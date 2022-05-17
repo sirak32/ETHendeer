@@ -76,7 +76,7 @@ export default function Sidebar() {
                 className={currentLink === 1 ? "active" : "none"}
                 onClick={() => setCurrentLink(1)}
               >
-                <a href="#">
+                <a href="/">
                   <MdSpaceDashboard />
                   <span> Dashboard</span>
                 </a>
@@ -94,7 +94,7 @@ export default function Sidebar() {
                 className={currentLink === 3 ? "active" : "none"}
                 onClick={() => setCurrentLink(3)}
                 >
-                <a href="#">
+                <a href="/supplier">
                   <FaAddressCard />
                   <span> Suppliers</span>
                 </a>
@@ -109,15 +109,7 @@ export default function Sidebar() {
                   <span> Officers</span>
                 </a>
               </li>
-              <li
-                className={currentLink === 5 ? "active" : "none"}
-                onClick={() => setCurrentLink(5)}
-                >
-                <a href="#">
-                  <BsFillChatTextFill />
-                  <span> FAQs</span>
-                </a>
-              </li>
+              
               <li
                 className={currentLink === 6 ? "active" : "none"}
                 onClick={() => setCurrentLink(6)}
@@ -131,7 +123,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="logout">
-          <a href="#">
+          <a href="/login">
             <FiLogOut />
             <span className="logout">Logout</span>
           </a>
