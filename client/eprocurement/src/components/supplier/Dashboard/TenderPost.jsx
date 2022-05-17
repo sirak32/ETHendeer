@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { MdArrowDropDown } from 'react-icons/md';
 
 export default function MediaCard() {
   return (
@@ -17,7 +18,7 @@ export default function MediaCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          ብረታ ብረት
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -25,8 +26,8 @@ export default function MediaCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button variant='outlined'  size="small">Apply</Button>
+        <Button size="small">See More <MdArrowDropDown /></Button>
       </CardActions>
     </Card>
   );

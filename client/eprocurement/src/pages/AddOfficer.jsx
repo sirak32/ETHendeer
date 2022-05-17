@@ -4,7 +4,7 @@ import SideBar from '../components/supplier/Dashboard/SideBar'
 import styled from 'styled-components'
 import Navbar from '../components/supplier/Dashboard/NavBar'
 
-export default function OfficersList() {
+export default function AddOfficer() {
   return (
       <Div>
       <SideBar/>
