@@ -14,8 +14,15 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import BasicSelect from "./BasicSelect";
 import { Button, Stack, TextareaAutosize } from "@mui/material";
 import { Grid } from "@mui/material";
-import axios from 'axios'
+import { Select, MenuItem } from "@mui/material";
+import axios from "axios";
+
 export default function InputAdornments() {
+  const [type, setType] = React.useState("");
+
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
+  };
   const [values, setValues] = React.useState({
     amount: "",
     password: "",
@@ -23,7 +30,7 @@ export default function InputAdornments() {
     weightRange: "",
     showPassword: false,
   });
-
+  const [formValues, setFormValue] = React.useState(formDatas);
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -40,10 +47,20 @@ export default function InputAdornments() {
   };
 
   return (
-    <form onSubmit={handleForm} action="sdghfjgh">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        axios.post("http://localhost:5001/tenders", formValues);
+        console.log(formValues);
+      }}
+      action="sdghfjgh"
+    >
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, title: e.target.value });
+            }}
             name="title"
             color="success"
             label="Tender Title"
@@ -53,7 +70,10 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
-          name="number"
+            onChange={(e) => {
+              setFormValue({ ...formValues, number: e.target.value });
+            }}
+            name="number"
             color="success"
             label="Tender Number"
             // id="outlined-start-adornment"
@@ -62,7 +82,10 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
-          name="description"
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="description"
             color="success"
             label="Tender Description"
             // id="outlined-start-adornment"
@@ -70,13 +93,45 @@ export default function InputAdornments() {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-          <BasicSelect type="type"  names="Tender Type" />
+          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Type"
+            name="type"
+            onChange={(e)=>{setFormValue({ ...formValues, type: e.target.value });
+          }}
+          >
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+
+          </Select>
         </Grid>
         <Grid item xs={4}>
-          <BasicSelect type="catagory" names="Tender Catagory" />
+          <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Catagory"
+            name="catagory"
+            onChange={(e)=>{setFormValue({ ...formValues, catagory: e.target.value });
+          }}
+          >
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+            <MenuItem value='Direct'>Direct</MenuItem>
+
+          </Select>
         </Grid>
+        <Grid item xs={4}></Grid>
         <Grid item xs={4}>
           <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, lotNo: e.target.value });
+            }}
             name="lotNo"
             color="success"
             label="Lot Number"
@@ -86,6 +141,9 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, minPrice: e.target.value });
+            }}
             name="minPrice"
             color="success"
             label="Minimum Price"
@@ -95,6 +153,12 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
+            onChange={(e) => {
+              setFormValue({
+                ...formValues,
+                bidSecurityAmount: e.target.value,
+              });
+            }}
             name="bidSecurityAmount"
             color="success"
             label="Bid Security Amount"
@@ -104,6 +168,12 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
+            onChange={(e) => {
+              setFormValue({
+                ...formValues,
+                termsAndConditions: e.target.value,
+              });
+            }}
             name="termsAndConditions"
             // id="outlined-multiline-static"
             label="Terms And Conditions"
@@ -114,7 +184,10 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <TextField
-           name="participationFee"
+            onChange={(e) => {
+              setFormValue({ ...formValues, participationFee: e.target.value });
+            }}
+            name="participationFee"
             color="success"
             label="Bid participation Fee"
             // id="outlined-start-adornment"
@@ -127,7 +200,7 @@ export default function InputAdornments() {
               Password
             </InputLabel>
             <OutlinedInput
-            //   id="outlined-adornment-password"
+              //   id="outlined-adornment-password"
               type={values.showPassword ? "text" : "password"}
               value={values.password}
               onChange={handleChange("password")}
@@ -147,11 +220,13 @@ export default function InputAdornments() {
             />
           </FormControl>
         </Grid>
-        
+
         <Grid item xs={4}>
           <input
+            onChange={(e) => {
+              setFormValue({ ...formValues, publishedDate: e.target.value });
+            }}
             name="publishedDate"
-            value="Closing Date"
             type="date"
             max="2020-02-02"
             min="2020-01-02"
@@ -159,8 +234,10 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <input
+            onChange={(e) => {
+              setFormValue({ ...formValues, closingDate: e.target.value });
+            }}
             name="closingDate"
-            value="Closing Date"
             type="date"
             max="2020-02-02"
             min="2020-01-02"
@@ -168,15 +245,16 @@ export default function InputAdornments() {
         </Grid>
         <Grid item xs={4}>
           <input
+            onChange={(e) => {
+              setFormValue({ ...formValues, bidOpenOn: e.target.value });
+            }}
             name="bidOpenOn"
-            value="Closing Date"
             type="date"
             max="2020-02-02"
             min="2020-01-02"
           />
         </Grid>
-        
-        
+
         <Grid item xs={4}>
           <Stack
             sx={{ margin: "3rem" }}
@@ -215,28 +293,49 @@ export default function InputAdornments() {
           background: "white",
           borderRadius: "1rem",
         }}
-      >
-      </Box>
+      ></Box>
     </form>
   );
 }
 const handleForm = (e) => {
   e.preventDefault();
   console.log(e.target[5].value);
-//   axios.post('http://localhost:5001/tenders',{
-//     title: e.target[0].value,
-//     description: e.target[2].value,
-//     number: e.target[1].value,
-//     type: e.target[3].value,
-//     catagory: e.target[4].value,
-//     lotNo: e.target[5].value,
-//     minPrice:e.target[6].value,
-//     publishedDate:e.target[11].value ,
-//     closingDate: e.target[12].value,
-//     bidOpenOn: e.target[13].value,
-//     participationFee: e.target[9].value,
-//     bidSecurityAmount: e.target[7].value,
-//     termsAndConditions: e.target[8].value,
-    
-//   })
+  //   axios.post('http://localhost:5001/tenders',{
+  //     title: e.target[0].value,
+  //     description: e.target[2].value,
+  //     number: e.target[1].value,
+  //     type: e.target[3].value,
+  //     catagory: e.target[4].value,
+  //     lotNo: e.target[5].value,
+  //     minPrice:e.target[6].value,
+  //     publishedDate:e.target[11].value ,
+  //     closingDate: e.target[12].value,
+  //     bidOpenOn: e.target[13].value,
+  //     participationFee: e.target[9].value,
+  //     bidSecurityAmount: e.target[7].value,
+  //     termsAndConditions: e.target[8].value,
+
+  //   })
+};
+// const handleFormChange =(e)=>{
+// setFormValue({
+//   ...formDatas,
+
+// })
+// }
+
+const formDatas = {
+  title: null,
+  description: null,
+  number: null,
+  type: null,
+  catagory: null,
+  lotNo: null,
+  minPrice: null,
+  publishedDate: null,
+  closingDate: null,
+  bidOpenOn: null,
+  participationFee: null,
+  bidSecurityAmount: null,
+  termsAndConditions: null,
 };
