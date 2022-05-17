@@ -1,0 +1,6 @@
+  export const CREATE_TENDER='CREATE_TENDER'
+  export const SET_LOADING='SET_LOADING'
+  export const SET_ERROR='SET_ERROR'
+  export const DELETE_TENDER='DELETE_TENDER'
+  export const SET_TENDER='SET_TENDER'
+  export const UPDATE_TENDER='UPDATE_TENDER'
