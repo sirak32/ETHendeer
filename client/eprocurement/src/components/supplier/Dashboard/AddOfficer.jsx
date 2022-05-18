@@ -56,15 +56,15 @@ export default function InputAdornments() {
       }}
       action="sdghfjgh"
     >
-      <Grid container spacing={2}>
+      <Grid sx={{background:'white'}} container spacing={2}>
         <Grid item xs={4}>
           <TextField
             onChange={(e) => {
               setFormValue({ ...formValues, title: e.target.value });
             }}
-            name="title"
+            name="FirstName"
             color="success"
-            label="Tender Title"
+            label="First name"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
@@ -74,9 +74,9 @@ export default function InputAdornments() {
             onChange={(e) => {
               setFormValue({ ...formValues, number: e.target.value });
             }}
-            name="number"
+            name="middleName"
             color="success"
-            label="Tender Number"
+            label="Middle Name"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />
@@ -86,186 +86,100 @@ export default function InputAdornments() {
             onChange={(e) => {
               setFormValue({ ...formValues, description: e.target.value });
             }}
-            name="description"
+            name="last Name"
             color="success"
-            label="Tender Description"
+            label="Last Name"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
         <Grid item xs={4}>
-        <InputLabel id="demo-simple-select-label">Type</InputLabel>
+          <TextField type={'email'}
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="Email"
+            color="success"
+            label="Email"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+          <TextField type={"phoneNumber"}
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="phoneNumber"
+            color="success"
+            label="Phone Number"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="City"
+            color="success"
+            label="city"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="Subcity"
+            color="success"
+            label="Subcity"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="Wereda"
+            color="success"
+            label="Wereda"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            onChange={(e) => {
+              setFormValue({ ...formValues, description: e.target.value });
+            }}
+            name="Kebele"
+            color="success"
+            label="Kebele"
+            // id="outlined-start-adornment"
+            sx={{ m: 1, width: "25ch" }}
+          />{" "}
+        </Grid>
+        <Grid item xs={4}>
+        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            label="Type"
-            name="type"
+            label="Gender"
+            name="gender"
             onChange={(e)=>{setFormValue({ ...formValues, type: e.target.value });
           }}
           >
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-
+            <MenuItem value='male'>Male</MenuItem>
+            <MenuItem value='female'>Female</MenuItem>
           </Select>
-        </Grid>
-        <Grid item xs={4}>
-          <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Catagory"
-            name="catagory"
-            onChange={(e)=>{setFormValue({ ...formValues, catagory: e.target.value });
-          }}
-          >
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-
-          </Select>
-        </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, lotNo: e.target.value });
-            }}
-            name="lotNo"
-            color="success"
-            label="Lot Number"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, minPrice: e.target.value });
-            }}
-            name="minPrice"
-            color="success"
-            label="Minimum Price"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({
-                ...formValues,
-                bidSecurityAmount: e.target.value,
-              });
-            }}
-            name="bidSecurityAmount"
-            color="success"
-            label="Bid Security Amount"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({
-                ...formValues,
-                termsAndConditions: e.target.value,
-              });
-            }}
-            name="termsAndConditions"
-            // id="outlined-multiline-static"
-            label="Terms And Conditions"
-            multiline
-            rows={4}
-            defaultValue="Default Value"
-          />{" "}
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, participationFee: e.target.value });
-            }}
-            name="participationFee"
-            color="success"
-            label="Bid participation Fee"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid>
-        <Grid item xs={4}>
-        <div className="App">
-      <Button variant="contained" component="label" color="primary">
-        {" "}
-        <IoAddCircleOutline/> Upload a file
-        <input accept=".pdf" type="file" hidden />
-      </Button>
-    </div>
         </Grid>
         
-        <Grid item xs={4}>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              //   id="outlined-adornment-password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl>
-        </Grid>
-
-        <Grid item xs={4}>
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, publishedDate: e.target.value });
-            }}
-            name="publishedDate"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, closingDate: e.target.value });
-            }}
-            name="closingDate"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, bidOpenOn: e.target.value });
-            }}
-            name="bidOpenOn"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
-          />
-        </Grid>
-
         <Grid item xs={4}>
           <Stack
             sx={{ margin: "3rem" }}

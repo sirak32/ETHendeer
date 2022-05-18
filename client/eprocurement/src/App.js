@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SupplierDashboard from "./pages/SupplierDashboard";
 import OfficersList from "./pages/OfficersList.jsx";
 import AddOfficer from "./pages/AddOfficer.jsx";
+// import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 
 const App = () => {
   return (

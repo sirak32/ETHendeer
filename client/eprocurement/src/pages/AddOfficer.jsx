@@ -1,22 +1,60 @@
-import React from 'react'
-import OfficersListComp from '../components/supplier/Dashboard/OfficersList'
-import SideBar from '../components/supplier/Dashboard/SideBar'
-import styled from 'styled-components'
-import Navbar from '../components/supplier/Dashboard/NavBar'
-
-export default function AddOfficer() {
+import styled from "styled-components";
+import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
+import NavBar from "../components/supplier/Dashboard/NavBar";
+import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
+import Table from "../components/supplier/Dashboard/Table";
+import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
+import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
+import Dash from '../components/supplier/Dashboard/Dash'
+import TenderInfo from "../components/supplier/Dashboard/TenderInfo";
+import BidFormGoods from "../components/supplier/Dashboard/BidFormGoods.jsx";
+import AddOfficer from "../components/supplier/Dashboard/AddOfficer"
+import Stepper  from "../components/supplier/Dashboard/Stepper";
+const App = () => {
   return (
-      <Div>
-      <SideBar/>
+    // <Container>
+    //     {/* <Sidebar/> */}
+    //     {/* <Sidebar/> */}
+    //     <MainContent/>
+    // </Container>
+    /*<Div>
+      <Sidebar/>
+      <Dashboard/>
+    </Di>*/
+    // <Sidebar/>
+    <Div>
+      <SideBar />
       <Section>
-      <Navbar />
-    <OfficersListComp/>
+        <NavBar />
+        <div className="grid">
+          <div className="row__one">
+         <AddOfficer/>
+         <Stepper/>
+          <TenderInfo/>
+          <BidFormGoods/>
+          </div>
+          <div className="row__two"></div>
+        </div>
       </Section>
-      </Div>
-  )
-}
+    </Div>
+    // <div>hi</div>
+    //  <> <SideBar/>
+    //   <NavBar/>
+    //   <Table/>
+    // </>
+  );
+};
 const Div = styled.div`
   position: relative;
+`;
+const Container = styled.div`
+  display: flex;
+  height: 97vh;
+  background: linear-gradient(to bottom right, white 0% #e6e4ff 70%);
+  border-radus: 2rem;
+  @media screen and (min-width: 320px) and (max-width: 1080px) {
+    flex-direction: column;
+  }
 `;
 const Section = styled.section`
   margin-left: 18vw;
@@ -51,3 +89,10 @@ const Section = styled.section`
     }
   }
 `;
+const Wrapper=styled.div`
+display:flex;
+gap:3rem;
+border-radius:2rem;
+justify-content:space-evenly;
+`;
+export default App;
