@@ -11,6 +11,8 @@ import BidFormGoods from "../components/supplier/Dashboard/BidFormGoods.jsx";
 import AddOfficer from "../components/supplier/Dashboard/AddOfficer"
 import Stepper  from "../components/supplier/Dashboard/Stepper";
 const App = () => {
+  const menus=['Dashboard','Officers','Suppliers','Logout']
+
   return (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -23,7 +25,7 @@ const App = () => {
     </Di>*/
     // <Sidebar/>
     <Div>
-      <SideBar />
+      <SideBar  menu={menus} />
       <Section>
         <NavBar />
         <div className="grid">

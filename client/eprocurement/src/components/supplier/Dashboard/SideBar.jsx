@@ -14,8 +14,8 @@ import { IoNavigateCircle } from 'react-icons/io5';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './Login'
 import { Table } from "@mui/material";
-export default function Sidebar() {
-  const [currentLink, setCurrentLink] = useState(2);
+export default function Sidebar(props) {
+  const [currentLink, setCurrentLink] = useState(1);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
@@ -72,31 +72,33 @@ export default function Sidebar() {
           </div>
           <div className="links">
             <ul>
-              <li
-                className={currentLink === 1 ? "active" : "none"}
+              {props.menu.map((menI,i)=>(
+                <li
+                className={currentLink === i ? "active" : "none"}
                 onClick={() => setCurrentLink(1)}
               >
                 <a href="/">
-                  <MdSpaceDashboard />
-                  <span> Dashboard</span>
+                  {iconChoose(i)}
+                  <span> {menI}</span>
                 </a>
               </li>
-              <li
+              ))}
+              {/* <li
                 className={currentLink === 2 ? "active" : "none"}
                 onClick={() => setCurrentLink(2)}
                 >
                 <a href="/">
-                  <RiDashboard2Fill />
-                  <span> Tenders</span>
+                  <RiDashboard2Fill /><FaAddressCard />
+                  <span> {props.menu[1]}</span>
                 </a>
-              </li>
-              <li
+              </li> */}
+              {/* <li
                 className={currentLink === 3 ? "active" : "none"}
                 onClick={() => setCurrentLink(3)}
                 >
                 <a href="/supplier">
                   <FaAddressCard />
-                  <span> Suppliers</span>
+                  <span> {props.menu[2]}</span>
                 </a>
               </li>
               <li
@@ -105,8 +107,9 @@ export default function Sidebar() {
                 >
                 <a href="/officer">
 
-                  <GiTwirlCenter />
-                  <span> Officers</span>
+                  <GiTwirlCenter />  <RiDashboard2Fill /><FaAddressCard />
+
+                  <span> {props.menu[3]}</span>
                 </a>
               </li>
               
@@ -115,10 +118,11 @@ export default function Sidebar() {
                 onClick={() => setCurrentLink(6)}
                 >
                 <a href="#">
-                  <IoSettings />
-                  <span> Settings</span>
+                  <IoSettings />  <GiTwirlCenter />  <RiDashboard2Fill /><FaAddressCard />
+
+                  <span> {props.menu[3]}</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
@@ -354,3 +358,25 @@ const ResponsiveNav = styled.div`
     }
   }
 `;
+
+const iconChoose=(i)=>{
+  switch (i) {
+    case 0:
+      return  <MdSpaceDashboard />
+      break;
+      case 1: 
+        return <GiTwirlCenter />
+        break;
+        case 2:
+      return <RiDashboard2Fill/> 
+      break;
+      case 3:
+      return<FaAddressCard />
+      break;
+      case 4:
+      return <IoSettings /> 
+      break;
+    default:
+      break;
+  }
+}

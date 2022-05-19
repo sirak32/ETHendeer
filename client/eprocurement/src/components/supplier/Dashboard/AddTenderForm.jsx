@@ -94,6 +94,9 @@ export default function InputAdornments() {
           />{" "}
         </Grid>
         <Grid item xs={4}>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+
+
         <InputLabel id="demo-simple-select-label">Type</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -109,8 +112,11 @@ export default function InputAdornments() {
             <MenuItem value='Direct'>Direct</MenuItem>
 
           </Select>
+            </FormControl>
         </Grid>
         <Grid item xs={4}>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+
           <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -126,6 +132,8 @@ export default function InputAdornments() {
             <MenuItem value='Direct'>Direct</MenuItem>
 
           </Select>
+            </FormControl>
+            
         </Grid>
         <Grid item xs={4}></Grid>
         <Grid item xs={4}>
@@ -241,6 +249,7 @@ export default function InputAdornments() {
             type="date"
             max="2020-02-02"
             min="2020-01-02"
+            
           />
         </Grid>
         <Grid item xs={4}>
@@ -265,12 +274,14 @@ export default function InputAdornments() {
             min="2020-01-02"
           />
         </Grid>
-
+        <Grid item xs={4}>
+          
+        </Grid>
         <Grid item xs={4}>
           <Stack
-            sx={{ margin: "3rem" }}
+            sx={{ margin: "1rem" }}
             alignItems="left"
-            spacing={15}
+            spacing={8}
             direction="row"
           >
             <Button

@@ -6,6 +6,8 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 const App = () => {
+  const menus=['Dashboard','Tenders','Profile','Logout']
+
   return (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -18,15 +20,14 @@ const App = () => {
     </Di>*/
     // <Sidebar/>
     <Div>
-      <SideBar />
+      <SideBar menu={menus} />
       <Section>
         <NavBar />
         <div className="grid">
           <div className="row__one">
-            <Table />
-            <BasicTabs/>
+            {/* <Table /> */}
+            {/* <BasicTabs/> */}
             <MediaCard/>
-
             <MediaCard/>
             <MediaCard/>
             <MediaCard/>

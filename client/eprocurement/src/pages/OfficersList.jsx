@@ -5,9 +5,11 @@ import styled from 'styled-components'
 import Navbar from '../components/supplier/Dashboard/NavBar'
 
 export default function OfficersList() {
+  const menus=['Dashboard','Tenders','Suppliers','Logout']
+
   return (
       <Div>
-      <SideBar/>
+      <SideBar  menu={menus}/>
       <Section>
       <Navbar />
     <OfficersListComp/>

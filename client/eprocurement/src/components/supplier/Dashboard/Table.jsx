@@ -84,7 +84,7 @@ axios.get('http://localhost:5001/tenders')
         <TableHead>
           <TableRow>
             <StyledTableCell>Tender Id</StyledTableCell>
-            <StyledTableCell align="right">{data}</StyledTableCell>
+            <StyledTableCell align="right">Published Date</StyledTableCell>
             <StyledTableCell align="right">Opening Date</StyledTableCell>
             <StyledTableCell align="right">Closing Date</StyledTableCell>
             <StyledTableCell align="right">Status</StyledTableCell>

@@ -6,8 +6,10 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Dash from '../components/supplier/Dashboard/Dash'
-
+import AddOfficer from '../components/supplier/Dashboard/AddOfficer'
+import OfficersList from "../components/supplier/Dashboard/OfficersList";
 const App = () => {
+  const menus=['Dashboard','Officers','Suppliers','Logout']
   return (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -20,7 +22,7 @@ const App = () => {
     </Di>*/
     // <Sidebar/>
     <Div>
-      <SideBar />
+      <SideBar  menu={menus} />
       <Section>
         <NavBar />
         <div className="grid">
@@ -33,13 +35,15 @@ const App = () => {
             {/* <Dash  title="Closed"/>
             <Dash  title="Closed"/> */}
             </Wrapper>
-            <Table />
-            <BasicTabs/>
-            <MediaCard/>
-
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
+            {/* <Table /> */}
+            {/* <BasicTabs/> */}
+            {/* <MediaCard/> */}
+{/*  */}
+            {/* <MediaCard/> */}
+            {/* <MediaCard/> */}
+            {/* <MediaCard/> */}
+            <AddOfficer/>
+            <OfficersList/>
           </div>
           <div className="row__two"></div>
         </div>
@@ -99,6 +103,7 @@ const Section = styled.section`
 `;
 const Wrapper=styled.div`
 display:flex;
+padding:2rem 0;
 gap:3rem;
 border-radius:2rem;
 justify-content:space-evenly;

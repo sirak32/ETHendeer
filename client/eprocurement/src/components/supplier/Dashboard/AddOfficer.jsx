@@ -166,6 +166,8 @@ export default function InputAdornments() {
           />{" "}
         </Grid>
         <Grid item xs={4}>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+
         <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -178,13 +180,16 @@ export default function InputAdornments() {
             <MenuItem value='male'>Male</MenuItem>
             <MenuItem value='female'>Female</MenuItem>
           </Select>
+            </FormControl>
         </Grid>
-        
+        <Grid item xs={4}>
+
+        </Grid>
         <Grid item xs={4}>
           <Stack
             sx={{ margin: "3rem" }}
             alignItems="left"
-            spacing={15}
+            spacing={7}
             direction="row"
           >
             <Button
@@ -193,7 +198,7 @@ export default function InputAdornments() {
               color="primary"
               type="submit"
             >
-              Submit
+              Done
             </Button>
             <Button
               size="large"
@@ -204,21 +209,11 @@ export default function InputAdornments() {
               Clear
             </Button>
             <Button size="large" variant="contained" color="error">
-              Exit
+              Cancel
             </Button>
           </Stack>
         </Grid>
       </Grid>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "2rem 0",
-          padding: "2rem",
-          background: "white",
-          borderRadius: "1rem",
-        }}
-      ></Box>
     </form>
   );
 }
