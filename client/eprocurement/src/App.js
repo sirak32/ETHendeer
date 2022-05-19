@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SupplierDashboard from "./pages/SupplierDashboard";
 import OfficersList from "./pages/OfficersList.jsx";
 import AddOfficer from "./pages/AddOfficer.jsx";
+import TenderDetail from "./pages/TenderDetail";
+
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 
 const App = () => {
@@ -18,6 +20,7 @@ const App = () => {
 
     <Routes>
                  <Route exact path='/' element={<AdminDashboard/>}></Route>
+                 <Route exact path='/tender-detail' element={<TenderDetail/>}></Route>
                  <Route exact path='/add-officer' element={<AddOfficer/>}></Route>
                  <Route exact path='/officers-list' element={<OfficersList/>}></Route>
                  <Route exact path='/login' element={<Login/>}></Route>

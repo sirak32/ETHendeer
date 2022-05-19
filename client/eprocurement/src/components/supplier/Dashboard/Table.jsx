@@ -13,7 +13,8 @@ import { FaAngrycreative, FaCircle, FaEdit, FaRegEdit, FaUserEdit } from 'react-
 import { MdDelete } from 'react-icons/md';
 import axios from 'axios'
 import Button from '@mui/material/Button'
-import { GiGreenPower } from 'react-icons/gi';
+import { GiGreenPower, GiNextButton } from 'react-icons/gi';
+import { BsPlayFill } from 'react-icons/bs';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -91,6 +92,8 @@ axios.get('http://localhost:5001/tenders')
             <StyledTableCell align="right">Status</StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+
 
           </TableRow>
         </TableHead>
@@ -114,7 +117,14 @@ axios.get('http://localhost:5001/tenders')
                 DELETE
                  </Button>
                 </StyledTableCell>
-
+                <StyledTableCell align="right">
+                  <a style={{textDecoration:'none'}} href='tender-detail'>
+               <Button color='info' endIcon={  <BsPlayFill />} variant='outlined' >
+                See More
+                    
+                 </Button>
+                  </a>
+                </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AddTenderForm from './AddTenderForm'
 import HorizontalLinearStepper from './Stepper';
+import Table from './Table'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,8 +52,8 @@ export default function BasicTabs() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example" centered>
           <Tab label="ADD TENDERS" {...a11yProps(0)} />
-          <Tab label="ADD TENDERS" {...a11yProps(1)} />
-          <Tab label="ADD TENDERS" {...a11yProps(2)} />
+          <Tab label="ALL TENDERS" {...a11yProps(1)} />
+          <Tab label="WEEKLY REPORT" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -60,7 +61,7 @@ export default function BasicTabs() {
         <HorizontalLinearStepper/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Table/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
