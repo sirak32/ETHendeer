@@ -3,7 +3,7 @@ import OfficersListComp from '../components/supplier/Dashboard/OfficersList'
 import SideBar from '../components/supplier/Dashboard/SideBar'
 import styled from 'styled-components'
 import Navbar from '../components/supplier/Dashboard/NavBar'
-
+import Modal from '../components/supplier/Dashboard/Modal'
 export default function OfficersList() {
   const menus=['Dashboard','Tenders','Suppliers','Logout']
 
@@ -13,6 +13,7 @@ export default function OfficersList() {
       <Section>
       <Navbar />
     <OfficersListComp/>
+    {/* <Modal/> */}
       </Section>
       </Div>
   )

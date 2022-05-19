@@ -144,8 +144,8 @@ export default function CollapsibleTable() {
             <TableCell align="right">Phone Number</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">Participations</TableCell>
-            <TableCell align="right"><Button color='primary' variant='contained'>Edit</Button></TableCell>
-            <TableCell align="right"><Button color='error' variant='contained'>Delete</Button></TableCell>
+            {/* <TableCell align="right"><Button color='primary' variant='contained'>Edit</Button></TableCell>
+            <TableCell align="right"><Button color='error' variant='contained'>Delete</Button></TableCell> */}
 
           </TableRow>
         </TableHead>

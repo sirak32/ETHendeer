@@ -5,6 +5,7 @@ import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
 import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
+import Modal from '../components/supplier/Dashboard/Modal'
 const App = () => {
   const menus=['Dashboard','Tender','Suppliers','Logout']
 
@@ -27,9 +28,8 @@ const App = () => {
           <div className="row__one">
             <Table />
             <BasicTabs/>
-            <MediaCard/>
-
-            
+            <Modal/>
+            <MediaCard/>            
           </div>
           <div className="row__two"></div>
         </div>

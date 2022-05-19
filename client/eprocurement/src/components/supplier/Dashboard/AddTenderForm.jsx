@@ -70,7 +70,7 @@ export default function InputAdornments() {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-          <TextField
+          <TextField 
             onChange={(e) => {
               setFormValue({ ...formValues, number: e.target.value });
             }}
@@ -98,7 +98,7 @@ export default function InputAdornments() {
 
 
         <InputLabel id="demo-simple-select-label">Type</InputLabel>
-          <Select
+          <Select sx={{ m: 1, width: "24.5ch" }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="Type"
@@ -118,7 +118,7 @@ export default function InputAdornments() {
         <FormControl sx={{ m: 1, minWidth: 120 }}>
 
           <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
-          <Select
+          <Select sx={{ m: 1, width: "24.5ch" }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="Catagory"
@@ -135,7 +135,7 @@ export default function InputAdornments() {
             </FormControl>
             
         </Grid>
-        <Grid item xs={4}></Grid>
+        {/* <Grid item xs={4}></Grid> */}
         <Grid item xs={4}>
           <TextField
             onChange={(e) => {
@@ -176,7 +176,7 @@ export default function InputAdornments() {
           />
         </Grid>
         <Grid item xs={4}>
-          <TextField
+          <TextField sx={{ m: 1, width: "25ch" }}
             onChange={(e) => {
               setFormValue({
                 ...formValues,
@@ -207,7 +207,7 @@ export default function InputAdornments() {
         <div className="App">
       <Button variant="contained" component="label" color="primary">
         {" "}
-        <IoAddCircleOutline/> Upload a file
+        <IoAddCircleOutline/> Upload Bid Document
         <input accept=".pdf" type="file" hidden />
       </Button>
     </div>
@@ -251,17 +251,9 @@ export default function InputAdornments() {
             min="2020-01-02"
             
           /> */}
-
-<input
-            onChange={(e) => {
-              setFormValue({ ...formValues, closingDate: e.target.value });
-            }}
-            name="closingDate"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
-          />        </Grid>
+               </Grid>
         <Grid item xs={4}>
+       <label> Closing Date
           <input
             onChange={(e) => {
               setFormValue({ ...formValues, closingDate: e.target.value });
@@ -270,9 +262,13 @@ export default function InputAdornments() {
             type="date"
             max="2020-02-02"
             min="2020-01-02"
-          />
+            />
+            </label>
+            
         </Grid>
         <Grid item xs={4}>
+          <label>
+Bid Opening Date
           <input
             onChange={(e) => {
               setFormValue({ ...formValues, bidOpenOn: e.target.value });
@@ -281,7 +277,8 @@ export default function InputAdornments() {
             type="date"
             max="2020-02-02"
             min="2020-01-02"
-          />
+            />
+            </label>
         </Grid>
         <Grid item xs={4}>
           

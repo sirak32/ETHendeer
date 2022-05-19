@@ -30,7 +30,7 @@ const App = () => {
           <Wrapper>
             <Dash title="Suppliers" number="888"/>
             <Dash title="Tenders" number="5000"/>
-            <Dash title="Active" number="3520"/>
+            <Dash title="Active" number="200"/>
             <Dash title="Closed" number="45"/>
             {/* <Dash  title="Closed"/>
             <Dash  title="Closed"/> */}

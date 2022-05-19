@@ -17,7 +17,6 @@ const App = () => {
   return (
     // <AdminDashboard />
     <Router>
-
     <Routes>
                  <Route exact path='/' element={<AdminDashboard/>}></Route>
                  <Route exact path='/tender-detail' element={<TenderDetail/>}></Route>
