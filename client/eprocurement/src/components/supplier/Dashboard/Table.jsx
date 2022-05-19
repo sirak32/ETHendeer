@@ -9,10 +9,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { FiDelete, FiEdit } from 'react-icons/fi';
 import { RiEditBoxFill } from 'react-icons/ri';
-import { FaEdit, FaRegEdit, FaUserEdit } from 'react-icons/fa';
+import { FaAngrycreative, FaCircle, FaEdit, FaRegEdit, FaUserEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import axios from 'axios'
 import Button from '@mui/material/Button'
+import { GiGreenPower } from 'react-icons/gi';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,11 +43,11 @@ function createData(tenderId, tenderTitle, openingDate, closingDate, status) {
 
 export default function CustomizedTables() {
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0), 
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3), 
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'), 
+    createData('Ice cream sandwich', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
+    createData('Eclair', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'),
+    createData('Cupcake', '15-02-2014','15-02-2014', '15-02-2014','Active'), 
+    createData('Gingerbread', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
   ];
   
 const [data, setData]=React.useState(null)
@@ -102,7 +103,7 @@ axios.get('http://localhost:5001/tenders')
               <StyledTableCell align="right">{row.tenderTitle}</StyledTableCell>
               <StyledTableCell align="right">{row.openingDate}</StyledTableCell>
               <StyledTableCell align="right">{row.closingDate}</StyledTableCell>
-              <StyledTableCell align="right">{row.status}</StyledTableCell>
+              <StyledTableCell align="right">{row.status} <FaCircle color='#0ac253'/> </StyledTableCell>
               <StyledTableCell align="right">
                <Button color='primary' endIcon={  <FaEdit />} variant='contained'>
                 EDIT

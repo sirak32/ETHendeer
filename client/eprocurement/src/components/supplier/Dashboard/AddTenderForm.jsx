@@ -17,7 +17,7 @@ import { Grid } from "@mui/material";
 import { Select, MenuItem } from "@mui/material";
 import axios from "axios";
 import { IoAddCircleOutline } from "react-icons/io5";
-
+import DatePicker from 'react-datepicker'
 export default function InputAdornments() {
   const [type, setType] = React.useState("");
 
@@ -241,7 +241,7 @@ export default function InputAdornments() {
         </Grid>
 
         <Grid item xs={4}>
-          <input
+          {/* <input
             onChange={(e) => {
               setFormValue({ ...formValues, publishedDate: e.target.value });
             }}
@@ -250,8 +250,17 @@ export default function InputAdornments() {
             max="2020-02-02"
             min="2020-01-02"
             
-          />
-        </Grid>
+          /> */}
+
+<input
+            onChange={(e) => {
+              setFormValue({ ...formValues, closingDate: e.target.value });
+            }}
+            name="closingDate"
+            type="date"
+            max="2020-02-02"
+            min="2020-01-02"
+          />        </Grid>
         <Grid item xs={4}>
           <input
             onChange={(e) => {

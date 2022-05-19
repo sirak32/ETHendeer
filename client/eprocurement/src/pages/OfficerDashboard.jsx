@@ -29,9 +29,7 @@ const App = () => {
             <BasicTabs/>
             <MediaCard/>
 
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
+            
           </div>
           <div className="row__two"></div>
         </div>

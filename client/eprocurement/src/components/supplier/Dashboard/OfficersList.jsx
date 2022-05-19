@@ -81,7 +81,6 @@ function Row(props) {
                     <TableCell>Kebele</TableCell>
 
                     <TableCell align="right">Id Number</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
