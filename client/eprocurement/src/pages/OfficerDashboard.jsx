@@ -6,21 +6,22 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Modal from '../components/supplier/Dashboard/Modal'
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector,useDispatch,connect } from "react-redux";
 import { useEffect } from 'react'
 import Dash from '../components/supplier/Dashboard/Dash'
 import {fetchTender} from '../actions/tenderAction'
-const App = ({fetchTender}) => {
+const App = ({tenders,fetchTenders}) => {
   const tender=useSelector(state=>state.loading)
   const dispatch=useDispatch()
   const menus=['Dashboard','Tender','Suppliers','Logout']
 useEffect(()=>{
 
-  dispatch({type:'SET_LOADING'})
-  dispatch({type:'SET_TENDER',
-    payload:'data'})
+  // dispatch({type:'SET_LOADING'})
+  // dispatch({type:'SET_TENDER',
+  //   payload:'data'})
+  fetchTenders()
   },[])
-  console.log('status',tender )
+  console.log('status',tenders )
   return !tender? (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -62,6 +63,27 @@ useEffect(()=>{
     // </>
   ):<h1>THis is error</h1>;
 };
+
+
+
+const mapStateToProps=state=>{
+  return {
+    tenders:state.tenders
+  }
+}
+
+const mapDispatchToProps=dispatch=>{
+  return {
+    fetchTenders:()=>dispatch(fetchTender())
+  }
+}
+
+
+
+
+
+
+
 const Div = styled.div`
   position: relative;
 `;
@@ -114,4 +136,4 @@ gap:3rem;
 border-radius:2rem;
 justify-content:space-evenly;
 `;
-export default App;
+export default connect(mapStateToProps,mapDispatchToProps) (App);
