@@ -11,7 +11,7 @@ const getPosts = async (req, res) => {
             status:false
         }
         console.log(minimalData)
-        res.status(200).json(minimalData)
+        res.status(200).json(postTenders)
     } catch (error) {
         res.status(404).json({
             message: error.message

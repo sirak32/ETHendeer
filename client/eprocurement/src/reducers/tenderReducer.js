@@ -11,7 +11,7 @@ import {
     loading: true,
     suppliers: [],
     error: null,
-    tenders:[{title:'title',num:'45678',date:'2022-22-2'}]
+    tenders:[]
   };
   
   export default function tenderReducer(state = initialState, action) {
@@ -26,7 +26,7 @@ import {
         return {
           ...state,
           loading: false,
-          error: null,
+          error: '',
           tenders: action.payload
         };
       case SET_ERROR:

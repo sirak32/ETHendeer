@@ -19,7 +19,8 @@ useEffect(()=>{
   dispatch({type:'SET_LOADING'})
   dispatch({type:'SET_TENDER',
     payload:'data'})
-},[])
+  },[])
+  console.log('status',tender )
   return !tender? (
     // <Container>
     //     {/* <Sidebar/> */}
