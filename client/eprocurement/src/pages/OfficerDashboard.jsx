@@ -6,12 +6,21 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Modal from '../components/supplier/Dashboard/Modal'
-
+import { useSelector,useDispatch } from "react-redux";
+import { useEffect } from 'react'
 import Dash from '../components/supplier/Dashboard/Dash'
-const App = () => {
+import {fetchTender} from '../actions/tenderAction'
+const App = ({fetchTender}) => {
+  const tender=useSelector(state=>state.loading)
+  const dispatch=useDispatch()
   const menus=['Dashboard','Tender','Suppliers','Logout']
+useEffect(()=>{
 
-  return (
+  dispatch({type:'SET_LOADING'})
+  dispatch({type:'SET_TENDER',
+    payload:'data'})
+},[])
+  return !tender? (
     // <Container>
     //     {/* <Sidebar/> */}
     //     {/* <Sidebar/> */}
@@ -29,7 +38,7 @@ const App = () => {
         <div className="grid">
           <div className="row__one">
             <Wrapper>
-
+<h1>{tender}</h1>
           <Dash title="Suppliers" number="888"/>
             <Dash title="Tenders" number="5000"/>
             <Dash title="Active" number="200"/>
@@ -37,6 +46,7 @@ const App = () => {
             </Wrapper>
             {/* <Table /> */}
             <BasicTabs/>
+            <h1>Hey {tender}</h1>
             {/* <Modal/> */}
             {/* <MediaCard/>             */}
           </div>
@@ -49,7 +59,7 @@ const App = () => {
     //   <NavBar/>
     //   <Table/>
     // </>
-  );
+  ):<h1>THis is error</h1>;
 };
 const Div = styled.div`
   position: relative;

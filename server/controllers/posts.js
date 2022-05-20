@@ -4,10 +4,10 @@ const getPosts = async (req, res) => {
     try {
         const postTenders = await tender.find()
         const minimalData = {
-            tenderNo: postTenders[0].number,
-            tenderTitel:postTenders[0].title,
-            openAt:postTenders[0].bidOpenOn,
-            closeAt:postTenders[0].closingDate,
+            tenderNo: postTenders[9].number,
+            tenderTitel:postTenders[9].title,
+            openAt:postTenders[9].bidOpenOn,
+            closeAt:postTenders[9].closingDate,
             status:false
         }
         console.log(minimalData)

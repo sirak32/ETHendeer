@@ -8,10 +8,10 @@ import {
   } from '../constants/tenderConstants';
   
   const initialState = {
-    loading: false,
+    loading: true,
     suppliers: [],
     error: null,
-    tenders:[]
+    tenders:[{title:'title',num:'45678',date:'2022-22-2'}]
   };
   
   export default function tenderReducer(state = initialState, action) {

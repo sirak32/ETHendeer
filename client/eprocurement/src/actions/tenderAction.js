@@ -30,7 +30,7 @@ import {
   const addTenderSuccess = tender => ({
     type: CREATE_TENDER,
     payload: {
-      ...todo
+      ...tender
     }
   });
   
@@ -52,7 +52,7 @@ import {
         dispatch(deleteTenderStarted());
         axios.delete(`https://localhost:5001/tenders`)
         .then((response)=>{
-          dispatch(deleteTenderSuccess(tenderId))
+          dispatch(deleteTenderSuccess(1))
           console.log('deleted succussfully')
         })
         .catch(err => {
@@ -78,7 +78,7 @@ import {
   
   //FETCHING TENDERS FROM THE API AND THEN SET TO THE REDUX STORE
 
-  export default fetchTender=()=>{
+  export const fetchTender=()=>{
     return dispatch=>{
       dispatch({type:SET_LOADING})
       axios.get(`http://localhost:5001/tenders`)
@@ -93,9 +93,7 @@ import {
   }
   const fetchAndSetTenders=data=>({
     type:SET_TENDER,
-    payload:{
-      ...data
-    }
+    payload:data
   })
 
   
