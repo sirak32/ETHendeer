@@ -8,6 +8,8 @@ import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Dash from '../components/supplier/Dashboard/Dash'
 import AddOfficer from '../components/supplier/Dashboard/AddOfficer'
 import OfficersList from "../components/supplier/Dashboard/OfficersList";
+import RegisterSupplier from '../components/supplier/Dashboard/RegisterSupplier'
+import AdminTab from '../components/supplier/Dashboard/AdminTab'
 const App = () => {
   const menus=['Dashboard','Officers','Suppliers','Logout']
   return (
@@ -42,8 +44,10 @@ const App = () => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
-            <AddOfficer/>
-            <OfficersList/>
+            <AdminTab/>
+            {/* <AddOfficer/> */}
+            {/* <OfficersList/>
+            <RegisterSupplier/> */}
           </div>
           <div className="row__two"></div>
         </div>
