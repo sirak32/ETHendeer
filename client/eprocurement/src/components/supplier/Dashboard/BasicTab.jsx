@@ -51,20 +51,23 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%',backgroundColor:'white' ,background: "white",borderRadius:'0.7rem' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab label="ADD TENDERS" {...a11yProps(0)} />
           <Tab label="ALL TENDERS" {...a11yProps(1)} />
-          <Tab label="WEEKLY REPORT" {...a11yProps(2)} />
+          <Tab label="ADD TENDERS" {...a11yProps(0)} />
+          <Tab label="SUPPLIERS LIST" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={1}>
-        <Table/>
-      </TabPanel>
-      <TabPanel value={value} index={0}>
         <AddTenderForm/>
         <HorizontalLinearStepper/>
       </TabPanel>
+      <TabPanel value={value} index={0}>
+        <Table/>
+      </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Table/>
       </TabPanel>
     </Box>
   );

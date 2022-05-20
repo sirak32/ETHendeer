@@ -49,6 +49,11 @@ export default function CustomizedTables() {
     createData('Eclair', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'),
     createData('Cupcake', '15-02-2014','15-02-2014', '15-02-2014','Active'), 
     createData('Gingerbread', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
+    createData('Frozen yoghurt', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'), 
+    createData('Ice cream sandwich', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
+    createData('Eclair', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'),
+    createData('Cupcake', '15-02-2014','15-02-2014', '15-02-2014','Active'), 
+    createData('Gingerbread', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
   ];
   
 const [data, setData]=React.useState(null)

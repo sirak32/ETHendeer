@@ -54,32 +54,32 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%',backgroundColor:'white' ,background: "white",borderRadius:'0.7rem' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab label="REGISTER SUPPLIER" {...a11yProps(0)} />
-          <Tab label="ADD OFFICER" {...a11yProps(1)} />
-          <Tab label="PENDING REGISTRATION" {...a11yProps(2)} />
-          <Tab label="OFFICERS LIST" {...a11yProps(3)} />
-          <Tab label="SUPPLIER LIST" {...a11yProps(4)} />
+          <Tab label="OFFICERS LIST" {...a11yProps(0)} />
+          <Tab label="SUPPLIER LIST" {...a11yProps(1)} />
+          <Tab label="REGISTER SUPPLIER" {...a11yProps(2)} />
+          <Tab label="ADD OFFICER" {...a11yProps(3)} />
+          <Tab label="PENDING REGISTRATION" {...a11yProps(4)} />
           <Tab label="FEEDBACK LIST" {...a11yProps(5)} />
 
 
 
         </Tabs>
       </Box>
-      <TabPanel value={value} index={1}>
-        <AddOfficer/>
-      </TabPanel>
       <TabPanel value={value} index={0}>
+        <OfficersList/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <OfficersList/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
         <RegisterSupplier/>
         <HorizontalLinearStepper/>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
       <TabPanel value={value} index={3}>
-        <OfficersList/>
+        <AddOfficer/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <OfficersList/>
+        Item Three
       </TabPanel>
       <TabPanel value={value} index={5}>
         <OfficersList/>

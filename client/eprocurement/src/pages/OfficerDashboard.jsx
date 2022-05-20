@@ -6,6 +6,8 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Modal from '../components/supplier/Dashboard/Modal'
+
+import Dash from '../components/supplier/Dashboard/Dash'
 const App = () => {
   const menus=['Dashboard','Tender','Suppliers','Logout']
 
@@ -26,9 +28,16 @@ const App = () => {
         <NavBar />
         <div className="grid">
           <div className="row__one">
+            <Wrapper>
+
+          <Dash title="Suppliers" number="888"/>
+            <Dash title="Tenders" number="5000"/>
+            <Dash title="Active" number="200"/>
+            <Dash title="Closed" number="45"/>
+            </Wrapper>
             {/* <Table /> */}
             <BasicTabs/>
-            <Modal/>
+            {/* <Modal/> */}
             {/* <MediaCard/>             */}
           </div>
           <div className="row__two"></div>
@@ -87,5 +96,11 @@ const Section = styled.section`
     }
   }
 `;
-
+const Wrapper=styled.div`
+display:flex;
+padding:2rem 0;
+gap:3rem;
+border-radius:2rem;
+justify-content:space-evenly;
+`;
 export default App;
