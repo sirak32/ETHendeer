@@ -42,18 +42,19 @@ function createData(tenderId, tenderTitle, openingDate, closingDate, status) {
 }
 
 
-export default function CustomizedTables() {
+export default function CustomizedTables(props) {
+  let date=props.data[0].bidOpenOn
   const rows = [
-    createData('Frozen yoghurt', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'), 
-    createData('Ice cream sandwich', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
-    createData('Eclair', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'),
-    createData('Cupcake', '15-02-2014','15-02-2014', '15-02-2014','Active'), 
-    createData('Gingerbread', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
-    createData('Frozen yoghurt', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'), 
-    createData('Ice cream sandwich', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
-    createData('Eclair', '15-02-2014', '15-02-2014', '15-02-2014', 'Active'),
-    createData('Cupcake', '15-02-2014','15-02-2014', '15-02-2014','Active'), 
-    createData('Gingerbread', '15-02-2014', '15-02-2014', '15-02-2014','Active'),
+    createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].closingDate, props.data[0].bidOpenOn, 'Active'), 
+    createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].closingDate, props.data[1].bidOpenOn,'Active'),
+    createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].closingDate, props.data[2].bidOpenOn, 'Active'),
+    createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'), 
+    createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].closingDate, props.data[4].bidOpenOn,'Active'),
+    createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'), 
+    createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].closingDate, props.data[6].bidOpenOn,'Active'),
+    createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].closingDate, props.data[7].bidOpenOn, 'Active'),
+    createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'), 
+    createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
   ];
   
 const [data, setData]=React.useState(null)

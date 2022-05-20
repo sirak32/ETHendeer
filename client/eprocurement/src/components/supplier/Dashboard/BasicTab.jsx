@@ -40,7 +40,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -61,7 +61,7 @@ export default function BasicTabs() {
         <HorizontalLinearStepper/>
       </TabPanel>
       <TabPanel value={value} index={0}>
-        <Table/>
+        <Table data={props.data}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
