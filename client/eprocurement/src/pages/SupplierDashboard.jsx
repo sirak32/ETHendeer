@@ -5,6 +5,7 @@ import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
 import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
+import { Stack } from "@mui/material";
 const App = () => {
   const menus=['Dashboard','Tenders','Profile','Logout']
 
@@ -27,10 +28,24 @@ const App = () => {
           <div className="row__one">
             {/* <Table /> */}
             {/* <BasicTabs/> */}
+            <Stack direction='row' spacing={3}>
             <MediaCard/>
             <MediaCard/>
             <MediaCard/>
             <MediaCard/>
+            
+            
+            </Stack>
+            <Stack direction='row' spacing={3}>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            </Stack>
+            
+            {/* <MediaCard/>
+            <MediaCard/>
+            <MediaCard/> */}
           </div>
           <div className="row__two"></div>
         </div>
