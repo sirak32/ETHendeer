@@ -56,12 +56,12 @@ export default function BasicTabs() {
           <Tab label="WEEKLY REPORT" {...a11yProps(2)} />
         </Tabs>
       </Box>
+      <TabPanel value={value} index={1}>
+        <Table/>
+      </TabPanel>
       <TabPanel value={value} index={0}>
         <AddTenderForm/>
         <HorizontalLinearStepper/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Table/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

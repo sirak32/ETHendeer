@@ -169,7 +169,7 @@ export default function InputAdornments() {
           <FormControl sx={{ m: 1, minWidth: 120 }}>
 
         <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-          <Select
+          <Select sx={{ m: 1, width: "22ch" }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="Gender"

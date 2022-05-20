@@ -26,10 +26,10 @@ const App = () => {
         <NavBar />
         <div className="grid">
           <div className="row__one">
-            <Table />
+            {/* <Table /> */}
             <BasicTabs/>
             <Modal/>
-            <MediaCard/>            
+            {/* <MediaCard/>             */}
           </div>
           <div className="row__two"></div>
         </div>

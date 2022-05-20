@@ -15,7 +15,7 @@ import axios from 'axios'
 import Button from '@mui/material/Button'
 import { GiGreenPower, GiNextButton } from 'react-icons/gi';
 import { BsPlayFill } from 'react-icons/bs';
-
+import Modal from './Modal'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -118,12 +118,13 @@ axios.get('http://localhost:5001/tenders')
                  </Button>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <a style={{textDecoration:'none'}} href='tender-detail'>
+                  {/* <a style={{textDecoration:'none'}} href='tender-detail'>
                <Button color='info' endIcon={  <BsPlayFill />} variant='outlined' >
                 See More
                     
                  </Button>
-                  </a>
+                  </a> */}
+                  <Modal/>
                 </StyledTableCell>
             </StyledTableRow>
           ))}

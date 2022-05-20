@@ -281,7 +281,9 @@ Bid Opening Date
             </label>
         </Grid>
         <Grid item xs={4}>
-          
+        </Grid>
+        <Grid item xs={4}>
+
         </Grid>
         <Grid item xs={4}>
           <Stack

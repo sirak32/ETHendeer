@@ -24,8 +24,9 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button variant='outlined' onClick={handleOpen}>See Details</Button>
       <Modal
+        
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
