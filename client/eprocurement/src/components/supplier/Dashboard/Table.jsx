@@ -57,34 +57,40 @@ export default function CustomizedTables() {
   ];
   
 const [data, setData]=React.useState(null)
- const c=React.useCallback(() => {
-axios.get('http://localhost:5001/tenders')
-  .then((response) => {
-    // const username=response.data.user[0].username;
-    // console.log(response.data.status)
-    // setData()
+//  const c=React.useCallback(() => {
+// axios.get('http://localhost:5001/tenders')
+//   .then((response) => {
+//     // const username=response.data.user[0].username;
+//     // console.log(response.data.status)
+//     // setData()
   
-  }
+//   }
   
-  ).catch((e)=>console.log(e));
+//   ).catch((e)=>console.log(e));
   
-  axios.get('http://localhost:5001/tenders')
-  .then((response) => {
-    // const data={"tenders":response.data}
-    console.log(response.data.status)
-    console.log(data)
-    const temp=response.data.status
-    setData(temp)
-    console.log(data)
+//   axios.get('http://localhost:5001/tenders')
+//   .then((response) => {
+//     // const data={"tenders":response.data}
+//     console.log('initial',data)
+//     console.log(response.data.status)
+//     // console.log(data)
+//     const temp=response.data.status
+//     setData(temp)
+//     console.log('data',data)
 
-  }
+//   }
   
-  ).catch((e)=>console.log(e));
+//   ).catch((e)=>console.log(e));
   
- }, []);
+//  }, []);
  React.useEffect(()=>{
-   c()
- },[data])
+  const tenderList= async()=>{
+    const response=await axios.get('http://localhost:5001/tenders')
+  setData(response.data.status)
+    console.log('response',response.data.status,'data',data)
+  } 
+ tenderList()
+ },[])
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -97,9 +103,7 @@ axios.get('http://localhost:5001/tenders')
             <StyledTableCell align="right">Status</StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
-
-
+            <StyledTableCell align="right"></StyledTableCell> 
           </TableRow>
         </TableHead>
         <TableBody>

@@ -92,9 +92,9 @@ import {
     }
   }
   const fetchAndSetTenders=data=>({
-    type:FETCH_AND_SET_TENDER,
+    type:SET_TENDER,
     payload:{
-      data
+      ...data
     }
   })
 

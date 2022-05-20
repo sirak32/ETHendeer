@@ -1,21 +1,23 @@
 import {
-    CREATE_SUPPLIER,
-    DELETE_SUPPLIER,
-    UPDATE_SUPPLIER,
-    FETCH_SUPPLIER,
-    ADD_TENDER_SUCCESS,
-    ADD_TENDER_FAILURE,
-    ADD_TENDER_STARTED
+    SET_TENDER,
+    CREATE_TENDER,
+    UPDATE_TENDER,
+    DELETE_TENDER
   } from '../constants/tenderConstants';
   
   const initialState = {
     loading: false,
     suppliers: [],
-    error: null
+    error: null,
+    tenders:[]
   };
   
   export default function supplierReducer(state = initialState, action) {
     switch (action.type) {
+      case SET_TENDER:
+        return {
+           tenders:action.data
+          }
       case ADD_STARTED:
         return {
           ...state,
@@ -26,7 +28,7 @@ import {
           ...state,
           loading: false,
           error: null,
-          todos: [...state.todos, action.payload]
+          todos: [...state.tenders, action.data]
         };
       case ADD_FAILURE:
         return {
@@ -34,7 +36,7 @@ import {
           loading: false,
           error: action.payload.error
         };
-      default:
+      default: 
         return state;
     }
   }
