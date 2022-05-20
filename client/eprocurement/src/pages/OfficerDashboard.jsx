@@ -22,17 +22,8 @@ useEffect(()=>{
   fetchTenders()
   },[])
   console.log('status',tenders )
+const t=  tenders.map((tender)=><h1>{tender.title}</h1>)
   return !tender? (
-    // <Container>
-    //     {/* <Sidebar/> */}
-    //     {/* <Sidebar/> */}
-    //     <MainContent/>
-    // </Container>
-    /*<Div>
-      <Sidebar/>
-      <Dashboard/>
-    </Di>*/
-    // <Sidebar/>
     <Div>
       <SideBar  menu={menus} />
       <Section>
@@ -48,6 +39,8 @@ useEffect(()=>{
             </Wrapper>
             {/* <Table /> */}
             <BasicTabs/>
+            {t}
+            <h1>{tenders[10].description}</h1>
             <h1>Hey {tender}</h1>
             {/* <Modal/> */}
             {/* <MediaCard/>             */}

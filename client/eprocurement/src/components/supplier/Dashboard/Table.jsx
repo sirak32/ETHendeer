@@ -83,14 +83,14 @@ const [data, setData]=React.useState(null)
 //   ).catch((e)=>console.log(e));
   
 //  }, []);
- React.useEffect(()=>{
-  const tenderList= async()=>{
-    const response=await axios.get('http://localhost:5001/tenders')
-  setData(response.data.status)
-    console.log('response',response.data.status,'data',data)
-  } 
- tenderList()
- },[])
+//  React.useEffect(()=>{
+//   const tenderList= async()=>{
+//     const response=await axios.get('http://localhost:5001/tenders')
+//   setData(response.data.status)
+//     console.log('response',response.data.status,'data',data)
+//   } 
+//  tenderList()
+//  },[])
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
