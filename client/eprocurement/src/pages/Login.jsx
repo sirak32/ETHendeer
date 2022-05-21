@@ -4,6 +4,7 @@ import { Button, Container, FormControl, IconButton, InputAdornment, InputLabel,
 import React from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
+import {Navigate} from 'react-router-dom'
 const Login = () => {
     
     const [type, setType] = React.useState("");
@@ -36,7 +37,8 @@ const Login = () => {
         password: values.password
       })
       .then(function (response) {
-        alert(response.data.succes);
+          <Navigate to='/officer'/>
+        // alert(response.data.succes);
       })
       .catch((e)=>console.log(e.response.status))
     //  
