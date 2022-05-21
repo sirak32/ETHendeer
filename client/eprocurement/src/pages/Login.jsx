@@ -32,13 +32,16 @@ const Login = () => {
       };
       const handleSubmit=(e)=>{
           e.preventDefault();
+
     axios.post('http://localhost:5001/officer-login', {
         username: values.username,
         password: values.password
       })
       .then(function (response) {
-          <Navigate to='/officer'/>
+          // <Navigate to='/officer'/>
         // alert(response.data.succes);
+        if(response.data.succes)
+        window.location='http://localhost:3000/officer'
       })
       .catch((e)=>console.log(e.response.status))
     //  
