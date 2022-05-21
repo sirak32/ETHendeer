@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs";
 import {
     user,
     address,
-    supplier
+    supplier,
+    officer
 } from '../models/user.js'
 import {
     account
@@ -60,20 +61,34 @@ const registerOfficer = async (req, res) => {
         kebele: "01",
 
     })
-    const newOfficer = new user({
+    const personalInfor=new user({
         firstName: "Tiliksew",
-        middleNam: "Mulugeta",
-        lastName: "Alamirew",
-        email: "tilik@gmail.com",
-        phoneNumber: {
-            countryCode: "+251",
-            regionalCode: "91929",
-            number: "8457",
-        },
-        address: userAddress,
-        sex: "male",
-        role: "Admin"
+    middleNam: "Mulugeta",
+    lastName: "Alamirew",
+    email: "tilik@gmail.com",
+    phoneNumber: {
+        countryCode: "+251",
+        regionalCode: "9",
+        number: "19298457",
+    },
+    address:userAddress._id,
+    sex:'m'
     })
+    const Offipassword = await bcrypt.hash('tilik', 12)
+    const accountInform=new account({
+        username: "tilik",
+    password: Offipassword,
+    email: "tilik",
+    role: "officer"
+    })
+    const newOfficer = new officer({
+        personalInfo:personalInfor._id,
+        accountInfo:accountInform._id,
+        officerId:'ETS3'
+    })
+    await userAddress.save()
+    await personalInfor.save()
+    await accountInform.save() 
     await newOfficer.save()
     return res.status(201).json({
         message: "Hurry! now you are successfully registred. Please  login.",
@@ -139,7 +154,7 @@ const userLogin = async (userCreds, role, res) => {
         username
     })
     if (!user) {
-        return res.status(404).json({
+        return res.status(200).json({
             message: "Username not found",
             succes: false
         })
@@ -153,8 +168,9 @@ const userLogin = async (userCreds, role, res) => {
         })
 
     }
-    let isMatch = await bcrypt.compare(user.password, password)
-    if (!isMatch) {
+    console.log(user.password)
+    let isMatch = await bcrypt.compare(password,user.password)
+    if (isMatch) {
         let token = jwt.sign({
             user_id: user._id,
             role: user.role,
@@ -172,11 +188,11 @@ const userLogin = async (userCreds, role, res) => {
         }
         return res.status(200).json({
             ...result,
-            succes: false
+            succes: true
         })
 
     } else {
-        return res.status(403).json({
+        return res.status(200).json({
             message: 'Incorrect Password',
             succes: false
         })

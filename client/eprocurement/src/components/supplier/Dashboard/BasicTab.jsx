@@ -64,10 +64,9 @@ export default function BasicTabs(props) {
         <Table data={props.data}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Table/>
+        <Table data={props.data}/>
       </TabPanel>
     </Box>
   );

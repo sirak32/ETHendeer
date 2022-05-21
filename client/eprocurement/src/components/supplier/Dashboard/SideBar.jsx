@@ -15,7 +15,7 @@ import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './Login'
 import { Table } from "@mui/material";
 export default function Sidebar(props) {
-  const [currentLink, setCurrentLink] = useState(1);
+  const [currentLink, setCurrentLink] = useState(0);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
@@ -75,9 +75,9 @@ export default function Sidebar(props) {
               {props.menu.map((menI,i)=>(
                 <li
                 className={currentLink === i ? "active" : "none"}
-                onClick={() => setCurrentLink(1)}
+                onClick={() => setCurrentLink(i)}
               >
-                <a href="/">
+                <a href="#">
                   {iconChoose(i)}
                   <span> {menI}</span>
                 </a>

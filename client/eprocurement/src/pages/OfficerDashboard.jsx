@@ -7,13 +7,14 @@ import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import Modal from "../components/supplier/Dashboard/Modal";
 import { useSelector, useDispatch, connect } from "react-redux";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import Dash from "../components/supplier/Dashboard/Dash";
 import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 const App = ({ tenders, fetchTenders }) => {
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
+  // const [tendeN,setTenderN]=useState(null)
   const menus = ["Dashboard", "Tender", "Suppliers", "Logout"];
   useEffect(() => {
     // dispatch({type:'SET_LOADING'})
@@ -41,17 +42,16 @@ const App = ({ tenders, fetchTenders }) => {
         <div className="grid">
           <div className="row__one">
             <Wrapper>
-              <h1>{tender}</h1>
+              {/* <h1>{tender}</h1> */}
               <Dash title="Suppliers" number="888" />
-              <Dash title="Tenders" number="5000" />
+              <Dash title="Tenders" number={tenders.length} />
               <Dash title="Active" number="200" />
               <Dash title="Closed" number="45" />
             </Wrapper>
             {/* <Table /> */}
             <BasicTabs data={OptmTender} />
-            {t}
-            <h1>{tenders[10].description}</h1>
-            <h1>Hey {tender}</h1>
+            {/* <h1>{tenders[10].description}</h1> */}
+            {/* <h1>Hey {tender}</h1> */}
             {/* <Modal/> */}
             {/* <MediaCard/>             */}
           </div>
@@ -65,7 +65,25 @@ const App = ({ tenders, fetchTenders }) => {
     //   <NavBar/>
     //   <Table/>
     // </>
-    <ProgressBar/>   
+    <>
+    <Div>
+      <SideBar menu={menus} />
+      <Section>
+        <NavBar />
+        <div className="grid">
+          <div className="row__one">
+            
+            {/* <Table /> */}
+    <ProgressBar/> 
+            {/* {t} */}
+            {/* <Modal/> */}
+            {/* <MediaCard/>             */}
+          </div>
+          <div className="row__two"></div>
+        </div>
+      </Section>
+    </Div>
+    </>
   );
 };
 

@@ -1,13 +1,23 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 
-export default function CircularColor() {
+export default function LinearColor() {
   return (
-    <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-      <CircularProgress color="secondary" />
-      <CircularProgress color="success" />
-      <CircularProgress color="inherit" />
+    <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+      <LinearProgress color="secondary" />
+      <LinearProgress color="success" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="secondary" />
+      <LinearProgress color="success" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="secondary" />
+      <LinearProgress color="success" />
+      <LinearProgress color="inherit" />
+      <LinearProgress color="secondary" />
+      <LinearProgress color="success" />
+      <LinearProgress color="inherit" />
+
     </Stack>
   );
 }
