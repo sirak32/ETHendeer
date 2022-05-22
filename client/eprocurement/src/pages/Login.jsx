@@ -6,14 +6,24 @@ import styled from 'styled-components';
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import vid from '../videos/production .mp4'
+import { MdGeneratingTokens } from 'react-icons/md';
 const Login = () => {
-  const [logged,setLogged]=React.useState(true)
+  React.useEffect(()=>{
+    const tokens=localStorage.getItem('token')
+    if(tokens!==null){
+      setLogged(true)
+      console.log('tokens ',tokens) 
+      // navigate('/officer')
+
+    }
+  },[])
+  const [logged,setLogged]=React.useState()
     
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
         username: "",
         password: "",
-        showPassword: false,
+        showPassword: false, 
       });
       const navigate=useNavigate()
     const handleTypeChange = (event) => {
@@ -45,7 +55,9 @@ const Login = () => {
         // alert(response.data.succes);
         if(response.data.succes){
 setLogged(true)
-          navigate('/officer')
+alert(response.data.token);
+localStorage.setItem('token', response.data.token);
+          // navigate('/officer')
         }
         else {
           setLogged(false)
@@ -67,6 +79,7 @@ setLogged(true)
           />
         Your browser does not support the video tag. */}
           {/* </video> */}
+          {logged&& navigate('/officer')}
       <Container>
     <Wrapper>
         <TextField 

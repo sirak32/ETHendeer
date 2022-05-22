@@ -118,7 +118,7 @@ const displayDashboard = (req, res) => {
     })
 }
 const displayAll = async (req, res) => {
-    const users = await account.find()
+    const users = await officer.find().populate('accountInfo').populate('personalInfo')
     res.status(200).json({
         user: users
     })
