@@ -81,14 +81,16 @@ import {
   export const fetchTender=()=>{
     return dispatch=>{
       dispatch({type:SET_LOADING})
-      axios.get(`http://localhost:5001/tenders`)
-      .then((response)=>{
-        const {data}=response
-        dispatch(fetchAndSetTenders(data))
-      })
-      .catch(()=>{
-
-      })
+        axios.get(`http://localhost:5001/tenders`)
+        .then((response)=>{
+          const {data}=response
+          dispatch(fetchAndSetTenders(data))
+        })
+        .catch(()=>{
+  
+        })
+        
+      
     }
   }
   const fetchAndSetTenders=data=>({

@@ -14,7 +14,9 @@ import { IoNavigateCircle } from 'react-icons/io5';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './Login'
 import { Table } from "@mui/material";
+import { useNavigate } from "react-router";
 export default function Sidebar(props) {
+  const navigate=useNavigate()
   const [currentLink, setCurrentLink] = useState(0);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
@@ -75,9 +77,16 @@ export default function Sidebar(props) {
               {props.menu.map((menI,i)=>(
                 <li
                 className={currentLink === i ? "active" : "none"}
-                onClick={() => setCurrentLink(i)}
+                onClick={() => {
+                  setCurrentLink(i)
+                if(currentLink==3){
+                  localStorage.removeItem('token')
+                  navigate('/')
+                  // window.location='localhost:3000/'
+                }
+                }}
               >
-                <a href="#">
+                <a >
                   {iconChoose(i)}
                   <span> {menI}</span>
                 </a>
@@ -129,7 +138,7 @@ export default function Sidebar(props) {
         <div className="logout">
           <a href="/login">
             <FiLogOut />
-            <span className="logout">Logout</span>
+            <span className="logout">Logouts</span>
           </a>
         </div>
       </Section>
@@ -247,6 +256,7 @@ gap: 2rem;
           padding: 0.6rem 1rem;
           border-radius: 0.6rem;
           &:hover {
+            cursor:pointer;
             background-color: #ffc107;
             a {
               color: black;

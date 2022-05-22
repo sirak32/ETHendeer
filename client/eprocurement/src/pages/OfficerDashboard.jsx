@@ -11,7 +11,21 @@ import { useEffect,useState } from "react";
 import Dash from "../components/supplier/Dashboard/Dash";
 import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
+import { useNavigate } from 'react-router-dom'
 const App = ({ tenders, fetchTenders }) => {
+  const navigate=useNavigate()
+  const [logged,setLogged]=useState(false)
+  // useEffect(()=>{
+  //   const tokens=localStorage.getItem('token')
+  //   if(tokens!==null){
+  //     setLogged(true)
+  //     console.log('tokens ',tokens) 
+  //     i(logged!==null)
+  //     navigate('/')
+
+
+  //   }
+  // },[])
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   // const [tendeN,setTenderN]=useState(null)
@@ -20,6 +34,9 @@ const App = ({ tenders, fetchTenders }) => {
     // dispatch({type:'SET_LOADING'})
     // dispatch({type:'SET_TENDER',
     //   payload:'data'})
+        const tokens=localStorage.getItem('token')
+    if(tokens==null)
+          navigate('/')
     fetchTenders();
   }, []);
   const OptmTender = [];

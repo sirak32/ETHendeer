@@ -17,7 +17,7 @@ const Login = () => {
 
     }
   },[])
-  const [logged,setLogged]=React.useState()
+  const [logged,setLogged]=React.useState(false)
     
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
