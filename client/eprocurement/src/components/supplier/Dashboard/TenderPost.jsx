@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { MdArrowDropDown } from 'react-icons/md';
 import { Stack } from '@mui/material';
 import Modal from './Modal'
+import { Link } from 'react-router-dom';
 export default function MediaCard() {
   return (
       
@@ -33,7 +34,9 @@ export default function MediaCard() {
         </Typography>
       </CardContent>
       <CardActions>
+        <Link to='/apply' >
         <Button sx={{margin:'1rem'}} variant='outlined'  size="small">Apply</Button>
+        </Link>
         <Modal><MdArrowDropDown /></Modal> 
       </CardActions>
     </Card>

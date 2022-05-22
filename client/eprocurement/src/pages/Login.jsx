@@ -1,11 +1,13 @@
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Alert, Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import React from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
-import {Navigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+import vid from '../videos/production .mp4'
 const Login = () => {
+  const [logged,setLogged]=React.useState(true)
     
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
@@ -13,6 +15,7 @@ const Login = () => {
         password: "",
         showPassword: false,
       });
+      const navigate=useNavigate()
     const handleTypeChange = (event) => {
       setType(event.target.value);
     };
@@ -40,8 +43,15 @@ const Login = () => {
       .then(function (response) {
           // <Navigate to='/officer'/>
         // alert(response.data.succes);
-        if(response.data.succes)
-        window.location='http://localhost:3000/officer'
+        if(response.data.succes){
+setLogged(true)
+          navigate('/officer')
+        }
+        else {
+          setLogged(false)
+
+        }
+        // window.location='http://localhost:3000/officer'
       })
       .catch((e)=>console.log(e.response.status))
     //  
@@ -50,18 +60,24 @@ const Login = () => {
       }
   return (
       <form onSubmit={handleSubmit}>
-
+{/* <video  loop autoPlay>
+        <source
+          src={vid}
+          type="video/mp4"
+          />
+        Your browser does not support the video tag. */}
+          {/* </video> */}
       <Container>
     <Wrapper>
         <TextField 
                 sx={{ m: 1, width: "15vw" }}
                 onChange={handleChange("username")}
-
-            name="userName"
-            color="success"
-            label="Enter User Name"
-            // id="outlined-start-adornment"
-            />{" "}
+                
+                name="userName"
+                color="success"
+                label="Enter User Name"
+                // id="outlined-start-adornment"
+                />{" "}
           <FormControl sx={{ m: 1, width: "15vw" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Password
@@ -72,7 +88,7 @@ const Login = () => {
               value={values.password}
               onChange={handleChange("password")}
               endAdornment={
-                  <InputAdornment position="end">
+                <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
@@ -86,6 +102,7 @@ const Login = () => {
               label="Password"
               />
           </FormControl>
+              {!logged&& <Alert severity="error">Incorrect Credetials: Fill it Correctly</Alert>}
           <Button type='submit' sx={{width:'15vw'}} color='primary' variant='contained' size='large'> Login</Button>
     </Wrapper>
               </Container>

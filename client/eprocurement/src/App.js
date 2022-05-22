@@ -11,7 +11,7 @@ import OfficersList from "./pages/OfficersList.jsx";
 import AddOfficer from "./pages/AddOfficer.jsx";
 import TenderDetail from "./pages/TenderDetail";
 import Login from "./pages/Login"
-
+import Apply from './pages/ApplyingTender'
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 
 const App = () => {
@@ -20,6 +20,8 @@ const App = () => {
     <Router>
     <Routes>
                  <Route exact path='/' element={<Login/>}></Route>
+                 <Route exact path='/apply' element={<Apply/>}></Route>
+
                  <Route exact path='/tender-detail' element={<TenderDetail/>}></Route>
                  <Route exact path='/add-officer' element={<AddOfficer/>}></Route>
                  <Route exact path='/officers-list' element={<OfficersList/>}></Route>
