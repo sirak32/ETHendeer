@@ -118,7 +118,7 @@ const displayDashboard = (req, res) => {
     })
 }
 const displayAll = async (req, res) => {
-    const users = await officer.find().populate('accountInfo').populate('personalInfo')
+    const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
     res.status(200).json({
         user: users
     })
@@ -169,7 +169,12 @@ const userLogin = async (userCreds, role, res) => {
 
     }
     console.log(user.password)
-    let isMatch = await bcrypt.compare(password,user.password)
+    let isMatch = await bcrypt.compare(password,user.password) 
+    const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
+        // res.filter()
+        console.log(res)
+    })
+    // console.log(officerIds.accountInfo)
     if (isMatch) {
         let token = jwt.sign({
             user_id: user._id,

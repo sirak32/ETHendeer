@@ -362,6 +362,7 @@ const formDatas = {
   catagory: null,
   lotNo: null,
   minPrice: null,
+  creator:null,
   publishedDate: null,
   closingDate: null,
   bidOpenOn: null,
