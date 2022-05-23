@@ -10,6 +10,7 @@ import AddOfficer from '../components/supplier/Dashboard/AddOfficer'
 import OfficersList from "../components/supplier/Dashboard/OfficersList";
 import RegisterSupplier from '../components/supplier/Dashboard/RegisterSupplier'
 import AdminTab from '../components/supplier/Dashboard/AdminTab'
+import { FilePicker } from 'evergreen-ui'
 const App = () => {
   const menus=['Dashboard','Officers','Suppliers','Logout']
   return (
@@ -45,6 +46,8 @@ const App = () => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             <AdminTab/>
+            <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" />
+
             {/* <AddOfficer/> */}
             {/* <OfficersList/>
             <RegisterSupplier/> */}

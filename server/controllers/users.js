@@ -170,11 +170,19 @@ const userLogin = async (userCreds, role, res) => {
     }
     console.log(user.password)
     let isMatch = await bcrypt.compare(password,user.password) 
-    const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
-        // res.filter()
-        console.log(res)
-    })
+    // const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
+        
+        
+    //     // res.filter()
+    //     console.log(res)
+    // })
     // console.log(officerIds.accountInfo)
+    const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
+    const u=users.filter((user)=>{
+        return user.accountInfo.username===username
+    })
+    const offId=u[0]._id
+    // res.status(200).json(u)
     if (isMatch) {
         let token = jwt.sign({
             user_id: user._id,
@@ -193,7 +201,8 @@ const userLogin = async (userCreds, role, res) => {
         }
         return res.status(200).json({
             ...result,
-            succes: true
+            succes: true,
+            offId
         })
 
     } else {

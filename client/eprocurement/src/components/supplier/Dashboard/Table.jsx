@@ -118,7 +118,9 @@ const [data, setData]=React.useState(null)
               <StyledTableCell align="right">{row.closingDate}</StyledTableCell>
               <StyledTableCell align="right">{row.status} <FaCircle color='#0ac253'/> </StyledTableCell>
               <StyledTableCell align="right">
-               <Button color='primary' endIcon={  <FaEdit />} variant='contained'>
+               <Button onClick={()=>{
+                alert(row.tenderId)
+              }}  color='primary' endIcon={  <FaEdit />} variant='contained'>
                 EDIT
                  </Button>
                 </StyledTableCell>

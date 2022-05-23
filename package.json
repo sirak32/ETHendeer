@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "framer-motion": "^6.3.3",
+    "primeicons": "^5.0.0",
+    "primereact": "^8.1.1",
     "react-visibility-sensor": "^5.1.1"
   }
 }

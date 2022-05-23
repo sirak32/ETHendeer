@@ -10,20 +10,20 @@ export default function Dash(props) {
     <Wrapper>
           <Card sx={{ maxWidth: 500  }}>
       <CardActionArea>
-        <CardContent sx={{background:"#ffc107"}}>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardContent sx={{background:"#ffc10720"}}>
+          <Typography align='center' gutterBottom variant="h5" component="div">
             {props.title}
           </Typography>
-          <Typography variant="h1" color="text.secondary">
+          <Typography align='center' variant="h1" color="text.secondary">
           {props.number}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions >
+      {/* <CardActions >
         <Button size="small" color="primary">
           More
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
     </Wrapper>
   )
@@ -31,4 +31,5 @@ export default function Dash(props) {
 const Wrapper=styled.div`
 background-color:blue;
 width :15rem;
+border-radius:21rem;
 `;

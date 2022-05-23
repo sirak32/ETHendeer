@@ -5,6 +5,7 @@
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "axios": "^0.27.2",
+    "evergreen-ui": "^6.9.10",
     "react-bootstrap": "^2.3.1",
     "react-datepicker": "^4.8.0",
     "react-file-base64": "^1.0.3",
@@ -15,6 +16,7 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "rsuite": "^5.13.0",
     "scrollreveal": "^4.0.9",
     "styled-components": "^5.3.5"
   }

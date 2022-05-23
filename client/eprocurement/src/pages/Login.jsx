@@ -57,6 +57,8 @@ const Login = () => {
 setLogged(true)
 alert(response.data.token);
 localStorage.setItem('token', response.data.token);
+localStorage.setItem('whoId', response.data.offId);
+
           // navigate('/officer')
         }
         else {
