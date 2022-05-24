@@ -10,7 +10,7 @@ export default function Dash(props) {
     <Wrapper>
           <Card sx={{ maxWidth: 500  }}>
       <CardActionArea>
-        <CardContent sx={{background:"#ffc10720"}}>
+        <CardContent sx={{background:"#ffc10760"}}>
           <Typography align='center' gutterBottom variant="h5" component="div">
             {props.title}
           </Typography>

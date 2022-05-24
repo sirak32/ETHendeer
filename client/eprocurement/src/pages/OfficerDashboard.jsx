@@ -35,9 +35,10 @@ const App = ({ tenders, fetchTenders }) => {
     // dispatch({type:'SET_TENDER',
     //   payload:'data'})
         const tokens=localStorage.getItem('token')
-    if(tokens==null)
-          navigate('/')
-    fetchTenders();
+        if(tokens==null)
+        navigate('/')
+        fetchTenders();
+        // console.log('this is my kingdom',tenders)
   }, []);
   const OptmTender = [];
   let i;

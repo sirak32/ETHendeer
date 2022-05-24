@@ -19,6 +19,7 @@ import axios from "axios";
 import { IoAddCircleOutline } from "react-icons/io5";
 import DatePicker from 'react-datepicker'
 export default function InputAdornments() {
+  const [no,setNo]=React.useState('')
   const [type, setType] = React.useState("");
 
   const handleTypeChange = (event) => {
@@ -51,7 +52,10 @@ export default function InputAdornments() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        axios.post("http://localhost:5001/tenders", formValues);
+        axios.post("http://localhost:5001/tenders", formValues).then(()=>{
+
+          setNo('changed')
+        });
         console.log(formValues);
       }}
       action="sdghfjgh"

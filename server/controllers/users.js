@@ -145,7 +145,7 @@ const displayDashboard = (req, res) => {
     })
 }
 const displayAll = async (req, res) => {
-    const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
+    const users = await supplier.find()
     res.status(200).json({
         user: users
     })
