@@ -353,7 +353,8 @@ const handleForm = (e) => {
 
 // })
 // }
-
+const id=localStorage.getItem('whoId')
+console.log('the id is ',id)
 const formDatas = {
   title: null,
   description: null,
@@ -362,7 +363,7 @@ const formDatas = {
   catagory: null,
   lotNo: null,
   minPrice: null,
-  creator:null,
+  creator:id,
   publishedDate: null,
   closingDate: null,
   bidOpenOn: null,

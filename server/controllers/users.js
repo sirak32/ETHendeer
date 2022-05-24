@@ -14,38 +14,65 @@ import jwt from 'jsonwebtoken'
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
-    const usernameNotTaken = await validateUsername(userBody.accountInfo.username)
+    const usernameNotTaken = await validateUsername('tilikw')
     if (!usernameNotTaken) {
         return res.status(401).json({
             message: "Username is taken"
         })
     }
 
-    const emailNotTaken = await validateEmail(userBody.accountInfo.email)
+    const emailNotTaken = await validateEmail("tilik@gmail.com")
     if (!emailNotTaken) {
         return res.status(401).json({
             message: "Email is taken"
         })
     }
 
-    const password = await bcrypt.hash(userBody.accountInfo.password, 12)
-    const newUser = new supplier({
-        ...userBody,
-        accountInfo: {
-            ...userBody.accountInfo,
-            password,
+    const password = await bcrypt.hash('tilik', 12)
+    const userAddress = new address({
+        city: "Finote Selam",
+        subcity: "Kuchra",
+        wereda: "finot",
+        kebele: "01",
 
-        }
     })
-    const newAccount = new account({
-        username: userBody.accountInfo.username,
-        password,
-        email: userBody.accountInfo.email,
-        role: userBody.accountInfo.role,
+    const personalInfor=new user({
+        firstName: "Tiliksew",
+    middleNam: "Mulugeta",
+    lastName: "Alamirew",
+    email: "tilik@gmail.com",
+    phoneNumber: {
+        countryCode: "+251",
+        regionalCode: "9",
+        number: "19298457",
+    },
+    address:userAddress._id,
+    sex:'m'
     })
+    const accountInform=new account({
+        username: "tilik",
+    password: password,
+    email: "tilik",
+    role: "officer"
+    })
+    const newSupplier = new supplier({
+        personalInfo:personalInfor._id,
+        accountInfo:accountInform._id,
+        bussinessType:'manufacturing',
+        tinNumber:'12345676543',
+    })
+    // const newAccount = new account({
+    //     username: userBody.accountInfo.username,
+    //     password,
+    //     email: userBody.accountInfo.email,
+    //     role: userBody.accountInfo.role,
+    // })
     //need to be nested like callback
-    await newAccount.save()
-    await newUser.save()
+    // await newAccount.save()
+    await userAddress.save()
+    await personalInfor.save()
+    await accountInform.save()
+    await newSupplier.save()
     return res.status(201).json({
         message: "Account Created"
     })
@@ -135,7 +162,7 @@ const validateEmail = async email => {
     const Email = await account.findOne({
         email
     })
-    console.log(Email)
+    console.log('email-',Email)
     return Email ? false : true
 }
 const checkRole = roles => (req, res, next) => {

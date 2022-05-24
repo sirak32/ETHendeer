@@ -6,6 +6,7 @@ import {createStore,compose,applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'  
 import tenderReducer from "./reducers/tenderReducer";
 import thunk from 'redux-thunk'
+
 const store=createStore(tenderReducer,compose(applyMiddleware(thunk)))
 ReactDom.render(
   <Provider store={store}>  

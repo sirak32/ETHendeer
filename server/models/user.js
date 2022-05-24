@@ -46,6 +46,7 @@ const supplierSchema = mongoose.Schema({
      },
     bussinesType: String,
     tinNumber: String,
+    Attacheddocument:String,
 })
 const systemAdminSchema = mongoose.Schema({
     personalInfo: {
