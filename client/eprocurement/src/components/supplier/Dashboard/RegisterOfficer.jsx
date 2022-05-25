@@ -1292,19 +1292,24 @@ export const FormikFormDemo = () => {
               </label>
             </div>
               </Grid>
+              <Grid item xs={6}></Grid>
+            <Grid item xs={6}>
+            <Button type="submit" label="Submit" className="mt-2" />
+             </Grid>
+<Grid item xs={6}>
+
+            <Button type='reset' label="Clear" className="mt-2 p-button-danger" onClick={(()=>{
+                console.log("Logger")
+                formik.resetForm();
+
+            })} />
+             </Grid>
             </Grid> 
 
 
             
             {/* THis is Break Point */}
 {/* This is  */}
-
-            <Button type="submit" label="Submit" className="mt-2" />
-            <Button type='reset' label="Clear" className="mt-2 p-button-danger" onClick={(()=>{
-                console.log("Logger")
-                formik.resetForm();
-
-            })} />
 
           </form>
         </div>
