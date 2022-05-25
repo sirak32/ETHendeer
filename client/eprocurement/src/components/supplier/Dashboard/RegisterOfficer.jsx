@@ -1300,6 +1300,12 @@ export const FormikFormDemo = () => {
 {/* This is  */}
 
             <Button type="submit" label="Submit" className="mt-2" />
+            <Button type='reset' label="Clear" className="mt-2 p-button-danger" onClick={(()=>{
+                console.log("Logger")
+                formik.resetForm();
+
+            })} />
+
           </form>
         </div>
       </div>
