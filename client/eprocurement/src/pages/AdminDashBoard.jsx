@@ -46,7 +46,7 @@ const App = () => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             <AdminTab/>
-            <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" />
+            {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
 
             {/* <AddOfficer/> */}
             {/* <OfficersList/>

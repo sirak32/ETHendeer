@@ -10,6 +10,7 @@ import Table from './Table'
 import AddOfficer from './AddOfficer'
 import RegisterSupplier from './RegisterSupplier'
 import OfficersList from './OfficersList';
+import { FormikFormDemo } from "./RegisterOfficer";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -60,9 +61,6 @@ export default function BasicTabs() {
           <Tab label="ADD OFFICER" {...a11yProps(3)} />
           <Tab label="PENDING REGISTRATION" {...a11yProps(4)} />
           <Tab label="FEEDBACK LIST" {...a11yProps(5)} />
-
-
-
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -76,7 +74,8 @@ export default function BasicTabs() {
         <HorizontalLinearStepper/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AddOfficer/>
+        <FormikFormDemo/>
+        {/* <AddOfficer/> */}
       </TabPanel>
       <TabPanel value={value} index={4}>
         Item Three

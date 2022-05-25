@@ -7,6 +7,7 @@
     "@mui/material": "^5.6.3",
     "axios": "^0.27.2",
     "evergreen-ui": "^6.9.10",
+    "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "primereact": "^8.1.1",
     "react-bootstrap": "^2.3.1",

@@ -8,6 +8,7 @@ import AddTenderForm from './AddTenderForm'
 import HorizontalLinearStepper from './Stepper';
 import Table from './Table'
 import SupplierTable from './SupplierTable'
+import {FormikFormDemo} from './RegisterOfficer'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -68,6 +69,7 @@ export default function BasicTabs(props) {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <SupplierTable data={props.data.suppliers}/>
+        <FormikFormDemo/>
       </TabPanel>
     </Box>
   );
