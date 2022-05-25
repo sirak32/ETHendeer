@@ -37,24 +37,24 @@
 //   },
 // }));
 
-// function createData(tenderId, tenderTitle, openingDate, closingDate, status) {
-//   return { tenderId, tenderTitle, openingDate, closingDate, status };
+// function createData(email, phone, email, tinNO, status) {
+//   return { email, phone, email, tinNO, status };
 // }
 
 
 // export default function CustomizedTables(props) {
 //   let date=props.data[0].bidOpenOn
 //   const rows = [
-//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].closingDate, props.data[0].bidOpenOn, 'Active'), 
-//     createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].closingDate, props.data[1].bidOpenOn,'Active'),
-//     createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].closingDate, props.data[2].bidOpenOn, 'Active'),
-//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'), 
-//     createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].closingDate, props.data[4].bidOpenOn,'Active'),
-//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'), 
-//     createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].closingDate, props.data[6].bidOpenOn,'Active'),
-//     createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].closingDate, props.data[7].bidOpenOn, 'Active'),
-//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'), 
-//     createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
+//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].tinNO, props.data[0].bidOpenOn, 'Active'), 
+//     createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].tinNO, props.data[1].bidOpenOn,'Active'),
+//     createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].tinNO, props.data[2].bidOpenOn, 'Active'),
+//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'), 
+//     createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].tinNO, props.data[4].bidOpenOn,'Active'),
+//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'), 
+//     createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].tinNO, props.data[6].bidOpenOn,'Active'),
+//     createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].tinNO, props.data[7].bidOpenOn, 'Active'),
+//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'), 
+//     createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
 //   ];
   
 // const [data, setData]=React.useState(null)
@@ -109,17 +109,17 @@
 //         </TableHead>
 //         <TableBody>
 //           {rows.map((row) => (
-//             <StyledTableRow key={row.tenderId}>
+//             <StyledTableRow key={row.email}>
 //               <StyledTableCell component="th" scope="row">
-//                 {row.tenderId}
+//                 {row.email}
 //               </StyledTableCell>
-//               <StyledTableCell align="right">{row.tenderTitle}</StyledTableCell>
-//               <StyledTableCell align="right">{row.openingDate}</StyledTableCell>
-//               <StyledTableCell align="right">{row.closingDate}</StyledTableCell>
+//               <StyledTableCell align="right">{row.phone}</StyledTableCell>
+//               <StyledTableCell align="right">{row.email}</StyledTableCell>
+//               <StyledTableCell align="right">{row.tinNO}</StyledTableCell>
 //               <StyledTableCell align="right">{row.status} <FaCircle color='#0ac253'/> </StyledTableCell>
 //               <StyledTableCell align="right">
 //                <Button onClick={()=>{
-//                 alert(row.tenderId)
+//                 alert(row.email)
 //               }}  color='primary' endIcon={  <FaEdit />} variant='contained'>
 //                 EDIT
 //                  </Button>
@@ -152,50 +152,50 @@ import {Column} from 'primereact/column'
 import { Button } from 'primereact/button';
 const Table=(props)=>{
   const [selectedCustomers, setSelectedCustomers] = useState(null);
-  function createData(tenderNO,tenderId, tenderTitle, openingDate, closingDate, status) {
-  return { tenderNO,tenderId, tenderTitle:tenderTitle.split('T')[0], openingDate:openingDate.split('T')[0], closingDate:closingDate.split('T')[0], status };
+  function createData(no,name,email, phone, tinNO, ) {
+  return {no, name, email, phone, tinNO};
 }
-  let dataa=props.data
-  console.log('my NEw KINGDOM',dataa)
+  let supList=props.data
+  console.log('my NEw KINGDOM' ,supList)
   let i
   
   const rows = [
-    // createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].closingDate, props.data[1].bidOpenOn,'Active'),
-    // createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].closingDate, props.data[2].bidOpenOn, 'Active'),
-    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'), 
-    // createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].closingDate, props.data[4].bidOpenOn,'Active'),
-    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'), 
-    // createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].closingDate, props.data[6].bidOpenOn,'Active'),
-    // createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].closingDate, props.data[7].bidOpenOn, 'Active'),
-    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'), 
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].tinNO, props.data[1].bidOpenOn,'Active'),
+    // createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].tinNO, props.data[2].bidOpenOn, 'Active'),
+    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'), 
+    // createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].tinNO, props.data[4].bidOpenOn,'Active'),
+    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'), 
+    // createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].tinNO, props.data[6].bidOpenOn,'Active'),
+    // createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].tinNO, props.data[7].bidOpenOn, 'Active'),
+    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'), 
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
+    // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
 
   ];
-  for(i=0;i<dataa.length;i++){
-   rows[i]=createData(i,dataa[i].title, dataa[i].bidOpenOn, dataa[i].closingDate, dataa[i].bidOpenOn, 'Active')
+  for(i=0;i<supList.length;i++){
+   rows[i]=createData(i,`${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`, supList[i].personalInfo.email, `${supList[i].personalInfo.phoneNumber.countryCode}-${supList[i].personalInfo.phoneNumber.regionalCode}-${supList[i].personalInfo.phoneNumber.number}`, supList[i].tinNumber, )
   }
   console.log('Succesffull',rows)
   const deleteButton = (rowData) => {
@@ -203,6 +203,11 @@ const Table=(props)=>{
   }
   const editButton = (rowData) => {
     return <Button icon="pi pi-pencil" className="p-button-rounded" aria-label="Cancel" />
+  }
+  const detailButton = (rowData) => {
+    // 
+    // 
+    return <Button icon="pi-chevron-circle-down" className="p-button-rounded" aria-label="Cancel" />
   }
   const statusItemTemplate = (option) => {
     return <span className={`customer-badge status-negotiation`}>{option}</span>;
@@ -222,8 +227,11 @@ const confirmDeleteProduct = () => {
 const actionBodyTemplate = (rowData) => {
   return (
       <>
+          <Button icon="pi pi-caret-down
+" className="p-button-rounded mr-2" onClick={() => confirmDeleteProduct(rowData)} />
           <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
           <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
+
       </>
   );
 }
@@ -236,21 +244,21 @@ const actionBodyTemplate = (rowData) => {
     value={rows}
     responsiveLayout='scroll'
     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[5,10,15,25,50]}
-    dataKey={rows.tenderNO}
+    dataKey={rows.name}
     paginator
     rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
     emptyMessage='Data Not Found'
     className='datatable-responsive'
-    currentPageReportTemplate='Showing {first} to {last} of {totalRecords} tenders'
+    currentPageReportTemplate='Showing {first} to {last} of {totalRecords} Suppliers'
     rows={10}
    >
     <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-     <Column field='tenderId' sortable header='Tender Name'></Column>
-     <Column field='tenderTitle' sortable header='Published Date'></Column>
-     <Column field='openingDate' sortable header='Opening Date'></Column>
-     <Column field='closingDate' sortable header='Closing Date'></Column>
+     <Column field='name' sortable header='Supplier Name'></Column>
+     <Column field='phone' sortable header='Phone Number'></Column>
+     <Column field='email' sortable header='Email'></Column>
+     <Column field='tinNO' sortable header='Tin'></Column>
      {/* <Column field='status' sortable header='status'></Column> */}
-     <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  />
+     {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
      <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>

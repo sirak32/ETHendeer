@@ -1,13 +1,7 @@
 import {
-    CREATE_SUPPLIER,
-    DELETE_SUPPLIER,
-    UPDATE_SUPPLIER,
-    FETCH_SUPPLIER,
-    ADD_TENDER_SUCCESS,
-    ADD_TENDER_FAILURE,
-    ADD_TENDER_STARTED
-  } from '../constants/actionType';
-  
+    SET_SUPPLIER,
+  } from '../constants/supplierConstants';
+  import { SET_ERROR,SET_LOADING } from "../constants/tenderConstants";
   const initialState = {
     loading: false,
     suppliers: [],
@@ -16,19 +10,19 @@ import {
   
   export default function supplierReducer(state = initialState, action) {
     switch (action.type) {
-      case ADD_STARTED:
+      case SET_LOADING:
         return {
           ...state,
           loading: true
         };
-      case ADD_SUCCESS:
+      case SET_SUPPLIER:
         return {
           ...state,
           loading: false,
           error: null,
-          todos: [...state.todos, action.payload]
+          suppliers: action.payload
         };
-      case ADD_FAILURE:
+      case SET_ERROR:
         return {
           ...state,
           loading: false,

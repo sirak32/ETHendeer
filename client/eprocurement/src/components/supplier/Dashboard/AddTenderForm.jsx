@@ -18,7 +18,9 @@ import { Select, MenuItem } from "@mui/material";
 import axios from "axios";
 import { IoAddCircleOutline } from "react-icons/io5";
 import DatePicker from 'react-datepicker'
-export default function InputAdornments() {
+import { fetchTender } from "../../../actions/tenderAction";
+
+export default function InputAdornments({ tenders, fetchTenders }) {
   const [no,setNo]=React.useState('')
   const [type, setType] = React.useState("");
 
@@ -50,12 +52,12 @@ export default function InputAdornments() {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async(e) => {
         e.preventDefault();
-        axios.post("http://localhost:5001/tenders", formValues).then(()=>{
-
-          setNo('changed')
+        await axios.post("http://localhost:5001/tenders", formValues).then(()=>{
+          // setNo('changed')
         });
+        fetchTenders()
         console.log(formValues);
       }}
       action="sdghfjgh"
@@ -374,4 +376,15 @@ const formDatas = {
   participationFee: null,
   bidSecurityAmount: null,
   termsAndConditions: null,
+};
+const mapStateToProps = (state) => {
+  return {
+    tenders: state.tenders,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTenders: () => dispatch(fetchTender()),
+  };
 };

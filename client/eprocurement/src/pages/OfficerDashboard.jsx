@@ -12,20 +12,11 @@ import Dash from "../components/supplier/Dashboard/Dash";
 import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
-const App = ({ tenders, fetchTenders }) => {
+import { fetchSuppliers } from "../actions/supplierAction.js";
+const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
-  // useEffect(()=>{
-  //   const tokens=localStorage.getItem('token')
-  //   if(tokens!==null){
-  //     setLogged(true)
-  //     console.log('tokens ',tokens) 
-  //     i(logged!==null)
-  //     navigate('/')
-
-
-  //   }
-  // },[])
+ 
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   // const [tendeN,setTenderN]=useState(null)
@@ -38,6 +29,7 @@ const App = ({ tenders, fetchTenders }) => {
         if(tokens==null)
         navigate('/')
         fetchTenders();
+        fetchSuppliers()
         // console.log('this is my kingdom',tenders)
   }, []);
   const OptmTender = [];
@@ -50,7 +42,7 @@ const App = ({ tenders, fetchTenders }) => {
       closingDate:tenders[i].closingDate };
   }
   // const [{}]=tenders.map((tender)=>)
-  console.log("status", tenders,'optimum',OptmTender);
+  console.log("tender from redux", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   return !tender ? (
     <Div>
@@ -61,13 +53,13 @@ const App = ({ tenders, fetchTenders }) => {
           <div className="row__one">
             <Wrapper>
               {/* <h1>{tender}</h1> */}
-              <Dash title="Suppliers" number="888" />
+              <Dash title="Suppliers" number={suppliers.length} />
               <Dash title="Tenders" number={tenders.length} />
-              <Dash title="Active" number="200" />
+              <Dash title="Active" number={tenders.length} />
               <Dash title="Closed" number="45" />
             </Wrapper>
             {/* <Table /> */}
-            <BasicTabs data={OptmTender} />
+            <BasicTabs data={{OptmTender,suppliers}} />
             {/* <h1>{tenders[10].description}</h1> */}
             {/* <h1>Hey {tender}</h1> */}
             {/* <Modal/> */}
@@ -107,13 +99,15 @@ const App = ({ tenders, fetchTenders }) => {
 
 const mapStateToProps = (state) => {
   return {
-    tenders: state.tenders,
+    tenders: state.tenders.tenders,
+    suppliers:state.suppliers.suppliers
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchTenders: () => dispatch(fetchTender()),
+    fetchSuppliers:()=>dispatch(fetchSuppliers())
   };
 };
 

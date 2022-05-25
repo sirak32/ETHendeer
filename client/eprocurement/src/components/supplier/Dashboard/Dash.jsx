@@ -5,7 +5,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import styled from 'styled-components';
+// import React,{useState} from 'react'
 export default function Dash(props) {
+  // const [no,setNo]=useState(props.number)
   return (
     <Wrapper>
           <Card sx={{ maxWidth: 500  }}>

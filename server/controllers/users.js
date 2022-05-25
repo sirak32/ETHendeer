@@ -145,10 +145,20 @@ const displayDashboard = (req, res) => {
     })
 }
 const displayAll = async (req, res) => {
-    const users = await supplier.find()
-    res.status(200).json({
-        user: users
-    })
+    const users = await supplier.find().populate('personalInfo').populate('accountInfo')
+    res.status(200).json(users)
+}
+const getAllOfficers=async (req, res) => {
+    // const users = await officer.find().populate('personalInfo').populate('accountInfo')
+    const users = await officer.find().populate({
+        path:'personalInfo',
+        populate:{
+            path:'address',
+            model:'Address'
+        }
+    }).populate('accountInfo')
+// .populate('accountInfo')
+    res.status(200).json(users)
 }
 
 const validateUsername = async username => {
@@ -280,5 +290,6 @@ export {
     displayAll,
     deleteAccount,
     updateAccount,
-    deleteTender
+    deleteTender,
+    getAllOfficers
 }

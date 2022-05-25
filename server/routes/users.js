@@ -13,8 +13,10 @@ import {
   userAuth,
   deleteAccount,
   updateAccount,
-  deleteTender
+  deleteTender,
+  getAllOfficers
 } from "../controllers/users.js";
+
 const router = express.Router();
 
 /** *
@@ -68,8 +70,8 @@ router.get(
   displayDashboard
 );
 
-router.get("/all", displayAll);
-
+router.get("/suppliers", displayAll);
+router.get("/officers",getAllOfficers)
 
 
 //UPDATING THE SUPPLIER,ADMIN AND OFFICER ACCOUNTS

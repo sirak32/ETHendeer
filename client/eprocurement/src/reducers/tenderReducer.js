@@ -9,7 +9,7 @@ import {
   
   const initialState = {
     loading: true,
-    suppliers: [],
+    // suppliers: [],
     error: null,
     tenders:[]
   };
