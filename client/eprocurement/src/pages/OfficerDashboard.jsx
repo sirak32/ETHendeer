@@ -44,6 +44,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   // const [{}]=tenders.map((tender)=>)
   console.log("tender from redux", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
+  
   return !tender ? (
     <Div>
       <SideBar menu={menus} />
@@ -59,6 +60,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
               <Dash title="Closed" number="45" />
             </Wrapper>
             {/* <Table /> */}
+            
             <BasicTabs data={{OptmTender,suppliers}} />
             {/* <h1>{tenders[10].description}</h1> */}
             {/* <h1>Hey {tender}</h1> */}

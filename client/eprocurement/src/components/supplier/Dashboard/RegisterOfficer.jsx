@@ -469,6 +469,30 @@
 //     );
 // }
 
+/*
+Adama (also called Nazareth or Nazret)
+Addis Ababa
+Addis Alem (also called Ejersa)
+Addis Zemen
+Adigrat
+Adwa
+Agaro
+Akaki
+Alaba (also called "Quliito" or Kulito)
+Alitena
+Amba Mariam
+Ambo
+Ankober
+Arba Minch
+Arboye
+Asaita
+Asella
+Asosa
+Awasa
+Awash
+Axum
+Alamata
+*/
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { InputText } from "primereact/inputtext";
@@ -481,50 +505,51 @@ import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 // import { CountryService } from '../service/CountryService';
-import './FormDemo.css'
+import "./FormDemo.css";
 import { Grid } from "@mui/material";
+import { FileUploadDemo } from "./FileUploadDemo";
 
 export const FormikFormDemo = () => {
   const count = [
-    { name: "Afghanistan", code: "AF" },
-    { name: "Åland Islands", code: "AX" },
-    { name: "Albania", code: "AL" },
-    { name: "Algeria", code: "DZ" },
-    { name: "American Samoa", code: "AS" },
-    { name: "Andorra", code: "AD" },
-    { name: "Angola", code: "AO" },
-    { name: "Anguilla", code: "AI" },
-    { name: "Antarctica", code: "AQ" },
-    { name: "Antigua and Barbuda", code: "AG" },
-    { name: "Argentina", code: "AR" },
-    { name: "Armenia", code: "AM" },
+    { name: "Addis Ababa,", code: "AF" },
+    { name: "Gonder", code: "AX" },
+    { name: "Dessie", code: "AL" },
+    { name: "Harar  ", code: "DZ" },
+    { name: "Addis Alem ", code: "AS" },
+    { name: "Addis Zemen", code: "AD" },
+    { name: "Adigrat", code: "AO" },
+    { name: "Adwa", code: "AI" },
+    { name: "Agaro", code: "AQ" },
+    { name: "Akaki", code: "AG" },
+    { name: "Alaba ", code: "AR" },
+    { name: "Adama", code: "AM" },
     { name: "Aruba", code: "AW" },
-    { name: "Australia", code: "AU" },
-    { name: "Austria", code: "AT" },
-    { name: "Azerbaijan", code: "AZ" },
-    { name: "Bahamas", code: "BS" },
-    { name: "Bahrain", code: "BH" },
-    { name: "Bangladesh", code: "BD" },
-    { name: "Barbados", code: "BB" },
-    { name: "Belarus", code: "BY" },
-    { name: "Belgium", code: "BE" },
-    { name: "Belize", code: "BZ" },
-    { name: "Benin", code: "BJ" },
-    { name: "Bermuda", code: "BM" },
-    { name: "Bhutan", code: "BT" },
-    { name: "Bolivia", code: "BO" },
-    { name: "Bosnia and Herzegovina", code: "BA" },
-    { name: "Botswana", code: "BW" },
-    { name: "Bouvet Island", code: "BV" },
-    { name: "Brazil", code: "BR" },
-    { name: "British Indian Ocean Territory", code: "IO" },
-    { name: "Brunei Darussalam", code: "BN" },
-    { name: "Bulgaria", code: "BG" },
-    { name: "Burkina Faso", code: "BF" },
-    { name: "Burundi", code: "BI" },
-    { name: "Cambodia", code: "KH" },
-    { name: "Cameroon", code: "CM" },
-    { name: "Canada", code: "CA" },
+    { name: "Alitena", code: "AU" },
+    { name: "Amba Mariam", code: "AT" },
+    { name: "Ambo", code: "AZ" },
+    { name: "Ankober", code: "BS" },
+    { name: "Arba Minch", code: "BH" },
+    { name: "Arboye", code: "BD" },
+    { name: "Asaita", code: "BB" },
+    { name: "Asella", code: "BY" },
+    { name: "Asosa", code: "BE" },
+    { name: "Awasa", code: "BZ" },
+    { name: "Awash", code: "BJ" },
+    { name: "Axum", code: "BM" },
+    { name: "Alamata", code: "BT" },
+    { name: "Babille", code: "BO" },
+    { name: "Baco", code: "BA" },
+    { name: "Badme", code: "BW" },
+    { name: "Bahir Dar", code: "BV" },
+    { name: "Bati", code: "BR" },
+    { name: "Bedele", code: "IO" },
+    { name: "Beica", code: "BN" },
+    { name: "Bichena", code: "BG" },
+    { name: "Bonga", code: "BF" },
+    { name: "Bishoftu", code: "BI" },
+    { name: "Ciro", code: "KH" },
+    { name: "Chencha", code: "CM" },
+    { name: "Dabat", code: "CA" },
     { name: "Cape Verde", code: "CV" },
     { name: "Cayman Islands", code: "KY" },
     { name: "Central African Republic", code: "CF" },
@@ -763,10 +788,65 @@ export const FormikFormDemo = () => {
     validate: (data) => {
       let errors = {};
 
+      // if (!data.name) {
+      //   errors.name = "Name is required.";
+      // }
       if (!data.name) {
-        errors.name = "Name is required.";
+        errors.name = " Name is required.";
+      } else if (
+        !/^(?!\s)(?!.*\s$)(?=.*[a-zA-Z0-9])[a-zA-Z0-9 '~?!]{2,}$/i.test(
+          data.name
+        )
+      ) {
+        errors.name = "Invalid Organization Name. E.g.+251919298457";
+      }
+      // if (!data.firstName) {
+      //   errors.firstName = "First Name is required.";
+      // }
+      if (!data.middleName) {
+        errors.middleName = "Middle Name is required.";
+      }
+      if (!data.lastName) {
+        errors.lastName = "Last Name is required.";
       }
 
+      if (!data.firstName) {
+        errors.firstName = "First Name is required.";
+      } else if (!/^[A-Za-z]+/i.test(data.firstName)) {
+        errors.firstName = "Invalid First Name. E.g.+251919298457";
+      }
+      // if (!data.phone) {
+      //   errors.phone = "Phone Name is required.";
+      // }
+      if (!data.subcity) {
+        errors.subcity = "Subcity Name is required.";
+      }
+      if (!data.wereda) {
+        errors.wereda = "Middle Name is required.";
+      }
+      if (!data.kebele) {
+        errors.kebele = "Middle Name is required.";
+      }
+      if (!data.businessType) {
+        errors.businessType = "Middle Name is required.";
+      }
+      // if (!data.tinNumber) {
+      //   errors.tinNumber = "Tin Number Name is required.";
+      // }
+      if (!data.tinNumber) {
+        errors.tinNumber = "Tin Number is required.";
+      } else if (
+        !/^(9\d{2})([ \-]?)([7]\d|8[0-8])([ \-]?)(\d{4})$/i.test(data.tinNumber)
+      ) {
+        errors.tinNumber =
+          "Invalid Tin Number.  range is 900-70-0000 through 999-88-9999";
+      }
+
+      if (!data.phone) {
+        errors.phone = "Phone is required.";
+      } else if (!/^\+[1-9]\d{10,14}$/i.test(data.phone)) {
+        errors.phone = "Invalid Phone number. E.g.+251919298457";
+      }
       if (!data.email) {
         errors.email = "Email is required.";
       } else if (
@@ -854,142 +934,141 @@ export const FormikFormDemo = () => {
 
       <div className="flex justify-content-center">
         <div className="card">
-          <h5 className="text-center">Register</h5>
+          <h5 className="text-center">Register Supplier</h5>
           <form onSubmit={formik.handleSubmit} className="p-fluid">
-          <Grid sx={{background:'white',padding:'0 12rem'}} container spacing={2}>
+            <Grid
+              sx={{ background: "white", padding: "0 12rem" }}
+              container
+              spacing={2}
+            >
               <Grid item xs={6}>
-
-             <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="name"
-                  name="name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("name"),
-                  })}
-                />
-                <label
-                  htmlFor="name"
-                  className={classNames({
-                    "p-error": isFormFieldValid("name"),
-                  })}
-                >
-                  Name*
-                </label>
-              </span>
-              {getFormErrorMessage("name")}
-            </div>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="name"
+                      name="name"
+                      value={formik.values.name}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("name"),
+                      })}
+                    />
+                    <label
+                      htmlFor="name"
+                      className={classNames({
+                        "p-error": isFormFieldValid("name"),
+                      })}
+                    >
+                      Name of Organization *
+                    </label>
+                  </span>
+                  {getFormErrorMessage("name")}
+                </div>
               </Grid>
-            <Grid item xs={6}>
-
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="firstName"
-                  name="firstName"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("firstName"),
-                  })}
-                />
-                <label
-                  htmlFor="firstName"
-                  className={classNames({
-                    "p-error": isFormFieldValid("firstName"),
-                  })}
-                >
-                  First Name*
-                </label>
-              </span>
-              {getFormErrorMessage("firstName")}
-            </div>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      maxLength={20}
+                      id="firstName"
+                      name="firstName"
+                      value={formik.values.firstName}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("firstName"),
+                      })}
+                    />
+                    <label
+                      htmlFor="firstName"
+                      className={classNames({
+                        "p-error": isFormFieldValid("firstName"),
+                      })}
+                    >
+                      First Name*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("firstName")}
+                </div>
               </Grid>
-            <Grid item xs={6}>
-
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="middleName"
-                  name="middleName"
-                  value={formik.values.middleName}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("middleName"),
-                  })}
-                />
-                <label
-                  htmlFor="middleName"
-                  className={classNames({
-                    "p-error": isFormFieldValid("middleName"),
-                  })}
-                >
-                  Last Name*
-                </label>
-              </span>
-              {getFormErrorMessage("middleName")}
-            </div>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      maxLength={20}
+                      id="middleName"
+                      name="middleName"
+                      value={formik.values.middleName}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("middleName"),
+                      })}
+                    />
+                    <label
+                      htmlFor="middleName"
+                      className={classNames({
+                        "p-error": isFormFieldValid("middleName"),
+                      })}
+                    >
+                      Middle Name*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("middleName")}
+                </div>
               </Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="lastName"
-                  name="lastName"
-                  value={formik.values.middleName}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("lastName"),
-                  })}
-                />
-                <label
-                  htmlFor="lastName"
-                  className={classNames({
-                    "p-error": isFormFieldValid("lastName"),
-                  })}
-                >
-                  Last Name*
-                </label>
-              </span>
-              {getFormErrorMessage("lastName")}
-            </div>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="lastName"
+                      name="lastName"
+                      value={formik.values.lastName}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("lastName"),
+                      })}
+                    />
+                    <label
+                      htmlFor="lastName"
+                      className={classNames({
+                        "p-error": isFormFieldValid("lastName"),
+                      })}
+                    >
+                      Last Name*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("lastName")}
+                </div>
               </Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="phone"
-                  name="phone"
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("phone"),
-                  })}
-                />
-                <label
-                  htmlFor="phone"
-                  className={classNames({
-                    "p-error": isFormFieldValid("phone"),
-                  })}
-                >
-                  Phone*
-                </label>
-              </span>
-              {getFormErrorMessage("phone")}
-            </div>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="phone"
+                      name="phone"
+                      value={formik.values.phone}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("phone"),
+                      })}
+                    />
+                    <label
+                      htmlFor="phone"
+                      className={classNames({
+                        "p-error": isFormFieldValid("phone"),
+                      })}
+                    >
+                      Phone*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("phone")}
+                </div>
               </Grid>
-            <Grid item xs={6}>
+              {/* <Grid item xs={6}>
 
             
             <div className="field">
@@ -1015,302 +1094,288 @@ export const FormikFormDemo = () => {
               </span>
               {getFormErrorMessage("city")}
             </div>
+              </Grid> */}
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <Dropdown
+                      id="country"
+                      name="country"
+                      value={formik.values.country}
+                      onChange={formik.handleChange}
+                      options={countries}
+                      optionLabel="name"
+                    />
+                    <label htmlFor="country">City</label>
+                  </span>
+                </div>
               </Grid>
-            <Grid item xs={6}>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="subcity"
+                      name="subcity"
+                      value={formik.values.subcity}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("subcity"),
+                      })}
+                    />
+                    <label
+                      htmlFor="subcity"
+                      className={classNames({
+                        "p-error": isFormFieldValid("subcity"),
+                      })}
+                    >
+                      Sub City*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("subcity")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="wereda"
+                      name="wereda"
+                      value={formik.values.wereda}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("wereda"),
+                      })}
+                    />
+                    <label
+                      htmlFor="wereda"
+                      className={classNames({
+                        "p-error": isFormFieldValid("wereda"),
+                      })}
+                    >
+                      Wereda*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("wereda")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="kebele"
+                      name="kebele"
+                      value={formik.values.kebele}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("kebele"),
+                      })}
+                    />
+                    <label
+                      htmlFor="wereda"
+                      className={classNames({
+                        "p-error": isFormFieldValid("kebele"),
+                      })}
+                    >
+                      Kebele*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("kebele")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="businessType"
+                      name="businessType"
+                      value={formik.values.businessType}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("businessType"),
+                      })}
+                    />
+                    <label
+                      htmlFor="businessType"
+                      className={classNames({
+                        "p-error": isFormFieldValid("businessType"),
+                      })}
+                    >
+                      Business Type*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("businessType")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="tinNumber"
+                      name="tinNumber"
+                      value={formik.values.tinNumber}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("tinNumber"),
+                      })}
+                    />
+                    <label
+                      htmlFor="tinNumber"
+                      className={classNames({
+                        "p-error": isFormFieldValid("tinNumber"),
+                      })}
+                    >
+                      Tin Number*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("tinNumber")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <InputText
+                      id="username"
+                      name="username"
+                      value={formik.values.username}
+                      onChange={formik.handleChange}
+                      autoFocus
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("username"),
+                      })}
+                    />
+                    <label
+                      htmlFor="username"
+                      className={classNames({
+                        "p-error": isFormFieldValid("username"),
+                      })}
+                    >
+                      Username*
+                    </label>
+                  </span>
+                  {/* {getFormErrorMessage("tinNumber")} */}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label p-input-icon-right">
+                    <i className="pi pi-envelope" />
+                    <InputText
+                      id="email"
+                      name="email"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("email"),
+                      })}
+                    />
+                    <label
+                      htmlFor="email"
+                      className={classNames({
+                        "p-error": isFormFieldValid("email"),
+                      })}
+                    >
+                      Email*
+                    </label>
+                  </span>
+                  {getFormErrorMessage("email")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <Password
+                      id="password"
+                      name="password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      toggleMask
+                      className={classNames({
+                        "p-invalid": isFormFieldValid("password"),
+                      })}
+                      header={passwordHeader}
+                      footer={passwordFooter}
+                    />
+                    <label
+                      htmlFor="password"
+                      className={classNames({
+                        "p-error": isFormFieldValid("password"),
+                      })}
+                    >
+                      Password *
+                    </label>
+                  </span>
+                  {getFormErrorMessage("password")}
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="field">
+                  <span className="p-float-label">
+                    <Calendar
+                      id="date"
+                      name="date"
+                      value={formik.values.date}
+                      onChange={formik.handleChange}
+                      dateFormat="dd/mm/yy"
+                      mask="99/99/9999"
+                      showIcon
+                    />
+                    <label htmlFor="date">Date</label>
+                  </span>
+                </div>
+              </Grid>
 
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="subcity"
-                  name="subcity"
-                  value={formik.values.city}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("subcity"),
-                  })}
+              <Grid item xs={6}>
+                <div className="field-checkbox">
+                  <Checkbox
+                    inputId="accept"
+                    name="accept"
+                    checked={formik.values.accept}
+                    onChange={formik.handleChange}
+                    className={classNames({
+                      "p-invalid": isFormFieldValid("accept"),
+                    })}
+                  />
+                  <label
+                    htmlFor="accept"
+                    className={classNames({
+                      "p-error": isFormFieldValid("accept"),
+                    })}
+                  >
+                    I agree to the terms and conditions *
+                  </label>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <FileUploadDemo />
+              </Grid>
+              {/* <Grid item xs={6}>
+
+              </Grid> */}
+
+              <Grid item xs={6}>
+                <Button type="submit" label="Submit" className="mt-2" />
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  type="reset"
+                  label="Clear"
+                  className="mt-2 p-button-danger"
+                  onClick={() => {
+                    console.log("Logger");
+                    formik.resetForm();
+                  }}
                 />
-                <label
-                  htmlFor="subcity"
-                  className={classNames({
-                    "p-error": isFormFieldValid("subcity"),
-                  })}
-                >
-                  Sub City*
-                </label>
-              </span>
-              {getFormErrorMessage("subcity")}
-            </div>
-</Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="wereda"
-                  name="wereda"
-                  value={formik.values.wereda}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("wereda"),
-                  })}
-                />
-                <label
-                  htmlFor="wereda"
-                  className={classNames({
-                    "p-error": isFormFieldValid("wereda"),
-                  })}
-                >
-                  Wereda*
-                </label>
-              </span>
-              {getFormErrorMessage("wereda")}
-            </div>
               </Grid>
-            <Grid item xs={6}>
+              {/* <FileUploadDemo/> */}
+            </Grid>
 
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="kebele"
-                  name="kebele"
-                  value={formik.values.wereda}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("kebele"),
-                  })}
-                />
-                <label
-                  htmlFor="wereda"
-                  className={classNames({
-                    "p-error": isFormFieldValid("kebele"),
-                  })}
-                >
-                  Kebele*
-                </label>
-              </span>
-              {getFormErrorMessage("kebele")}
-            </div>
-              </Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="businessType"
-                  name="businessType"
-                  value={formik.values.businessType}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("businessType"),
-                  })}
-                />
-                <label
-                  htmlFor="businessType"
-                  className={classNames({
-                    "p-error": isFormFieldValid("businessType"),
-                  })}
-                >
-                  Business Type*
-                </label>
-              </span>
-              {getFormErrorMessage("businessType")}
-            </div>
-              </Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="tinNumber"
-                  name="tinNumber"
-                  value={formik.values.tinNumber}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("tinNumber"),
-                  })}
-                />
-                <label
-                  htmlFor="tinNumber"
-                  className={classNames({
-                    "p-error": isFormFieldValid("tinNumber"),
-                  })}
-                >
-                  Tin Number*
-                </label>
-              </span>
-              {getFormErrorMessage("tinNumber")}
-            </div>
-              </Grid>
-            <Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <InputText
-                  id="username"
-                  name="username"
-                  value={formik.values.username}
-                  onChange={formik.handleChange}
-                  autoFocus
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("username"),
-                  })}
-                />
-                <label
-                  htmlFor="username"
-                  className={classNames({
-                    "p-error": isFormFieldValid("username"),
-                  })}
-                >
-                  Username*
-                </label>
-              </span>
-              {getFormErrorMessage("tinNumber")}
-            </div>
-              </Grid>
-<Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label p-input-icon-right">
-                <i className="pi pi-envelope" />
-                <InputText
-                  id="email"
-                  name="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("email"),
-                  })}
-                />
-                <label
-                  htmlFor="email"
-                  className={classNames({
-                    "p-error": isFormFieldValid("email"),
-                  })}
-                >
-                  Email*
-                </label>
-              </span>
-              {getFormErrorMessage("email")}
-            </div>
-              </Grid>
-<Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <Password
-                  id="password"
-                  name="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  toggleMask
-                  className={classNames({
-                    "p-invalid": isFormFieldValid("password"),
-                  })}
-                  header={passwordHeader}
-                  footer={passwordFooter}
-                />
-                <label
-                  htmlFor="password"
-                  className={classNames({
-                    "p-error": isFormFieldValid("password"),
-                  })}
-                >
-                  Password*
-                </label>
-              </span>
-              {getFormErrorMessage("password")}
-            </div>
-              </Grid>
-<Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <Calendar
-                  id="date"
-                  name="date"
-                  value={formik.values.date}
-                  onChange={formik.handleChange}
-                  dateFormat="dd/mm/yy"
-                  mask="99/99/9999"
-                  showIcon
-                />
-                <label htmlFor="date">Birthday</label>
-              </span>
-            </div>
-              </Grid>
-<Grid item xs={6}>
-
-            
-            <div className="field">
-              <span className="p-float-label">
-                <Dropdown
-                  id="country"
-                  name="country"
-                  value={formik.values.country}
-                  onChange={formik.handleChange}
-                  options={countries}
-                  optionLabel="name"
-                />
-                <label htmlFor="country">Country</label>
-              </span>
-            </div>
-              </Grid>
-<Grid item xs={6}>
-
-            
-            <div className="field-checkbox">
-              <Checkbox
-                inputId="accept"
-                name="accept"
-                checked={formik.values.accept}
-                onChange={formik.handleChange}
-                className={classNames({
-                  "p-invalid": isFormFieldValid("accept"),
-                })}
-              />
-              <label
-                htmlFor="accept"
-                className={classNames({
-                  "p-error": isFormFieldValid("accept"),
-                })}
-              >
-                I agree to the terms and conditions*
-              </label>
-            </div>
-              </Grid>
-              <Grid item xs={6}></Grid>
-            <Grid item xs={6}>
-            <Button type="submit" label="Submit" className="mt-2" />
-             </Grid>
-<Grid item xs={6}>
-
-            <Button type='reset' label="Clear" className="mt-2 p-button-danger" onClick={(()=>{
-                console.log("Logger")
-                formik.resetForm();
-
-            })} />
-             </Grid>
-            </Grid> 
-
-
-            
             {/* THis is Break Point */}
-{/* This is  */}
-
+            {/* This is  */}
           </form>
         </div>
       </div>

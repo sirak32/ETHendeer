@@ -41,22 +41,21 @@
 //   return { email, phone, email, tinNO, status };
 // }
 
-
 // export default function CustomizedTables(props) {
 //   let date=props.data[0].bidOpenOn
 //   const rows = [
-//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].tinNO, props.data[0].bidOpenOn, 'Active'), 
+//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].tinNO, props.data[0].bidOpenOn, 'Active'),
 //     createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].tinNO, props.data[1].bidOpenOn,'Active'),
 //     createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].tinNO, props.data[2].bidOpenOn, 'Active'),
-//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'), 
+//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'),
 //     createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].tinNO, props.data[4].bidOpenOn,'Active'),
-//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'), 
+//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'),
 //     createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].tinNO, props.data[6].bidOpenOn,'Active'),
 //     createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].tinNO, props.data[7].bidOpenOn, 'Active'),
-//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'), 
+//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'),
 //     createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
 //   ];
-  
+
 // const [data, setData]=React.useState(null)
 // //  const c=React.useCallback(() => {
 // // axios.get('http://localhost:5001/tenders')
@@ -64,11 +63,11 @@
 // //     // const username=response.data.user[0].username;
 // //     // console.log(response.data.status)
 // //     // setData()
-  
+
 // //   }
-  
+
 // //   ).catch((e)=>console.log(e));
-  
+
 // //   axios.get('http://localhost:5001/tenders')
 // //   .then((response) => {
 // //     // const data={"tenders":response.data}
@@ -80,16 +79,16 @@
 // //     console.log('data',data)
 
 // //   }
-  
+
 // //   ).catch((e)=>console.log(e));
-  
+
 // //  }, []);
 // //  React.useEffect(()=>{
 // //   const tenderList= async()=>{
 // //     const response=await axios.get('http://localhost:5001/tenders')
 // //   setData(response.data.status)
 // //     console.log('response',response.data.status,'data',data)
-// //   } 
+// //   }
 // //  tenderList()
 // //  },[])
 //   return (
@@ -104,7 +103,7 @@
 //             <StyledTableCell align="right">Status</StyledTableCell>
 //             <StyledTableCell align="right"></StyledTableCell>
 //             <StyledTableCell align="right"></StyledTableCell>
-//             <StyledTableCell align="right"></StyledTableCell> 
+//             <StyledTableCell align="right"></StyledTableCell>
 //           </TableRow>
 //         </TableHead>
 //         <TableBody>
@@ -133,7 +132,7 @@
 //                   {/* <a style={{textDecoration:'none'}} href='tender-detail'>
 //                <Button color='info' endIcon={  <BsPlayFill />} variant='outlined' >
 //                 See More
-                    
+
 //                  </Button>
 //                   </a> */}
 //                   <Modal/>
@@ -146,28 +145,28 @@
 //   );
 // }
 
-import React ,{useEffect,useState} from 'react'
-import {DataTable} from 'primereact/datatable'
-import {Column} from 'primereact/column'
-import { Button } from 'primereact/button';
-const Table=(props)=>{
+import React, { useEffect, useState } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
+const Table = (props) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
-  function createData(no,name,email, phone, tinNO, ) {
-  return {no, name, email, phone, tinNO};
-}
-  let supList=props.data
-  console.log('my NEw KINGDOM' ,supList)
-  let i
-  
+  function createData(no, name, email, phone, tinNO) {
+    return { no, name, email, phone, tinNO };
+  }
+  let supList = props.data;
+  console.log("my NEw KINGDOM", supList);
+  let i;
+
   const rows = [
     // createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].tinNO, props.data[1].bidOpenOn,'Active'),
     // createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].tinNO, props.data[2].bidOpenOn, 'Active'),
-    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'), 
+    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].tinNO, props.data[3].bidOpenOn,'Active'),
     // createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].tinNO, props.data[4].bidOpenOn,'Active'),
-    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'), 
+    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].tinNO, props.data[5].bidOpenOn, 'Active'),
     // createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].tinNO, props.data[6].bidOpenOn,'Active'),
     // createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].tinNO, props.data[7].bidOpenOn, 'Active'),
-    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'), 
+    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].tinNO, props.data[8].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
@@ -192,80 +191,115 @@ const Table=(props)=>{
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
-
   ];
-  for(i=0;i<supList.length;i++){
-   rows[i]=createData(i,`${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`, supList[i].personalInfo.email, `${supList[i].personalInfo.phoneNumber.countryCode}-${supList[i].personalInfo.phoneNumber.regionalCode}-${supList[i].personalInfo.phoneNumber.number}`, supList[i].tinNumber, )
+  for (i = 0; i < supList.length; i++) {
+    rows[i] = createData(
+      i,
+      `${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`,
+      supList[i].personalInfo.email,
+      `${supList[i].personalInfo.phoneNumber.countryCode}-${supList[i].personalInfo.phoneNumber.regionalCode}-${supList[i].personalInfo.phoneNumber.number}`,
+      supList[i].tinNumber
+    );
   }
-  console.log('Succesffull',rows)
+  console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
-    return <Button icon="pi pi-trash" className="p-button-rounded p-button-danger" aria-label="Cancel" />
-  }
+    return (
+      <Button
+        icon="pi pi-trash"
+        className="p-button-rounded p-button-danger"
+        aria-label="Cancel"
+      />
+    );
+  };
   const editButton = (rowData) => {
-    return <Button icon="pi pi-pencil" className="p-button-rounded" aria-label="Cancel" />
-  }
+    return (
+      <Button
+        icon="pi pi-pencil"
+        className="p-button-rounded"
+        aria-label="Cancel"
+      />
+    );
+  };
   const detailButton = (rowData) => {
-    // 
-    // 
-    return <Button icon="pi-chevron-circle-down" className="p-button-rounded" aria-label="Cancel" />
-  }
+    //
+    //
+    return (
+      <Button
+        icon="pi-chevron-circle-down"
+        className="p-button-rounded"
+        aria-label="Cancel"
+      />
+    );
+  };
   const statusItemTemplate = (option) => {
-    return <span className={`customer-badge status-negotiation`}>{option}</span>;
-}
-const statusBodyTemplate = (rowData) => {
-  return <Button  label={`${rowData.status}`} className="p-button-success" />
-  // return <span  className={`status-active`}>{rowData.status}</span>;
-
-
-}
-const editProduct = () => {
-  
-}
-const confirmDeleteProduct = () => {
- 
-}
-const actionBodyTemplate = (rowData) => {
-  return (
+    return (
+      <span className={`customer-badge status-negotiation`}>{option}</span>
+    );
+  };
+  const statusBodyTemplate = (rowData) => {
+    return <Button label={`${rowData.status}`} className="p-button-success" />;
+    // return <span  className={`status-active`}>{rowData.status}</span>;
+  };
+  const editProduct = () => {};
+  const confirmDeleteProduct = () => {};
+  const actionBodyTemplate = (rowData) => {
+    return (
       <>
-          <Button icon="pi pi-caret-down
-" className="p-button-rounded mr-2" onClick={() => confirmDeleteProduct(rowData)} />
-          <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
-          <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
-
+        <Button
+          icon="pi pi-caret-down
+"
+          className="p-button-rounded mr-2"
+          onClick={() => confirmDeleteProduct(rowData)}
+        />
+        <Button
+          icon="pi pi-pencil"
+          className="p-button-rounded p-button-success mr-2"
+          onClick={() => editProduct(rowData)}
+        />
+        <Button
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-warning"
+          onClick={() => confirmDeleteProduct(rowData)}
+        />
       </>
-  );
-}
-  console.log('rows are',rows)
+    );
+  };
+  console.log("rows are", rows);
   return (
     <DataTable
-    breakpoint="960px"
-    editMode="cell"
-    header='Tenders List'
-    value={rows}
-    responsiveLayout='scroll'
-    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[5,10,15,25,50]}
-    dataKey={rows.name}
-    paginator
-    rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
-    emptyMessage='Data Not Found'
-    className='datatable-responsive'
-    currentPageReportTemplate='Showing {first} to {last} of {totalRecords} Suppliers'
-    rows={10}
-   >
-    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-     <Column field='name' sortable header='Supplier Name'></Column>
-     <Column field='phone' sortable header='Phone Number'></Column>
-     <Column field='email' sortable header='Email'></Column>
-     <Column field='tinNO' sortable header='Tin'></Column>
-     {/* <Column field='status' sortable header='status'></Column> */}
-     {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
-     {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-     {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
-     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
-
-
+      breakpoint="960px"
+      editMode="cell"
+      header="Tenders List"
+      value={rows}
+      responsiveLayout="scroll"
+      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+      rowsPerPageOptions={[5, 10, 15, 25, 50]}
+      dataKey={rows.name}
+      paginator
+      rowHover
+      selection={selectedCustomers}
+      onSelectionChange={(e) => setSelectedCustomers(e.value)}
+      emptyMessage="Data Not Found"
+      className="datatable-responsive"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
+      rows={10}
+    >
+      <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
+      <Column field="name" sortable header="Supplier Name"></Column>
+      <Column field="phone" sortable header="Phone Number"></Column>
+      <Column field="email" sortable header="Email"></Column>
+      <Column field="tinNO" sortable header="Tin"></Column>
+      {/* <Column field='status' sortable header='status'></Column> */}
+      {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
+      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
+      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
+      <Column
+        body={actionBodyTemplate}
+        exportable={false}
+        style={{ minWidth: "8rem" }}
+      ></Column>
     </DataTable>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

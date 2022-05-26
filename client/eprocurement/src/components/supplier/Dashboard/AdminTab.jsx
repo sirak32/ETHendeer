@@ -11,9 +11,11 @@ import AddOfficer from './AddOfficer'
 import RegisterSupplier from './RegisterSupplier'
 import OfficersList from './OfficersList';
 import { FormikFormDemo } from "./RegisterOfficer";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+  
   return (
     <div
       role="tabpanel"
@@ -47,10 +49,11 @@ function a11yProps(index) {
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
 
+  const [vis,setVis]=React.useState(true)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   return (
     <Box sx={{ width: '100%',backgroundColor:'white' ,background: "white",borderRadius:'0.7rem' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -70,11 +73,15 @@ export default function BasicTabs() {
         <OfficersList/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <RegisterSupplier/>
+        {/* <RegisterSupplier/> */}
+        <Dialog visible={vis} className='p-fluid' style={{ width: '80rem' }}  header="REGISTER SUPPLIER" onHide={(()=>{setVis(false)})}>
+
+        <FormikFormDemo/>
+        </Dialog>
+        <Button onClick={(()=>{setVis(true)})}>ADD SUPPLIER</Button>
         <HorizontalLinearStepper/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <FormikFormDemo/>
         {/* <AddOfficer/> */}
       </TabPanel>
       <TabPanel value={value} index={4}>

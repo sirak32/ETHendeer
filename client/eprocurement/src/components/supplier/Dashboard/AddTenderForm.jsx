@@ -17,11 +17,15 @@ import { Grid } from "@mui/material";
 import { Select, MenuItem } from "@mui/material";
 import axios from "axios";
 import { IoAddCircleOutline } from "react-icons/io5";
-import DatePicker from 'react-datepicker'
+import DatePicker from "react-datepicker";
 import { fetchTender } from "../../../actions/tenderAction";
+import { Calendar } from "primereact/calendar";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from 'primereact/inputtextarea';
+ 
 
 export default function InputAdornments({ tenders, fetchTenders }) {
-  const [no,setNo]=React.useState('')
+  const [no, setNo] = React.useState("");
   const [type, setType] = React.useState("");
 
   const handleTypeChange = (event) => {
@@ -52,12 +56,14 @@ export default function InputAdornments({ tenders, fetchTenders }) {
 
   return (
     <form
-      onSubmit={async(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:5001/tenders", formValues).then(()=>{
-          // setNo('changed')
-        });
-        fetchTenders()
+        await axios
+          .post("http://localhost:5001/tenders", formValues)
+          .then(() => {
+            // setNo('changed')
+          });
+        fetchTenders();
         console.log(formValues);
       }}
       action="sdghfjgh"
@@ -76,7 +82,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-          <TextField 
+          <TextField
             onChange={(e) => {
               setFormValue({ ...formValues, number: e.target.value });
             }}
@@ -100,46 +106,44 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-
-
-        <InputLabel id="demo-simple-select-label">Type</InputLabel>
-          <Select sx={{ m: 1, width: "24.5ch" }}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Type"
-            name="type"
-            onChange={(e)=>{setFormValue({ ...formValues, type: e.target.value });
-          }}
-          >
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-
-          </Select>
-            </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              sx={{ m: 1, width: "24.5ch" }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Type"
+              name="type"
+              onChange={(e) => {
+                setFormValue({ ...formValues, type: e.target.value });
+              }}
+            >
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={4}>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-
-          <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
-          <Select sx={{ m: 1, width: "24.5ch" }}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Catagory"
-            name="catagory"
-            onChange={(e)=>{setFormValue({ ...formValues, catagory: e.target.value });
-          }}
-          >
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-            <MenuItem value='Direct'>Direct</MenuItem>
-
-          </Select>
-            </FormControl>
-            
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
+            <Select
+              sx={{ m: 1, width: "24.5ch" }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Catagory"
+              name="catagory"
+              onChange={(e) => {
+                setFormValue({ ...formValues, catagory: e.target.value });
+              }}
+            >
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Direct</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         {/* <Grid item xs={4}></Grid> */}
         <Grid item xs={4}>
@@ -167,22 +171,31 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({
-                ...formValues,
-                bidSecurityAmount: e.target.value,
-              });
-            }}
-            name="bidSecurityAmount"
-            color="success"
-            label="Bid Security Amount"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />
+          <span className="p-float-label">
+            <InputText
+              onChange={(e) => {
+                setFormValue({
+                  ...formValues,
+                  bidSecurityAmount: e.target.value,
+                });
+              }}
+              name="bidSecurityAmount"
+              id="bidSecurityAmount"
+              autoFocus
+              color="success"
+              label="Bid Security Amount"
+              // id="outlined-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+            />
+            <label htmlFor="bidSecurityAmount">Bid Security Amount*</label>
+          </span>
         </Grid>
         <Grid item xs={4}>
-          <TextField sx={{ m: 1, width: "25ch" }}
+        <span className="p-float-label">
+
+          <InputTextarea
+          rows={5}
+          autoResize
             onChange={(e) => {
               setFormValue({
                 ...formValues,
@@ -191,11 +204,12 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             }}
             name="termsAndConditions"
             // id="outlined-multiline-static"
-            label="Terms And Conditions"
-            multiline
-            rows={4}
-            defaultValue="Default Value"
-          />{" "}
+            autoFocus
+            id="termsAndConditions"
+            />{" "}
+                        <label htmlFor="termsAndConditions">Terms And Conditions</label>
+
+            </span>
         </Grid>
         <Grid item xs={4}>
           <TextField
@@ -210,15 +224,15 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           />{" "}
         </Grid>
         <Grid item xs={4}>
-        <div className="App">
-      <Button variant="contained" component="label" color="primary">
-        {" "}
-        <IoAddCircleOutline/> Upload Bid Document
-        <input accept=".pdf" type="file" hidden />
-      </Button>
-    </div>
+          <div className="App">
+            <Button variant="contained" component="label" color="primary">
+              {" "}
+              <IoAddCircleOutline /> Upload Bid Document
+              <input accept=".pdf" type="file" hidden />
+            </Button>
+          </div>
         </Grid>
-        
+
         <Grid item xs={4}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
@@ -257,40 +271,47 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             min="2020-01-02"
             
           /> */}
-               </Grid>
+        </Grid>
         <Grid item xs={4}>
-       <label> Closing Date
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, closingDate: e.target.value });
-            }}
-            name="closingDate"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
+          <span className="p-float-label">
+            <Calendar
+              onChange={(e) => {
+                setFormValue({ ...formValues, closingDate: e.target.value });
+              }}
+              name="bidOpenOn"
+              max="2020-02-02"
+              min="2020-01-02"
+              id="bidOpenOn"
+              // value={formik.values.date}
+              // onChange={formik.handleChange}
+              dateFormat="dd/mm/yy"
+              mask="99/99/9999"
+              showIcon
             />
-            </label>
-            
+            <label htmlFor="bidOpenOn"> Opening Date</label>
+          </span>
         </Grid>
         <Grid item xs={4}>
-          <label>
-Bid Opening Date
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, bidOpenOn: e.target.value });
-            }}
-            name="bidOpenOn"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
+          <span className="p-float-label">
+            <Calendar
+              onChange={(e) => {
+                setFormValue({ ...formValues, closingDate: e.target.value });
+              }}
+              name="closingDate"
+              max="2020-02-02"
+              min="2020-01-02"
+              id="closingDate"
+              // value={formik.values.date}
+              // onChange={formik.handleChange}
+              dateFormat="dd/mm/yy"
+              mask="99/99/9999"
+              showIcon
             />
-            </label>
+            <label htmlFor="closingDate"> Closing Date</label>
+          </span>
         </Grid>
-        <Grid item xs={4}>
-        </Grid>
-        <Grid item xs={4}>
-
-        </Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}></Grid>
         <Grid item xs={4}>
           <Stack
             sx={{ margin: "1rem" }}
@@ -359,8 +380,8 @@ const handleForm = (e) => {
 
 // })
 // }
-const id=localStorage.getItem('whoId')
-console.log('the id is ',id)
+const id = localStorage.getItem("whoId");
+console.log("the id is ", id);
 const formDatas = {
   title: null,
   description: null,
@@ -369,7 +390,7 @@ const formDatas = {
   catagory: null,
   lotNo: null,
   minPrice: null,
-  creator:id,
+  creator: id,
   publishedDate: null,
   closingDate: null,
   bidOpenOn: null,

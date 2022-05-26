@@ -41,22 +41,21 @@
 //   return { tenderId, tenderTitle, openingDate, closingDate, status };
 // }
 
-
 // export default function CustomizedTables(props) {
 //   let date=props.data[0].bidOpenOn
 //   const rows = [
-//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].closingDate, props.data[0].bidOpenOn, 'Active'), 
+//     createData(props.data[0].title, props.data[0].bidOpenOn, props.data[0].closingDate, props.data[0].bidOpenOn, 'Active'),
 //     createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].closingDate, props.data[1].bidOpenOn,'Active'),
 //     createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].closingDate, props.data[2].bidOpenOn, 'Active'),
-//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'), 
+//     createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'),
 //     createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].closingDate, props.data[4].bidOpenOn,'Active'),
-//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'), 
+//     createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'),
 //     createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].closingDate, props.data[6].bidOpenOn,'Active'),
 //     createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].closingDate, props.data[7].bidOpenOn, 'Active'),
-//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'), 
+//     createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'),
 //     createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
 //   ];
-  
+
 // const [data, setData]=React.useState(null)
 // //  const c=React.useCallback(() => {
 // // axios.get('http://localhost:5001/tenders')
@@ -64,11 +63,11 @@
 // //     // const username=response.data.user[0].username;
 // //     // console.log(response.data.status)
 // //     // setData()
-  
+
 // //   }
-  
+
 // //   ).catch((e)=>console.log(e));
-  
+
 // //   axios.get('http://localhost:5001/tenders')
 // //   .then((response) => {
 // //     // const data={"tenders":response.data}
@@ -80,16 +79,16 @@
 // //     console.log('data',data)
 
 // //   }
-  
+
 // //   ).catch((e)=>console.log(e));
-  
+
 // //  }, []);
 // //  React.useEffect(()=>{
 // //   const tenderList= async()=>{
 // //     const response=await axios.get('http://localhost:5001/tenders')
 // //   setData(response.data.status)
 // //     console.log('response',response.data.status,'data',data)
-// //   } 
+// //   }
 // //  tenderList()
 // //  },[])
 //   return (
@@ -104,7 +103,7 @@
 //             <StyledTableCell align="right">Status</StyledTableCell>
 //             <StyledTableCell align="right"></StyledTableCell>
 //             <StyledTableCell align="right"></StyledTableCell>
-//             <StyledTableCell align="right"></StyledTableCell> 
+//             <StyledTableCell align="right"></StyledTableCell>
 //           </TableRow>
 //         </TableHead>
 //         <TableBody>
@@ -133,7 +132,7 @@
 //                   {/* <a style={{textDecoration:'none'}} href='tender-detail'>
 //                <Button color='info' endIcon={  <BsPlayFill />} variant='outlined' >
 //                 See More
-                    
+
 //                  </Button>
 //                   </a> */}
 //                   <Modal/>
@@ -146,28 +145,43 @@
 //   );
 // }
 
-import React ,{useEffect,useState} from 'react'
-import {DataTable} from 'primereact/datatable'
-import {Column} from 'primereact/column'
-import { Button } from 'primereact/button';
-const Table=(props)=>{
+import React, { useEffect, useState } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+const Table = (props) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
-  function createData(tenderNO,tenderId, tenderTitle, openingDate, closingDate, status) {
-  return { tenderNO,tenderId, tenderTitle:tenderTitle.split('T')[0], openingDate:openingDate.split('T')[0], closingDate:closingDate.split('T')[0], status };
-}
-  let dataa=props.data
-  console.log('my NEw KINGDOM',dataa)
-  let i
-  
+  function createData(
+    tenderNO,
+    tenderId,
+    tenderTitle,
+    openingDate,
+    closingDate,
+    status
+  ) {
+    return {
+      tenderNO,
+      tenderId,
+      tenderTitle: tenderTitle.split("T")[0],
+      openingDate: openingDate.split("T")[0],
+      closingDate: closingDate.split("T")[0],
+      status,
+    };
+  }
+  let dataa = props.data;
+  console.log("my NEw KINGDOM", dataa);
+  let i;
+
   const rows = [
     // createData(props.data[1].title, props.data[1].bidOpenOn, props.data[1].closingDate, props.data[1].bidOpenOn,'Active'),
     // createData(props.data[2].title, props.data[2].bidOpenOn, props.data[2].closingDate, props.data[2].bidOpenOn, 'Active'),
-    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'), 
+    // createData(props.data[3].title, props.data[3].bidOpenOn,props.data[3].closingDate, props.data[3].bidOpenOn,'Active'),
     // createData(props.data[4].title, props.data[4].bidOpenOn, props.data[4].closingDate, props.data[4].bidOpenOn,'Active'),
-    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'), 
+    // createData(props.data[5].title, props.data[5].bidOpenOn, props.data[5].closingDate, props.data[5].bidOpenOn, 'Active'),
     // createData(props.data[6].title, props.data[6].bidOpenOn, props.data[6].closingDate, props.data[6].bidOpenOn,'Active'),
     // createData(props.data[7].title, props.data[7].bidOpenOn, props.data[7].closingDate, props.data[7].bidOpenOn, 'Active'),
-    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'), 
+    // createData(props.data[8].title, props.data[8].bidOpenOn,props.data[8].closingDate, props.data[8].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
@@ -192,72 +206,157 @@ const Table=(props)=>{
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].closingDate, props.data[9].bidOpenOn,'Active'),
-
   ];
-  for(i=0;i<dataa.length;i++){
-   rows[i]=createData(i,dataa[i].title, dataa[i].bidOpenOn, dataa[i].closingDate, dataa[i].bidOpenOn, 'Active')
+  for (i = 0; i < dataa.length; i++) {
+    rows[i] = createData(
+      i,
+      dataa[i].title,
+      dataa[i].bidOpenOn,
+      dataa[i].closingDate,
+      dataa[i].bidOpenOn,
+      "Active"
+    );
   }
-  console.log('Succesffull',rows)
+  console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
-    return <Button icon="pi pi-trash" className="p-button-rounded p-button-danger" aria-label="Cancel" />
-  }
+    return (
+      <Button
+        icon="pi pi-trash"
+        className="p-button-rounded p-button-danger"
+        aria-label="Cancel"
+      />
+    );
+  };
   const editButton = (rowData) => {
-    return <Button icon="pi pi-pencil" className="p-button-rounded" aria-label="Cancel" />
-  }
+    return (
+      <Button
+        icon="pi pi-pencil"
+        className="p-button-rounded"
+        aria-label="Cancel"
+      />
+    );
+  };
   const statusItemTemplate = (option) => {
-    return <span className={`customer-badge status-negotiation`}>{option}</span>;
-}
-const statusBodyTemplate = (rowData) => {
-  return <Button  label={`${rowData.status}`} className="p-button-success" />
-  // return <span  className={`status-active`}>{rowData.status}</span>;
-
-
-}
-const editProduct = () => {
-  
-}
-const confirmDeleteProduct = () => {
- 
-}
-const actionBodyTemplate = (rowData) => {
-  return (
+    return (
+      <span className={`customer-badge status-negotiation`}>{option}</span>
+    );
+  };
+  const statusBodyTemplate = (rowData) => {
+    return <Button label={`${rowData.status}`} className="p-button-success" />;
+    // return <span  className={`status-active`}>{rowData.status}</span>;
+  };
+  const editProduct = () => {};
+  const confirmDeleteProduct = () => {};
+  const actionBodyTemplate = (rowData) => {
+    return (
       <>
-          <Button icon="pi pi-pencil" className="p-button-rounded p-button-success mr-2" onClick={() => editProduct(rowData)} />
-          <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
+        <Button
+          icon="pi pi-caret-down
+"
+          className="p-button-rounded mr-2"
+          onClick={() => confirmDeleteProduct(rowData)}
+        />
+        <Button
+          icon="pi pi-pencil"
+          className="p-button-rounded p-button-success mr-2"
+          onClick={() => editProduct(rowData)}
+        />
+        <Button
+          icon="pi pi-trash"
+          className="p-button-rounded p-button-warning"
+          onClick={() => {
+            setDeleteProductsDialog(true);
+          }}
+        />
       </>
-  );
-}
-  console.log('rows are',rows)
+    );
+  };
+  console.log("rows are", rows);
+  const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return (
-    <DataTable
-    breakpoint="960px"
-    editMode="cell"
-    header='Tenders List'
-    value={rows}
-    responsiveLayout='scroll'
-    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[5,10,15,25,50]}
-    dataKey={rows.tenderNO}
-    paginator
-    rowHover selection={selectedCustomers} onSelectionChange={e => setSelectedCustomers(e.value)}
-    emptyMessage='Data Not Found'
-    className='datatable-responsive'
-    currentPageReportTemplate='Showing {first} to {last} of {totalRecords} tenders'
-    rows={10}
-   >
-    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
-     <Column field='tenderId' sortable header='Tender Name'></Column>
-     <Column field='tenderTitle' sortable header='Published Date'></Column>
-     <Column field='openingDate' sortable header='Opening Date'></Column>
-     <Column field='closingDate' sortable header='Closing Date'></Column>
-     {/* <Column field='status' sortable header='status'></Column> */}
-     <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  />
-     {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-     {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
-     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '8rem' }}></Column>
+    <>
+      <DataTable
+        breakpoint="960px"
+        editMode="cell"
+        header="Tenders List"
+        value={rows}
+        responsiveLayout="scroll"
+        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+        rowsPerPageOptions={[5, 10, 15, 25, 50]}
+        dataKey={rows.tenderNO}
+        paginator
+        rowHover
+        selection={selectedCustomers}
+        onSelectionChange={(e) => setSelectedCustomers(e.value)}
+        emptyMessage="Data Not Found"
+        className="datatable-responsive"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
+        rows={10}
+      >
+        <Column
+          selectionMode="multiple"
+          headerStyle={{ width: "3em" }}
+        ></Column>
+        <Column field="tenderId" sortable header="Tender Name"></Column>
+        <Column field="tenderTitle" sortable header="Published Date"></Column>
+        <Column field="openingDate" sortable header="Bid Opening Date"></Column>
+        <Column field="closingDate" sortable header="Closing Date"></Column>
+        {/* <Column field='status' sortable header='status'></Column> */}
+        <Column
+          field="status"
+          header="Status"
+          sortable
+          style={{ minWidth: "10rem" }}
+          body={statusBodyTemplate}
+          filter
+        />
+        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
+        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
+        <Column
+          body={actionBodyTemplate}
+          exportable={false}
+          style={{ minWidth: "8rem" }}
+        ></Column>
+      </DataTable>
+      <Dialog
+        visible={deleteProductsDialog}
+        style={{ width: "450px" }}
+        header="Confirm"
+        modal
+        footer={
+          <>
+            <Button
+              label="No"
+              icon="pi pi-times"
+              className="p-button-text"
+              onClick={() => {
+                setDeleteProductsDialog(false);
+              }}
+            />
+            <Button
+              label="Yes"
+              icon="pi pi-check"
+              className="p-button-text"
+              onClick={(() => {
+                setDeleteProductsDialog(false);
+              })}
+            />
+          </>
+        }
+        onHide={() => {
+          setDeleteProductsDialog(false);
+        }}
+      >
+        <div className="confirmation-content">
+          <i
+            className="pi pi-exclamation-triangle mr-3"
+            style={{ fontSize: "2rem" }}
+          />
+          {<span>Are you sure you want to delete the selected products?</span>}
+        </div>
+      </Dialog>
+    </>
+  );
+};
 
-
-    </DataTable>
-  )
-}
-
-export default Table
+export default Table;
