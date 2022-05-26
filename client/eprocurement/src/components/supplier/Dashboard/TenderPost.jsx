@@ -59,8 +59,8 @@ const [vis2,setVis2]=useState(false)
     </Card> */}
     <div>
 
-            <Card title="ብረታ ብረት" subTitle="Subtitle" style={{ width: '25em' }} footer={footer} header={header}>
-                <p className="m-0" style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+            <Card className='m-0 scalein animation-duration-1000 max-h-1rem' title="ብረታ ብረት" subTitle="Subtitle" style={{ width: '25em' }} footer={footer} header={header}>
+                <p className="m-0 " style={{lineHeight: '1.5'}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
                     quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
             </Card>
 

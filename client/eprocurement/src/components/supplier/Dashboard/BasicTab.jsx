@@ -77,7 +77,7 @@ export default function BasicTabs(props) {
     // </Box>
 
     <TabView   activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-    <TabPanel header="ALL TENDERS">
+    <TabPanel  header="ALL TENDERS">
         Content I
         <Table data={props.data.OptmTender}/>
     </TabPanel>
@@ -87,7 +87,7 @@ export default function BasicTabs(props) {
     </TabPanel>
     <TabPanel header="SUPPLIERS LIST">
         Content III
-        <SupplierTable data={props.data.suppliers}/>
+        
     </TabPanel>
 </TabView>
   );

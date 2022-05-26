@@ -6,6 +6,8 @@ import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import { Stack } from "@mui/material";
+import { ScrollTop } from 'primereact/scrolltop';
+
 const App = () => {
   const menus=['Dashboard','Tenders','Profile','Logout']
 
@@ -42,6 +44,25 @@ const App = () => {
             <MediaCard/>
             <MediaCard/>
             </Stack>
+            <Stack direction='row' spacing={3}>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            </Stack>
+            <Stack direction='row' spacing={3}>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            </Stack>
+            <Stack direction='row' spacing={3}>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            <MediaCard/>
+            </Stack>
+            <ScrollTop/>
             
             {/* <MediaCard/>
             <MediaCard/>

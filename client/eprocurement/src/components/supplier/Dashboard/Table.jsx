@@ -297,10 +297,10 @@ const Table = (props) => {
           selectionMode="multiple"
           headerStyle={{ width: "3em" }}
         ></Column>
-        <Column field="tenderId" sortable header="Tender Name"></Column>
-        <Column field="tenderTitle" sortable header="Published Date"></Column>
-        <Column field="openingDate" sortable header="Bid Opening Date"></Column>
-        <Column field="closingDate" sortable header="Closing Date"></Column>
+        <Column field="tenderId" sortable filter header="Tender Name"></Column>
+        <Column field="tenderTitle" sortable  header="Published Date"></Column>
+        <Column field="openingDate" sortable  header="Bid Opening Date"></Column>
+        <Column field="closingDate" sortable  header="Closing Date"></Column>
         {/* <Column field='status' sortable header='status'></Column> */}
         <Column
           field="status"
@@ -308,7 +308,7 @@ const Table = (props) => {
           sortable
           style={{ minWidth: "10rem" }}
           body={statusBodyTemplate}
-          filter
+          
         />
         {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
         {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}

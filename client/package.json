@@ -9,6 +9,7 @@
     "evergreen-ui": "^6.9.10",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
+    "primeflex": "^3.2.0",
     "primereact": "^8.1.1",
     "react-bootstrap": "^2.3.1",
     "react-datepicker": "^4.8.0",
