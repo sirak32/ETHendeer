@@ -13,6 +13,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { useState } from 'react';
+import TenderInfo from './TenderInfo';
 export default function MediaCard() {
   const header = (
     <img alt="Card" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm8jXlLuWDxu2tZbT08S5ovq5rj5Tqi8LbTA&usqp=CAU" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
@@ -65,10 +66,16 @@ const [vis2,setVis2]=useState(false)
             </Card>
 
             <Dialog modal draggable={false} dismissableMask style={{width:'90rem',height:'300rem'}} visible={vis} onHide={(()=>{setVis(false)})}>
-                Apply For This Tender Here 
+                {/* Apply For This Tender Here  */}
+                {/* <TenderInfo/> */}
+
+                <div className='bg-orange-400 m-0 w-12 h-5rem'>
+
+                </div>
             </Dialog>
-            <Dialog modal draggable={false} dismissableMask style={{width:'90rem',height:'300rem'}} visible={vis2} onHide={(()=>{setVis2(false)})}>
+            <Dialog  draggable={false} dismissableMask style={{width:'90rem',height:'300rem'}} visible={vis2} onHide={(()=>{setVis2(false)})}>
                 Tender Details Here
+                <TenderInfo/>
             </Dialog>
 
 
