@@ -72,6 +72,13 @@ const [vis2,setVis2]=useState(false)
                 <div className='bg-orange-400 m-0 w-12 h-5rem'>
 
                 </div>
+                <p class="text-4xl w-10 font-semibold">Tender Title</p>
+                <p class="text-4xl w-10 font-semibold">Tender Description</p>
+                <p class="text-4xl w-10 font-semibold">Pyblished Date</p>
+                <p class="text-4xl w-10 font-semibold">Closing Date</p>
+                <p class="text-4xl w-10 font-semibold">Bid Opening Date</p>
+                <p class="text-4xl w-10 font-semibold">Attached Documents</p>
+
             </Dialog>
             <Dialog  draggable={false} dismissableMask style={{width:'90rem',height:'300rem'}} visible={vis2} onHide={(()=>{setVis2(false)})}>
                 Tender Details Here
