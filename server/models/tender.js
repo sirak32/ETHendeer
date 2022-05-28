@@ -27,6 +27,7 @@ const postSchema = mongoose.Schema({
     participationFee: String,
     bidSecurityAmount: String,
     termsAndConditions: String,
+    document:String,
     applicants:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Supplier'

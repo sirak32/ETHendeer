@@ -4,6 +4,8 @@ import {
     DELETE_OFFICER,
     UPDATE_OFFICER
   } from '../constants/officerConstants'
+  import { SET_ERROR,SET_LOADING } from '../constants/tenderConstants';
+
   import axios from 'axios';
 import { CREATE_SUPPLIER } from '../constants/actionType';
   
@@ -77,10 +79,10 @@ import { CREATE_SUPPLIER } from '../constants/actionType';
   
   //FETCHING TENDERS FROM THE API AND THEN SET TO THE REDUX STORE
 
-  export default fetchOfficer=()=>{
+  export const fetchOfficer=()=>{
     return dispatch=>{
       dispatch({type:SET_LOADING})
-      axios.get(`http://localhost:5001/tenders`)
+      axios.get(`http://localhost:5001/officers`)
       .then((response)=>{
         const {data}=response
         dispatch(fetchAndSetOfficer(data))
@@ -92,15 +94,13 @@ import { CREATE_SUPPLIER } from '../constants/actionType';
   }
   const fetchAndSetOfficer=data=>({
     type:SET_OFFICER,
-    payload:{
-      data
-    }
+    payload:data
   })
 
   export const updateOfficer=(officer)=>{
     return dispatch=>{
         dispatch({type:SET_LOADING});
-        axios.patch(`https://localhost:5001/tenders/${id}`,{
+        axios.patch(`https://localhost:5001/tenders/id`,{
           officer
         })
         .then((res)=>{

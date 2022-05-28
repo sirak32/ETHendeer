@@ -125,11 +125,11 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData('Merid Nigusie', 'ETS159','+251-919-298457', 24, 4.0, 3.99),
-  createData('Merid Nigusie', 'ETS159', '+251-919-298457', 37, 4.3, 4.99),
-  createData('Merid Nigusie', 'ETS159', '+251-919-298457', 24, 6.0, 3.79),
-  createData('Merid Nigusie', 'ETS159', '+251-919-298457', 67, 4.3, 2.5),
-  createData('Merid Nigusie', 'ETS159', '+251-919-298457', 49, 3.9, 1.5),
+  createData('Merid Nigusiea', 'ETS159','+251-919-298457', 24, 4.0, 3.99),
+  createData('Merid Nigusieb', 'ETS159', '+251-919-298457', 37, 4.3, 4.99),
+  createData('Merid Nigusiec', 'ETS159', '+251-919-298457', 24, 6.0, 3.79),
+  createData('Merid Nigusied', 'ETS159', '+251-919-298457', 67, 4.3, 2.5),
+  createData('Merid Nigusiee', 'ETS159', '+251-919-298457', 49, 3.9, 1.5),
 ];
 
 export default function CollapsibleTable() {

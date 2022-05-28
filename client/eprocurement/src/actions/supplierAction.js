@@ -1,7 +1,7 @@
 import {
     CREATE_SUPPLIER,
     DELETE_SUPPLIER,
-    UPDATE_TENDER,
+    UPDATE_SUPPLIER,
     SET_SUPPLIER,
     
   } from '../constants/supplierConstants'

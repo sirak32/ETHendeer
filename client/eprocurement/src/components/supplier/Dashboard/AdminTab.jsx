@@ -10,7 +10,7 @@ import Table from './Table'
 import AddOfficer from './AddOfficer'
 import RegisterSupplier from './RegisterSupplier'
 import OfficersList from './OfficersList';
-import { FormikFormDemo } from "./RegisterOfficer";
+import { FormikFormDemo } from "./RegisterOfficers";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 function TabPanel(props) {
@@ -62,8 +62,8 @@ export default function BasicTabs() {
           <Tab label="SUPPLIER LIST" {...a11yProps(1)} />
           <Tab label="REGISTER SUPPLIER" {...a11yProps(2)} />
           <Tab label="ADD OFFICER" {...a11yProps(3)} />
-          <Tab label="PENDING REGISTRATION" {...a11yProps(4)} />
-          <Tab label="FEEDBACK LIST" {...a11yProps(5)} />
+          {/* <Tab label="PENDING REGISTRATION" {...a11yProps(4)} />
+          <Tab label="FEEDBACK LIST" {...a11yProps(5)} /> */}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -79,17 +79,18 @@ export default function BasicTabs() {
         <FormikFormDemo/>
         </Dialog>
         <Button onClick={(()=>{setVis(true)})}>ADD SUPPLIER</Button>
-        <HorizontalLinearStepper/>
+        {/* <HorizontalLinearStepper/> */}
       </TabPanel>
       <TabPanel value={value} index={3}>
         {/* <AddOfficer/> */}
+        <FormikFormDemo/>
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      {/* <TabPanel value={value} index={4}>
         Item Three
       </TabPanel>
       <TabPanel value={value} index={5}>
         <OfficersList/>
-      </TabPanel>
+      </TabPanel> */}
     </Box>
   );
 }
