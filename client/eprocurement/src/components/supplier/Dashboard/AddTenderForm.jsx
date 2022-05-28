@@ -23,8 +23,13 @@ import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useFormik } from "formik";
+import {connect} from 'react-redux' 
+import { useEffect } from "react";
+const InputAdornments=({ tenders,fetchTenders }) =>{
+  useEffect(()=>{
 
-export default function InputAdornments({ tenders, fetchTenders }) {
+    // fetchTenders()
+  },[])
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -75,7 +80,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
+console.log("testing the states without dispatching",tenders.tenders)
   return (
     <form
       // onSubmit={async (e) => {
@@ -92,7 +97,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
       onSubmit={formik.handleSubmit}
     >
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, title: e.target.value });
@@ -107,7 +112,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, number: e.target.value });
@@ -122,7 +127,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, description: e.target.value });
@@ -138,7 +143,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
@@ -161,7 +166,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
             <Select
@@ -183,8 +188,8 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             </Select>
           </FormControl>
         </Grid>
-        {/* <Grid item xs={6}></Grid> */}
-        <Grid item xs={6}>
+        {/* <Grid item xs={4}></Grid> */}
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, lotNo: e.target.value });
@@ -200,7 +205,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, minPrice: e.target.value });
@@ -216,13 +221,13 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <span className="p-float-label">
             <InputText
               // onChange={(e) => {
               //   setFormValue({
               //     ...formValues,
-              //     bidSecurityAmount: e.target.value,
+              //     bidSec-urityAmount: e.target.value,
               //   });
               // }}
               onChange={formik.handleChange}
@@ -238,7 +243,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="bidSecurityAmount">Bid Security Amount*</label>
           </span>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <span className="p-float-label">
             <InputTextarea
               rows={5}
@@ -260,7 +265,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="termsAndConditions">Terms And Conditions</label>
           </span>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, participationFee: e.target.value });
@@ -276,7 +281,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <div className="App">
             <Button variant="contained" component="label" color="primary">
               {" "}
@@ -286,7 +291,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           </div>
         </Grid>
 
-        {/* <Grid item xs={6}>
+        {/* <Grid item xs={4}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Password
@@ -313,7 +318,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           </FormControl>
         </Grid> */}
 
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           {/* <input
             onChange={(e) => {
               setFormValue({ ...formValues, publishedDate: e.target.value });
@@ -325,7 +330,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             
           /> */}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <span className="p-float-label">
             <Calendar
               onChange={(e) => {
@@ -346,7 +351,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="bidOpenOn"> Opening Date</label>
           </span>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <span className="p-float-label">
             <Calendar
               onChange={(e) => {
@@ -367,9 +372,9 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="closingDate"> Closing Date</label>
           </span>
         </Grid>
-        <Grid item xs={6}></Grid>
-        <Grid item xs={6}></Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}>
           <Stack
             sx={{ margin: "1rem" }}
             alignItems="left"
@@ -466,3 +471,4 @@ const mapDispatchToProps = (dispatch) => {
     fetchTenders: () => dispatch(fetchTender()),
   };
 };
+export default connect(mapStateToProps,mapDispatchToProps)(InputAdornments)

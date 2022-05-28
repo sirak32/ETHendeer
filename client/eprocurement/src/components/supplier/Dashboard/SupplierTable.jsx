@@ -151,14 +151,14 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import {connect} from 'react-redux'
 import { fetchTender } from "../../../actions/tenderAction";
-import { FormikFormDemo } from "./RegisterOfficer";
+import { FormikFormDemo } from "./EditSupplier";
 import { Dialog } from "primereact/dialog";
 
 const Table = (props,{}) => {
   const [edit,setEdit]=useState(false)
   const [selectedCustomers, setSelectedCustomers] = useState(null);
-  function createData(no, name, email, phone, tinNO) {
-    return { no, name, email, phone, tinNO };
+  function createData(id,no, name, email, phone, tinNO) {
+    return {id, no, name, email, phone, tinNO };
   }
   let supList = props.data;
   console.log("my NEw KINGDOM", supList);
@@ -199,7 +199,14 @@ const Table = (props,{}) => {
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
   ];
   for (i = 0; i < supList.length; i++) {
+    console.log(supList[i])
     rows[i] = createData(
+      supList[i]._id,
+      // supList[i].accountInfo._id,
+      // supList[i].personalInfo._id,
+      // supList[i].personalInfo.address._id,
+
+
       i,
       `${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`,
       supList[i].personalInfo.email,
@@ -253,6 +260,7 @@ const Table = (props,{}) => {
   const editProduct = () => {};
   const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
+    console.log("row datas",rowData)
     return (
       <>
         <Button
@@ -296,7 +304,7 @@ const Table = (props,{}) => {
       rows={10}
     >
       <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
-      <Column field="name" sortable header="Supplier Name"></Column>
+      <Column field="id" sortable header="Supplier Name" ></Column>
       <Column field="phone" sortable header="Phone Number"></Column>
       <Column field="email" sortable header="Email"></Column>
       <Column field="tinNO" sortable header="Tin"></Column>

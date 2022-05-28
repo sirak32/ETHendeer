@@ -16,6 +16,7 @@ import {
   deleteTender,
   getAllOfficers
 } from "../controllers/users.js";
+import { supplier } from "../models/user.js";
 
 const router = express.Router();
 
@@ -101,5 +102,10 @@ router.delete('/delete-tender', passport.authenticate("jwt-bearer", {
 }), checkRole(['officer']), deleteTender)
 
 
-
+router.patch('/edit-supplier/:id',async(req,res)=>{
+const id=req.params.id
+const data=req.body
+await supplier.findByIdAndUpdate(id,data)
+res.json("succes")
+})
 export default router;

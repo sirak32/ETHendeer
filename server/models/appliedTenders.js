@@ -8,7 +8,9 @@ const appliedTendersSchema = mongoose.Schema({
     },
     appliedDate:{
         type:mongoose.Schema.Types.Date
-    }
+    },
+    businessDoc:String,
+    technicalDoc:String
 })
 const appliedtenders = mongoose.model('AppliedTender', appliedTendersSchema)
 export default appliedtenders
