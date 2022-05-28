@@ -6,4 +6,5 @@ router.post('/', createPost);
 router.get('/:id', getPost);
 router.patch('/:id', updatePost);
 router.delete('/:id', deletePost);
+router.post('applied-tenders',(req,res)=>{})
 export default router

@@ -87,7 +87,7 @@ export default function BasicTabs(props) {
     </TabPanel>
     <TabPanel header="SUPPLIERS LIST">
         Content III
-        
+        <SupplierTable data={props.data.suppliers}/>
     </TabPanel>
 </TabView>
   );

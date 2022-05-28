@@ -149,7 +149,13 @@ import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-const Table = (props) => {
+import {connect} from 'react-redux'
+import { fetchTender } from "../../../actions/tenderAction";
+import { FormikFormDemo } from "./RegisterOfficer";
+import { Dialog } from "primereact/dialog";
+
+const Table = (props,{}) => {
+  const [edit,setEdit]=useState(false)
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   function createData(no, name, email, phone, tinNO) {
     return { no, name, email, phone, tinNO };
@@ -211,12 +217,16 @@ const Table = (props) => {
       />
     );
   };
+  
   const editButton = (rowData) => {
     return (
       <Button
         icon="pi pi-pencil"
         className="p-button-rounded"
         aria-label="Cancel"
+        onClick={(()=>{
+          setEdit(true)
+        })}
       />
     );
   };
@@ -250,22 +260,23 @@ const Table = (props) => {
 "
           className="p-button-rounded mr-2"
           onClick={() => confirmDeleteProduct(rowData)}
-        />
+          />
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
-          onClick={() => editProduct(rowData)}
-        />
+          onClick={() => setEdit(true)}
+          />
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
           onClick={() => confirmDeleteProduct(rowData)}
-        />
+          />
       </>
     );
   };
   console.log("rows are", rows);
   return (
+    <>
     <DataTable
       breakpoint="960px"
       editMode="cell"
@@ -299,7 +310,22 @@ const Table = (props) => {
         style={{ minWidth: "8rem" }}
       ></Column>
     </DataTable>
+
+      <Dialog visible={edit} style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
+        <FormikFormDemo/>
+      </Dialog>
+      </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    tenders: state.tenders,
+  };
+};
 
-export default Table;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTenders: () => dispatch(fetchTender()),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Table);

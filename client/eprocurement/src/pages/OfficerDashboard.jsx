@@ -45,7 +45,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   console.log("tender from redux", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   
-  return !tender ? (
+  return tenders ? (
     <Div>
       <SideBar menu={menus} />
       <Section>

@@ -1,4 +1,6 @@
 import tender from "../models/tender.js";
+import appliedtenders from "../models/appliedTenders.js";
+
 import mongoose from 'mongoose'
 const getPosts = async (req, res) => {
     try {
@@ -20,7 +22,16 @@ const getPosts = async (req, res) => {
         })
     }
 }
-
+const createAppliedTender=async (req,res)=>{
+    const body = req.body
+    const newApplied=new appliedtenders(body)
+    try {
+        appliedtenders.save()
+        res.status(201).json(newApplied)
+    } catch (error) {
+        
+    }
+}
 
 const createPost = async (req, res) => {
     const body = req.body

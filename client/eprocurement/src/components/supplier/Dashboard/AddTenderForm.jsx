@@ -21,10 +21,32 @@ import DatePicker from "react-datepicker";
 import { fetchTender } from "../../../actions/tenderAction";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
-import { InputTextarea } from 'primereact/inputtextarea';
- 
+import { InputTextarea } from "primereact/inputtextarea";
+import { useFormik } from "formik";
 
 export default function InputAdornments({ tenders, fetchTenders }) {
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      number: "",
+      type: "",
+      catagory: "",
+      lotNo: "null",
+      minPrice: "",
+      creator: id,
+      publishedDate: "null",
+      closingDate: "null",
+      bidOpenOn: "null",
+      participationFee: "",
+      bidSecurityAmount: "",
+      termsAndConditions: "",
+    },
+    onSubmit:(data)=>{
+      setFormValue(data)
+      console.log("initial tenders",formValues)
+    }
+  });
   const [no, setNo] = React.useState("");
   const [type, setType] = React.useState("");
 
@@ -56,67 +78,81 @@ export default function InputAdornments({ tenders, fetchTenders }) {
 
   return (
     <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await axios
-          .post("http://localhost:5001/tenders", formValues)
-          .then(() => {
-            // setNo('changed')
-          });
-        fetchTenders();
-        console.log(formValues);
-      }}
-      action="sdghfjgh"
+      // onSubmit={async (e) => {
+      //   e.preventDefault();
+      //   await axios
+      //     .post("http://localhost:5001/tenders", formValues)
+      //     .then(() => {
+      //       // setNo('changed')
+      //     });
+      //   fetchTenders();
+      //   console.log(formValues);
+      // }}
+      // action="sdghfjgh"
+      onSubmit={formik.handleSubmit}
     >
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, title: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, title: e.target.value });
+            // }}
+            onChange={formik.handleChange}
             name="title"
+            id="title"
             color="success"
             label="Tender Title"
+            value={formik.values.title}
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, number: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, number: e.target.value });
+            // }}
+            onChange={formik.handleChange}
             name="number"
+            id="number"
+            value={formik.values.number}
             color="success"
             label="Tender Number"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, description: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, description: e.target.value });
+            // }}
+            onChange={formik.handleChange}
             name="description"
+            id="description"
             color="success"
+            value={formik.values.description}
+
             label="Tender Description"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
               sx={{ m: 1, width: "24.5ch" }}
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              id="type"
               label="Type"
+              onChange={formik.handleChange}
+              value={formik.values.type}
+
               name="type"
-              onChange={(e) => {
-                setFormValue({ ...formValues, type: e.target.value });
-              }}
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, type: e.target.value });
+              // }}
             >
               <MenuItem value="Direct">Direct</MenuItem>
               <MenuItem value="Direct">Direct</MenuItem>
@@ -125,18 +161,20 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
             <Select
               sx={{ m: 1, width: "24.5ch" }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="type"
+              id="catagory"
               label="Catagory"
+              value={formik.values.catagory}
+              onChange={formik.handleChange}
               name="catagory"
-              onChange={(e) => {
-                setFormValue({ ...formValues, catagory: e.target.value });
-              }}
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, catagory: e.target.value });
+              // }}
             >
               <MenuItem value="Direct">Direct</MenuItem>
               <MenuItem value="Direct">Direct</MenuItem>
@@ -145,42 +183,52 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             </Select>
           </FormControl>
         </Grid>
-        {/* <Grid item xs={4}></Grid> */}
-        <Grid item xs={4}>
+        {/* <Grid item xs={6}></Grid> */}
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, lotNo: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, lotNo: e.target.value });
+            // }}
+            onChange={formik.handleChange}
+
             name="lotNo"
+            id="lotNo"
+            value={formik.values.lotNo}
             color="success"
             label="Lot Number"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, minPrice: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, minPrice: e.target.value });
+            // }}
+            id="minPrice"
             name="minPrice"
             color="success"
+            value={formik.values.minPrice}
+            onChange={formik.handleChange}
+
             label="Minimum Price"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <span className="p-float-label">
             <InputText
-              onChange={(e) => {
-                setFormValue({
-                  ...formValues,
-                  bidSecurityAmount: e.target.value,
-                });
-              }}
+              // onChange={(e) => {
+              //   setFormValue({
+              //     ...formValues,
+              //     bidSecurityAmount: e.target.value,
+              //   });
+              // }}
+              onChange={formik.handleChange}
               name="bidSecurityAmount"
               id="bidSecurityAmount"
+              value={formik.values.bidSecurityAmount}
               autoFocus
               color="success"
               label="Bid Security Amount"
@@ -190,40 +238,45 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="bidSecurityAmount">Bid Security Amount*</label>
           </span>
         </Grid>
-        <Grid item xs={4}>
-        <span className="p-float-label">
+        <Grid item xs={6}>
+          <span className="p-float-label">
+            <InputTextarea
+              rows={5}
+              autoResize
+              // onChange={(e) => {
+              //   setFormValue({
+              //     ...formValues,
+              //     termsAndConditions: e.target.value,
+              //   });
+              // }}
+              onChange={formik.handleChange}
+              name="termsAndConditions"
+              // id="outlined-multiline-static"
+              value={formik.values.termsAndConditions}
 
-          <InputTextarea
-          rows={5}
-          autoResize
-            onChange={(e) => {
-              setFormValue({
-                ...formValues,
-                termsAndConditions: e.target.value,
-              });
-            }}
-            name="termsAndConditions"
-            // id="outlined-multiline-static"
-            autoFocus
-            id="termsAndConditions"
+              autoFocus
+              id="termsAndConditions"
             />{" "}
-                        <label htmlFor="termsAndConditions">Terms And Conditions</label>
-
-            </span>
+            <label htmlFor="termsAndConditions">Terms And Conditions</label>
+          </span>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, participationFee: e.target.value });
-            }}
+            // onChange={(e) => {
+            //   setFormValue({ ...formValues, participationFee: e.target.value });
+            // }}
+            id='participationFee'
             name="participationFee"
+            value={formik.values.participationFee}
+            onChange={formik.handleChange}
+
             color="success"
             label="Bid participation Fee"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <div className="App">
             <Button variant="contained" component="label" color="primary">
               {" "}
@@ -233,7 +286,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
           </div>
         </Grid>
 
-        <Grid item xs={4}>
+        {/* <Grid item xs={6}>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Password
@@ -258,9 +311,9 @@ export default function InputAdornments({ tenders, fetchTenders }) {
               label="Password"
             />
           </FormControl>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           {/* <input
             onChange={(e) => {
               setFormValue({ ...formValues, publishedDate: e.target.value });
@@ -272,7 +325,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             
           /> */}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <span className="p-float-label">
             <Calendar
               onChange={(e) => {
@@ -282,6 +335,8 @@ export default function InputAdornments({ tenders, fetchTenders }) {
               max="2020-02-02"
               min="2020-01-02"
               id="bidOpenOn"
+              value={formik.values.bidOpenOn}
+
               // value={formik.values.date}
               // onChange={formik.handleChange}
               dateFormat="dd/mm/yy"
@@ -291,7 +346,7 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="bidOpenOn"> Opening Date</label>
           </span>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <span className="p-float-label">
             <Calendar
               onChange={(e) => {
@@ -301,6 +356,8 @@ export default function InputAdornments({ tenders, fetchTenders }) {
               max="2020-02-02"
               min="2020-01-02"
               id="closingDate"
+              value={formik.values.closingDate}
+
               // value={formik.values.date}
               // onChange={formik.handleChange}
               dateFormat="dd/mm/yy"
@@ -310,9 +367,9 @@ export default function InputAdornments({ tenders, fetchTenders }) {
             <label htmlFor="closingDate"> Closing Date</label>
           </span>
         </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}></Grid>
+        <Grid item xs={6}></Grid>
+        <Grid item xs={6}>
           <Stack
             sx={{ margin: "1rem" }}
             alignItems="left"

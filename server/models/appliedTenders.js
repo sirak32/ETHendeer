@@ -11,4 +11,4 @@ const appliedTendersSchema = mongoose.Schema({
     }
 })
 const appliedtenders = mongoose.model('AppliedTender', appliedTendersSchema)
-export {appliedtenders}
+export default appliedtenders
