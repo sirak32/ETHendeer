@@ -22,14 +22,29 @@ const getPosts = async (req, res) => {
         })
     }
 }
+const getAppliedTenders=async (req,res) =>{
+    try {
+        // const valid=mongoose.Types.ObjectId.isValid("628c670820fa3eaa840adfb8")
+        // console.log(valid)
+        // res.json(valid)
+        const applied=await appliedtenders.find()
+        // console.log(applied)
+        res.status(200).json(applied.length)
+    } catch (error) {
+        res.status(404).json({message:error})
+    }
+    // console.log("this is testers")
+    // res.json({tiliksew:"tiliksew"})
+}
 const createAppliedTender=async (req,res)=>{
     const body = req.body
+    console.log(body)
     const newApplied=new appliedtenders(body)
     try {
-        appliedtenders.save()
+       await newApplied.save()
         res.status(201).json(newApplied)
     } catch (error) {
-        
+        res.json(error)
     }
 }
 
@@ -149,4 +164,6 @@ export {
     createPost,
     updatePost,
     deletePost,
+    createAppliedTender,
+    getAppliedTenders
 }

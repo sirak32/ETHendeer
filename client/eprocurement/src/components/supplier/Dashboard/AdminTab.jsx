@@ -10,9 +10,10 @@ import Table from './Table'
 import AddOfficer from './AddOfficer'
 import RegisterSupplier from './RegisterSupplier'
 import OfficersList from './OfficersList';
-import { FormikFormDemo } from "./RegisterOfficers";
+import { FormikFormDemo } from "./RegisterOfficer";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import SupplierTable from './SupplierTable';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -46,10 +47,10 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
-
-  const [vis,setVis]=React.useState(true)
+console.log('props value',props.data)
+  const [vis,setVis]=React.useState(false)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -70,7 +71,11 @@ export default function BasicTabs() {
         <OfficersList/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OfficersList/>
+        {/* <OfficersList/> */}
+        {/* <SupplierTable data={props.data.suppliers}/> */}
+        {/* <SupplierTable/> */}
+        <SupplierTable data={props.data.suppliers}/>
+
       </TabPanel>
       <TabPanel value={value} index={2}>
         {/* <RegisterSupplier/> */}

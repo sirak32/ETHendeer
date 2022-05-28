@@ -81,7 +81,7 @@ import {
   export const fetchTender=()=>{
     return dispatch=>{
       dispatch({type:SET_LOADING})
-        axios.get(`http://localhost:5001/tenders`)
+        axios.get(`http://localhost:5001/tenders/all`)
         .then((response)=>{
           const {data}=response
           dispatch(fetchAndSetTenders(data))

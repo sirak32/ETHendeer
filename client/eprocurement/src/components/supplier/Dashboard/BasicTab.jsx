@@ -45,6 +45,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
+  console.log('props value',props.data.suppliers)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

@@ -56,7 +56,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
-            <AdminTab/>
+            <AdminTab data={{suppliers}}/>
             {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
 
             {/* <AddOfficer/> */}
