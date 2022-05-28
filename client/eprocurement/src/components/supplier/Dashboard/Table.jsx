@@ -150,8 +150,10 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
+import { FormikFormDemo } from "./EditTender";
 const Table = (props) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
+  const [edit,setEdit]=useState(false)
   function createData(
     tenderNO,
     tenderId,
@@ -259,7 +261,9 @@ const Table = (props) => {
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
-          onClick={() => editProduct(rowData)}
+          onClick={() => {
+            setEdit(true)
+            editProduct(rowData)}}
         />
         <Button
           icon="pi pi-trash"
@@ -318,6 +322,18 @@ const Table = (props) => {
           style={{ minWidth: "8rem" }}
         ></Column>
       </DataTable>
+      <Dialog
+        visible={edit}
+        style={{ width: "90rem" }}
+        header="Confirm"
+        modal
+        dismissableMask
+        onHide={() => {
+          setEdit(false);
+        }}>
+            <FormikFormDemo/>
+
+        </Dialog>
       <Dialog
         visible={deleteProductsDialog}
         style={{ width: "450px" }}

@@ -198,6 +198,7 @@ const Table = (props,{}) => {
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
     // createData(props.data[9].title, props.data[9].bidOpenOn, props.data[9].tinNO, props.data[9].bidOpenOn,'Active'),
   ];
+  const [suppli,setSuppli]=useState({})
   for (i = 0; i < supList.length; i++) {
     console.log(supList[i])
     rows[i] = createData(
@@ -210,7 +211,7 @@ const Table = (props,{}) => {
       i,
       `${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`,
       supList[i].personalInfo.email,
-      `${supList[i].personalInfo.phoneNumber.countryCode}-${supList[i].personalInfo.phoneNumber.regionalCode}-${supList[i].personalInfo.phoneNumber.number}`,
+      `${supList[i].personalInfo.phoneNumber.countryCode}${supList[i].personalInfo.phoneNumber.regionalCode}${supList[i].personalInfo.phoneNumber.number}`,
       supList[i].tinNumber
     );
   }
@@ -272,7 +273,9 @@ const Table = (props,{}) => {
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
-          onClick={() => setEdit(true)}
+          onClick={() => {setEdit(true)
+          setSuppli(rowData)
+          }}
           />
         <Button
           icon="pi pi-trash"
@@ -283,6 +286,24 @@ const Table = (props,{}) => {
     );
   };
   console.log("rows are", rows);
+  const suppData=[]
+  let j
+  console.log("supList",supList)
+  for(j=0;j<supList.length;j++)
+ suppData[j]= {
+    firstName: supList[j].personalInfo.firstName,
+      middleName:supList[j].personalInfo.middleName,
+      lastName: supList[j].personalInfo.lastName,
+      phone: supList[j].personalInfo.firstName,
+      city: supList[j].personalInfo.firstName,
+      subcity: supList[j].personalInfo.firstName,
+      wereda: supList[j].personalInfo.firstName,
+      kebele: supList[j].personalInfo.firstName,
+      businessType: supList[j].personalInfo.firstName,
+      tinNumber: supList[ j].tinNumber,
+      username: supList[j].personalInfo.firstName,
+      
+  }
   return (
     <>
     <DataTable
@@ -304,7 +325,7 @@ const Table = (props,{}) => {
       rows={10}
     >
       <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
-      <Column field="id" sortable header="Supplier Name" ></Column>
+      <Column field="name" filter sortable header="Supplier Name" ></Column>
       <Column field="phone" sortable header="Phone Number"></Column>
       <Column field="email" sortable header="Email"></Column>
       <Column field="tinNO" sortable header="Tin"></Column>
@@ -319,8 +340,8 @@ const Table = (props,{}) => {
       ></Column>
     </DataTable>
 
-      <Dialog visible={edit} style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-        <FormikFormDemo/>
+      <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
+        <FormikFormDemo selected={suppli} />
       </Dialog>
       </>
   );
