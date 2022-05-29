@@ -12,6 +12,7 @@ import AddOfficer from "./pages/AddOfficer.jsx";
 import TenderDetail from "./pages/TenderDetail";
 import Login from "./pages/Login"
 import Apply from './pages/ApplyingTender'
+import Home from "./pages/Home.jsx";
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
     <Router>
     <Routes>
                  <Route exact path='/' element={<Login/>}></Route>
+                 <Route exact path='/home' element={<Home/>}></Route>
+
                  <Route exact path='/apply' element={<Apply/>}></Route>
 
                  <Route exact path='/tender-detail' element={<TenderDetail/>}></Route>

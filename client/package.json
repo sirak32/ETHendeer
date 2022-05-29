@@ -6,6 +6,7 @@
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "axios": "^0.27.2",
+    "base64topdf": "^1.1.8",
     "evergreen-ui": "^6.9.10",
     "file-saver": "^2.0.5",
     "formik": "^2.2.9",

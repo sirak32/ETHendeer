@@ -7,7 +7,9 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import vid from '../videos/production .mp4'
 import { MdGeneratingTokens } from 'react-icons/md';
+// import base64 from 'base64topdf'
 const Login = () => {
+  const [pdf,setPdf]=React.useState('')
   React.useEffect(()=>{
     const tokens=localStorage.getItem('token')
     if(tokens!==null){
@@ -53,6 +55,10 @@ const Login = () => {
       .then(function (response) {
           // <Navigate to='/officer'/>
         // alert(response.data.succes);
+        axios.get('http://localhost:5001/tenders')
+.then((result)=>{
+setPdf(result)
+})
         if(response.data.succes){
 setLogged(true)
 alert(response.data.token);
@@ -72,6 +78,10 @@ localStorage.setItem('whoId', response.data.offId);
         //   alert(`username - ${values.username} \npassword -  ${values.password}`)
         //   console.log(values.username)
       }
+
+      const doc=""
+
+      // let decoded=base64.base64Decode(doc,'pdfname')
   return (
       <form onSubmit={handleSubmit}>
 {/* <video  loop autoPlay>
@@ -121,6 +131,7 @@ localStorage.setItem('whoId', response.data.offId);
           <Button type='submit' sx={{width:'15vw'}} color='primary' variant='contained' size='large'> Login</Button>
     </Wrapper>
               </Container>
+              {/* <a download='document.pdf' href={decoded}>Download the file</a> */}
                         </form>
   )
 }

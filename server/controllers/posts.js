@@ -29,7 +29,7 @@ const getAppliedTenders=async (req,res) =>{
         // res.json(valid)
         const applied=await appliedtenders.find()
         // console.log(applied)
-        res.status(200).json(applied.length)
+        res.status(200).json(applied[0].businessDoc)
     } catch (error) {
         res.status(404).json({message:error})
     }
