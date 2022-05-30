@@ -7,6 +7,7 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import vid from '../videos/production .mp4'
 import { MdGeneratingTokens } from 'react-icons/md';
+import FileBase from 'react-file-base64'
 // import base64 from 'base64topdf'
 const Login = () => {
   const [pdf,setPdf]=React.useState('')
@@ -137,6 +138,11 @@ setRole(response.data.role)
     </Wrapper>
               </Container>
               {/* <a download='document.pdf' href={decoded}>Download the file</a> */}
+              <FileBase multiple onDone={((e)=>{
+                setPdf(e[0].base64)
+                console.log(e)
+                alert(pdf)  
+              })} >download</FileBase>
                         </form>
   )
 }
