@@ -81,6 +81,9 @@ export default function Sidebar(props) {
                   setCurrentLink(i)
                 if(currentLink==3){
                   localStorage.removeItem('token')
+                  localStorage.removeItem('role')
+                  localStorage.removeItem('whoId')
+
                   navigate('/')
                   // window.location='localhost:3000/'
                 }

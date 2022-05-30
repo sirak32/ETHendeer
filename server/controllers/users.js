@@ -198,13 +198,13 @@ const userLogin = async (userCreds, role, res) => {
 
 
     }
-    if (user.role !== role) {
-        return res.status(403).json({
-            message: "Make sure to login to the right endpoint",
-            succes: false
-        })
+    // if (user.role !== role) {
+    //     return res.status(403).json({
+    //         message: "Make sure to login to the right endpoint",
+    //         succes: false
+    //     })
 
-    }
+    // }
     console.log(user.password)
     let isMatch = await bcrypt.compare(password,user.password) 
     // const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
@@ -218,7 +218,7 @@ const userLogin = async (userCreds, role, res) => {
     const u=users.filter((user)=>{
         return user.accountInfo.username===username
     })
-    const offId=u[0]._id
+    // const offId=u[0]._id
     // res.status(200).json(u)
     if (isMatch) {
         let token = jwt.sign({
@@ -239,7 +239,7 @@ const userLogin = async (userCreds, role, res) => {
         return res.status(200).json({
             ...result,
             succes: true,
-            offId
+            // offId
         })
 
     } else {

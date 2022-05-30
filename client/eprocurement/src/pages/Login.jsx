@@ -20,7 +20,7 @@ const Login = () => {
     }
   },[])
   const [logged,setLogged]=React.useState(false)
-    
+    const [role,setRole]=React.useState('')
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
         username: "",
@@ -64,7 +64,8 @@ setLogged(true)
 alert(response.data.token);
 localStorage.setItem('token', response.data.token);
 localStorage.setItem('whoId', response.data.offId);
-
+localStorage.setItem('role',response.data.role)
+setRole(response.data.role)
           // navigate('/officer')
         }
         else {
@@ -91,7 +92,11 @@ localStorage.setItem('whoId', response.data.offId);
           />
         Your browser does not support the video tag. */}
           {/* </video> */}
-          {logged&& navigate('/officer')}
+          {(role==='officer')&& navigate('/officer')}
+          {(role==='admin')&& navigate('/admin')}
+          {(role==='supplier')&& navigate('/supplier')}
+
+
       <Container>
     <Wrapper>
         <TextField 
