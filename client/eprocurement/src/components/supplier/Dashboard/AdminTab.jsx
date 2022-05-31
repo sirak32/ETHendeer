@@ -14,6 +14,7 @@ import { FormikFormDemo } from "./RegisterOfficer";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import SupplierTable from './SupplierTable';
+import OfficersTable from './OfficersTable'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -61,7 +62,7 @@ console.log('props value',props.data)
         <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example" centered>
           <Tab label="OFFICERS LIST" {...a11yProps(0)} />
           <Tab label="SUPPLIER LIST" {...a11yProps(1)} />
-          <Tab label="REGISTER SUPPLIER" {...a11yProps(2)} />
+          <Tab label="PENDING SUPPLIER REGISTRATION" {...a11yProps(2)} />
           <Tab label="ADD OFFICER" {...a11yProps(3)} />
           {/* <Tab label="PENDING REGISTRATION" {...a11yProps(4)} />
           <Tab label="FEEDBACK LIST" {...a11yProps(5)} /> */}
@@ -69,6 +70,7 @@ console.log('props value',props.data)
       </Box>
       <TabPanel value={value} index={0}>
         <OfficersList/>
+        <OfficersTable data={props.data.officers}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         {/* <OfficersList/> */}

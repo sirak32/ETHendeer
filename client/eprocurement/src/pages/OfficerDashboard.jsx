@@ -26,7 +26,9 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
     // dispatch({type:'SET_TENDER',
     //   payload:'data'})
         const tokens=localStorage.getItem('token')
-        if(tokens==null)
+        const role=localStorage.getItem('role')
+
+        if(role!=='officer')
         navigate('/')
         fetchTenders();
         fetchSuppliers()

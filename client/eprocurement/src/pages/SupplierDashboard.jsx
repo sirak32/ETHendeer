@@ -7,8 +7,18 @@ import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
 import { Stack } from "@mui/material";
 import { ScrollTop } from 'primereact/scrolltop';
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const App = () => {
+  const navigate=useNavigate()
+
+  useEffect(()=>{
+    const role=localStorage.getItem('role')
+
+    if(role!=='supplier')
+    navigate('/')
+  },[])
   const menus=['Dashboard','Tenders','Profile','Logout']
 
   return (

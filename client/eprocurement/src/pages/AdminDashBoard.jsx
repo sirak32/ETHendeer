@@ -15,15 +15,21 @@ import { fetchSuppliers } from "../actions/supplierAction.js";
 import { fetchOfficer } from "../actions/officerAction.js";
 import { useEffect } from "react";
 import { connect } from "react-redux";
- 
+ import { useNavigate } from "react-router";
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
   const menus=['Dashboard','Officers','Suppliers','Logout']
   console.log("from admin panel officers",suppliers,officers)
+  const navigate=useNavigate()
   useEffect(()=>{
+    const role=localStorage.getItem('role')
+
+        if(role!=='admin')
+        navigate('/')
     fetchSuppliers()
     fetchOfficers()
 
   },[])
+  console.log('officers are ',officers)
   return (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -56,7 +62,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
-            <AdminTab data={{suppliers}}/>
+            <AdminTab data={{suppliers,officers}}/>
             {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
 
             {/* <AddOfficer/> */}

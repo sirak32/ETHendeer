@@ -11,14 +11,25 @@ import FileBase from 'react-file-base64'
 // import base64 from 'base64topdf'
 const Login = () => {
   const [pdf,setPdf]=React.useState('')
+  const navigate=useNavigate()
   React.useEffect(()=>{
     const tokens=localStorage.getItem('token')
+    const r=localStorage.getItem('role')
+
     if(tokens!==null){
       setLogged(true)
       console.log('tokens ',tokens) 
       // navigate('/officer')
 
     }
+    if(r==='officer')
+    navigate('/officer')
+    else if(r==='supplier')
+    navigate('/supplier')
+    else if(r==='admin')
+    navigate('/admin')
+    else{}
+    
   },[])
   const [logged,setLogged]=React.useState(false)
     const [role,setRole]=React.useState('')
@@ -28,7 +39,6 @@ const Login = () => {
         password: "",
         showPassword: false, 
       });
-      const navigate=useNavigate()
     const handleTypeChange = (event) => {
       setType(event.target.value);
     };

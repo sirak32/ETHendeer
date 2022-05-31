@@ -18,17 +18,13 @@ import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { useEffect } from "react";
 import { ProgressBar } from "primereact/progressbar";
-import img from "../../../videos/productio.mp4";
+import img from "../../../assets/images.jfif";
 import {saveAs} from 'file-saver'
 const MediaCard = ({ tenders, fetchTenders }) => {
   const header = (
     <img
       alt="Card"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm8jXlLuWDxu2tZbT08S5ovq5rj5Tqi8LbTA&usqp=CAU"
-      onError={(e) =>
-        (e.target.src =
-          "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
-      }
+      src={img}
     />
   );
   const footer = (
