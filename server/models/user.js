@@ -44,8 +44,11 @@ const supplierSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'Account'
      },
+    handlerRole:String, 
     bussinesType: String,
+    organizationName:String,
     tinNumber: String,
+    ownershipType:String,
     Attacheddocument:String,
 })
 const systemAdminSchema = mongoose.Schema({

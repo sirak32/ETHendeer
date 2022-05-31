@@ -14,7 +14,8 @@ import {
   deleteAccount,
   updateAccount,
   deleteTender,
-  getAllOfficers
+  getAllOfficers,
+  getPending
 } from "../controllers/users.js";
 import { supplier } from "../models/user.js";
 
@@ -52,7 +53,7 @@ router.get(
   checkRole(["admin"]),
   displayDashboard
 );
-
+router.get('/pending-supplier',getPending)
 router.get(
   "/officer-dashboard",
   passport.authenticate("jwt-bearer", {

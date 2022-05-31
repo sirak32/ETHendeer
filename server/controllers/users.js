@@ -6,6 +6,7 @@ import {
     supplier,
     officer
 } from '../models/user.js'
+import { pendingsupplier } from "../models/pendingSupplier.js";
 import {
     account
 } from "../models/account.js";
@@ -14,7 +15,7 @@ import jwt from 'jsonwebtoken'
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
-    const usernameNotTaken = await validateUsername('tilikw')
+    const usernameNotTaken = await validateUsername('Benjam')
     if (!usernameNotTaken) {
         return res.status(401).json({
             message: "Username is taken"
@@ -50,16 +51,20 @@ const registerSupplier = async (req, res) => {
     sex:'m'
     })
     const accountInform=new account({
-        username: "tilik",
+        username: "Benjam",
     password: password,
     email: "tilik",
     role: "officer"
     })
-    const newSupplier = new supplier({
+    const newSupplier = new pendingsupplier({
         personalInfo:personalInfor._id,
         accountInfo:accountInform._id,
         bussinessType:'manufacturing',
+        organizationName:'Alpha Business Group',
+        handlerRole:"manager",
+        ownershipType:"PartnerShip",
         tinNumber:'12345676543',
+        Attacheddocument:"something base 64",
     })
     // const newAccount = new account({
     //     username: userBody.accountInfo.username,
@@ -78,7 +83,21 @@ const registerSupplier = async (req, res) => {
     })
 }
 
+
+
+
+/////
+const getPending=async(req,res)=>{
+    const pend=await pendingsupplier.findOne().populate('accountInfo').populate('personalInfo')
+    res.status(200).json(pend)
+}
+
+
+
+
+
 // Officer Registration
+
 const registerOfficer = async (req, res) => {
 
     const userAddress = new address({
@@ -291,5 +310,6 @@ export {
     deleteAccount,
     updateAccount,
     deleteTender,
-    getAllOfficers
+    getAllOfficers,
+    getPending
 }

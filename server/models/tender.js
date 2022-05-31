@@ -5,9 +5,9 @@ const postSchema = mongoose.Schema({
     description: String,
     number: String,
     type: String,
-    catagory: String,
-    lotNo: String,
-    minPrice:String,
+    // catagory: String,
+    // lotNo: String,
+    // minPrice:String,
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Officer'
@@ -25,7 +25,7 @@ const postSchema = mongoose.Schema({
         default: new Date()
     },
     participationFee: String,
-    bidSecurityAmount: String,
+    // bidSecurityAmount: String,
     termsAndConditions: String,
     document:String,
     applicants:[{

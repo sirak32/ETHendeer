@@ -7,7 +7,8 @@ const appliedTendersSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
     },
     appliedDate:{
-        type:mongoose.Schema.Types.Date
+        type:mongoose.Schema.Types.Date,
+        default:new Date()
     },
     businessDoc:String,
     technicalDoc:String
