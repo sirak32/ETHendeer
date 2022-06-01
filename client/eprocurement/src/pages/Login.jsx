@@ -11,14 +11,16 @@ import FileBase from 'react-file-base64'
 // import axios from 'axios' 
 // import base64 from 'base64topdf'
 const Login = () => {
+  const [selectedFile, setSelectedFile] = React.useState(null);
+
   const [pdf,setPdf]=React.useState('')
   const navigate=useNavigate()
   React.useEffect(()=>{
-    axios.get('http://localhost:5001/files/8bbe0c2edba7923eef0d954284aed972.png')
-    .then((response)=>{
-      setPdf(response.data)
-      console.log(response)
-    })
+    // axios.get('http://localhost:5001/files/8bbe0c2edba7923eef0d954284aed972.png')
+    // .then((response)=>{
+    //   setPdf(response.data)
+    //   console.log(response)
+    // })
     const tokens=localStorage.getItem('token')
     const r=localStorage.getItem('role')
 
@@ -160,24 +162,37 @@ setRole(response.data.role)
               {/* <a download='document.pdf' href={decoded}>Download the file</a> */}
                         </form>
                         <form
-                         name='up' method='POST'
-                          encType='multipart/form-data' 
-                          action='http://localhost:5001/upload' 
-                        id='np'
-                        // onSubmit={(e)=>{
-                        //   e.preventDefault()
-                        //   axios.post('http://localhost:5001/upload',formData,{
-                        //     "Content-Type": "multipart/form-data",
-                        //   })
-                        // }}
-                        >
-                          <input type={"file"} name="doc" onChange={(e=>{
-                          })}/>
-                          <input type="submit" value="Submit" />
+                        //  name='up' method='POST'
+                        //   encType='multipart/form-data' 
+                        //   action='http://localhost:5001/upload' 
+                        // id='np'
+                        onSubmit={((e)=>{
+                          e.preventDefault()
+                          const data = new FormData()
+                          data.append("doc", selectedFile);
+                          console.log(data)
+                          axios.post('http://localhost:5001/upload',data,
+                          // {
+                          //   headers: {
+                          //     accept: "application/json",
+                          //     "Accept-Language": "en-US,en;q=0.8",
+                          //     "Content-Type": `multipart/form-data`,
+                          //   },
+                          // }
+                          )
+                        })}
+                        >  
+                          <input onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
+                          // onChange={(e=>{
+                          // })}
+                          />
+                          <input 
+                          // onInput={e => setSelectedFile(e.target.files[0])} 
+                          type="submit" value="Submit" />
                             {/* <img src={pdf}/> */}
                             {/* {pdf} */}
                         </form>
-                        <img src={`image/9f69c13f142e0f89bd902b9ec5beccf8.png`} alt=""/>
+                        <img src={`image/c9088f58b148054769bf681597875bf2.png`} alt=""/>
 
                         </>
   )

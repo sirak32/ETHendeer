@@ -81,9 +81,9 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 app.post("/upload", upload.single("doc"), (req, res) => {
 //   res.redirect("/");
-//   console.log(req.file.filename)
+  res.json(req.file.filename)
   console.log("here from upload");
-   res.json({TILIKSEW:"TILIKSEW"})
+  //  res.json({file:req.file}).redirect('/')
 //   res.json({"name":req.file.filename})
   console.log("here after upload");
 });
