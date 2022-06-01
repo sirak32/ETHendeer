@@ -8,11 +8,17 @@ import {useNavigate} from 'react-router-dom'
 import vid from '../videos/production .mp4'
 import { MdGeneratingTokens } from 'react-icons/md';
 import FileBase from 'react-file-base64'
+// import axios from 'axios' 
 // import base64 from 'base64topdf'
 const Login = () => {
   const [pdf,setPdf]=React.useState('')
   const navigate=useNavigate()
   React.useEffect(()=>{
+    axios.get('http://localhost:5001/files/8bbe0c2edba7923eef0d954284aed972.png')
+    .then((response)=>{
+      setPdf(response.data)
+      console.log(response)
+    })
     const tokens=localStorage.getItem('token')
     const r=localStorage.getItem('role')
 
@@ -31,22 +37,25 @@ const Login = () => {
     else{}
     
   },[])
+
+  const form=document.getElementById("np")
+  // const formData=new FormData(form)
   const [logged,setLogged]=React.useState(false)
     const [role,setRole]=React.useState('')
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
-        username: "",
-        password: "",
-        showPassword: false, 
-      });
+      username: "",
+      password: "",
+      showPassword: false, 
+    });
     const handleTypeChange = (event) => {
       setType(event.target.value);
     };
     const handleClickShowPassword = () => {
-        setValues({
-          ...values,
-          showPassword: !values.showPassword,
-        });
+      setValues({
+        ...values,
+        showPassword: !values.showPassword,
+      });
       };
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -57,21 +66,21 @@ const Login = () => {
         event.preventDefault();
       };
       const handleSubmit=(e)=>{
-          e.preventDefault();
+        e.preventDefault();
 
     axios.post('http://localhost:5001/officer-login', {
-        username: values.username,
-        password: values.password
+      username: values.username,
+      password: values.password
       })
       .then(function (response) {
-          // <Navigate to='/officer'/>
+        // <Navigate to='/officer'/>
         // alert(response.data.succes);
         axios.get('http://localhost:5001/tenders')
 .then((result)=>{
-setPdf(result)
+  setPdf(result)
 })
         if(response.data.succes){
-setLogged(true)
+          setLogged(true)
 alert(response.data.token);
 localStorage.setItem('token', response.data.token);
 localStorage.setItem('whoId', response.data.offId);
@@ -95,13 +104,14 @@ setRole(response.data.role)
 
       // let decoded=base64.base64Decode(doc,'pdfname')
   return (
-      <form onSubmit={handleSubmit}>
+      <>
+    <form onSubmit={handleSubmit}>
 {/* <video  loop autoPlay>
         <source
-          src={vid}
-          type="video/mp4"
-          />
-        Your browser does not support the video tag. */}
+        src={vid}
+        type="video/mp4"
+        />
+      Your browser does not support the video tag. */}
           {/* </video> */}
           {(role==='officer')&& navigate('/officer')}
           {(role==='admin')&& navigate('/admin')}
@@ -148,12 +158,28 @@ setRole(response.data.role)
     </Wrapper>
               </Container>
               {/* <a download='document.pdf' href={decoded}>Download the file</a> */}
-              <FileBase multiple onDone={((e)=>{
-                setPdf(e[0].base64)
-                console.log(e)
-                alert(pdf)  
-              })} >download</FileBase>
                         </form>
+                        <form
+                         name='up' method='POST'
+                          encType='multipart/form-data' 
+                          action='http://localhost:5001/upload' 
+                        id='np'
+                        // onSubmit={(e)=>{
+                        //   e.preventDefault()
+                        //   axios.post('http://localhost:5001/upload',formData,{
+                        //     "Content-Type": "multipart/form-data",
+                        //   })
+                        // }}
+                        >
+                          <input type={"file"} name="doc" onChange={(e=>{
+                          })}/>
+                          <input type="submit" value="Submit" />
+                            {/* <img src={pdf}/> */}
+                            {/* {pdf} */}
+                        </form>
+                        <img src={`image/9f69c13f142e0f89bd902b9ec5beccf8.png`} alt=""/>
+
+                        </>
   )
 }
 const Wrapper=styled.div`
