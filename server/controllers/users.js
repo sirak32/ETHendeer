@@ -15,7 +15,7 @@ import jwt from 'jsonwebtoken'
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
-    const usernameNotTaken = await validateUsername('Benjam')
+    const usernameNotTaken = await validateUsername('Benjaminer')
     if (!usernameNotTaken) {
         return res.status(401).json({
             message: "Username is taken"
@@ -38,23 +38,23 @@ const registerSupplier = async (req, res) => {
 
     })
     const personalInfor=new user({
-        firstName: "Tiliksew",
-    middleNam: "Mulugeta",
-    lastName: "Alamirew",
-    email: "tilik@gmail.com",
+        firstName: "Sirak",
+    middleNam: "Tesfaye",
+    lastName: "Tadele",
+    email: "sirinka@gmail.com",
     phoneNumber: {
         countryCode: "+251",
         regionalCode: "9",
-        number: "19298457",
+        number: "01023434",
     },
     address:userAddress._id,
     sex:'m'
     })
     const accountInform=new account({
-        username: "Benjam",
+        username: "Sirak",
     password: password,
-    email: "tilik",
-    role: "officer"
+    email: "sirak@gmail.com",
+    role: "supplier"
     })
     const newSupplier = new pendingsupplier({
         personalInfo:personalInfor._id,
@@ -88,7 +88,7 @@ const registerSupplier = async (req, res) => {
 
 /////
 const getPending=async(req,res)=>{
-    const pend=await pendingsupplier.findOne().populate('accountInfo').populate('personalInfo')
+    const pend=await pendingsupplier.find().populate('accountInfo').populate('personalInfo')
     res.status(200).json(pend)
 }
 
@@ -129,7 +129,7 @@ const registerOfficer = async (req, res) => {
     })
     const newOfficer = new officer({
         personalInfo:personalInfor._id,
-        accountInfo:accountInform._id,
+        accountInfo:accountInform._id,  
         officerId:'ETS3'
     })
     await userAddress.save()

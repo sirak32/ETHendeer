@@ -20,7 +20,12 @@ import { useEffect } from "react";
 import { ProgressBar } from "primereact/progressbar";
 import img from "../../../assets/images.jfif";
 import {saveAs} from 'file-saver'
+import { useRef } from "react";
+import { Toast } from 'primereact/toast';
+
 const MediaCard = ({ tenders, fetchTenders }) => {
+  const toast = useRef(null);
+
   const header = (
     <img
       alt="Card"
@@ -33,7 +38,9 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         label="Apply"
         icon="pi pi-check"
         onClick={() => {
+          
           setVis(true);
+          toast.current.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
         }}
       />
       <Button
@@ -101,11 +108,12 @@ const MediaCard = ({ tenders, fetchTenders }) => {
           </p>
         </Card>
 
+        <Toast ref={toast} />
         <Dialog
           modal
           draggable={false}
           dismissableMask
-          style={{ width: "90rem", height: "300rem" }}
+          style={{ width: "90rem", height: "300rem",left:"8%" }}
           visible={vis}
           onHide={() => {
             setVis(false);
@@ -168,13 +176,15 @@ const MediaCard = ({ tenders, fetchTenders }) => {
             aria-label="Amazon"
           >
             <i className="pi pi-right px-2"></i>
-            <span className="px-3 align-self-center flex ">Apply</span>
+            <span className="px-3 align-self-center flex" onClick={() => {
+        toast.current.show({severity:'success', summary: 'Success Message', detail:'Message Content', life: 3000});
+    }}>Applyd</span>
           </Button>
         </Dialog>
         <Dialog
           draggable={false}
           dismissableMask
-          style={{ width: "90rem", height: "300rem" }}
+          style={{ width: "90rem", height: "300rem",left:"30%" }}
           visible={vis2}
           onHide={() => {
             setVis2(false);

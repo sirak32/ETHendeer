@@ -15,6 +15,7 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import SupplierTable from './SupplierTable';
 import OfficersTable from './OfficersTable'
+import PendingTable from './PendingTable'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   
@@ -87,6 +88,8 @@ console.log('props value',props.data)
         </Dialog>
         <Button onClick={(()=>{setVis(true)})}>ADD SUPPLIER</Button>
         {/* <HorizontalLinearStepper/> */}
+        <PendingTable data={props.data.pendings}/>
+
       </TabPanel>
       <TabPanel value={value} index={3}>
         {/* <AddOfficer/> */}

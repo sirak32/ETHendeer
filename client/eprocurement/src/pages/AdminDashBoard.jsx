@@ -16,7 +16,8 @@ import { fetchOfficer } from "../actions/officerAction.js";
 import { useEffect } from "react";
 import { connect } from "react-redux";
  import { useNavigate } from "react-router";
-const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
+import { fetchPending } from "../actions/pendingAction.js";
+const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings}) => {
   const menus=['Dashboard','Officers','Suppliers','Logout']
   console.log("from admin panel officers",suppliers,officers)
   const navigate=useNavigate()
@@ -25,11 +26,12 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
 
         if(role!=='admin')
         navigate('/')
+        fetchPendings()
     fetchSuppliers()
     fetchOfficers()
 
   },[])
-  console.log('officers are ',officers)
+  console.log('pendings are ',pendings)
   return (
     // <Container>
     //     {/* <Sidebar/> */}
@@ -62,7 +64,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
             {/* <MediaCard/> */}
-            <AdminTab data={{suppliers,officers}}/>
+            <AdminTab data={{suppliers,officers,pendings}}/>
             {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
 
             {/* <AddOfficer/> */}
@@ -85,14 +87,16 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
 const mapStateToProps = (state) => {
   return {
     suppliers:state.suppliers.suppliers,
-    officers:state.officers.officers
+    officers:state.officers.officers,
+    pendings:state.pendings.pendings
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSuppliers:()=>dispatch(fetchSuppliers()),
-    fetchOfficers:()=>dispatch(fetchOfficer())
+    fetchOfficers:()=>dispatch(fetchOfficer()),
+    fetchPendings:()=>dispatch(fetchPending())
   };
 };
 

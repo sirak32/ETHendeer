@@ -267,19 +267,19 @@ const Table = (props,{}) => {
         <Button
           icon="pi pi-caret-down
 "
-          className="p-button-rounded mr-2"
+          className="p-button-rounded p-button-info mr-2"
           onClick={() => confirmDeleteProduct(rowData)}
           />
-        <Button
+        {/* <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
           onClick={() => {setEdit(true)
           setSuppli(rowData)
           }}
-          />
+          /> */}
         <Button
-          icon="pi pi-trash"
-          className="p-button-rounded p-button-warning"
+          icon="pi pi-check "
+          className="p-button-rounded  p-button-success"
           onClick={() => confirmDeleteProduct(rowData)}
           />
       </>
