@@ -90,8 +90,16 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         <Modal><MdArrowDropDown /></Modal> 
       </CardActions>
     </Card> */}
-
+    
+    <Stack
+    //  direction="row" 
+     spacing={2}>
+        
+      
+{tenders.map((t)=>(
+  
       <div>
+        
         <Card
           className="m-0 scalein animation-duration-1000 max-h-1rem"
           title={tenders[0].title}
@@ -192,6 +200,9 @@ const MediaCard = ({ tenders, fetchTenders }) => {
           <TenderInfo />
         </Dialog>
       </div>
+)
+)}
+</Stack>
     </>
   ) : (
     <>

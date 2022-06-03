@@ -40,15 +40,15 @@ const App = () => {
           <div className="row__one">
             {/* <Table /> */}
             {/* <BasicTabs/> */}
-            <Stack direction='row' spacing={3}>
+            {/* <Stack direction='row' spacing={3}> */}
             <MediaCard/>
+            {/* <MediaCard/>
             <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
+            <MediaCard/> */}
             
             
-            </Stack>
-            <Stack direction='row' spacing={3}>
+            {/* </Stack> */}
+            {/* <Stack direction='row' spacing={3}>
             <MediaCard/>
             <MediaCard/>
             <MediaCard/>
@@ -71,7 +71,7 @@ const App = () => {
             <MediaCard/>
             <MediaCard/>
             <MediaCard/>
-            </Stack>
+            </Stack> */}
             <ScrollTop/>
             
             {/* <MediaCard/>
