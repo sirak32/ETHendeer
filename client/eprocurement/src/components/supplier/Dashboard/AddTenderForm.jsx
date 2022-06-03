@@ -70,7 +70,7 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
             // setNo('changed')
           });
         console.log(res.data)
-      });
+      }).then(()=>fetchTenders());
       
       setFormValue(data);
       console.log("sent tenders", data);
@@ -182,9 +182,9 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
               // }}
             >
               <MenuItem value="Direct">Goods</MenuItem>
-              <MenuItem value="Direct">Service</MenuItem>
-              <MenuItem value="Direct">Construction Works</MenuItem>
-              <MenuItem value="Direct">Consultancy</MenuItem>
+              <MenuItem value="Service">Service</MenuItem>
+              <MenuItem value="Construction Works">Construction Works</MenuItem>
+              <MenuItem value="Consultancy">Consultancy</MenuItem>
             </Select>
           </FormControl>
         </Grid>

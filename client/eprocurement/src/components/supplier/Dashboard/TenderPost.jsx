@@ -136,7 +136,7 @@ const MediaCard = ({ tenders, fetchTenders }) => {
               <p class="text-4xl w-10 font-semibold">Bid Opening Date</p>
               <p class="text-4xl w-10 font-semibold">Attached Documents</p>
               <Button onClick={(()=>{
-                saveAs(img,'video.mp4')
+                saveAs("http://localhost:5001/image/b619ef469d3739f4b33293af9a0eb916.pdf",'Bid.pdf')
               })}
                 className="w-full  p-0 h-6rem flex justify-content-center bg-yellow-400"
                 aria-label="Amazon"
@@ -167,8 +167,6 @@ const MediaCard = ({ tenders, fetchTenders }) => {
               <p class="text-2xl w-10 font-semibold">Closing Date</p>
               <p class="text-2xl w-10 font-semibold">Bid Opening Date</p>
               <p class="text-2xl w-10 font-semibold">Attached Documents</p>
-              
-              
             </Card>
           </div>
           <Button
