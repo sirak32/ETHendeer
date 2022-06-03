@@ -8,23 +8,27 @@ const postSchema = mongoose.Schema({
     // catagory: String,
     // lotNo: String,
     // minPrice:String,
-    creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Officer'
-     },
-    publishedDate: {
-        type: Date,
-        default: new Date()
-    },
-    closingDate: {
-        type: Date,
-        default: new Date()
-    },
-    bidOpenOn: {
-        type: Date,
-        default: new Date()
-    },
-    participationFee: String,
+    creator: String,
+    // {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:'Officer'
+    //  },
+    publishedDate:Date,
+    //  {
+    //     type: Date,
+    //     default: new Date()
+    // },
+    closingDate: Date,
+    // {
+    //     type: Date,
+    //     default: new Date()
+    // },
+    bidOpenOn: Date,
+    // {
+    //     type: Date,
+    //     default: new Date()
+    // },
+    // participationFee: String,
     // bidSecurityAmount: String,
     termsAndConditions: String,
     document:String,

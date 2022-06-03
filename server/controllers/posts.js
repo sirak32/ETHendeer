@@ -50,6 +50,8 @@ const createAppliedTender=async (req,res)=>{
 
 const createPost = async (req, res) => {
     const body = req.body
+    console.log(body)
+    // return;
     const newPost = new tender(body)
     try {
         await newPost.save()

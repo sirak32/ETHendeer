@@ -170,7 +170,7 @@ setRole(response.data.role)
                           e.preventDefault()
                           const data = new FormData()
                           data.append("doc", selectedFile);
-                          console.log(data)
+                          console.log("the cuty i=of ",data)
                           axios.post('http://localhost:5001/upload',data,
                           // {
                           //   headers: {
@@ -182,7 +182,7 @@ setRole(response.data.role)
                           )
                         })}
                         >  
-                          <input onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
+                          <input accept='.pdf' onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
                           // onChange={(e=>{
                           // })}
                           />
@@ -193,7 +193,8 @@ setRole(response.data.role)
                             {/* {pdf} */}
                         </form>
                         <img src={`image/c9088f58b148054769bf681597875bf2.png`} alt=""/>
-
+                        <a download href="image/8c65d30265f9ad04c6caa370438bb456.pdf">DOWNLOAD FILE</a>
+                        <iframe src="image/8c65d30265f9ad04c6caa370438bb456.pdf" frameBorder="0" width={100}></iframe>
                         </>
   )
 }

@@ -23,38 +23,62 @@ import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useFormik } from "formik";
-import {connect} from 'react-redux' 
+import { connect } from "react-redux";
 import { useEffect } from "react";
-const InputAdornments=({ tenders,fetchTenders }) =>{
-  useEffect(()=>{
-
+const InputAdornments = ({ tenders, fetchTenders }) => {
+  useEffect(() => {
     // fetchTenders()
-  },[])
+  }, []);
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       number: "",
       type: "",
-      catagory: "",
-      lotNo: "null",
-      minPrice: "",
-      creator: id,
-      publishedDate: "null",
+      creator: "6295f2a9d4ed395d1c862eb7",
+      // publishedDate: null,
       closingDate: "null",
       bidOpenOn: "null",
-      participationFee: "",
-      bidSecurityAmount: "",
       termsAndConditions: "",
+      // catagory: "",
+      // lotNo: "null",
+      // minPrice: "",
+      // participationFee: "",
+      // bidSecurityAmount: "",
     },
-    onSubmit:(data)=>{
-      setFormValue(data)
-      console.log("initial tenders",formValues)
-    }
+    onSubmit: async (data) => {
+      // e.preventDefault();
+      const dat = new FormData();
+      const publishedDate=new Date().toUTCString()
+      dat.append("doc", selectedFile);
+      const bidOpenOn= new Date(data.bidOpenOn).toUTCString()
+      const closingDate=new Date(data.closingDate).toUTCString()
+      console.log("the expected",dat);
+      console.log("spreading ",{...data,creator:"tilikse",bidOpenOn,closingDate,publishedDate})
+
+      console.log("data",publishedDate)
+//       let dateStr = "Fri Apr 20 2020 00:00:00 GMT+0530 (India Standard Time)"
+// console.log(new Date(dateStr).toUTCString())
+      await axios.post(
+        "http://localhost:5001/upload",
+        dat
+      ).then(async(res)=>{
+        console.log('upload success')
+        const file=res.data
+          await axios.post("http://localhost:5001/tenders", {...data,creator:"datacreator",bidOpenOn,closingDate,publishedDate,document:file})
+          .then(() => {
+            // setNo('changed')
+          });
+        console.log(res.data)
+      });
+      
+      setFormValue(data);
+      console.log("sent tenders", data);
+    },
   });
   const [no, setNo] = React.useState("");
   const [type, setType] = React.useState("");
-
+  const [selectedFile, setSelectedFile] = React.useState(null);
   const handleTypeChange = (event) => {
     setType(event.target.value);
   };
@@ -80,7 +104,7 @@ const InputAdornments=({ tenders,fetchTenders }) =>{
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-console.log("testing the states without dispatching",tenders.tenders)
+  console.log("testing the states without dispatching", tenders.tenders);
   return (
     <form
       // onSubmit={async (e) => {
@@ -137,7 +161,6 @@ console.log("testing the states without dispatching",tenders.tenders)
             id="description"
             color="success"
             value={formik.values.description}
-
             label="Tender Description"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
@@ -153,20 +176,19 @@ console.log("testing the states without dispatching",tenders.tenders)
               label="Type"
               onChange={formik.handleChange}
               value={formik.values.type}
-
               name="type"
               // onChange={(e) => {
               //   setFormValue({ ...formValues, type: e.target.value });
               // }}
             >
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
+              <MenuItem value="Direct">Goods</MenuItem>
+              <MenuItem value="Direct">Service</MenuItem>
+              <MenuItem value="Direct">Construction Works</MenuItem>
+              <MenuItem value="Direct">Consultancy</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
             <Select
@@ -187,15 +209,14 @@ console.log("testing the states without dispatching",tenders.tenders)
               <MenuItem value="Direct">Direct</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
+        </Grid> */}
         {/* <Grid item xs={4}></Grid> */}
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, lotNo: e.target.value });
-            // }}
+            onChange={(e) => {
+              setFormValue({ ...formValues, lotNo: e.target.value });
+            }}
             onChange={formik.handleChange}
-
             name="lotNo"
             id="lotNo"
             value={formik.values.lotNo}
@@ -204,8 +225,8 @@ console.log("testing the states without dispatching",tenders.tenders)
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
-        </Grid>
-        <Grid item xs={4}>
+        </Grid> */}
+        {/* <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, minPrice: e.target.value });
@@ -215,13 +236,12 @@ console.log("testing the states without dispatching",tenders.tenders)
             color="success"
             value={formik.values.minPrice}
             onChange={formik.handleChange}
-
             label="Minimum Price"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
-        </Grid>
-        <Grid item xs={4}>
+        </Grid> */}
+        {/* <Grid item xs={4}>
           <span className="p-float-label">
             <InputText
               // onChange={(e) => {
@@ -242,7 +262,7 @@ console.log("testing the states without dispatching",tenders.tenders)
             />
             <label htmlFor="bidSecurityAmount">Bid Security Amount*</label>
           </span>
-        </Grid>
+        </Grid> */}
         <Grid item xs={4}>
           <span className="p-float-label">
             <InputTextarea
@@ -258,35 +278,40 @@ console.log("testing the states without dispatching",tenders.tenders)
               name="termsAndConditions"
               // id="outlined-multiline-static"
               value={formik.values.termsAndConditions}
-
               autoFocus
               id="termsAndConditions"
             />{" "}
             <label htmlFor="termsAndConditions">Terms And Conditions</label>
           </span>
         </Grid>
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <TextField
             // onChange={(e) => {
             //   setFormValue({ ...formValues, participationFee: e.target.value });
             // }}
-            id='participationFee'
+            id="participationFee"
             name="participationFee"
             value={formik.values.participationFee}
             onChange={formik.handleChange}
-
             color="success"
             label="Bid participation Fee"
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
-        </Grid>
+        </Grid> */}
         <Grid item xs={4}>
           <div className="App">
             <Button variant="contained" component="label" color="primary">
               {" "}
               <IoAddCircleOutline /> Upload Bid Document
-              <input accept=".pdf" type="file" hidden />
+              <input
+                onInput={(e) => setSelectedFile(e.target.files[0])}
+                accept=".pdf"
+                type="file"
+                name="doc"
+                required
+                // hidden
+              />
             </Button>
           </div>
         </Grid>
@@ -318,8 +343,8 @@ console.log("testing the states without dispatching",tenders.tenders)
           </FormControl>
         </Grid> */}
 
-        <Grid item xs={4}>
-          {/* <input
+        {/* <Grid item xs={4}>
+          <input
             onChange={(e) => {
               setFormValue({ ...formValues, publishedDate: e.target.value });
             }}
@@ -328,22 +353,20 @@ console.log("testing the states without dispatching",tenders.tenders)
             max="2020-02-02"
             min="2020-01-02"
             
-          /> */}
-        </Grid>
+          />
+        </Grid> */}
         <Grid item xs={4}>
           <span className="p-float-label">
             <Calendar
-              onChange={(e) => {
-                setFormValue({ ...formValues, closingDate: e.target.value });
-              }}
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, closingDate: e.target.value });
+              // }}
               name="bidOpenOn"
               max="2020-02-02"
               min="2020-01-02"
               id="bidOpenOn"
               value={formik.values.bidOpenOn}
-
-              // value={formik.values.date}
-              // onChange={formik.handleChange}
+              onChange={formik.handleChange}
               dateFormat="dd/mm/yy"
               mask="99/99/9999"
               showIcon
@@ -354,17 +377,15 @@ console.log("testing the states without dispatching",tenders.tenders)
         <Grid item xs={4}>
           <span className="p-float-label">
             <Calendar
-              onChange={(e) => {
-                setFormValue({ ...formValues, closingDate: e.target.value });
-              }}
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, closingDate: e.target.value });
+              // }}
               name="closingDate"
-              max="2020-02-02"
-              min="2020-01-02"
+              // max="2020-02-02"
+              // min="2020-01-02"
               id="closingDate"
               value={formik.values.closingDate}
-
-              // value={formik.values.date}
-              // onChange={formik.handleChange}
+              onChange={formik.handleChange}
               dateFormat="dd/mm/yy"
               mask="99/99/9999"
               showIcon
@@ -415,7 +436,7 @@ console.log("testing the states without dispatching",tenders.tenders)
       ></Box>
     </form>
   );
-}
+};
 const handleForm = (e) => {
   e.preventDefault();
   console.log(e.target[5].value);
@@ -449,16 +470,16 @@ const formDatas = {
   description: null,
   number: null,
   type: null,
-  catagory: null,
-  lotNo: null,
-  minPrice: null,
   creator: id,
   publishedDate: null,
   closingDate: null,
   bidOpenOn: null,
-  participationFee: null,
-  bidSecurityAmount: null,
   termsAndConditions: null,
+  // catagory: null,
+  // lotNo: null,
+  // minPrice: null,
+  // participationFee: null,
+  // bidSecurityAmount: null,
 };
 const mapStateToProps = (state) => {
   return {
@@ -471,4 +492,4 @@ const mapDispatchToProps = (dispatch) => {
     fetchTenders: () => dispatch(fetchTender()),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(InputAdornments)
+export default connect(mapStateToProps, mapDispatchToProps)(InputAdornments);
