@@ -33,16 +33,6 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
   },[])
   console.log('pendings are ',pendings)
   return (
-    // <Container>
-    //     {/* <Sidebar/> */}
-    //     {/* <Sidebar/> */}
-    //     <MainContent/>
-    // </Container>
-    /*<Div>
-      <Sidebar/>
-      <Dashboard/>
-    </Di>*/
-    // <Sidebar/>
     <Div>
       <SideBar  menu={menus} />
       <Section>
@@ -52,24 +42,11 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
           <Wrapper>
             <Dash title="Suppliers" number={suppliers.length}/>
             <Dash title="Officers" number={officers.length}/>
-            {/* <Dash title="Active" number="200"/>
-            <Dash title="Closed" number="45"/> */}
-            {/* <Dash  title="Closed"/>
-            <Dash  title="Closed"/> */}
-            </Wrapper>
-            {/* <Table /> */}
-            {/* <BasicTabs/> */}
-            {/* <MediaCard/> */}
-{/*  */}
-            {/* <MediaCard/> */}
-            {/* <MediaCard/> */}
-            {/* <MediaCard/> */}
-            <AdminTab data={{suppliers,officers,pendings}}/>
-            {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
 
-            {/* <AddOfficer/> */}
-            {/* <OfficersList/>
-            <RegisterSupplier/> */}
+            </Wrapper>
+
+            <AdminTab data={{suppliers,officers,pendings}}/>
+
           </div>
           <div className="row__two"></div>
         </div>

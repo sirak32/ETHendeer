@@ -68,7 +68,8 @@ const [selected,setSelected]=useState({})
       <Grid container spacing={5}>
         {tenders.map((t) => (
           <Grid item xs={3}>
-            <Card
+            <Card 
+            
               className="m-0 scalein animation-duration-250 max-h-1rem"
               title={t.title}
               subTitle={seen}
@@ -76,11 +77,8 @@ const [selected,setSelected]=useState({})
               footer={footer(t)}
               header={header}
             >
-              <p className="m-0 " style={{ lineHeight: "1.5" }}>
-                {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Inventore sed consequuntur error repudiandae numquam deserunt
-                quisquam repellat libero asperiores earum nam nobis, culpa
-                ratione quam perferendis esse, cupiditate neque quas! */}
+              <p className="m-0 " style={{ lineHeight: "1.5",height:"10rem" }}>
+                
                {t.description}
               </p>
             </Card>

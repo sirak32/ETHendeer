@@ -70,7 +70,14 @@ const [data,setData] =useState({})
     );
   };
   const statusBodyTemplate = (rowData) => {
-    return <Button label={`${rowData.status}`} className="p-button-success" />;
+    const op=rowData.bidOpenOn
+    const now=new Date().toISOString()
+console.log("now ",now," op ",op,op<now)
+    if(op>now)
+    return <Button label={`Active`} className="p-button-success" />;
+    else
+    return <Button label={`Closed`} className="p-button-warning" />;
+
     // return <span  className={`status-active`}>{rowData.status}</span>;
   };
   const editProduct = () => {};
@@ -131,13 +138,13 @@ const [data,setData] =useState({})
           headerStyle={{ width: "3em" }}
         ></Column>
         {console.log("tenders are",tenders)}
-        <Column field="title" sortable filter header="Tender Name"></Column>
+        <Column field="title" style={{width:"300px"}} sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         {/* <Column field='status' sortable header='status'></Column> */}
         <Column
-          field={"number"}
+          field={"title"}
           header="Status"
           sortable
           style={{ minWidth: "10rem" }}

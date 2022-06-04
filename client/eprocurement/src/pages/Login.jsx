@@ -182,19 +182,18 @@ setRole(response.data.role)
                           )
                         })}
                         >  
-                          <input accept='.pdf' onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
-                          // onChange={(e=>{
-                          // })}
-                          />
-                          <input 
-                          // onInput={e => setSelectedFile(e.target.files[0])} 
-                          type="submit" value="Submit" />
+                          {/* <input accept='.pdf' onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
+                          
+                          /> */}
+                          {/* <input  */}
+                          {/* // onInput={e => setSelectedFile(e.target.files[0])}  */}
+                          {/* type="submit" value="Submit" /> */}
                             {/* <img src={pdf}/> */}
                             {/* {pdf} */}
                         </form>
                         {/* <img src={`image/c9088f58b148054769bf681597875bf2.png`} alt=""/> */}
-                        <a target="_blank" download="Tender.pdf" href="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf">DOWNLOAD FILE</a>
-                        <iframe src="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf" frameBorder="100%"  width={"50%"} height="250rem"></iframe>
+                        {/* <a target="_blank" download="Tender.pdf" href="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf">DOWNLOAD FILE</a>
+                        <iframe src="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf" frameBorder="100%"  width={"50%"} height="250rem"></iframe> */}
                         </>
   )
 }

@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import BasicSelect from "./BasicSelect";
-import { Button, Stack, TextareaAutosize } from "@mui/material";
+import {  Container, Stack, TextareaAutosize } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Select, MenuItem } from "@mui/material";
 import axios from "axios";
@@ -28,6 +28,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { useRef } from "react";
 import { Toast } from "primereact/toast";
+import { Button } from "primereact/button";
 const InputAdornments = ({ tenders, fetchTenders }) => {
   const toast = useRef(null);
   const showSuccess = () => {
@@ -116,186 +117,201 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
   };
   console.log("testing the states without dispatching", tenders.tenders);
   return (
-    <form
-      // onSubmit={async (e) => {
-      //   e.preventDefault();
-      //   await axios
-      //     .post("http://localhost:5001/tenders", formValues)
-      //     .then(() => {
-      //       // setNo('changed')
-      //     });
-      //   fetchTenders();
-      //   console.log(formValues);
-      // }}
-      // action="sdghfjgh"
-      onSubmit={formik.handleSubmit}
-    >
-      <Div className="card">
-      <span className="p-float-label">
-          <InputText
-            className="p-float-label p-input-icon-right m-5"
-            onChange={formik.handleChange}
-            name="title"
-            id="title"
-            color="success"
-            label="Tender Title"
-            value={formik.values.title}
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        <label htmlFor="title" className='p-succes'>Title*</label>
-      </span>
-      <span className="p-float-label">
-
-          <InputText
-            onChange={formik.handleChange}
-            className="m-5 w-4"
-            name="number"
-            id="number"
-            value={formik.values.number}
-            color="success"
-            label="Tender Number"
-            sx={{ m: 1, width: "25ch" }}
-          />
-            <label htmlFor="number" className='p-success'>Tender Number*</label>
-      </span>
-
-      <span className="p-float-label">
-        
-          <InputText
-            onChange={formik.handleChange}
-            name="description"
-            className="m-5 w-4"
-            id="description"
-            color="success"
-            value={formik.values.description}
-            label="Tender Description"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-                      <label htmlFor="description" className='p-success'>Tender Description*</label>
-
-        </span>       
-        
-        
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select
-              id="type"
-              label="Type"
-              className="m-5"
-              onChange={formik.handleChange}
-              value={formik.values.type}
-              name="type"
-            >
-              <MenuItem value="Direct">Goods</MenuItem>
-              <MenuItem value="Service">Service</MenuItem>
-              <MenuItem value="Construction Works">Construction Works</MenuItem>
-              <MenuItem value="Consultancy">Consultancy</MenuItem>
-            </Select>
-          </FormControl>
-        
-        
-          <span className="p-float-label">
-            <InputTextarea
-            className="mt-9 pt-5 w-4"
-              rows={5}
-              autoResize
-              onChange={formik.handleChange}
-              name="termsAndConditions"
-              value={formik.values.termsAndConditions}
-              autoFocus
-              id="termsAndConditions"
-            />{" "}
-            <label htmlFor="termsAndConditions">Terms And Conditions</label>
-          </span>
-        
-          <span className="p-float-label">
-            <Calendar
-              className="m-5"
-              name="bidOpenOn"
-              max="2020-02-02"
-              min="2020-01-02"
-              id="bidOpenOn"
-              value={formik.values.bidOpenOn}
-              onChange={formik.handleChange}
-              dateFormat="dd/mm/yy"
-              mask="99/99/9999"
-              showIcon
-            />
-            <label htmlFor="bidOpenOn"> Opening Date</label>
-          </span>
-          <span className="p-float-label">
-            <Calendar
-              name="closingDate"
-              className="mt-5"
-
-              // max="2020-02-02"
-              // min="2020-01-02"
-              id="closingDate"
-              value={formik.values.closingDate}
-              onChange={formik.handleChange}
-              dateFormat="dd/mm/yy"
-              mask="99/99/9999"
-              showIcon
-            />
-            <label htmlFor="closingDate"> Closing Date</label>
-          </span>
-          <div className="App mt-5">
-            <Button variant="contained" component="label" color="primary">
-              {" "}
-              <IoAddCircleOutline /> Upload Bid Document
-              <input
-                onInput={(e) => setSelectedFile(e.target.files[0])}
-                accept=".pdf"
-                type="file"
-                name="doc"
+    <form onSubmit={formik.handleSubmit}>
+      <Container>
+        <Div className="card">
+          <Grid container spacing={5}>
+            <Grid item xs={6}>
+              <span className="p-float-label ">
+                <InputText
                 required
-                // hidden
-              />
-            </Button>
-          </div>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-          <Stack
-            sx={{ margin: "1rem" }}
-            alignItems="left"
-            spacing={8}
-            direction="row"
-          >
-            <Button
-              size="large"
-              variant="contained"
-              color="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-            <Button
-              size="large"
-              variant="contained"
-              color="warning"
-              type="reset"
-            >
-              Clear
-            </Button>
-            <Button size="large" variant="contained" color="error">
-              Exit
-            </Button>
-          </Stack>
-       
-      </Div>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          margin: "2rem 0",
-          padding: "2rem",
-          background: "white",
-          borderRadius: "1rem",
-        }}
-      ></Box>
-      
-      <Toast ref={toast} position="bottom-center" />
+                  className="p-float-label p-input-icon-right mt-5 w-7 h-5rem"
+                  onChange={formik.handleChange}
+                  name="title"
+                  id="title"
+                  color="success"
+                  label="Tender Title"
+                  value={formik.values.title}
+                  sx={{ m: 1, width: "25ch" }}
+                />{" "}
+                <label htmlFor="title" className="p-succes">
+                  Title*
+                </label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <InputText
+                required
+                  onChange={formik.handleChange}
+                  className="mt-5 w-7 h-5rem"
+                  name="number"
+                  id="number"
+                  value={formik.values.number}
+                  color="success"
+                  label="Tender Number"
+                  // sx={{ m: 1, width: "25ch" }}
+                />
+                <label htmlFor="number" className="p-success">
+                  Tender Number*
+                </label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <InputText
+                required
+                  onChange={formik.handleChange}
+                  name="description"
+                  className="mt-5 w-7 h-5rem"
+                  id="description"
+                  color="success"
+                  value={formik.values.description}
+                  label="Tender Description"
+                  sx={{ m: 1, width: "25ch" }}
+                />{" "}
+                <label htmlFor="description" className="p-success">
+                  Tender Description*
+                </label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                <Select
+                required
+                  sx={{ width: "20rem" }}
+                  id="type"
+                  label="Type"
+                  className="mt-5 h-5rem"
+                  onChange={formik.handleChange}
+                  value={formik.values.type}
+                  name="type"
+                >
+                  <MenuItem value="Direct">Goods</MenuItem>
+                  <MenuItem value="Service">Service</MenuItem>
+                  <MenuItem value="Construction Works">
+                    Construction Works
+                  </MenuItem>
+                  <MenuItem value="Consultancy">Consultancy</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <InputTextarea
+                required
+                  className="mt-9 pt-5 w-7 h-5rem"
+                  rows={5}
+                  autoResize
+                  onChange={formik.handleChange}
+                  name="termsAndConditions"
+                  value={formik.values.termsAndConditions}
+                  autoFocus
+                  id="termsAndConditions"
+                />{" "}
+                <label htmlFor="termsAndConditions">Terms And Conditions</label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <Calendar
+                required
+                  className="mt-5 h-5rem w-7"
+                  name="bidOpenOn"
+                  max="2020-02-02"
+                  min="2020-01-02"
+                  id="bidOpenOn"
+                  minDate={new Date()}
+                  // maxDate={new Date("2020-02-02")}
+                  value={formik.values.bidOpenOn}
+                  onChange={formik.handleChange}
+                  dateFormat="dd/mm/yy"
+                  // mask="99/99/9999"
+                  showIcon
+                />
+                <label htmlFor="bidOpenOn"> Opening Date</label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <Calendar
+                required
+                  name="closingDate"
+                  className="mt-5 h-5rem w-7"
+                  // max="2020-02-02"
+                  // min="2020-01-02"
+                  minDate={new Date()}
+                  id="closingDate"
+                  value={formik.values.closingDate}
+                  onChange={formik.handleChange}
+                  dateFormat="dd/mm/yy"
+                  mask="99/99/9999"
+                  showIcon
+                />
+                <label htmlFor="closingDate"> Closing Date</label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <div className="App mt-5 w-7 h-5rem">
+                <Button variant="contained" component="label" color="primary">
+                  {" "}
+                  <IoAddCircleOutline /> Upload Bid Document
+                  <input
+                    onInput={(e) => setSelectedFile(e.target.files[0])}
+                    accept=".pdf"
+                    type="file"
+                    name="doc"
+                    required
+                    // hidden
+                  />
+                </Button>
+              </div>
+            </Grid>
+            <Grid item xs={6}></Grid>
+            <Grid item xs={6}>
+              <Stack
+                sx={{ marginTop: "3rem" }}
+                // alignItems="left"
+                spacing={8}
+                direction="row"
+              >
+                <Button
+                  // size="large"
+                  // variant="contained"
+                  // color="primary"
+                  className="p-button-success"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+                <Button
+                  // size="large"
+                  className="p-button-warning"
+                  type="reset"
+                >
+                  Clear
+                </Button>
+                <Button size="large" variant="contained" color="error">
+                  Exit
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Div>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            margin: "2rem 0",
+            padding: "2rem",
+            background: "white",
+            borderRadius: "1rem",
+          }}
+        ></Box>
 
+        <Toast ref={toast} position="bottom-center" />
+      </Container>
     </form>
   );
 };

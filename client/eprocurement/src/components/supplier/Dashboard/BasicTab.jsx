@@ -54,29 +54,6 @@ export default function BasicTabs(props) {
 
   return (
 
-    // <Box sx={{ width: '100%',backgroundColor:'white' ,background: "white",borderRadius:'0.7rem' }}>
-    //   <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-    //     <Tabs  value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-    //       <Tab label="ALL TENDERS" {...a11yProps(1)} />
-    //       <Tab label="ADD TENDERS" {...a11yProps(0)} />
-    //       <Tab label="SUPPLIERS LIST" {...a11yProps(2)} />
-    //     </Tabs>
-    //   </Box>
-    //   <TabPanel value={value} index={1}>
-    //     <AddTenderForm/>
-    //     <HorizontalLinearStepper/>
-    //   </TabPanel>
-    //   <TabPanel value={value} index={0}>
-    //     <Table data={props.data.OptmTender}/>
-    //   </TabPanel>
-    //   <TabPanel value={value} index={2}>
-    //   </TabPanel>
-    //   <TabPanel value={value} index={2}>
-    //     <SupplierTable data={props.data.suppliers}/>
-    //     <FormikFormDemo/>
-    //   </TabPanel>
-    // </Box>
-
     <TabView   activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel  header="ALL TENDERS">
         Content I
