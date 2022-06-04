@@ -29,6 +29,8 @@ const [data,setData] =useState({})
     };
   }
   let dataa = props.data;
+  let tenders = props.data;
+
   console.log("my NEw KINGDOM", dataa);
   let i;
 
@@ -110,11 +112,11 @@ const [data,setData] =useState({})
         breakpoint="960px"
         editMode="cell"
         header="Tenders List"
-        value={rows}
+        value={tenders}
         responsiveLayout="scroll"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
-        dataKey={rows.tenderNO}
+        dataKey={tenders._id}
         paginator
         rowHover
         selection={selectedCustomers}
@@ -128,13 +130,14 @@ const [data,setData] =useState({})
           selectionMode="multiple"
           headerStyle={{ width: "3em" }}
         ></Column>
-        <Column field="tenderId" sortable filter header="Tender Name"></Column>
-        <Column field="tenderTitle" sortable  header="Published Date"></Column>
-        <Column field="openingDate" sortable  header="Bid Opening Date"></Column>
+        {console.log("tenders are",tenders)}
+        <Column field="title" sortable filter header="Tender Name"></Column>
+        <Column field="publishedDate" sortable  header="Published Date"></Column>
+        <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         {/* <Column field='status' sortable header='status'></Column> */}
         <Column
-          field="status"
+          field={"number"}
           header="Status"
           sortable
           style={{ minWidth: "10rem" }}

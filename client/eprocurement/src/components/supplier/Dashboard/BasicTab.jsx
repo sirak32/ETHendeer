@@ -80,7 +80,7 @@ export default function BasicTabs(props) {
     <TabView   activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel  header="ALL TENDERS">
         Content I
-        <Table data={props.data.OptmTender}/>
+        <Table data={props.data.tenders}/>
     </TabPanel>
     <TabPanel header="ADD TENDERS">
         Content II
