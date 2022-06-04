@@ -133,7 +133,7 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       <Div className="card">
       <span className="p-float-label">
           <InputText
-            className="p-float-label p-input-icon-right"
+            className="p-float-label p-input-icon-right m-5"
             onChange={formik.handleChange}
             name="title"
             id="title"
@@ -148,13 +148,12 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
 
           <InputText
             onChange={formik.handleChange}
-            className="mt-5 w-4"
+            className="m-5 w-4"
             name="number"
             id="number"
             value={formik.values.number}
             color="success"
             label="Tender Number"
-            // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />
             <label htmlFor="number" className='p-success'>Tender Number*</label>
@@ -165,12 +164,11 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
           <InputText
             onChange={formik.handleChange}
             name="description"
-            className="mt-5 w-4"
+            className="m-5 w-4"
             id="description"
             color="success"
             value={formik.values.description}
             label="Tender Description"
-            // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
                       <label htmlFor="description" className='p-success'>Tender Description*</label>
@@ -181,17 +179,12 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
-              // sx={{ m: 1, width: "24.5ch" }}
               id="type"
               label="Type"
-              // className="mt-5"x  x
-
+              className="m-5"
               onChange={formik.handleChange}
               value={formik.values.type}
               name="type"
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, type: e.target.value });
-              // }}
             >
               <MenuItem value="Direct">Goods</MenuItem>
               <MenuItem value="Service">Service</MenuItem>
@@ -217,10 +210,7 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
         
           <span className="p-float-label">
             <Calendar
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, closingDate: e.target.value });
-              // }}
-              className="mt-5"
+              className="m-5"
               name="bidOpenOn"
               max="2020-02-02"
               min="2020-01-02"
@@ -235,9 +225,6 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
           </span>
           <span className="p-float-label">
             <Calendar
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, closingDate: e.target.value });
-              // }}
               name="closingDate"
               className="mt-5"
 
@@ -307,7 +294,7 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
         }}
       ></Box>
       
-      <Toast ref={toast} />
+      <Toast ref={toast} position="bottom-center" />
 
     </form>
   );
@@ -357,11 +344,6 @@ const formDatas = {
   closingDate: null,
   bidOpenOn: null,
   termsAndConditions: null,
-  // catagory: null,
-  // lotNo: null,
-  // minPrice: null,
-  // participationFee: null,
-  // bidSecurityAmount: null,
 };
 const mapStateToProps = (state) => {
   return {

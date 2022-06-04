@@ -79,6 +79,7 @@ export default function Sidebar(props) {
                 className={currentLink === i ? "active" : "none"}
                 onClick={() => {
                   setCurrentLink(i)
+                  navigate('/officer-manual')
                 // if(currentLink==3){
                 //   localStorage.removeItem('token')
                 //   localStorage.removeItem('role')
@@ -95,46 +96,6 @@ export default function Sidebar(props) {
                 </a>
               </li>
               ))}
-              {/* <li
-                className={currentLink === 2 ? "active" : "none"}
-                onClick={() => setCurrentLink(2)}
-                >
-                <a href="/">
-                  <RiDashboard2Fill /><FaAddressCard />
-                  <span> {props.menu[1]}</span>
-                </a>
-              </li> */}
-              {/* <li
-                className={currentLink === 3 ? "active" : "none"}
-                onClick={() => setCurrentLink(3)}
-                >
-                <a href="/supplier">
-                  <FaAddressCard />
-                  <span> {props.menu[2]}</span>
-                </a>
-              </li>
-              <li
-                className={currentLink === 4 ? "active" : "none"}
-                onClick={() => setCurrentLink(4)}
-                >
-                <a href="/officer">
-
-                  <GiTwirlCenter />  <RiDashboard2Fill /><FaAddressCard />
-
-                  <span> {props.menu[3]}</span>
-                </a>
-              </li>
-              
-              <li
-                className={currentLink === 6 ? "active" : "none"}
-                onClick={() => setCurrentLink(6)}
-                >
-                <a href="#">
-                  <IoSettings />  <GiTwirlCenter />  <RiDashboard2Fill /><FaAddressCard />
-
-                  <span> {props.menu[3]}</span>
-                </a>
-              </li> */}
             </ul>
           </div>
         </div>

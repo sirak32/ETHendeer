@@ -55,30 +55,18 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         <div className="grid">
           <div className="row__one">
             <Wrapper>
-              {/* <h1>{tender}</h1> */}
               <Dash title="Suppliers" number={suppliers.length} />
               <Dash title="Tenders" number={tenders.length} />
               <Dash title="Active" number={tenders.length} />
               <Dash title="Closed" number="45" />
-            </Wrapper>
-            {/* <Table /> */}
-            
+            </Wrapper>           
             <BasicTabs data={{OptmTender,suppliers,tenders}} />
-            {/* <h1>{tenders[10].description}</h1> */}
-            {/* <h1>Hey {tender}</h1> */}
-            {/* <Modal/> */}
-            {/* <MediaCard/>             */}
           </div>
           <div className="row__two"></div>
         </div>
       </Section>
     </Div>
   ) : (
-    // <div>hi</div>
-    //  <> <SideBar/>
-    //   <NavBar/>
-    //   <Table/>
-    // </>
     <>
     <Div>
       <SideBar menu={menus} />
@@ -86,12 +74,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         <NavBar />
         <div className="grid">
           <div className="row__one">
-            
-            {/* <Table /> */}
-    <ProgressBar/> 
-            {/* {t} */}
-            {/* <Modal/> */}
-            {/* <MediaCard/>             */}
+            <ProgressBar/> 
           </div>
           <div className="row__two"></div>
         </div>

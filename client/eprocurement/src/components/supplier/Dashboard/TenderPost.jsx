@@ -25,21 +25,23 @@ import { Toast } from "primereact/toast";
 
 const MediaCard = ({ tenders, fetchTenders }) => {
   const toast = useRef(null);
-
+const [selected,setSelected]=useState({})
   const header = <img alt="Card" src={img} />;
-  const footer = (
+  const footer = (t)=>(
+    
     <span>
       <Button
         label="Apply"
         icon="pi pi-check"
         onClick={() => {
+          setSelected(t)
           setVis(true);
-          toast.current.show({
-            severity: "success",
-            summary: "Success Message",
-            detail: "Message Content",
-            life: 3000,
-          });
+          // toast.current.show({
+          //   severity: "success",
+          //   summary: "Success Message",
+          //   detail: "Message Content",
+          //   life: 3000,
+          // });
         }}
       />
       <Button
@@ -47,11 +49,13 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         icon="pi pi-chevron-circle-down"
         className="p-button-secondary ml-2"
         onClick={() => {
+          // setSelected(t)
           setVis2(true);
         }}
       />
     </span>
   );
+  const seen=<i class="pi pi-eye text-xl text-yellow-500  font-medium "> 3k</i>
   const [vis, setVis] = useState(false);
   const [vis2, setVis2] = useState(false);
   console.log("tenders are from supplier", tenders);
@@ -61,24 +65,30 @@ const MediaCard = ({ tenders, fetchTenders }) => {
 
   return tenders.length !== 0 ? (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
         {tenders.map((t) => (
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Card
-              className="m-0 scalein animation-duration-1000 max-h-1rem"
+              className="m-0 scalein animation-duration-250 max-h-1rem"
               title={t.title}
-              subTitle="Subtitle"
+              subTitle={seen}
               style={{ width: "25em" }}
-              footer={footer}
+              footer={footer(t)}
               header={header}
             >
               <p className="m-0 " style={{ lineHeight: "1.5" }}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Inventore sed consequuntur error repudiandae numquam deserunt
                 quisquam repellat libero asperiores earum nam nobis, culpa
-                ratione quam perferendis esse, cupiditate neque quas!
+                ratione quam perferendis esse, cupiditate neque quas! */}
+               {t.description}
               </p>
             </Card>
+
+            <Toast  ref={toast} />
+          </Grid>
+        ))}
+      </Grid>
 <Dialog
         modal
         draggable={false}
@@ -92,23 +102,23 @@ const MediaCard = ({ tenders, fetchTenders }) => {
 
 
         <div className="bg-orange-400 m-0 w-12 h-5rem"></div>
-        <div class="formgrid grid">
+        <div className="formgrid grid">
           <div className="col">
             <p class="text-4xl w-10 font-semibold">
-              Tender Title : - {t.title}
+              Tender Title : - {selected.title}
             </p>
             <p class="text-4xl w-10 font-semibold">
-              Tender Description :- {t.description}
+              Tender Description :- {selected.description}
             </p>
-            <p class="text-4xl w-10 font-semibold">Pyblished Date</p>
+            <p class="text-4xl w-10 font-semibold">Published Date</p>
             <p class="text-4xl w-10 font-semibold">Closing Date</p>
             <p class="text-4xl w-10 font-semibold">Bid Opening Date</p>
             <p class="text-4xl w-10 font-semibold">Attached Documents</p>
             <Button
               onClick={() => {
                 saveAs(
-                  `http://localhost:5001/image/${t.document}`,
-                  `Tender Bid ${t._id}.pdf`
+                  `http://localhost:5001/image/${selected.document}`,
+                  `Tender Bid ${selected.document}.pdf`
                 );
               }}
               className="w-full  p-0 h-6rem flex justify-content-center bg-yellow-400"
@@ -131,12 +141,12 @@ const MediaCard = ({ tenders, fetchTenders }) => {
             </p>
 
             <p class="text-2xl w-10 font-semibold">
-              Tender Title : - {t.title}
+              Tender Title : - {selected.title}
             </p>
             <p class="text-2xl w-10 font-semibold">
-              Tender Description :- {t.description}
+              Tender Description :- {selected.description}
             </p>
-            <p class="text-2xl w-10 font-semibold">Pyblished Date</p>
+            <p class="text-2xl w-10 font-semibold">Published Date</p>
             <p class="text-2xl w-10 font-semibold">Closing Date</p>
             <p class="text-2xl w-10 font-semibold">Bid Opening Date</p>
             <p class="text-2xl w-10 font-semibold">Attached Documents</p>
@@ -148,7 +158,7 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         >
           <i className="pi pi-right px-2"></i>
           <span
-            className="px-3 align-self-center flex"
+            className="px-3 align-self-center flex m-4"
             onClick={() => {
               toast.current.show({
                 severity: "success",
@@ -158,15 +168,10 @@ const MediaCard = ({ tenders, fetchTenders }) => {
               });
             }}
           >
-            Applyd
+            Apply
           </span>
         </Button>
       </Dialog>
-            <Toast ref={toast} />
-          </Grid>
-        ))}
-      </Grid>
-
       
       <Dialog
         draggable={false}

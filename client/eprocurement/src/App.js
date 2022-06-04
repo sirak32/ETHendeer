@@ -13,6 +13,7 @@ import TenderDetail from "./pages/TenderDetail";
 import Login from "./pages/Login";
 import Apply from "./pages/ApplyingTender";
 import Home from "./pages/Home.jsx";
+import { AccordionDemo } from "./pages/Manual.jsx";
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Login />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
+        <Route exact path="/officer-manual" element={<AccordionDemo />}></Route>
 
         <Route exact path="/apply" element={<Apply />}></Route>
         <Route exact path="/register" element={<Login />}></Route>

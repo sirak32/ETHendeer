@@ -22,71 +22,19 @@ const App = () => {
   const menus=['Dashboard','Tenders','Profile','Help & Support']
 
   return (
-    // <Container>
-    //     {/* <Sidebar/> */}
-    //     {/* <Sidebar/> */}
-    //     <MainContent/>
-    // </Container>
-    /*<Div>
-      <Sidebar/>
-      <Dashboard/>
-    </Di>*/
-    // <Sidebar/>
     <Div>
       <SideBar menu={menus} />
       <Section>
         <NavBar  />
         <div className="grid">
           <div className="row__one">
-            {/* <Table /> */}
-            {/* <BasicTabs/> */}
-            {/* <Stack direction='row' spacing={3}> */}
             <MediaCard/>
-            {/* <MediaCard/>
-            <MediaCard/>
-            <MediaCard/> */}
-            
-            
-            {/* </Stack> */}
-            {/* <Stack direction='row' spacing={3}>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            </Stack>
-            <Stack direction='row' spacing={3}>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            </Stack>
-            <Stack direction='row' spacing={3}>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            </Stack>
-            <Stack direction='row' spacing={3}>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            <MediaCard/>
-            </Stack> */}
             <ScrollTop/>
-            
-            {/* <MediaCard/>
-            <MediaCard/>
-            <MediaCard/> */}
           </div>
           <div className="row__two"></div>
         </div>
       </Section>
     </Div>
-    // <div>hi</div>
-    //  <> <SideBar/>
-    //   <NavBar/>
-    //   <Table/>
-    // </>
   );
 };
 const Div = styled.div`
