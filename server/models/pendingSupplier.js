@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-
 const PendingsupplierSchema = mongoose.Schema({
     personalInfo: {
         type: mongoose.Schema.Types.ObjectId,
@@ -17,8 +16,8 @@ const PendingsupplierSchema = mongoose.Schema({
     Attacheddocument:String,
 })
 
-// const names = ['address', 'user', 'officer', 'systemAdmin', 'supplier']
 const pendingsupplier = mongoose.model('PendingSupplier', PendingsupplierSchema)
+
 export {
     pendingsupplier,
 }

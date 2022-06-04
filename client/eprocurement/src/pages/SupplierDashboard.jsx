@@ -19,7 +19,7 @@ const App = () => {
     if(role!=='supplier')
     navigate('/')
   },[])
-  const menus=['Dashboard','Tenders','Profile','Logout']
+  const menus=['Dashboard','Tenders','Profile','Help & Support']
 
   return (
     // <Container>
@@ -35,7 +35,7 @@ const App = () => {
     <Div>
       <SideBar menu={menus} />
       <Section>
-        <NavBar />
+        <NavBar  />
         <div className="grid">
           <div className="row__one">
             {/* <Table /> */}

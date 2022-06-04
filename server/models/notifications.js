@@ -6,9 +6,9 @@ const notificationSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     }
-
 })
 const notification = mongoose.model('Notification', notificationSchema)
+
 export {
     notification
 }

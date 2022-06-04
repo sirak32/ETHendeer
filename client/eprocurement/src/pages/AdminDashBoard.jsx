@@ -18,7 +18,7 @@ import { connect } from "react-redux";
  import { useNavigate } from "react-router";
 import { fetchPending } from "../actions/pendingAction.js";
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings}) => {
-  const menus=['Dashboard','Officers','Suppliers','Logout']
+  const menus=['Dashboard','Officers','Suppliers','Feadbacks']
   console.log("from admin panel officers",suppliers,officers)
   const navigate=useNavigate()
   useEffect(()=>{

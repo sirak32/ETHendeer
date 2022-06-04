@@ -79,14 +79,14 @@ export default function Sidebar(props) {
                 className={currentLink === i ? "active" : "none"}
                 onClick={() => {
                   setCurrentLink(i)
-                if(currentLink==3){
-                  localStorage.removeItem('token')
-                  localStorage.removeItem('role')
-                  localStorage.removeItem('whoId')
+                // if(currentLink==3){
+                //   localStorage.removeItem('token')
+                //   localStorage.removeItem('role')
+                //   localStorage.removeItem('whoId')
 
-                  navigate('/')
-                  // window.location='localhost:3000/'
-                }
+                //   navigate('/')
+                //   // window.location='localhost:3000/'
+                // }
                 }}
               >
                 <a >
@@ -138,7 +138,16 @@ export default function Sidebar(props) {
             </ul>
           </div>
         </div>
-        <div className="logout">
+        <div className="logout" onClick={(()=>{
+           
+            localStorage.removeItem('token')
+            localStorage.removeItem('role')
+            localStorage.removeItem('whoId')
+
+            navigate('/')
+            // window.location='localhost:3000/'
+          
+        })}>
           <a href="/login">
             <FiLogOut />
             <span className="logout">Logouts</span>

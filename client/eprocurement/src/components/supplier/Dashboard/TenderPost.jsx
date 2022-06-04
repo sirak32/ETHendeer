@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 // import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import { MdArrowDropDown } from "react-icons/md";
-import { Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { Card } from "primereact/card";
@@ -91,15 +91,12 @@ const MediaCard = ({ tenders, fetchTenders }) => {
       </CardActions>
     </Card> */}
     
-    <Stack
-    //  direction="row" 
-     spacing={2}>
-        
+    
+    
+       <Grid  container spacing={2}>
       
 {tenders.map((t)=>(
-  
-      <div>
-        
+  <Grid item xs={4}>
         <Card
           className="m-0 scalein animation-duration-1000 max-h-1rem"
           title={tenders[0].title}
@@ -117,7 +114,13 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         </Card>
 
         <Toast ref={toast} />
-        <Dialog
+
+      </Grid>
+)
+)}
+</Grid>
+
+<Dialog
           modal
           draggable={false}
           dismissableMask
@@ -190,7 +193,7 @@ const MediaCard = ({ tenders, fetchTenders }) => {
         <Dialog
           draggable={false}
           dismissableMask
-          style={{ width: "90rem", height: "300rem",left:"30%" }}
+          style={{ width: "90rem", height: "300rem",left:"8%" }}
           visible={vis2}
           onHide={() => {
             setVis2(false);
@@ -199,14 +202,17 @@ const MediaCard = ({ tenders, fetchTenders }) => {
           Tender Details Here
           <TenderInfo />
         </Dialog>
-      </div>
-)
-)}
-</Stack>
     </>
   ) : (
     <>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+
       ;
     </>
   );

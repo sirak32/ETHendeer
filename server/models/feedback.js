@@ -7,6 +7,7 @@ const feedbackNotification = mongoose.Schema({
     }
 })
 const feedback = mongoose.model('Feedback', feedbackNotification)
+
 export {
     feedback
 }

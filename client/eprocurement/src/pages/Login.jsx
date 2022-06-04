@@ -193,8 +193,8 @@ setRole(response.data.role)
                             {/* {pdf} */}
                         </form>
                         {/* <img src={`image/c9088f58b148054769bf681597875bf2.png`} alt=""/> */}
-                        <a target="_blank" download="Tender.pdf" href="http://localhost:5001/image/b619ef469d3739f4b33293af9a0eb916.pdf">DOWNLOAD FILE</a>
-                        <iframe src="http://localhost:5001/image/b619ef469d3739f4b33293af9a0eb916.pdf" frameBorder="100%"  width={"50%"} height="250rem"></iframe>
+                        <a target="_blank" download="Tender.pdf" href="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf">DOWNLOAD FILE</a>
+                        <iframe src="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf" frameBorder="100%"  width={"50%"} height="250rem"></iframe>
                         </>
   )
 }

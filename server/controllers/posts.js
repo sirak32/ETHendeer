@@ -5,16 +5,16 @@ import mongoose from 'mongoose'
 const getPosts = async (req, res) => {
     try {
         const postTenders = await tender.find()
-      let date= new Date( postTenders[9].bidOpenOn)
-      date=`${date.getDate}/${date.getMonth}/${date.getFullYear}`
-        const minimalData = {
-            tenderNo: postTenders[9].number,
-            tenderTitel:postTenders[9].title,
-            openAt:postTenders[9].bidOpenOn,
-            closeAt:postTenders[9].closingDate,
-            status:false
-        }
-        console.log(minimalData)
+    //   let date= new Date( postTenders[9].bidOpenOn)
+    //   date=`${date.getDate}/${date.getMonth}/${date.getFullYear}`
+    //     const minimalData = {
+    //         tenderNo: postTenders[9].number,
+    //         tenderTitel:postTenders[9].title,
+    //         openAt:postTenders[9].bidOpenOn,
+    //         closeAt:postTenders[9].closingDate,
+    //         status:false
+    //     }
+        // console.log(minimalData)
         res.status(200).json(postTenders)
     } catch (error) {
         res.status(404).json({

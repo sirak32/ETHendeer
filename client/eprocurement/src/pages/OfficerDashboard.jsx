@@ -20,7 +20,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   // const [tendeN,setTenderN]=useState(null)
-  const menus = ["Dashboard", "Tender", "Suppliers", "Logout"];
+  const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
     // dispatch({type:'SET_LOADING'})
     // dispatch({type:'SET_TENDER',
@@ -32,7 +32,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         navigate('/')
         fetchTenders();
         fetchSuppliers()
-        // console.log('this is my kingdom',tenders)
+        // console.log('Im being belcash baldereba',tenders)
   }, []);
   const OptmTender = [];
   let i;
@@ -44,7 +44,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       closingDate:tenders[i].closingDate };
   }
   // const [{}]=tenders.map((tender)=>)
-  // console.log("tender from redux", tenders,'supplier from redux',suppliers);
+  console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   
   return tenders ? (
@@ -63,7 +63,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
             </Wrapper>
             {/* <Table /> */}
             
-            <BasicTabs data={{OptmTender,suppliers}} />
+            <BasicTabs data={{OptmTender,suppliers,tenders}} />
             {/* <h1>{tenders[10].description}</h1> */}
             {/* <h1>Hey {tender}</h1> */}
             {/* <Modal/> */}

@@ -25,7 +25,15 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useFormik } from "formik";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import styled from "styled-components";
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
 const InputAdornments = ({ tenders, fetchTenders }) => {
+  const toast = useRef(null);
+  const showSuccess = () => {
+    toast.current.show({severity:'success', summary: 'Tender Added Successfully', detail:'Tender Added Successfully Descriptions Here', life: 10000});
+}
+
   useEffect(() => {
     // fetchTenders()
   }, []);
@@ -53,10 +61,10 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       dat.append("doc", selectedFile);
       const bidOpenOn= new Date(data.bidOpenOn).toUTCString()
       const closingDate=new Date(data.closingDate).toUTCString()
-      console.log("the expected",dat);
-      console.log("spreading ",{...data,creator:"tilikse",bidOpenOn,closingDate,publishedDate})
+      // console.log("the expected",dat);
+      // console.log("spreading ",{...data,creator:"tilikse",bidOpenOn,closingDate,publishedDate})
 
-      console.log("data",publishedDate)
+      // console.log("data",publishedDate)
 //       let dateStr = "Fri Apr 20 2020 00:00:00 GMT+0530 (India Standard Time)"
 // console.log(new Date(dateStr).toUTCString())
       await axios.post(
@@ -65,9 +73,11 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       ).then(async(res)=>{
         console.log('upload success')
         const file=res.data
-          await axios.post("http://localhost:5001/tenders", {...data,creator:"datacreator",bidOpenOn,closingDate,publishedDate,document:file})
+          await axios.post("http://localhost:5001/tenders/", {...data,creator:"datacreator",bidOpenOn,closingDate,publishedDate,document:file})
           .then(() => {
             // setNo('changed')
+            showSuccess()
+            formik.resetForm()
           });
         console.log(res.data)
       }).then(()=>fetchTenders());
@@ -120,28 +130,25 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       // action="sdghfjgh"
       onSubmit={formik.handleSubmit}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, title: e.target.value });
-            // }}
+      <Div className="card">
+      <span className="p-float-label">
+          <InputText
+            className="p-float-label p-input-icon-right"
             onChange={formik.handleChange}
             name="title"
             id="title"
             color="success"
             label="Tender Title"
             value={formik.values.title}
-            // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, number: e.target.value });
-            // }}
+        <label htmlFor="title" className='p-succes'>Title*</label>
+      </span>
+      <span className="p-float-label">
+
+          <InputText
             onChange={formik.handleChange}
+            className="mt-5 w-4"
             name="number"
             id="number"
             value={formik.values.number}
@@ -150,14 +157,15 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />
-        </Grid>
-        <Grid item xs={4}>
-          <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, description: e.target.value });
-            // }}
+            <label htmlFor="number" className='p-success'>Tender Number*</label>
+      </span>
+
+      <span className="p-float-label">
+        
+          <InputText
             onChange={formik.handleChange}
             name="description"
+            className="mt-5 w-4"
             id="description"
             color="success"
             value={formik.values.description}
@@ -165,15 +173,19 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
             // id="outlined-start-adornment"
             sx={{ m: 1, width: "25ch" }}
           />{" "}
-        </Grid>
-        <Grid item xs={4}>
+                      <label htmlFor="description" className='p-success'>Tender Description*</label>
+
+        </span>       
+        
+        
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
-              sx={{ m: 1, width: "24.5ch" }}
-              labelId="demo-simple-select-label"
+              // sx={{ m: 1, width: "24.5ch" }}
               id="type"
               label="Type"
+              // className="mt-5"x  x
+
               onChange={formik.handleChange}
               value={formik.values.type}
               name="type"
@@ -187,120 +199,60 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
               <MenuItem value="Consultancy">Consultancy</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
-        {/* <Grid item xs={4}>
-          <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Catagory</InputLabel>
-            <Select
-              sx={{ m: 1, width: "24.5ch" }}
-              labelId="type"
-              id="catagory"
-              label="Catagory"
-              value={formik.values.catagory}
-              onChange={formik.handleChange}
-              name="catagory"
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, catagory: e.target.value });
-              // }}
-            >
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
-              <MenuItem value="Direct">Direct</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid> */}
-        {/* <Grid item xs={4}></Grid> */}
-        {/* <Grid item xs={4}>
-          <TextField
-            onChange={(e) => {
-              setFormValue({ ...formValues, lotNo: e.target.value });
-            }}
-            onChange={formik.handleChange}
-            name="lotNo"
-            id="lotNo"
-            value={formik.values.lotNo}
-            color="success"
-            label="Lot Number"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid> */}
-        {/* <Grid item xs={4}>
-          <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, minPrice: e.target.value });
-            // }}
-            id="minPrice"
-            name="minPrice"
-            color="success"
-            value={formik.values.minPrice}
-            onChange={formik.handleChange}
-            label="Minimum Price"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid> */}
-        {/* <Grid item xs={4}>
-          <span className="p-float-label">
-            <InputText
-              // onChange={(e) => {
-              //   setFormValue({
-              //     ...formValues,
-              //     bidSec-urityAmount: e.target.value,
-              //   });
-              // }}
-              onChange={formik.handleChange}
-              name="bidSecurityAmount"
-              id="bidSecurityAmount"
-              value={formik.values.bidSecurityAmount}
-              autoFocus
-              color="success"
-              label="Bid Security Amount"
-              // id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-            />
-            <label htmlFor="bidSecurityAmount">Bid Security Amount*</label>
-          </span>
-        </Grid> */}
-        <Grid item xs={4}>
+        
+        
           <span className="p-float-label">
             <InputTextarea
+            className="mt-9 pt-5 w-4"
               rows={5}
               autoResize
-              // onChange={(e) => {
-              //   setFormValue({
-              //     ...formValues,
-              //     termsAndConditions: e.target.value,
-              //   });
-              // }}
               onChange={formik.handleChange}
               name="termsAndConditions"
-              // id="outlined-multiline-static"
               value={formik.values.termsAndConditions}
               autoFocus
               id="termsAndConditions"
             />{" "}
             <label htmlFor="termsAndConditions">Terms And Conditions</label>
           </span>
-        </Grid>
-        {/* <Grid item xs={4}>
-          <TextField
-            // onChange={(e) => {
-            //   setFormValue({ ...formValues, participationFee: e.target.value });
-            // }}
-            id="participationFee"
-            name="participationFee"
-            value={formik.values.participationFee}
-            onChange={formik.handleChange}
-            color="success"
-            label="Bid participation Fee"
-            // id="outlined-start-adornment"
-            sx={{ m: 1, width: "25ch" }}
-          />{" "}
-        </Grid> */}
-        <Grid item xs={4}>
-          <div className="App">
+        
+          <span className="p-float-label">
+            <Calendar
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, closingDate: e.target.value });
+              // }}
+              className="mt-5"
+              name="bidOpenOn"
+              max="2020-02-02"
+              min="2020-01-02"
+              id="bidOpenOn"
+              value={formik.values.bidOpenOn}
+              onChange={formik.handleChange}
+              dateFormat="dd/mm/yy"
+              mask="99/99/9999"
+              showIcon
+            />
+            <label htmlFor="bidOpenOn"> Opening Date</label>
+          </span>
+          <span className="p-float-label">
+            <Calendar
+              // onChange={(e) => {
+              //   setFormValue({ ...formValues, closingDate: e.target.value });
+              // }}
+              name="closingDate"
+              className="mt-5"
+
+              // max="2020-02-02"
+              // min="2020-01-02"
+              id="closingDate"
+              value={formik.values.closingDate}
+              onChange={formik.handleChange}
+              dateFormat="dd/mm/yy"
+              mask="99/99/9999"
+              showIcon
+            />
+            <label htmlFor="closingDate"> Closing Date</label>
+          </span>
+          <div className="App mt-5">
             <Button variant="contained" component="label" color="primary">
               {" "}
               <IoAddCircleOutline /> Upload Bid Document
@@ -314,88 +266,8 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
               />
             </Button>
           </div>
-        </Grid>
-
-        {/* <Grid item xs={4}>
-          <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              //   id="outlined-adornment-password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
-            />
-          </FormControl>
-        </Grid> */}
-
-        {/* <Grid item xs={4}>
-          <input
-            onChange={(e) => {
-              setFormValue({ ...formValues, publishedDate: e.target.value });
-            }}
-            name="publishedDate"
-            type="date"
-            max="2020-02-02"
-            min="2020-01-02"
-            
-          />
-        </Grid> */}
-        <Grid item xs={4}>
-          <span className="p-float-label">
-            <Calendar
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, closingDate: e.target.value });
-              // }}
-              name="bidOpenOn"
-              max="2020-02-02"
-              min="2020-01-02"
-              id="bidOpenOn"
-              value={formik.values.bidOpenOn}
-              onChange={formik.handleChange}
-              dateFormat="dd/mm/yy"
-              mask="99/99/9999"
-              showIcon
-            />
-            <label htmlFor="bidOpenOn"> Opening Date</label>
-          </span>
-        </Grid>
-        <Grid item xs={4}>
-          <span className="p-float-label">
-            <Calendar
-              // onChange={(e) => {
-              //   setFormValue({ ...formValues, closingDate: e.target.value });
-              // }}
-              name="closingDate"
-              // max="2020-02-02"
-              // min="2020-01-02"
-              id="closingDate"
-              value={formik.values.closingDate}
-              onChange={formik.handleChange}
-              dateFormat="dd/mm/yy"
-              mask="99/99/9999"
-              showIcon
-            />
-            <label htmlFor="closingDate"> Closing Date</label>
-          </span>
-        </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12}></Grid>
+        <Grid item xs={12}></Grid>
           <Stack
             sx={{ margin: "1rem" }}
             alignItems="left"
@@ -422,8 +294,8 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
               Exit
             </Button>
           </Stack>
-        </Grid>
-      </Grid>
+       
+      </Div>
       <Box
         sx={{
           display: "flex",
@@ -434,6 +306,9 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
           borderRadius: "1rem",
         }}
       ></Box>
+      
+      <Toast ref={toast} />
+
     </form>
   );
 };
@@ -463,6 +338,13 @@ const handleForm = (e) => {
 
 // })
 // }
+const Div =styled.div`
+
+min-width:450px;
+margin-top: 2rem;
+margin-bottom: 1.5rem;  
+
+`;
 const id = localStorage.getItem("whoId");
 console.log("the id is ", id);
 const formDatas = {
