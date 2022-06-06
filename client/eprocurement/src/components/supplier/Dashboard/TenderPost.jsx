@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 // import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import { MdArrowDropDown } from "react-icons/md";
-import { Grid, Stack } from "@mui/material";
+import { Container, Grid, Stack } from "@mui/material";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { Card } from "primereact/card";
@@ -22,9 +22,16 @@ import img from "../../../assets/images.jfif";
 import { saveAs } from "file-saver";
 import { useRef } from "react";
 import { Toast } from "primereact/toast";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 const MediaCard = ({ tenders, fetchTenders }) => {
   const toast = useRef(null);
+  const [techDoc, setTechDoc] = useState(null);
+  const [busiDoc,setBusiDoc]= useState(null)
+  
+
 const [selected,setSelected]=useState({})
   const header = <img alt="Card" src={img} />;
   const footer = (t)=>(
@@ -55,7 +62,7 @@ const [selected,setSelected]=useState({})
       />
     </span>
   );
-  const seen=<i class="pi pi-eye text-xl text-yellow-500  font-medium "> 3k</i>
+  const seen=(pubDate)=>(<i class="pi pi-calendar-plus  p-2 text-xl text-black-500  font-medium ">{`  ${pubDate}`}</i>)
   const [vis, setVis] = useState(false);
   const [vis2, setVis2] = useState(false);
   console.log("tenders are from supplier", tenders);
@@ -68,26 +75,27 @@ const [selected,setSelected]=useState({})
       <Grid container spacing={5}>
         {tenders.map((t) => (
           <Grid item xs={3}>
-            <Card 
-            
+            <Card
               className="m-0 scalein animation-duration-250 max-h-1rem"
               title={t.title}
-              subTitle={seen}
+              subTitle={seen(new Date(t.publishedDate).toDateString())}
               style={{ width: "25em" }}
               footer={footer(t)}
               header={header}
             >
-              <p className="m-0 " style={{ lineHeight: "1.5",height:"10rem" }}>
-                
-               {t.description}
+              <p
+                className="m-0 "
+                style={{ lineHeight: "1.5", height: "10rem" }}
+              >
+                {t.description}
               </p>
             </Card>
 
-            <Toast  ref={toast} />
+            <Toast ref={toast} />
           </Grid>
         ))}
       </Grid>
-<Dialog
+      <Dialog
         modal
         draggable={false}
         dismissableMask
@@ -97,20 +105,25 @@ const [selected,setSelected]=useState({})
           setVis(false);
         }}
       >
-
-
         <div className="bg-orange-400 m-0 w-12 h-5rem"></div>
         <div className="formgrid grid">
-          <div className="col">
+          {/* <div className="col">
             <p class="text-4xl w-10 font-semibold">
               Tender Title : - {selected.title}
             </p>
             <p class="text-4xl w-10 font-semibold">
               Tender Description :- {selected.description}
             </p>
-            <p class="text-4xl w-10 font-semibold">Published Date</p>
-            <p class="text-4xl w-10 font-semibold">Closing Date</p>
-            <p class="text-4xl w-10 font-semibold">Bid Opening Date</p>
+            <p class="text-4xl w-10 font-semibold">
+              Published =&gt; {new Date(selected.publishedDate).toDateString()}
+            </p>
+            <p class="text-4xl w-10 font-semibold">
+              Closing Date =&gt;{" "}
+              {new Date(selected.closingDate).toDateString().replace(/ /g, "-")}
+            </p>
+            <p class="text-4xl w-10 font-semibold">
+              Bid Opening =&gt; {new Date(selected.bidOpenOn).toDateString()}
+            </p>
             <p class="text-4xl w-10 font-semibold">Attached Documents</p>
             <Button
               onClick={() => {
@@ -127,35 +140,115 @@ const [selected,setSelected]=useState({})
                 Download Documents
               </span>
             </Button>
-          </div>
+          </div> */}
           <Card
-            title="Simple Card "
+            // title="Tender Information/"
+            
             style={{ width: "25rem", marginBottom: "2rem" }}
-            className="col m-6 p-6"
+            className="col m-6 p-6 "
           >
-            <p className="m-0  " style={{ lineHeight: "1.5" }}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              
-            </p>
+            {/* <p class="text-3xl w-10 font-bold">{selected.title}</p> */}
+            <center class="text-3xl w-10 font-bold">{selected.title}</center>
 
-            <p class="text-2xl w-10 font-semibold">
-              Tender Title : - {selected.title}
+            <p class="text-2xl w-10 ">
+               <br /> {selected.description}
             </p>
-            <p class="text-2xl w-10 font-semibold">
-              Tender Description :- {selected.description}
+            <p class="text-2xl w-10 flex align-items-center justify-content-end mt-8">
+              Published <pre>  </pre><i class="pi pi-calendar-minus"> </i>  <pre>  </pre>{new Date(selected.publishedDate).toDateString()}
             </p>
-            <p class="text-2xl w-10 font-semibold">Published Date</p>
-            <p class="text-2xl w-10 font-semibold">Closing Date</p>
-            <p class="text-2xl w-10 font-semibold">Bid Opening Date</p>
-            <p class="text-2xl w-10 font-semibold">Attached Documents</p>
+            <p class="text-2xl w-10 flex align-items-center justify-content-end">
+              Closing Date<pre>  </pre><i class="pi pi-calendar-minus"> </i> <pre>  </pre>
+              {new Date(selected.closingDate).toDateString().replace(/ /g, "-")}
+            </p>
+            <p class="text-2xl w-10 flex align-items-center justify-content-end">
+              Bid Opening <pre>  </pre><i class="pi pi-calendar-minus"> </i><pre>  </pre> {new Date(selected.bidOpenOn).toDateString()}
+            </p>
+            <p class="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p>
+           {/* <p>Remaining Days</p> */}
+            <Button
+              onClick={() => {
+                saveAs(
+                  `http://localhost:5001/image/${selected.document}`,
+                  `Tender Bid ${selected.document}.pdf`
+                );
+              }}
+              className="w-full  p-0 h-6rem flex justify-content-center p-button-rounded p-button-info"
+            >
+              <i className="pi pi-download px-2 "></i>
+              {/* <span className="px-3 align-self-center flex"> */}
+              Download Documents
+              {/* </span> */}
+            </Button>
           </Card>
         </div>
-        <Button
-          className="w-full  p-0 h-6rem flex justify-content-center"
-          aria-label="Amazon"
-        >
-          <i className="pi pi-right px-2"></i>
-          <span
+        
+          <Card className="m-0   flex align-items-center justify-content-center">
+            <form
+              className="m-5"
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log(busiDoc);
+              }}
+            >
+              <div className="mt-7">
+                <span className="p-float-label">
+                  <Password
+                    className="mt-3 "
+                    id="supPassword"
+                    name="supPassword"
+                    toggleMask
+                  />
+                  <label htmlFor="supPassword">Password</label>
+                </span>
+              </div>
+              <div className="mt-7 w-9">
+                <span className="p-float-label">
+                  <Password
+                    // className="mt-3"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    toggleMask
+                  />
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                </span>
+              </div>
+              <div className="mt-7 w-4">
+                <span className="p-float-label p-input-icon-right">
+                  <i className="pi pi-info-circle" />
+                  <InputText id="remark" name="remark" />
+                  <label htmlFor="remark">Remark</label>
+                </span>
+              </div>
+              <div className="App mt-5">
+                <Button className="p-button-rounded p-button-info ">
+                  <input
+                    onInput={(e) => setTechDoc(e.target.files[0])}
+                    accept=".pdf"
+                    type="file"
+                    name="doc"
+                    required
+                  />
+                </Button>
+              </div>
+              <div className="App mt-5 w-full h-5rem">
+                <Button className="p-button-rounded p-button-info">
+                  <input
+                    onInput={(e) => setBusiDoc(e.target.files[1])}
+                    accept=".pdf"
+                    type="file"
+                    name="doc"
+                    required
+                  />
+                </Button>
+              </div>
+
+              <Button
+                type="submit"
+                className="p-button-warning p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"
+                aria-label="Amazon"
+              >
+                {/* <i className="pi pi-right px-2"></i> */}
+                {/* <span
             className="px-3 align-self-center flex m-4"
             onClick={() => {
               toast.current.show({
@@ -167,10 +260,14 @@ const [selected,setSelected]=useState({})
             }}
           >
             Apply
-          </span>
-        </Button>
+          </span> */}
+                Apply
+              </Button>
+            </form>
+          </Card>
+        
       </Dialog>
-      
+
       <Dialog
         draggable={false}
         dismissableMask
