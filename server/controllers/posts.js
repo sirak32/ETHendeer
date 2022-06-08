@@ -38,6 +38,7 @@ const getAppliedTenders=async (req,res) =>{
 }
 const createAppliedTender=async (req,res)=>{
     const body = req.body
+
     console.log(body)
     const newApplied=new appliedtenders(body)
     try {

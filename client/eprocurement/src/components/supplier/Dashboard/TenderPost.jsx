@@ -25,14 +25,16 @@ import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { IoAddCircleOutline } from "react-icons/io5";
+import axios from "axios";
 
 const MediaCard = ({ tenders, fetchTenders }) => {
-  const toast = useRef(null);
+  const toastBR  = useRef(null);
   const [techDoc, setTechDoc] = useState(null);
   const [busiDoc,setBusiDoc]= useState(null)
   
 
 const [selected,setSelected]=useState({})
+
   const header = <img alt="Card" src={img} />;
   const footer = (t)=>(
     
@@ -43,12 +45,7 @@ const [selected,setSelected]=useState({})
         onClick={() => {
           setSelected(t)
           setVis(true);
-          // toast.current.show({
-          //   severity: "success",
-          //   summary: "Success Message",
-          //   detail: "Message Content",
-          //   life: 3000,
-          // });
+         
         }}
       />
       <Button
@@ -91,7 +88,7 @@ const [selected,setSelected]=useState({})
               </p>
             </Card>
 
-            <Toast ref={toast} />
+            <Toast ref={toastBR } />
           </Grid>
         ))}
       </Grid>
@@ -185,15 +182,38 @@ const [selected,setSelected]=useState({})
           <Card className="m-0   flex align-items-center justify-content-center">
             <form
               className="m-5"
-              onSubmit={(e) => {
+              onSubmit={async(e) => {
                 e.preventDefault();
                 console.log(busiDoc);
+                const data1=new FormData()
+                const data2=new FormData()
+                data1.append('doc',busiDoc)
+                data2.append('doc',techDoc)
+// return;
+                await axios.post( "http://localhost:5001/upload",data1)
+                .then(async(res)=>{
+                  const busi=res.data
+                  await axios.post( "http://localhost:5001/upload",data2)
+                  .then(async(res2)=>{
+                    const tech=res2.data
+
+                    await axios.post('http://localhost:5001/tenders/applied-tenders',{
+                      tender:selected._id,
+                      applier:'628c670820fa3eaa840adfb8',
+                      businessDoc:busi,
+                      technicalDoc:tech
+                    }).then(()=>{console.log("post applied tender")
+                  setVis(false)
+                  toastBR .current.show({severity:'success', summary: 'You Applied Successfully', detail:'Tender Application', life: 8000});
+                  })
+                  })
+                })
               }}
             >
               <div className="mt-7">
                 <span className="p-float-label">
                   <Password
-                    className="mt-3 "
+                    className="mt-3  "
                     id="supPassword"
                     name="supPassword"
                     toggleMask
@@ -201,7 +221,7 @@ const [selected,setSelected]=useState({})
                   <label htmlFor="supPassword">Password</label>
                 </span>
               </div>
-              <div className="mt-7 w-9">
+              <div className="mt-7 ">
                 <span className="p-float-label">
                   <Password
                     // className="mt-3"
@@ -212,14 +232,14 @@ const [selected,setSelected]=useState({})
                   <label htmlFor="confirmPassword">Confirm Password</label>
                 </span>
               </div>
-              <div className="mt-7 w-4">
+              <div className="mt-7 ">
                 <span className="p-float-label p-input-icon-right">
                   <i className="pi pi-info-circle" />
                   <InputText id="remark" name="remark" />
                   <label htmlFor="remark">Remark</label>
                 </span>
               </div>
-              <div className="App mt-5">
+              <div className=" mt-7">
                 <Button className="p-button-rounded p-button-info ">
                   <input
                     onInput={(e) => setTechDoc(e.target.files[0])}
@@ -230,10 +250,10 @@ const [selected,setSelected]=useState({})
                   />
                 </Button>
               </div>
-              <div className="App mt-5 w-full h-5rem">
+              <div className=" mt-4 w-full h-5rem">
                 <Button className="p-button-rounded p-button-info">
                   <input
-                    onInput={(e) => setBusiDoc(e.target.files[1])}
+                    onInput={(e) => setBusiDoc(e.target.files[0])}
                     accept=".pdf"
                     type="file"
                     name="doc"
@@ -241,7 +261,6 @@ const [selected,setSelected]=useState({})
                   />
                 </Button>
               </div>
-
               <Button
                 type="submit"
                 className="p-button-warning p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"

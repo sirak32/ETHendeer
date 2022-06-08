@@ -506,9 +506,11 @@ import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 // import { CountryService } from '../service/CountryService';
 import "./FormDemo.css";
-import { Grid } from "@mui/material";
+import { Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import { FileUploadDemo } from "./FileUploadDemo";
 import { InputTextarea } from "primereact/inputtextarea";
+import FormControl from "@mui/material/FormControl";
+
 
 export const FormikFormDemo = (props) => {
  
@@ -521,101 +523,52 @@ export const FormikFormDemo = (props) => {
     // countryservice.getCountries().then(data => setCountries(data));
     // setCountries(count);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-console.log('Selected',props.selected)
+console.log('Selected',props.data)
+// alert(props.selected)
+const tender=props.data
 const selected=props.selected
   const formik = useFormik({
-    initialValues: {
-      firstName:'',
-      middleName: '',
-      lastName:'',
-      phone:'',
-      city: "Gonder",
-      subcity: "no",
-      wereda: "04",
-      kebele: "5",
-      businessType: "Manufacturing",
-      tinNumber: '',
-      username: "",
-      name: 'selected.id',
-      email: "",
-      password: "",
-      date: null,
-      accept: false,
-    },
+    initialValues:tender,
+    //  {
+    //   title: tender.title,
+    //   description: tender.description,
+    //   number: tender.number,
+    //   closingDate: tender.closingDate,
+    //   bidOpenOn: tender.bidOpenOn,
+    //   termsAndConditions: tender.termsAndConditions
+     
+    // },
     validate: (data) => {
       let errors = {};
 
       // if (!data.name) {
       //   errors.name = "Name is required.";
       // }
-      if (!data.name) {
-        errors.name = " Name is required.";
-      } else if (
-        !/^(?!\s)(?!.*\s$)(?=.*[a-zA-Z0-9])[a-zA-Z0-9 '~?!]{2,}$/i.test(
-          data.name
-        )
-      ) {
-        errors.name = "Invalid Organization Name. E.g.+251919298457";
+      if (!data.title) {
+        errors.title = " Name is required.";
       }
       // if (!data.firstName) {
       //   errors.firstName = "First Name is required.";
       // }
-      if (!data.middleName) {
-        errors.middleName = "Middle Name is required.";
+      if (!data.number) {
+        errors.number = "Middle Name is required.";
       }
-      if (!data.lastName) {
-        errors.lastName = "Last Name is required.";
+      if (!data.description) {
+        errors.description = "Last Name is required.";
       }
 
-      if (!data.firstName) {
-        errors.firstName = "First Name is required.";
-      } else if (!/^[A-Za-z]+/i.test(data.firstName)) {
-        errors.firstName = "Invalid First Name. E.g.+251919298457";
-      }
+      if (!data.type) {
+        errors.type = "First Name is required.";
+      } 
       // if (!data.phone) {
       //   errors.phone = "Phone Name is required.";
       // }
-      if (!data.subcity) {
-        errors.subcity = "Subcity Name is required.";
-      }
-      if (!data.wereda) {
-        errors.wereda = "Middle Name is required.";
-      }
-      if (!data.kebele) {
-        errors.kebele = "Middle Name is required.";
-      }
-      if (!data.businessType) {
-        errors.businessType = "Middle Name is required.";
+      if (!data.termsAndConditions) {
+        errors.termsAndConditions = "Subcity Name is required.";
       }
       // if (!data.tinNumber) {
       //   errors.tinNumber = "Tin Number Name is required.";
       // }
-      if (!data.tinNumber) {
-        errors.tinNumber = "Tin Number is required.";
-      } else if (
-        !/^(9\d{2})([ \-]?)([7]\d|8[0-8])([ \-]?)(\d{4})$/i.test(data.tinNumber)
-      ) {
-        errors.tinNumber =
-          "Invalid Tin Number.  range is 900-70-0000 through 999-88-9999";
-      }
-
-      if (!data.phone) {
-        errors.phone = "Phone is required.";
-      } else if (!/^\+[1-9]\d{10,14}$/i.test(data.phone)) {
-        errors.phone = "Invalid Phone number. E.g.+251919298457";
-      }
-      if (!data.email) {
-        errors.email = "Email is required.";
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)
-      ) {
-        errors.email = "Invalid email address. E.g. example@email.com";
-      }
-
-      if (!data.password) {
-        errors.password = "Password is required.";
-      }
-
       if (!data.accept) {
         errors.accept = "You need to agree to the terms and conditions.";
       }
@@ -702,25 +655,25 @@ const selected=props.selected
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
-                      id="name"
-                      name="name"
-                      value={formik.values.name}
+                      id="title"
+                      name="title"
+                      value={formik.values.title}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("name"),
+                        "p-invalid": isFormFieldValid("title"),
                       })}
                     />
                     <label
-                      htmlFor="name"
+                      htmlFor="title"
                       className={classNames({
-                        "p-error": isFormFieldValid("name"),
+                        "p-error": isFormFieldValid("title"),
                       })}
                     >
                       Tender Title *
                     </label>
                   </span>
-                  {getFormErrorMessage("name")}
+                  {getFormErrorMessage("title")}
                 </div>
               </Grid>
               {/* <Grid item xs={6}>
@@ -754,25 +707,25 @@ const selected=props.selected
                   <span className="p-float-label">
                     <InputText
                       maxLength={20}
-                      id="middleName"
-                      name="middleName"
-                      value={formik.values.middleName}
+                      id="number"
+                      name="number"
+                      value={formik.values.number}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("middleName"),
+                        "p-invalid": isFormFieldValid("number"),
                       })}
                     />
                     <label
-                      htmlFor="middleName"
+                      htmlFor="number"
                       className={classNames({
-                        "p-error": isFormFieldValid("middleName"),
+                        "p-error": isFormFieldValid("number"),
                       })}
                     >
                       Tender Number*
                     </label>
                   </span>
-                  {getFormErrorMessage("middleName")}
+                  {getFormErrorMessage("number")}
                 </div>
               </Grid>
               <Grid item xs={6}>
@@ -781,28 +734,28 @@ const selected=props.selected
                     <InputTextarea
                     cols={3}
                     rows={5}
-                      id="lastName"
-                      name="lastName"
-                      value={formik.values.lastName}
+                      id="description"
+                      name="description"
+                      value={formik.values.description}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("lastName"),
+                        "p-invalid": isFormFieldValid("description"),
                       })}
                     />
                     <label
-                      htmlFor="lastName"
+                      htmlFor="description"
                       className={classNames({
-                        "p-error": isFormFieldValid("lastName"),
+                        "p-error": isFormFieldValid("description"),
                       })}
                     >
                       Tender Description*
                     </label>
-                  </span>
+                  </span  >
                   {getFormErrorMessage("lastName")}
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -826,7 +779,7 @@ const selected=props.selected
                   </span>
                   {getFormErrorMessage("phone")}
                 </div>
-              </Grid>
+              </Grid> */}
               {/* <Grid item xs={6}>
 
             
@@ -855,21 +808,28 @@ const selected=props.selected
             </div>
               </Grid> */}
               <Grid item xs={6}>
-                <div className="field">
-                  <span className="p-float-label">
-                    <Dropdown
-                      id="country"
-                      name="country"
-                      value={formik.values.country}
-                      onChange={formik.handleChange}
-                      options={countries}
-                      optionLabel="name"
-                    />
-                    <label htmlFor="country">Tender Type</label>
-                  </span>
-                </div>
-              </Grid>
-              <Grid item xs={6}>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                <Select
+
+                  sx={{ width: "20rem" }}
+                  id="type"
+                  label="Type"
+                  className="mt-5 h-5rem"
+                  onChange={formik.handleChange}
+                  value={formik.values.type}
+                  name="type"
+                >
+                  <MenuItem value="Direct">Goods</MenuItem>
+                  <MenuItem value="Service">Service</MenuItem>
+                  <MenuItem value="Construction Works">
+                    Construction Works
+                  </MenuItem>
+                  <MenuItem value="Consultancy">Consultancy</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <Dropdown
@@ -883,8 +843,8 @@ const selected=props.selected
                     <label htmlFor="country">Tender Catagory</label>
                   </span>
                 </div>
-              </Grid>
-              <Grid item xs={6}>
+              </Grid> */}
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -908,8 +868,8 @@ const selected=props.selected
                   </span>
                   {getFormErrorMessage("subcity")}
                 </div>
-              </Grid>
-              <Grid item xs={6}>
+              </Grid> */}
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -933,8 +893,8 @@ const selected=props.selected
                   </span>
                   {getFormErrorMessage("wereda")}
                 </div>
-              </Grid>
-              <Grid item xs={6}>
+              </Grid> */}
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -958,55 +918,30 @@ const selected=props.selected
                   </span>
                   {getFormErrorMessage("kebele")}
                 </div>
-              </Grid>
+              </Grid> */}
               <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputTextarea
-                      id="businessType"
-                      name="businessType"
-                      value={formik.values.businessType}
+                      id="termsAndConditions"
+                      name="termsAndConditions"
+                      value={formik.values.termsAndConditions}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("businessType"),
+                        "p-invalid": isFormFieldValid("termsAndConditions"),
                       })}
                     />
                     <label
-                      htmlFor="businessType"
+                      htmlFor="termsAndConditions"
                       className={classNames({
-                        "p-error": isFormFieldValid("businessType"),
+                        "p-error": isFormFieldValid("termsAndConditions"),
                       })}
                     >
                       Terms and Conditions*
                     </label>
                   </span>
-                  {getFormErrorMessage("businessType")}
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className="field">
-                  <span className="p-float-label">
-                    <InputText
-                      id="tinNumber"
-                      name="tinNumber"
-                      value={formik.values.tinNumber}
-                      onChange={formik.handleChange}
-                      autoFocus
-                      className={classNames({
-                        "p-invalid": isFormFieldValid("tinNumber"),
-                      })}
-                    />
-                    <label
-                      htmlFor="tinNumber"
-                      className={classNames({
-                        "p-error": isFormFieldValid("tinNumber"),
-                      })}
-                    >
-                      Bid Participation Fee*
-                    </label>
-                  </span>
-                  {getFormErrorMessage("tinNumber")}
+                  {getFormErrorMessage("termsAndConditions")}
                 </div>
               </Grid>
               {/* <Grid item xs={6}>
@@ -1102,6 +1037,45 @@ const selected=props.selected
                   </span>
                 </div>
               </Grid> */}
+              <Grid item xs={6}>
+              <span className="p-float-label">
+                <Calendar
+                required
+                  className="mt-5 h-5rem w-7"
+                  name="bidOpenOn"
+                  max="2020-02-02"
+                  min="2020-01-02"
+                  id="bidOpenOn"
+                  minDate={new Date()}
+                  // maxDate={new Date("2020-02-02")}
+                  value={formik.values.bidOpenOn}
+                  onChange={formik.handleChange}
+                  dateFormat="dd/mm/yy"
+                  // mask="99/99/9999"
+                  showIcon
+                />
+                <label htmlFor="bidOpenOn"> Opening Date</label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <Calendar
+                required
+                  name="closingDate"
+                  className="mt-5 h-5rem w-7"
+                  // max="2020-02-02"
+                  // min="2020-01-02"
+                  minDate={new Date()}
+                  id="closingDate"
+                  value={formik.values.closingDate}
+                  onChange={formik.handleChange}
+                  dateFormat="dd/mm/yy"
+                  mask="99/99/9999"
+                  showIcon
+                />
+                <label htmlFor="closingDate"> Closing Date</label>
+              </span>
+            </Grid>
 
               {/* <Grid item xs={6}>
                 <div className="field-checkbox">
@@ -1124,13 +1098,13 @@ const selected=props.selected
                   </label>
                 </div>
               </Grid> */}
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FileUploadDemo />
-              </Grid>
+              </Grid> */}
               {/* <Grid item xs={6}>
 
               </Grid> */}
-
+<Grid item xs={6}></Grid>
               <Grid item xs={6}>
                 <Button type="submit" label="Submit" className="mt-2" />
               </Grid>

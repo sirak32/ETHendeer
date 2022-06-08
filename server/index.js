@@ -147,6 +147,7 @@ app.get("/image/:filename", (req, res) => {
 });
 app.use("/tenders", route);
 app.use("/", userRoute);
+// app.use('/applied')
 
 // let buff = new Buffer.from(data, 'base64');
 // // fs.writeFileSync('print.pdf', buff);

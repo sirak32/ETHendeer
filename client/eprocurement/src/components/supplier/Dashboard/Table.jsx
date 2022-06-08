@@ -5,46 +5,56 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { FormikFormDemo } from "./EditTender";
 import { Sidebar } from 'primereact/sidebar';
+import axios from "axios";
+import { connect } from "react-redux";
+import { fetchTender } from "../../../actions/tenderAction";
+import { ProgressBar } from "primereact/progressbar";
 
-const Table = (props) => {
+
+const Table = ({tenderss,fetchTenders}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
+  const [editData, setEditData]=useState({})
   const [visibleTop, setVisibleTop] = useState(false);
+  const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
-  function createData(
-    tenderNO,
-    tenderId,
-    tenderTitle,
-    openingDate,
-    closingDate,
-    status
-  ) {
-    return {
-      tenderNO,
-      tenderId,
-      tenderTitle: tenderTitle.split("T")[0],
-      openingDate: openingDate.split("T")[0],
-      closingDate: closingDate.split("T")[0],
-      status,
-    };
-  }
-  let dataa = props.data;
-  let tenders = props.data;
+  // function createData(
+  //   tenderNO,
+  //   tenderId,
+  //   tenderTitle,
+  //   openingDate,
+  //   closingDate,
+  //   status
+  // ) {
+  //   return {
+  //     tenderNO,
+  //     tenderId,
+  //     tenderTitle: tenderTitle.split("T")[0],
+  //     openingDate: openingDate.split("T")[0],
+  //     closingDate: closingDate.split("T")[0],
+  //     status,
+  //   };
+  // }
+  useEffect(()=>{
+    fetchTenders()
+  },[])
+  // let dataa = props.data;
+  let tenders = tenderss;
 
-  console.log("my NEw KINGDOM", dataa);
+  // console.log("my NEw KINGDOM", dataa);
   let i;
 
   const rows = [];
-  for (i = 0; i < dataa.length; i++) {
-    rows[i] = createData(
-      i,
-      dataa[i].title,
-      dataa[i].bidOpenOn,
-      dataa[i].closingDate,
-      dataa[i].bidOpenOn,
-      "Active"
-    );
-  }
+  // for (i = 0; i < tenderss.length; i++) {
+  //   rows[i] = createData(
+  //     i,
+  //     // dataa[i].title,
+  //     // dataa[i].bidOpenOn,
+  //     // dataa[i].closingDate,
+  //     // dataa[i].bidOpenOn,
+  //     "Active"
+  //   );
+  // }
   console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
     return (
@@ -100,14 +110,27 @@ console.log("now ",now," op ",op,op<now)
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
           onClick={() => {
+
+            setEditData(rowData)
+            console.log('setting the data',editData)
             setEdit(true)
             editProduct(rowData)}}
         />
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
-          onClick={() => {
-            setDeleteProductsDialog(true);
+          onClick={async() => {
+            // alert(rowData._id)
+            await axios.delete(`http://localhost:5001/tenders/${rowData._id}`)
+            .then((e)=>{
+              if(restart)
+              setRestart(false)
+              else
+              setRestart(true)
+
+            })
+
+            // setDeleteProductsDialog(true);
           }}
         />
       </>
@@ -115,7 +138,7 @@ console.log("now ",now," op ",op,op<now)
   };
   console.log("rows are", rows);
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
-  return (
+  return tenderss!==null?(
     <>
       <DataTable
         breakpoint="960px"
@@ -142,8 +165,8 @@ console.log("now ",now," op ",op,op<now)
         {console.log("tenders are",tenders)}
         <Column field="title" style={{width:"300px"}} sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
-        <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
+        <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
         {/* <Column field='status' sortable header='status'></Column> */}
         <Column
           field={"title"}
@@ -170,7 +193,7 @@ console.log("now ",now," op ",op,op<now)
         onHide={() => {
           setEdit(false);
         }}>
-            <FormikFormDemo/>
+            <FormikFormDemo data={editData} />
 
         </Dialog>
       <Dialog
@@ -219,7 +242,19 @@ console.log("now ",now," op ",op,op<now)
 
                 </Sidebar>
     </>
-  );
+  ):<ProgressBar/>;
 };
 
-export default Table;
+const mapStateToProps = (state) => {
+  return {
+    tenderss: state.tenders.tenders,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchTenders: () => dispatch(fetchTender()),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Table);

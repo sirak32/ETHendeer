@@ -118,7 +118,7 @@ export default function Sidebar(props) {
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <div className="responsive__links">
           <ul>
-            <li
+            <li key={1}
               className={currentLink === 1 ? "active" : "none"}
               onClick={() => setCurrentLink(1)}
               >
@@ -127,7 +127,7 @@ export default function Sidebar(props) {
                 <span> Dashboard</span>
               </a>
             </li>
-            <li
+            <li key={2}
               className={currentLink === 2 ? "active" : "none"}
               onClick={() => setCurrentLink(2)}
               >
@@ -136,7 +136,7 @@ export default function Sidebar(props) {
                 <span> Tenders</span>
               </a>
             </li>
-            <li
+            <li key={3}
               className={currentLink === 3 ? "active" : "none"}
               onClick={() => setCurrentLink(3)}
               >
@@ -145,7 +145,7 @@ export default function Sidebar(props) {
                 <span> Suppliers</span>
               </a>
             </li>
-            <li
+            <li key={4}
               className={currentLink === 4 ? "active" : "none"}
               onClick={() => setCurrentLink(4)}
               >
@@ -155,7 +155,7 @@ export default function Sidebar(props) {
                 <span> Officers</span>
               </a>
             </li>
-            <li
+            <li key={5}
               className={currentLink === 5 ? "active" : "none"}
               onClick={() => setCurrentLink(5)}
               >
@@ -164,7 +164,7 @@ export default function Sidebar(props) {
                 <span> FAQs</span>
               </a>
             </li>
-            <li
+            <li key={6}
               className={currentLink === 6 ? "active" : "none"}
               onClick={() => setCurrentLink(6)}
               >
