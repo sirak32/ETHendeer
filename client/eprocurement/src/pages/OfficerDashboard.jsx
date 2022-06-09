@@ -13,6 +13,7 @@ import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
+import Side from '../components/supplier/Dashboard/SideOff'
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
@@ -44,12 +45,13 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       closingDate:tenders[i].closingDate };
   }
   // const [{}]=tenders.map((tender)=>)
-  console.log("tender from belcash", tenders,'supplier from redux',suppliers);
+    console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   
   return tenders ? (
     <Div>
-      <SideBar menu={menus} />
+      {/* <SideBar menu={menus} /> */}
+      <Side menu={menus}/>
       <Section>
         <NavBar />
         <div className="grid">

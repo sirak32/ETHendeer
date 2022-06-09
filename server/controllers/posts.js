@@ -100,49 +100,52 @@ const updatePost = async (req, res) => {
     const {
         id
     } = req.params;
-    const {
-        title,
-        description,
-        number,
-        type,
-        catagory,
-        lotNo,
-        minPrice,
-        creator,
-        publishedDate,
-        closingDateate,
-        bidOpenOnate,
-        participationFee,
-        bidSecurityAmount,
-        termsAndConditions,
-        applicants
-    } = req.body;
+    // title: String,
+    // description: String,
+    // number: String,
+    // type: String,
+    // creator: String,
+    // publishedDate:Date,
+    // closingDate: Date,
+    // bidOpenOn: Date,
+    // termsAndConditions: String,
+    // document:String,
+    // const {
+    //     title,
+    //     description,
+    //     number,
+    //     type,
+    //     creator,
+    //     closingDate,
+    //     bidOpenOnate,
+    //     termsAndConditions,
+    // } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = {
-        title,
-        description,
-        number,
-        type,
-        catagory,
-        lotNo,
-        minPrice,
-        creator,
-        publishedDate,
-        closingDateate,
-        bidOpenOnate,
-        participationFee,
-        bidSecurityAmount,
-        termsAndConditions,
-    };
+    // const updatedPost = {
+    //     title,
+    //     description,
+    //     number,
+    //     type,
+    //     catagory,
+    //     lotNo,
+    //     minPrice,
+    //     creator,
+    //     publishedDate,
+    //     closingDateate,
+    //     bidOpenOnate,
+    //     participationFee,
+    //     bidSecurityAmount,
+    //     termsAndConditions,
+    // };
 
-    await tender.findByIdAndUpdate(id, updatedPost, {
+    await tender.findByIdAndUpdate(id, req.body, {
         new: true
     });
 
 
-    res.json(updatedPost);
+    res.send("updated Post");
 }
 
 const deletePost = async (req, res) => {

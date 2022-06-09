@@ -123,6 +123,7 @@ console.log("now ",now," op ",op,op<now)
             // alert(rowData._id)
             await axios.delete(`http://localhost:5001/tenders/${rowData._id}`)
             .then((e)=>{
+              fetchTenders()
               if(restart)
               setRestart(false)
               else
@@ -191,6 +192,7 @@ console.log("now ",now," op ",op,op<now)
         modal
         dismissableMask
         onHide={() => {
+          fetchTenders()
           setEdit(false);
         }}>
             <FormikFormDemo data={editData} />
