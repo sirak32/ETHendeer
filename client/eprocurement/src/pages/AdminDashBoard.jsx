@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
  import { useNavigate } from "react-router";
 import { fetchPending } from "../actions/pendingAction.js";
+import Side from '../components/supplier/Dashboard/AdmSide'
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings}) => {
   const menus=['Dashboard','Officers','Suppliers','Feadbacks']
   console.log("from admin panel officers",suppliers,officers)
@@ -34,7 +35,9 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
   console.log('pendings are ',pendings)
   return (
     <Div>
-      <SideBar  menu={menus} />
+      {/* <SideBar  menu={menus} /> */}
+      <Side  menu={menus} />
+
       <Section>
         <NavBar />
         <div className="grid">

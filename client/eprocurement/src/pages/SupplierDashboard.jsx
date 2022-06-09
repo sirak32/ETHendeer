@@ -9,7 +9,7 @@ import { Stack } from "@mui/material";
 import { ScrollTop } from 'primereact/scrolltop';
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-
+import Side from '../components/supplier/Dashboard/SupSide'
 const App = () => {
   const navigate=useNavigate()
 
@@ -23,7 +23,8 @@ const App = () => {
 
   return (
     <Div>
-      <SideBar menu={menus} />
+      {/* <SideBar menu={menus} /> */}
+      <Side menu={menus} />
       <Section>
         <NavBar  />
         <div className="grid">
