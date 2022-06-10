@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { InputText } from "primereact/inputtext";
@@ -9,11 +10,10 @@ import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
-import "./FormDemo.css";
 import { Grid } from "@mui/material";
-import { FileUploadDemo } from "./FileUploadDemo";
+import { FileUploadDemo } from "./Dashboard/FileUploadDemo";
 
-export const FormikFormDemo = () => {
+ const FormikFormDemo = () => {
   const count = [
     { name: "Addis Ababa,", code: "AF" },
     { name: "Gonder", code: "AX" },
@@ -262,12 +262,10 @@ export const FormikFormDemo = () => {
   const [countries, setCountries] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
-  // const countryservice = new CountryService();
 
   useEffect(() => {
-    // countryservice.getCountries().then(data => setCountries(data));
     setCountries(count);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
 
   const formik = useFormik({
     initialValues: {
@@ -279,15 +277,13 @@ export const FormikFormDemo = () => {
       subcity: "",
       wereda: "",
       kebele: "",
-      businessType: "",
-      tinNumber: "",
       username: "",
       name: "",
       email: "",
       password: "",
-      date: null,
+      officerId:"",
+      role:"officer",
       country: null,
-      accept: false,
     },
     validate: (data) => {
       let errors = {};
@@ -331,21 +327,7 @@ export const FormikFormDemo = () => {
       if (!data.kebele) {
         errors.kebele = "Middle Name is required.";
       }
-      if (!data.businessType) {
-        errors.businessType = "Middle Name is required.";
-      }
-      // if (!data.tinNumber) {
-      //   errors.tinNumber = "Tin Number Name is required.";
-      // }
-      if (!data.tinNumber) {
-        errors.tinNumber = "Tin Number is required.";
-      } else if (
-        !/^(9\d{2})([ \-]?)([7]\d|8[0-8])([ \-]?)(\d{4})$/i.test(data.tinNumber)
-      ) {
-        errors.tinNumber =
-          "Invalid Tin Number.  range is 900-70-0000 through 999-88-9999";
-      }
-
+      
       if (!data.phone) {
         errors.phone = "Phone is required.";
       } else if (!/^\+[1-9]\d{10,14}$/i.test(data.phone)) {
@@ -361,10 +343,6 @@ export const FormikFormDemo = () => {
 
       if (!data.password) {
         errors.password = "Password is required.";
-      }
-
-      if (!data.accept) {
-        errors.accept = "You need to agree to the terms and conditions.";
       }
 
       return errors;
@@ -449,22 +427,22 @@ export const FormikFormDemo = () => {
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
-                      id="name"
-                      name="name"
-                      value={formik.values.name}
+                      id="officerId"
+                      name="officerId"
+                      value={formik.values.officerId}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("name"),
+                        "p-invalid": isFormFieldValid("officerId"),
                       })}
                     />
                     <label
-                      htmlFor="name"
+                      htmlFor="officerId"
                       className={classNames({
-                        "p-error": isFormFieldValid("name"),
+                        "p-error": isFormFieldValid("officerId"),
                       })}
                     >
-                      Name of Organization *
+                      Officer Id
                     </label>
                   </span>
                   {getFormErrorMessage("name")}
@@ -693,28 +671,28 @@ export const FormikFormDemo = () => {
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
-                      id="businessType"
-                      name="businessType"
-                      value={formik.values.businessType}
+                      id="username"
+                      name="username"
+                      value={formik.values.username}
                       onChange={formik.handleChange}
                       autoFocus
                       className={classNames({
-                        "p-invalid": isFormFieldValid("businessType"),
+                        "p-invalid": isFormFieldValid("username"),
                       })}
                     />
                     <label
-                      htmlFor="businessType"
+                      htmlFor="username"
                       className={classNames({
-                        "p-error": isFormFieldValid("businessType"),
+                        "p-error": isFormFieldValid("username"),
                       })}
                     >
-                      Business Type*
+                      Username
                     </label>
                   </span>
                   {getFormErrorMessage("businessType")}
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -738,8 +716,8 @@ export const FormikFormDemo = () => {
                   </span>
                   {getFormErrorMessage("tinNumber")}
                 </div>
-              </Grid>
-              <Grid item xs={6}>
+              </Grid> */}
+              {/* <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
                     <InputText
@@ -761,9 +739,8 @@ export const FormikFormDemo = () => {
                       Username*
                     </label>
                   </span>
-                  {/* {getFormErrorMessage("tinNumber")} */}
                 </div>
-              </Grid>
+              </Grid> */}
               <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label p-input-icon-right">
@@ -789,6 +766,7 @@ export const FormikFormDemo = () => {
                   {getFormErrorMessage("email")}
                 </div>
               </Grid>
+              
               <Grid item xs={6}>
                 <div className="field">
                   <span className="p-float-label">
@@ -817,51 +795,6 @@ export const FormikFormDemo = () => {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="field">
-                  <span className="p-float-label">
-                    <Calendar
-                      id="date"
-                      name="date"
-                      value={formik.values.date}
-                      onChange={formik.handleChange}
-                      dateFormat="dd/mm/yy"
-                      mask="99/99/9999"
-                      showIcon
-                    />
-                    <label htmlFor="date">Date</label>
-                  </span>
-                </div>
-              </Grid>
-
-              <Grid item xs={6}>
-                <div className="field-checkbox">
-                  <Checkbox
-                    inputId="accept"
-                    name="accept"
-                    checked={formik.values.accept}
-                    onChange={formik.handleChange}
-                    className={classNames({
-                      "p-invalid": isFormFieldValid("accept"),
-                    })}
-                  />
-                  <label
-                    htmlFor="accept"
-                    className={classNames({
-                      "p-error": isFormFieldValid("accept"),
-                    })}
-                  >
-                    I agree to the terms and conditions *
-                  </label>
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <FileUploadDemo />
-              </Grid>
-              {/* <Grid item xs={6}>
-
-              </Grid> */}
-
-              <Grid item xs={6}>
                 <Button type="submit" label="Submit" className="mt-2" />
               </Grid>
               <Grid item xs={6}>
@@ -875,14 +808,12 @@ export const FormikFormDemo = () => {
                   }}
                 />
               </Grid>
-              {/* <FileUploadDemo/> */}
             </Grid>
 
-            {/* THis is Break Point */}
-            {/* This is  */}
           </form>
         </div>
       </div>
     </div>
   );
 };
+export default FormikFormDemo

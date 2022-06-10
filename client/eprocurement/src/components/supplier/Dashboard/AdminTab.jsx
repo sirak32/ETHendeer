@@ -16,6 +16,7 @@ import { Button } from "primereact/button";
 import SupplierTable from "./SupplierTable";
 import OfficersTable from "./OfficersTable";
 import PendingTable from "./PendingTable";
+import RegisterOfficer from '../RegisterOfficer'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -107,7 +108,7 @@ export default function BasicTabs(props) {
         <PendingTable data={props.data.pendings} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <FormikFormDemo />
+        <RegisterOfficer />
       </TabPanel>
     </Box>
   );

@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'Address'
      },
-    sex: String,
+    // sex: String,
 })
 const officerSchema = mongoose.Schema({
     personalInfo: {
