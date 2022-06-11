@@ -205,6 +205,11 @@ const getPending=async(req,res)=>{
     const pend=await pendingsupplier.find().populate('accountInfo').populate('personalInfo')
     res.status(200).json(pend)
 }
+const rejectPending=async(req,res)=>{
+    const id=req.params.id
+    const pend=await pendingsupplier.findByIdAndRemove(id)
+    res.status(200).json("Request Rejected")
+}
 const getPendingSuppliers=async(req,res)=>{
     const pend=await pendingsupplier.find().populate('accountInfo')
     res.status(200).json(pend)
@@ -464,5 +469,6 @@ export {
     registerPendingSupplier,
     getPendingSuppliers,
     getOnePending,
-    acceptSupplier
+    acceptSupplier,
+    rejectPending
 }

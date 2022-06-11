@@ -19,7 +19,8 @@ import {
   registerPendingSupplier,
   getPendingSuppliers,
   getOnePending,
-  acceptSupplier
+  acceptSupplier,
+  rejectPending
 } from "../controllers/users.js";
 import { supplier } from "../models/user.js";
 
@@ -60,6 +61,7 @@ router.get(
 );
 router.get('/pending-supplier',getPending)
 router.post('/accept-pending-supplier',acceptSupplier)
+router.delete('/reject-pending-supplier/:id',rejectPending)
 router.get('/get-pending-suppliers',getPendingSuppliers)
 router.get('/get-pending-supplier/:id',getOnePending)
 

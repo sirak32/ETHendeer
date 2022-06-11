@@ -121,7 +121,10 @@ useEffect(()=>{
           icon="pi pi-times
 "
           className="p-button-rounded p-button-warning mr-2"
-          onClick={() => confirmDeleteProduct(rowData)}
+          onClick={() => {
+            axios.delete(`http://localhost:5001/reject-pending-supplier/${rowData.id}`)
+            confirmDeleteProduct(rowData)
+          }}
           />
       </>
     );
