@@ -36,7 +36,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
   return (
     <Div>
       {/* <SideBar  menu={menus} /> */}
-      <Side  menu={menus} />
+      <Side active={0}  menu={menus} />
 
       <Section>
         <NavBar />

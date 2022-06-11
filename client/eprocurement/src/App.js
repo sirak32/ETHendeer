@@ -15,7 +15,7 @@ import Apply from "./pages/ApplyingTender";
 import Home from "./pages/Home.jsx";
 import { AccordionDemo } from "./pages/Manual.jsx";
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
-
+import SupplierProfile from './pages/SupplierProfile'
 const App = () => {
   return (
     // <AdminDashboard />
@@ -28,7 +28,9 @@ const App = () => {
         <Route exact path="/apply" element={<Apply />}></Route>
         <Route exact path="/register" element={<Login />}></Route>
 
-        <Route exact path="/tender-detail" element={<TenderDetail />}></Route>
+        {/* <Route exact path="/supplier-profile" element={<TenderDetail />}></Route> */}
+        
+        <Route exact path="/supplier-profile" element={<SupplierProfile />}></Route>
         <Route exact path="/add-officer" element={<AddOfficer />}></Route>
         <Route exact path="/officers-list" element={<OfficersList />}></Route>
         <Route exact path="/login" element={<Login />}></Route>

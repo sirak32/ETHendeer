@@ -17,11 +17,11 @@ import { Table } from "@mui/material";
 import { useNavigate } from "react-router";
 export default function Sidebar(props) {
   const navigate=useNavigate()
-  const [currentLink, setCurrentLink] = useState(0);
+  const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
-  const menus=['Dashboard','Tenders','Profile','Account Setting','Help & Support']
-  const links=['#','#','#','#','','#'] 
+  const menus=['Dashboard','Tenders','Profile',,'Help & Support']
+  const links=['/','#','/supplier-profile','#','#'] 
 
   html.addEventListener("click", () => setNavbarState(false));
 

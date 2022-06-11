@@ -15,9 +15,9 @@ import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import Login from './Login'
 import { Table } from "@mui/material";
 import { useNavigate } from "react-router";
-export default function Sidebar() {
+export default function Sidebar(props) {
   const navigate=useNavigate()
-  const [currentLink, setCurrentLink] = useState(0);
+  const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));

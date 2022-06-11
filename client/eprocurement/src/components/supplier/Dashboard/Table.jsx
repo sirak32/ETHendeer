@@ -233,15 +233,15 @@ console.log("now ",now," op ",op,op<now)
         </div>
       </Dialog>
       <Sidebar className=" text-500 border-cyan-500 surface-overlay border-3 border-round-md font-bold m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                     <center><h1>{data.title}<pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h1> <hr></hr></center>
+                     <center><h1 className="text-white">{data.title}</h1> <h2><pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h2> <hr></hr></center>
                        
                     <h1>{data.description}</h1>
                     <h1>{data.title}</h1> 
-                    <h1>ጨርታዉ የተከፈተበት _ <i>{new Date(data.publishedDate).toDateString()}</i></h1>
-                    <h1>ጨረታዉ የሚዘጋው <i>{new Date(data.closingDate).toDateString()}</i></h1>
-                    <h1>ሰነድ የሚከፈተው <i>{new Date(data.bidOpenOn).toDateString()}</i></h1>
+                    <h1>ጨርታዉ የተከፈተበት _ <i className="text-300 text-white">{new Date(data.publishedDate).toDateString()}</i></h1>
+                    <h1>ጨረታዉ የሚዘጋው <i className="text-white">{new Date(data.closingDate).toDateString()}</i></h1>
+                    <h1>ሰነድ የሚከፈተው <i className="text-white">{new Date(data.bidOpenOn).toDateString()}</i></h1>
                     <hr></hr>
-                    <h1><i className="">የጨረታ መስፈርቶች</i> <br/> {data.termsAndConditions}</h1> 
+                    <h1><i className="">የጨረታ መስፈርቶች</i>  <p className="text-white"> {data.termsAndConditions}</p></h1> 
                     {data.applicants==[] && <h2>
           You have unread messages.
         </h2>}

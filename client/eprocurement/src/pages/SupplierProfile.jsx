@@ -13,7 +13,7 @@ import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
-import Side from '../components/supplier/Dashboard/SideOff'
+import Side from '../components/supplier/Dashboard/SupSide'
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
@@ -21,7 +21,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   // const [tendeN,setTenderN]=useState(null)
-  const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
+  const menus=['Dashboard','Tenders','Profile','Help & Support']
   useEffect(() => {
     // dispatch({type:'SET_LOADING'})
     // dispatch({type:'SET_TENDER',
@@ -29,7 +29,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         const tokens=localStorage.getItem('token')
         const role=localStorage.getItem('role')
 
-        if(role!=='officer')
+        if(role!=='supplier')
         navigate('/')
         fetchTenders();
         fetchSuppliers()
@@ -58,18 +58,18 @@ closedNo++
   return tenders ? (
     <Div>
       {/* <SideBar menu={menus} /> */}
-      <Side active={0} menu={menus}/>
+      <Side active={2} menu={menus}/>
       <Section>
         <NavBar />
         <div className="grid">
           <div className="row__one">
-            <Wrapper>
+            {/* <Wrapper>
               <Dash title="Suppliers" number={suppliers.length} />
               <Dash title="Tenders" number={tenders.length} />
               <Dash title="Active" number={tenders.length-closedNo} />
               <Dash title="Closed" number={closedNo} />
-            </Wrapper>           
-            <BasicTabs data={{OptmTender,suppliers,tenders}} />
+            </Wrapper>            */}
+            {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
           </div>
           <div className="row__two"></div>
         </div>
