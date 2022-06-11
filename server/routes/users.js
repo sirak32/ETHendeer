@@ -106,9 +106,10 @@ router.patch('/update-admin', passport.authenticate("jwt-bearer", {
 router.delete('/delete-supplier', passport.authenticate("jwt-bearer", {
   session: false,
 }), checkRole(['admin']), deleteAccount)
-router.delete('/delete-officer', passport.authenticate("jwt-bearer", {
-  session: false,
-}), checkRole(['admin']), deleteAccount)
+router.delete('/officer-deletion', deleteAccount)
+// router.delete('/delete-officer', passport.authenticate("jwt-bearer", {
+//   session: false,
+// }), checkRole(['admin']), deleteAccount)
 router.delete('/delete-tender', passport.authenticate("jwt-bearer", {
   session: false,
 }), checkRole(['officer']), deleteTender)

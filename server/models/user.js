@@ -11,11 +11,7 @@ const userSchema = mongoose.Schema({
     middleNam: String,
     lastName: String,
     email: String,
-    phoneNumber: {
-        countryCode: String,
-        regionalCode: String,
-        number: String,
-    },
+    phoneNumber: String,
     address: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Address'

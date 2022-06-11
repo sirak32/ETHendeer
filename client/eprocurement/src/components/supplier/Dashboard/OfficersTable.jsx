@@ -5,44 +5,51 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { FormikFormDemo } from "./EditTender";
 import { Sidebar } from 'primereact/sidebar';
+import { connect } from "react-redux";
+import { fetchOfficer } from "../../../actions/officerAction";
+import axios from "axios";
 
-const Table = (props) => {
+const Table = ({officers,fetchOfficers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
   const [visibleTop, setVisibleTop] = useState(false);
 const [data,setData] =useState({})
-  function createData(
-    tenderNO,
-    tenderId,
-    tenderTitle,
-    openingDate,
-    closingDate,
-    status
-  ) {
-    return {
-      tenderNO,
-      firstName:tenderId,
-      tenderTitle,
-      openingDate,
-      closingDate,
-      status, };
-  }
-  let dataa = props.data;
-  console.log("my NEw KINGDOM", dataa);
+useEffect(()=>{
+fetchOfficers()
+console.log('consola',officers)
+},[])
+  // function createData(
+  //   tenderNO,
+  //   tenderId,
+  //   tenderTitle,
+  //   openingDate,
+  //   closingDate,
+  //   status
+  // ) {
+  //   return {
+  //     tenderNO,
+  //     firstName:tenderId,
+  //     tenderTitle,
+  //     openingDate,
+  //     closingDate,
+  //     status, };
+  // }
+  // let dataa 
+  // console.log("my NEw KINGDOM", dataa);
   let i;
 
   const rows = [];
-  for (i = 0; i < dataa.length; i++) {
-    rows[i] = createData(
-      i,
-      dataa[i].officerId,
-      dataa[i].personalInfo.firstName,
-      `${dataa[i].personalInfo.phoneNumber.countryCode}${dataa[i].personalInfo.phoneNumber.regionalCode}${dataa[i].personalInfo.phoneNumber.number}`,
-      dataa[i].personalInfo.email,
-      "4"
-    );
-  }
-  console.log("Succesffull", rows);
+  // for (i = 0; i < dataa.length; i++) {
+  //   rows[i] = createData(
+  //     i,
+  //     dataa[i].officerId,
+  //     dataa[i].personalInfo.firstName,
+  //     `${dataa[i].personalInfo.phoneNumber.countryCode}${dataa[i].personalInfo.phoneNumber.regionalCode}${dataa[i].personalInfo.phoneNumber.number}`,
+  //     dataa[i].personalInfo.email,
+  //     "4"
+  //   );
+  // }
+  // console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
     return (
       <Button
@@ -80,28 +87,34 @@ const [data,setData] =useState({})
 "
           className="p-button-rounded mr-2"
           onClick={() => {
-            setVisibleTop(true)
+            console.log('Supplier List',rowData)
             setData(rowData)
+            setVisibleTop(true)
           }}
         />
-        <Button
+        {/* <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
           onClick={() => {
             setEdit(true)
             editProduct(rowData)}}
-        />
+        /> */}
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
           onClick={() => {
-            setDeleteProductsDialog(true);
+            console.log('consola',rowData._id)
+              axios.delete(`http://localhost:5001/officer-deletion/${rowData._id}`)
+              .then((res)=>{
+                fetchOfficers()
+                setDeleteProductsDialog(true);
+              })
           }}
         />
       </>
     );
   };
-  console.log("rows are", rows);
+  // console.log("rows are", rows);
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return (
     <>
@@ -109,11 +122,11 @@ const [data,setData] =useState({})
         breakpoint="960px"
         editMode="cell"
         header="Tenders List"
-        value={rows}
+        value={officers}
         responsiveLayout="scroll"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
-        dataKey={rows.tenderNO}
+        dataKey={officers._id}
         paginator
         rowHover
         selection={selectedCustomers}
@@ -127,19 +140,18 @@ const [data,setData] =useState({})
           selectionMode="multiple"
           headerStyle={{ width: "3em" }}
         ></Column>
-        <Column field="firstName" sortable filter header="Officer Id"></Column>
-        <Column field="tenderTitle" sortable  header="Officer Name"></Column>
-        <Column field="openingDate" sortable  header="Phone Number"></Column>
-        <Column field="closingDate" sortable  header="Email"></Column>
+        <Column field="officerId" sortable filter header="Officer Id"></Column>
+        <Column field="personalInfo.firstName" sortable  header="Officer Name"></Column>
+        <Column field="personalInfo.phoneNumber.number" sortable  header="Phone Number"></Column>
+        <Column field="personalInfo.email" sortable  header="Email"></Column>
         {/* <Column field='status' sortable header='status'></Column> */}
-        <Column
+        {/* <Column
           field="status"
           header="Participations"
           sortable
           style={{ minWidth: "10rem" }}
           body={statusBodyTemplate}
-          
-        />
+        /> */}
         {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
         {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
         <Column
@@ -154,10 +166,11 @@ const [data,setData] =useState({})
         header="Confirm"
         modal
         dismissableMask
+        draggable={false}
         onHide={() => {
           setEdit(false);
         }}>
-            <FormikFormDemo/>
+            {/* <FormikFormDemo/> */}
 
         </Dialog>
       <Dialog
@@ -198,8 +211,8 @@ const [data,setData] =useState({})
         </div>
       </Dialog>
       <Sidebar  visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <h3>Top Sidebar</h3>
-                    <h1>{data.tenderId}</h1>
+                    <h3>Top Sidebar Supplier</h3>
+                    <h1>{data.lastName}</h1>
                     <h1>Tender Description</h1>
                     <h1>Tender Number</h1>
                     <h1>Tender `Description`</h1>
@@ -208,5 +221,15 @@ const [data,setData] =useState({})
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    officers:state.officers.officers,
+  };
+};
 
-export default Table;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOfficers:()=>dispatch(fetchOfficer()),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Table);

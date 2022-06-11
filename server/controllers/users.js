@@ -159,11 +159,7 @@ const registerPendingSupplier = async (req, res) => {
     middleNam: userBody.middleName,
     lastName: userBody.lastName,
     email: userBody.email,
-    phoneNumber: {
-        countryCode: "+251",
-        regionalCode: "9",
-        number: "01023434",
-    },
+    phoneNumber: userBody.phoneNumber,
     address:userAddress._id,
     })
     const accountInform=new pendingAccount({
@@ -182,14 +178,7 @@ const registerPendingSupplier = async (req, res) => {
         tinNumber:userBody.tinNumber,
         Attacheddocument:userBody.Attacheddocument,
     })
-    // const newAccount = new account({
-    //     username: userBody.accountInfo.username,
-    //     password,
-    //     email: userBody.accountInfo.email,
-    //     role: userBody.accountInfo.role,
-    // })
-    //need to be nested like callback
-    // await newAccount.save()
+
     await userAddress.save()
     await personalInfor.save()
     await accountInform.save()
@@ -251,11 +240,7 @@ const registerOfficer = async (req, res) => {
     middleNam: officer1.middleName,
     lastName: officer1.lastName,
     email: officer1.email,
-    phoneNumber: {
-        countryCode: "+251",
-        regionalCode: "9",
-        number: "19298457",
-    },
+    phoneNumber:'+251919298457',
     address:userAddress._id,
 
     })
@@ -441,8 +426,9 @@ const updateAccount=async (req,res)=>{
   })
 }
 const deleteAccount=async(req,res)=>{
-    const filter=req.params.id
-   const dataBeforeDeletion=await user.findOneAndDelete(filter)
+    const id=req.params.id
+    console.log(id)
+   const dataBeforeDeletion=await officer.findOneAndDelete(id)
    res.status(200).json(dataBeforeDeletion)
 }
 const deleteTender=async(req,res)=>{
