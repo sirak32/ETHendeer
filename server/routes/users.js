@@ -15,7 +15,11 @@ import {
   updateAccount,
   deleteTender,
   getAllOfficers,
-  getPending
+  getPending,
+  registerPendingSupplier,
+  getPendingSuppliers,
+  getOnePending,
+  acceptSupplier
 } from "../controllers/users.js";
 import { supplier } from "../models/user.js";
 
@@ -25,6 +29,7 @@ const router = express.Router();
  *  @DESC registration routes for different
  */
 router.post("/supplier-registration", registerSupplier);
+router.post("/pending-supplier",registerPendingSupplier)
 router.post("/officer-registration", registerOfficer);
 
 /** *
@@ -54,6 +59,10 @@ router.get(
   displayDashboard
 );
 router.get('/pending-supplier',getPending)
+router.post('/accept-pending-supplier',acceptSupplier)
+router.get('/get-pending-suppliers',getPendingSuppliers)
+router.get('/get-pending-supplier/:id',getOnePending)
+
 router.get(
   "/officer-dashboard",
   passport.authenticate("jwt-bearer", {

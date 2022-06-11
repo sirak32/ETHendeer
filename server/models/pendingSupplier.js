@@ -6,10 +6,10 @@ const PendingsupplierSchema = mongoose.Schema({
      },
     accountInfo: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Account'
+        ref:'PendingAccount'
      },
     handlerRole:String, 
-    bussinesType: String,
+    businessType: String,
     organizationName:String,
     tinNumber: String,
     ownershipType:String,

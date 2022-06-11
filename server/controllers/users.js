@@ -8,7 +8,7 @@ import {
 } from '../models/user.js'
 import { pendingsupplier } from "../models/pendingSupplier.js";
 import {
-    account
+    account,pendingAccount
 } from "../models/account.js";
 import passport from "passport";
 import jwt from 'jsonwebtoken'
@@ -48,7 +48,6 @@ const registerSupplier = async (req, res) => {
         number: "01023434",
     },
     address:userAddress._id,
-    sex:'m'
     })
     const accountInform=new account({
         username: "Sirak",
@@ -82,14 +81,150 @@ const registerSupplier = async (req, res) => {
         message: "Account Created"
     })
 }
+const acceptSupplier = async (req, res) => {
+    const userBody = req.body
+    const usernameNotTaken = await validateUsername(userBody.accountInfo.username)
+    if (!usernameNotTaken) {
+        return res.status(401).json({
+            message: "Username is taken"
+        })
+    }
+    const emailNotTaken = await validateEmail(userBody.accountInfo.email)
+    if (!emailNotTaken) {
+        return res.status(401).json({
+            message: "Email is taken"
+        })
+    }
 
+    const password = await bcrypt.hash(userBody.accountInfo.password, 12)
+    // const userAddress = new address({
+    //     city: "Finote Selam",
+    //     subcity: "Kuchra",
+    //     wereda: "finot",
+    //     kebele: "01",
 
+    // })
+    // const personalInfor=userBody.personalInfo
+    const accountInform=new account({
+        username: userBody.accountInfo.username,
+    password:password,
+    email: userBody.accountInfo.email,
+    role: "supplier"
+    })
+    const newSupplier = new supplier({
+        personalInfo:userBody.personalInfo,
+        accountInfo:accountInform._id,
+        bussinessType:userBody.businessType,
+        organizationName:userBody.organizationName,
+        handlerRole:"manager",
+        ownershipType:userBody.ownershipType,
+        tinNumber:userBody.tinNumber,
+        Attacheddocument:"filename.pdf",
+    })
+
+    await accountInform.save()
+    await newSupplier.save()
+    await pendingsupplier.findByIdAndDelete(userBody._id)
+    return res.status(201).json({
+        message: "Supplier Accepted"
+    })
+}
+
+const registerPendingSupplier = async (req, res) => {
+    const userBody = req.body
+    const usernameNotTaken = await validatePendingUsername(userBody.username)
+    if (!usernameNotTaken) {
+        return res.status(401).json({
+            message: "Username is taken"
+        })
+    }
+
+    const emailNotTaken = await validatePendingEmail(userBody.email)
+    if (!emailNotTaken) {
+        return res.status(401).json({
+            message: "Email is taken"
+        })
+    }
+
+    const password = await bcrypt.hash(userBody.password, 12)
+    const userAddress = new address({
+        city: userBody.city.name,
+        subcity:userBody.subcity,
+        wereda: userBody.wereda,
+        kebele: userBody.kebele,
+
+    })
+    const personalInfor=new user({
+        firstName: userBody.firstName,
+    middleNam: userBody.middleName,
+    lastName: userBody.lastName,
+    email: userBody.email,
+    phoneNumber: {
+        countryCode: "+251",
+        regionalCode: "9",
+        number: "01023434",
+    },
+    address:userAddress._id,
+    })
+    const accountInform=new pendingAccount({
+        username: userBody.username,
+    password: password,
+    email: userBody.email,
+    role: "supplier"
+    })
+    const newSupplier = new pendingsupplier({
+        personalInfo:personalInfor._id,
+        accountInfo:accountInform._id,
+        businessType:userBody.businessType,
+        organizationName:userBody.organizationName,
+        handlerRole:"manager",
+        ownershipType:"PartnerShip",
+        tinNumber:userBody.tinNumber,
+        Attacheddocument:userBody.Attacheddocument,
+    })
+    // const newAccount = new account({
+    //     username: userBody.accountInfo.username,
+    //     password,
+    //     email: userBody.accountInfo.email,
+    //     role: userBody.accountInfo.role,
+    // })
+    //need to be nested like callback
+    // await newAccount.save()
+    await userAddress.save()
+    await personalInfor.save()
+    await accountInform.save()
+    await newSupplier.save()
+    return res.status(201).json({
+        message: "Account Created"
+    })
+}
 
 
 /////
 const getPending=async(req,res)=>{
     const pend=await pendingsupplier.find().populate('accountInfo').populate('personalInfo')
     res.status(200).json(pend)
+}
+const getPendingSuppliers=async(req,res)=>{
+    const pend=await pendingsupplier.find().populate('accountInfo')
+    res.status(200).json(pend)
+}
+const getOnePending=async(req,res)=>{
+    const id=req.params.id
+    
+    try {
+        
+        const sup=await pendingsupplier.findById(id).populate('accountInfo')
+        // const post = await tender.findById(id);
+        console.log(sup)
+        res.status(200).json(sup)
+        // res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({
+            message: error.message
+        });
+    }
+
 }
 
 
@@ -99,38 +234,37 @@ const getPending=async(req,res)=>{
 // Officer Registration
 
 const registerOfficer = async (req, res) => {
-
+    const officer1=req.body
     const userAddress = new address({
-        city: "Finote Selam",
-        subcity: "Kuchra",
-        wereda: "finot",
-        kebele: "01",
-
+        city: officer1.city.name,
+        subcity: officer1.subcity,
+        wereda: officer1.wereda,
+        kebele: officer1.kebele
     })
     const personalInfor=new user({
-        firstName: "Tiliksew",
-    middleNam: "Mulugeta",
-    lastName: "Alamirew",
-    email: "tilik@gmail.com",
+        firstName: officer1.firstName,
+    middleNam: officer1.middleName,
+    lastName: officer1.lastName,
+    email: officer1.email,
     phoneNumber: {
         countryCode: "+251",
         regionalCode: "9",
         number: "19298457",
     },
     address:userAddress._id,
-    sex:'m'
+
     })
-    const Offipassword = await bcrypt.hash('tilik', 12)
+    const Offipassword = await bcrypt.hash(officer1.password, 12)
     const accountInform=new account({
-        username: "tilik",
+        username: officer1.username,
     password: Offipassword,
-    email: "tilik",
+    email: officer1.email,
     role: "officer"
     })
     const newOfficer = new officer({
         personalInfo:personalInfor._id,
         accountInfo:accountInform._id,  
-        officerId:'ETS3'
+        officerId:officer1.officerId,
     })
     await userAddress.save()
     await personalInfor.save()
@@ -182,6 +316,21 @@ const getAllOfficers=async (req, res) => {
 
 const validateUsername = async username => {
     const userName = await account.findOne({
+        username
+    })
+    console.log(userName)
+    return userName ? false : true
+}
+const validatePendingEmail = async email => {
+    const Email = await pendingsupplier.findOne({
+        email
+    })
+    console.log('email-',Email)
+    return Email ? false : true
+}
+
+const validatePendingUsername = async username => {
+    const userName = await pendingsupplier.findOne({
         username
     })
     console.log(userName)
@@ -311,5 +460,9 @@ export {
     updateAccount,
     deleteTender,
     getAllOfficers,
-    getPending
+    getPending,
+    registerPendingSupplier,
+    getPendingSuppliers,
+    getOnePending,
+    acceptSupplier
 }
