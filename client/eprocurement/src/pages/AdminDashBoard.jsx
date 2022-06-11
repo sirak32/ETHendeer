@@ -45,6 +45,8 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
           <Wrapper>
             <Dash title="Suppliers" number={suppliers.length}/>
             <Dash title="Officers" number={officers.length}/>
+            <Dash title="Pending " number={pendings.length}/>
+
 
             </Wrapper>
 
