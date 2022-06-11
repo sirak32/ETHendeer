@@ -1,9 +1,7 @@
 import * as React from "react";
-// import Card from '@mui/material/Card';
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-// import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import { MdArrowDropDown } from "react-icons/md";
 import { Container, Grid, Stack } from "@mui/material";
@@ -63,14 +61,18 @@ const [selected,setSelected]=useState({})
   const [vis, setVis] = useState(false);
   const [vis2, setVis2] = useState(false);
   console.log("tenders are from supplier", tenders);
+  let ten=[]
   useEffect(() => {
     fetchTenders();
   }, []);
+  
+  console.log('filtered',ten) 
 
   return tenders.length !== 0 ? (
     <>
       <Grid container spacing={5}>
         {tenders.map((t) => (
+          new Date(t.closingDate).toISOString()>new Date().toISOString()?
           <Grid item xs={3}>
             <Card
               className="m-0 scalein animation-duration-250 max-h-1rem"
@@ -89,7 +91,7 @@ const [selected,setSelected]=useState({})
             </Card>
 
             <Toast ref={toastBR } />
-          </Grid>
+          </Grid>:''
         ))}
       </Grid>
       <Dialog
@@ -145,22 +147,22 @@ const [selected,setSelected]=useState({})
             className="col m-6 p-6 "
           >
             {/* <p class="text-3xl w-10 font-bold">{selected.title}</p> */}
-            <center class="text-3xl w-10 font-bold">{selected.title}</center>
+            <center className="text-3xl w-10 font-bold">{selected.title}</center>
 
-            <p class="text-2xl w-10 ">
+            <p className="text-2xl w-10 ">
                <br /> {selected.description}
             </p>
-            <p class="text-2xl w-10 flex align-items-center justify-content-end mt-8">
-              Published <pre>  </pre><i class="pi pi-calendar-minus"> </i>  <pre>  </pre>{new Date(selected.publishedDate).toDateString()}
+            <p className="text-2xl w-10 flex align-items-center justify-content-end mt-8">
+              Published <pre>  </pre><i className="pi pi-calendar-minus"> </i>  <pre>  </pre>{new Date(selected.publishedDate).toDateString()}
             </p>
-            <p class="text-2xl w-10 flex align-items-center justify-content-end">
-              Closing Date<pre>  </pre><i class="pi pi-calendar-minus"> </i> <pre>  </pre>
+            <p className="text-2xl w-10 flex align-items-center justify-content-end">
+              Closing Date<pre>  </pre><i className="pi pi-calendar-minus"> </i> <pre>  </pre>
               {new Date(selected.closingDate).toDateString().replace(/ /g, "-")}
             </p>
-            <p class="text-2xl w-10 flex align-items-center justify-content-end">
-              Bid Opening <pre>  </pre><i class="pi pi-calendar-minus"> </i><pre>  </pre> {new Date(selected.bidOpenOn).toDateString()}
+            <p className="text-2xl w-10 flex align-items-center justify-content-end">
+              Bid Opening <pre>  </pre><i className="pi pi-calendar-minus"> </i><pre>  </pre> {new Date(selected.bidOpenOn).toDateString()}
             </p>
-            <p class="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p>
+            <p className="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p>
            {/* <p>Remaining Days</p> */}
             <Button
               onClick={() => {

@@ -96,7 +96,7 @@ const acceptSupplier = async (req, res) => {
         })
     }
 
-    const password = await bcrypt.hash(userBody.accountInfo.password, 12)
+    // const password = await bcrypt.hash(userBody.accountInfo.password, 12)
     // const userAddress = new address({
     //     city: "Finote Selam",
     //     subcity: "Kuchra",
@@ -107,7 +107,7 @@ const acceptSupplier = async (req, res) => {
     // const personalInfor=userBody.personalInfo
     const accountInform=new account({
         username: userBody.accountInfo.username,
-    password:password,
+    password:userBody.accountInfo.password,
     email: userBody.accountInfo.email,
     role: "supplier"
     })

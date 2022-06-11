@@ -305,9 +305,7 @@ export const FormikFormDemo = () => {
 
       if (!data.firstName) {
         errors.firstName = "First Name is required.";
-      } else if (!/^[A-Za-z]+/i.test(data.firstName)) {
-        errors.firstName = "Invalid First Name. E.g.+251919298457";
-      }
+      } 
 
       if (!data.subcity) {
         errors.subcity = "Subcity  is required.";
