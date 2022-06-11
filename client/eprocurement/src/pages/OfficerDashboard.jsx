@@ -47,7 +47,14 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   // const [{}]=tenders.map((tender)=>)
     console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
-  
+  let closedNo=0
+  const closed=tenders.map((t)=>{
+    let cd=new Date(t.closingDate).toISOString()
+    let td=new Date().toISOString()
+if(cd<=td)
+closedNo++
+
+  })
   return tenders ? (
     <Div>
       {/* <SideBar menu={menus} /> */}
@@ -59,8 +66,8 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
             <Wrapper>
               <Dash title="Suppliers" number={suppliers.length} />
               <Dash title="Tenders" number={tenders.length} />
-              <Dash title="Active" number={tenders.length} />
-              <Dash title="Closed" number="45" />
+              <Dash title="Active" number={tenders.length-closedNo} />
+              <Dash title="Closed" number={closedNo} />
             </Wrapper>           
             <BasicTabs data={{OptmTender,suppliers,tenders}} />
           </div>

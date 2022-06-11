@@ -102,8 +102,8 @@ console.log("now ",now," op ",op,op<now)
 "
           className="p-button-rounded mr-2"
           onClick={() => {
-            setVisibleTop(true)
             setData(rowData)
+            setVisibleTop(true)
           }}
         />
         <Button
@@ -168,7 +168,6 @@ console.log("now ",now," op ",op,op<now)
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
-        {/* <Column field='status' sortable header='status'></Column> */}
         <Column
           field={"title"}
           header="Status"
@@ -177,8 +176,6 @@ console.log("now ",now," op ",op,op<now)
           body={statusBodyTemplate}
           
         />
-        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
         <Column
           body={actionBodyTemplate}
           exportable={false}
@@ -235,13 +232,19 @@ console.log("now ",now," op ",op,op<now)
           {<span>Are you sure you want to delete the selected products?</span>}
         </div>
       </Dialog>
-      <Sidebar  visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <h3>Top Sidebar</h3>
-                    <h1>{data.tenderId}</h1>
-                    <h1>Tender Description</h1>
-                    <h1>Tender Number</h1>
-                    <h1>Tender `Description`</h1>
-
+      <Sidebar className=" text-500 border-cyan-500 surface-overlay border-3 border-round-md font-bold m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+                     <center><h1>{data.title}<pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h1> <hr></hr></center>
+                       
+                    <h1>{data.description}</h1>
+                    <h1>{data.title}</h1> 
+                    <h1>ጨርታዉ የተከፈተበት _ <i>{new Date(data.publishedDate).toDateString()}</i></h1>
+                    <h1>ጨረታዉ የሚዘጋው <i>{new Date(data.closingDate).toDateString()}</i></h1>
+                    <h1>ሰነድ የሚከፈተው <i>{new Date(data.bidOpenOn).toDateString()}</i></h1>
+                    <hr></hr>
+                    <h1><i className="">የጨረታ መስፈርቶች</i> <br/> {data.termsAndConditions}</h1> 
+                    {data.applicants==[] && <h2>
+          You have unread messages.
+        </h2>}
                 </Sidebar>
     </>
   ):<ProgressBar/>;
