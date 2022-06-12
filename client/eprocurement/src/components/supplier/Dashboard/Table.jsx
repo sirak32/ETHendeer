@@ -55,10 +55,6 @@ console.log("now ",now," op ",op,op<now)
     return <Button label={`Active`} className="p-button-success" />;
     else
     return <Button label={`Closed`} className="p-button-warning" />;
-
-
-    
-    // return <span  className={`status-active`}>{rowData.status}</span>;
   };
   const editProduct = () => {};
   const confirmDeleteProduct = () => {};
@@ -213,8 +209,8 @@ console.log("now ",now," op ",op,op<now)
                     <h1>ሰነድ የሚከፈተው <i className="text-white">{new Date(data.bidOpenOn).toDateString()}</i></h1>
                     <hr></hr>
                     <h1><i className="">የጨረታ መስፈርቶች</i>  <p className="text-white"> {data.termsAndConditions}</p></h1> 
-                    {data.applicants==[] && <h2>
-          You have unread messages.
+                    {data.applicants!==null && <h2> <hr></hr>
+          {/* {data.applicants} */}
         </h2>}
                 </Sidebar>
     </>
