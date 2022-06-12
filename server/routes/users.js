@@ -22,6 +22,7 @@ import {
   acceptSupplier,
   rejectPending
 } from "../controllers/users.js";
+import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
 import {officer} from '../models/user.js'
 const router = express.Router();
@@ -108,7 +109,9 @@ router.get('/fromme/:id',async (req,res)=>{
     const id=req.params.id
       console.log(id)
      const dataBeforeDeletion=await officer.findByIdAndRemove(id)
-     res.status(200).json(dataBeforeDeletion)
+     const delAcc=await account.findByIdAndRemove(dataBeforeDeletion.accountInfo)
+     res.status(200).json({offi:dataBeforeDeletion,acc:delAcc})
+    
   } catch (error) {
     res.status(404).json({message:error.message})
   }
