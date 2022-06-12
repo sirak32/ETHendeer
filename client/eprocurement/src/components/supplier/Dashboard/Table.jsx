@@ -18,36 +18,13 @@ const Table = ({tenderss,fetchTenders}) => {
   const [visibleTop, setVisibleTop] = useState(false);
   const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
-  // function createData(
-  //   tenderNO,
-  //   tenderId,
-  //   tenderTitle,
-  //   openingDate,
-  //   closingDate,
-  //   status
-  // ) {
-  //   return {
-  //     tenderNO,
-  //     tenderId,
-  //     tenderTitle: tenderTitle.split("T")[0],
-  //     openingDate: openingDate.split("T")[0],
-  //     closingDate: closingDate.split("T")[0],
-  //     status,
-  //   };
-  // }
   useEffect(()=>{
     fetchTenders()
   },[])
-  // let dataa = props.data;
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
   });
 
-  // console.log("my NEw KINGDOM", dataa);
-  let i;
-
-  const rows = [];
-  console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
     return (
       <Button
@@ -129,7 +106,6 @@ console.log("now ",now," op ",op,op<now)
       </>
     );
   };
-  console.log("rows are", rows);
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return tenderss!==null?(
     <>
@@ -138,7 +114,7 @@ console.log("now ",now," op ",op,op<now)
         editMode="cell"
         header="Tenders List"
         value={tenders}
-        responsiveLayout="scroll"
+        responsiveLayout="stack"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
         dataKey={tenders._id}

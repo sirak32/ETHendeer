@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import AddTenderForm from './AddTenderForm'
 import HorizontalLinearStepper from './Stepper';
 import Table from './Table'
-import SupplierTable from './SupplierTable'
+import SuppliersTable from './SuppliersTable'
 import {FormikFormDemo} from './RegisterOfficer'
 import { TabView, TabPanel } from 'primereact/tabview';
 
@@ -34,7 +34,7 @@ export default function BasicTabs(props) {
     </TabPanel>
     <TabPanel header="SUPPLIERS LIST">
         Content III
-        <SupplierTable data={props.data.suppliers}/>
+        <SuppliersTable data={props.data.suppliers}/>
     </TabPanel>
 </TabView>
   );
