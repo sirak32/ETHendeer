@@ -46,22 +46,14 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
             <Dash title="Suppliers" number={suppliers.length}/>
             <Dash title="Officers" number={officers.length}/>
             <Dash title="Pending " number={pendings.length}/>
-
-
             </Wrapper>
-
             <AdminTab data={{suppliers,officers,pendings}}/>
-
           </div>
           <div className="row__two"></div>
         </div>
       </Section>
     </Div>
-    // <div>hi</div>
-    //  <> <SideBar/>
-    //   <NavBar/>
-    //   <Table/>
-    // </>
+
   );
 };
 

@@ -14,47 +14,80 @@ import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import Side from '../components/supplier/Dashboard/SupSide'
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { InputText } from "primereact/inputtext";
+import { useFormik } from "formik";
+import { Password } from "primereact/password";
+import { classNames } from "primereact/utils";
+import Containe from '@mui/material/Container'
+
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
  
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-  // const [tendeN,setTenderN]=useState(null)
   const menus=['Dashboard','Tenders','Profile','Help & Support']
+  let myInfo
+  let uname
   useEffect(() => {
-    // dispatch({type:'SET_LOADING'})
-    // dispatch({type:'SET_TENDER',
-    //   payload:'data'})
+
         const tokens=localStorage.getItem('token')
         const role=localStorage.getItem('role')
-
         if(role!=='supplier')
         navigate('/')
         fetchTenders();
         fetchSuppliers()
-        // console.log('Im being belcash baldereba',tenders)
-  }, []);
-  const OptmTender = [];
-  let i;
-  for (i = 0; i < tenders.length; i++) {
-    OptmTender[i] = { 
-      title: tenders[i].title, 
-      tenderNo: tenders[i].number,
-      bidOpenOn:tenders[i].bidOpenOn,
-      closingDate:tenders[i].closingDate };
-  }
-  // const [{}]=tenders.map((tender)=>)
-    console.log("tender from belcash", tenders,'supplier from redux',suppliers);
-  const t = tenders.map((tender) => <h1>{tender.title}</h1>);
-  let closedNo=0
-  const closed=tenders.map((t)=>{
-    let cd=new Date(t.closingDate).toISOString()
-    let td=new Date().toISOString()
-if(cd<=td)
-closedNo++
+        myInfo=suppliers.filter((supplier)=>{
 
-  })
+          return supplier._id=localStorage.getItem('whoId')
+        }
+       )
+       uname=myInfo[1].accountInfo.username
+       localStorage.setItem('un',uname) 
+       console.log("myInfo",myInfo) 
+      }, []);
+// if(my)
+  const textEditor = (options) => {
+    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+}
+const onRowEditComplete1=()=>{
+
+}
+const formik = useFormik({
+  initialValues: {
+      username: localStorage.getItem('un'),
+      password: '',
+      password2:''
+  },
+  validate: (data) => {
+      let errors = {}; 
+
+      if (!data.username) {
+          errors.emausernameil = 'username is required.';
+      }   
+
+      if (!data.password) {
+          errors.password = 'Password is required.';
+      }
+      if (!data.password2) {
+        errors.password2 = 'Confirm Password ';
+    }
+      
+      return errors;
+  },
+  onSubmit: (data) => {
+      // setFormData(data);
+      // setShowMessage(true);
+
+      formik.resetForm();
+  }
+});
+const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+const getFormErrorMessage = (name) => {
+    return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+};
   return tenders ? (
     <Div>
       {/* <SideBar menu={menus} /> */}
@@ -66,10 +99,37 @@ closedNo++
             {/* <Wrapper>
               <Dash title="Suppliers" number={suppliers.length} />
               <Dash title="Tenders" number={tenders.length} />
-              <Dash title="Active" number={tenders.length-closedNo} />
+              <Dash title="Active" number={tenders.length-closedNo} /> 
               <Dash title="Closed" number={closedNo} />
             </Wrapper>            */}
             {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
+            <div >
+              <div className="field">
+                            <span className="p-float-label p-input-icon-right">
+                                <i className="pi pi-envelope" />
+                                <InputText id="username" name="username" value={formik.values.username} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('username') })} />
+                                <label htmlFor="username" className={classNames({ 'p-error': isFormFieldValid('username') })}>Username</label>
+                            </span>
+                            {getFormErrorMessage('username')}
+                        </div>
+                        <div className="field"> 
+                            <span className="p-float-label">
+                                <Password id="password" name="password" value={formik.values.password} onChange={formik.handleChange} toggleMask
+                                    className={classNames({ 'p-invalid': isFormFieldValid('password') })}   />
+                                <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>Password</label>
+                            </span>
+                            {getFormErrorMessage('password')}
+                        </div>
+                        <div className="field">
+                            <span className="p-float-label">
+                                <Password id="password2" name="password2" value={formik.values.password2} onChange={formik.handleChange} toggleMask
+                                    className={classNames({ 'p-invalid': isFormFieldValid('password2') })}   />
+                                <label htmlFor="password2" className={classNames({ 'p-error': isFormFieldValid('password2') })}>Confirm Password</label>
+                            </span>
+                            {getFormErrorMessage('password2')}
+                        </div>
+            </div>
+            
           </div>
           <div className="row__two"></div>
         </div>

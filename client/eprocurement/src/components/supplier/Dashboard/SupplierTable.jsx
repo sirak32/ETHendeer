@@ -8,6 +8,7 @@ import { fetchTender } from "../../../actions/tenderAction";
 import { FormikFormDemo } from "./EditSupplier";
 import { Dialog } from "primereact/dialog";
 import { fetchSuppliers } from "../../../actions/supplierAction";
+import axios from "axios";
 
 const Table = ({suppliers,fetchSuppliers}) => {
   const [edit,setEdit]=useState(false)
@@ -66,19 +67,32 @@ const Table = ({suppliers,fetchSuppliers}) => {
           icon="pi pi-caret-down
 "
           className="p-button-rounded mr-2"
-          onClick={() => confirmDeleteProduct(rowData)}
+          onClick={() => {
+            
+            confirmDeleteProduct(rowData)
+          
+          }}
           />
-        <Button
+        {/* <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
           onClick={() => {setEdit(true)
           setSuppli(rowData)
           }}
-          />
+          /> */}
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
-          onClick={() => confirmDeleteProduct(rowData)}
+          onClick={() => {
+            console.log('consola',rowData._id)
+            axios.get(`http://localhost:5001/supli/${rowData._id}`)
+            .then((res)=>{
+             fetchSuppliers()
+              // setDeleteProductsDialog(true);
+            })
+            // alert("box")
+            confirmDeleteProduct(rowData)
+          }}
           />
       </>
     );
@@ -108,10 +122,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
       <Column field="personalInfo.phoneNumber.number" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
-      {/* <Column field='status' sortable header='status'></Column> */}
-      {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
       <Column
         body={actionBodyTemplate}
         exportable={false}

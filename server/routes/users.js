@@ -117,6 +117,21 @@ router.get('/fromme/:id',async (req,res)=>{
   }
   // res.json({message:id})
 })
+
+router.get('/supli/:id',async (req,res)=>{
+  try {
+    
+    const id=req.params.id
+      console.log(id)
+     const dataBeforeDeletion=await supplier.findByIdAndRemove(id)
+     const delAcc=await account.findByIdAndRemove(dataBeforeDeletion.accountInfo)
+     res.status(200).json({offi:dataBeforeDeletion,acc:delAcc})
+    
+  } catch (error) {
+    res.status(404).json({message:error.message})
+  }
+  // res.json({message:id})
+})
 // DELETING THE SUPPLIER AND OFFICER ACCOUNTS
 
 router.delete('/delete-supplier', passport.authenticate("jwt-bearer", {

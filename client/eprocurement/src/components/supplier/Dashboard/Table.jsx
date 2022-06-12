@@ -9,6 +9,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
+import { InputText } from "primereact/inputtext";
 
 
 const Table = ({tenderss,fetchTenders}) => {
@@ -106,6 +107,9 @@ console.log("now ",now," op ",op,op<now)
       </>
     );
   };
+  const textEditor = (options) => {
+    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+}
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return tenderss!==null?(
     <>
@@ -127,12 +131,13 @@ console.log("now ",now," op ",op,op<now)
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
-        <Column
+        {/* <Column
+        
           selectionMode="multiple"
           headerStyle={{ width: "3em" }}
-        ></Column>
+        ></Column> */}
         {console.log("tenders are",tenders)}
-        <Column field="title" style={{width:"300px"}} sortable filter header="Tender Name"></Column>
+        <Column editor={(options) => textEditor(options)} style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
