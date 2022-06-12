@@ -201,7 +201,7 @@ const [selected,setSelected]=useState({})
 
                     await axios.post('http://localhost:5001/tenders/applied-tenders',{
                       tender:selected._id,
-                      applier:'628c670820fa3eaa840adfb8',
+                      applier:localStorage.getItem('whoId'),
                       businessDoc:busi,
                       technicalDoc:tech
                     }).then(()=>{console.log("post applied tender")

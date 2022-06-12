@@ -44,8 +44,8 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
           return supplier._id=localStorage.getItem('whoId')
         }
        )
-       uname=myInfo[1].accountInfo.username
-       localStorage.setItem('un',uname) 
+      //  uname=myInfo[1].accountInfo.username
+      //  localStorage.setItem('un',uname) 
        console.log("myInfo",myInfo) 
       }, []);
 // if(my)
@@ -57,7 +57,7 @@ const onRowEditComplete1=()=>{
 }
 const formik = useFormik({
   initialValues: {
-      username: localStorage.getItem('un'),
+      username: '',
       password: '',
       password2:''
   },
@@ -103,8 +103,12 @@ const getFormErrorMessage = (name) => {
               <Dash title="Closed" number={closedNo} />
             </Wrapper>            */}
             {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
-            <div >
-              <div className="field">
+            <div className="flex align-items-center justify-content-center top-50 font-bold text-white border-round m-2" >
+             
+             <div>
+
+             
+              <div className="field w-7 m-6">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
                                 <InputText id="username" name="username" value={formik.values.username} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('username') })} />
@@ -112,22 +116,22 @@ const getFormErrorMessage = (name) => {
                             </span>
                             {getFormErrorMessage('username')}
                         </div>
-                        <div className="field"> 
-                            <span className="p-float-label">
+                        <div className="field m-6 min-w-full"> 
+                            <span className="p-float-label min-w-full">
                                 <Password id="password" name="password" value={formik.values.password} onChange={formik.handleChange} toggleMask
                                     className={classNames({ 'p-invalid': isFormFieldValid('password') })}   />
                                 <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>Password</label>
                             </span>
                             {getFormErrorMessage('password')}
                         </div>
-                        <div className="field">
+                        <div className="field m-6">
                             <span className="p-float-label">
                                 <Password id="password2" name="password2" value={formik.values.password2} onChange={formik.handleChange} toggleMask
                                     className={classNames({ 'p-invalid': isFormFieldValid('password2') })}   />
                                 <label htmlFor="password2" className={classNames({ 'p-error': isFormFieldValid('password2') })}>Confirm Password</label>
                             </span>
                             {getFormErrorMessage('password2')}
-                        </div>
+                        </div></div>
             </div>
             
           </div>

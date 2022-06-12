@@ -2,9 +2,11 @@ import mongoose from "mongoose";
 const appliedTendersSchema = mongoose.Schema({
     tender: {
         type: mongoose.Schema.Types.ObjectId,
+        ref:'postTender'
     },
     applier:{
         type: mongoose.Schema.Types.ObjectId,
+        ref:'Supplier'
     },
     appliedDate:{
         type:mongoose.Schema.Types.Date,

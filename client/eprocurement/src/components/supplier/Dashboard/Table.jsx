@@ -10,8 +10,6 @@ import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
 import { InputText } from "primereact/inputtext";
-
-
 const Table = ({tenderss,fetchTenders}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)

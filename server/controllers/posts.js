@@ -27,9 +27,9 @@ const getAppliedTenders=async (req,res) =>{
         // const valid=mongoose.Types.ObjectId.isValid("628c670820fa3eaa840adfb8")
         // console.log(valid)
         // res.json(valid)
-        const applied=await appliedtenders.find()
+        const applied=await appliedtenders.find().populate('tender')
         // console.log(applied)
-        res.status(200).json(applied[0].businessDoc)
+        res.status(200).json(applied)
     } catch (error) {
         res.status(404).json({message:error})
     }
@@ -38,15 +38,38 @@ const getAppliedTenders=async (req,res) =>{
 }
 const createAppliedTender=async (req,res)=>{
     const body = req.body
+    const t=body.tender
+    let repeat=false
+    const tend=await tender.findById(t)
+    tend.applicants.map((app)=>{
+        console.log(app)
+        console.log(body.applier)
+        if(app.equals(new mongoose.Types.ObjectId(body.applier)))
+        {
+            repeat=true
+        return;}
+        
+    })
+    if(!repeat){
 
-    console.log(body)
-    const newApplied=new appliedtenders(body)
-    try {
-       await newApplied.save()
-        res.status(201).json(newApplied)
-    } catch (error) {
-        res.json(error)
+        tend.applicants=[...tend.applicants,mongoose.Types.ObjectId(body.applier) ]
+        await tend.save()
+        const applica=tend.applicants
+    
+        tend.appllicants=[...applica,t.applier]
+        tend.save()
+        const newApplied=new appliedtenders(body)
+        try {
+           await newApplied.save()
+            res.status(201).json(tend)
+        } catch (error) {
+            res.json(error)
+        }
     }
+    else{
+        res.status(404).json({message:"Re-Apply is not allowed"})
+    }
+    // res.json({message:tend})
 }
 
 const createPost = async (req, res) => {
