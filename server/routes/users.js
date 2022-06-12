@@ -23,12 +23,13 @@ import {
   rejectPending
 } from "../controllers/users.js";
 import { supplier } from "../models/user.js";
-
+import {officer} from '../models/user.js'
 const router = express.Router();
 
 /** *
  *  @DESC registration routes for different
  */
+// router.delete('/:id',deleteAccount)
 router.post("/supplier-registration", registerSupplier);
 router.post("/pending-supplier",registerPendingSupplier)
 router.post("/officer-registration", registerOfficer);
@@ -85,6 +86,7 @@ router.get(
 
 router.get("/suppliers", displayAll);
 router.get("/officers",getAllOfficers)
+router.get("/officers/:id",deleteAccount)
 
 
 //UPDATING THE SUPPLIER,ADMIN AND OFFICER ACCOUNTS
@@ -100,7 +102,13 @@ router.patch('/update-admin', passport.authenticate("jwt-bearer", {
   session: false,
 }), checkRole(['admin']),updateAccount)
 
-
+router.get('/fromme/:id',async (req,res)=>{
+  const id=req.params.id
+    console.log(id)
+   const dataBeforeDeletion=await officer.findOneAndDelete(id)
+   res.status(200).json(dataBeforeDeletion)
+  // res.json({message:id})
+})
 // DELETING THE SUPPLIER AND OFFICER ACCOUNTS
 
 router.delete('/delete-supplier', passport.authenticate("jwt-bearer", {

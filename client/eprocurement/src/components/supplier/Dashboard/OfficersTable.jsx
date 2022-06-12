@@ -104,7 +104,7 @@ console.log('consola',officers)
           className="p-button-rounded p-button-warning"
           onClick={() => {
             console.log('consola',rowData._id)
-              axios.delete(`http://localhost:5001/officer-deletion/${rowData._id}`)
+              axios.get(`http://localhost:5001/fromme/${rowData._id}`)
               .then((res)=>{
                 fetchOfficers()
                 setDeleteProductsDialog(true);
@@ -142,18 +142,8 @@ console.log('consola',officers)
         ></Column>
         <Column field="officerId" sortable filter header="Officer Id"></Column>
         <Column field="personalInfo.firstName" sortable  header="Officer Name"></Column>
-        <Column field="personalInfo.phoneNumber.number" sortable  header="Phone Number"></Column>
+        <Column field="personalInfo.phoneNumber" sortable  header="Phone Number"></Column>
         <Column field="personalInfo.email" sortable  header="Email"></Column>
-        {/* <Column field='status' sortable header='status'></Column> */}
-        {/* <Column
-          field="status"
-          header="Participations"
-          sortable
-          style={{ minWidth: "10rem" }}
-          body={statusBodyTemplate}
-        /> */}
-        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-        {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
         <Column
           body={actionBodyTemplate}
           exportable={false}
@@ -212,7 +202,7 @@ console.log('consola',officers)
       </Dialog>
       <Sidebar  visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
                     <h3>Top Sidebar Supplier</h3>
-                    <h1>{data.lastName}</h1>
+                    <h1>{data._id}</h1>
                     <h1>Tender Description</h1>
                     <h1>Tender Number</h1>
                     <h1>Tender `Description`</h1>
