@@ -34,9 +34,10 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
   const showSuccess = () => {
     toast.current.show({severity:'success', summary: 'Tender Added Successfully', detail:'Tender Added Successfully Descriptions Here', life: 10000});
 }
-
+let creator;
   useEffect(() => {
     // fetchTenders()
+     creator=localStorage.getItem('whoId')
   }, []);
   const formik = useFormik({
     initialValues: {
@@ -44,16 +45,10 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       description: "",
       number: "",
       type: "",
-      creator: "6295f2a9d4ed395d1c862eb7",
-      // publishedDate: null,
+      creator: creator,
       closingDate: "null",
       bidOpenOn: "null",
-      termsAndConditions: "",
-      // catagory: "",
-      // lotNo: "null",
-      // minPrice: "",
-      // participationFee: "",
-      // bidSecurityAmount: "",
+
     },
     onSubmit: async (data) => {
       // e.preventDefault();
@@ -74,11 +69,12 @@ const InputAdornments = ({ tenders, fetchTenders }) => {
       ).then(async(res)=>{
         console.log('upload success')
         const file=res.data
-          await axios.post("http://localhost:5001/tenders/", {...data,creator:"datacreator",bidOpenOn,closingDate,publishedDate,document:file})
+        const c=localStorage.getItem('whoId')
+          await axios.post("http://localhost:5001/tenders/", {...data,creator:c,bidOpenOn,closingDate,publishedDate,document:file})
           .then(() => {
             // setNo('changed')
             showSuccess()
-            formik.resetForm()
+            // formik.resetForm()
           });
         console.log(res.data)
       }).then(()=>fetchTenders());

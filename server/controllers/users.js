@@ -73,6 +73,7 @@ const registerSupplier = async (req, res) => {
     // })
     //need to be nested like callback
     // await newAccount.save()
+    // accountInform.user=
     await userAddress.save()
     await personalInfor.save()
     await accountInform.save()
@@ -95,16 +96,6 @@ const acceptSupplier = async (req, res) => {
             message: "Email is taken"
         })
     }
-
-    // const password = await bcrypt.hash(userBody.accountInfo.password, 12)
-    // const userAddress = new address({
-    //     city: "Finote Selam",
-    //     subcity: "Kuchra",
-    //     wereda: "finot",
-    //     kebele: "01",
-
-    // })
-    // const personalInfor=userBody.personalInfo
     const accountInform=new account({
         username: userBody.accountInfo.username,
     password:userBody.accountInfo.password,
@@ -121,7 +112,7 @@ const acceptSupplier = async (req, res) => {
         tinNumber:userBody.tinNumber,
         Attacheddocument:"filename.pdf",
     })
-
+    accountInform.user=newSupplier._id
     await accountInform.save()
     await newSupplier.save()
     await pendingsupplier.findByIdAndDelete(userBody._id)
@@ -262,6 +253,7 @@ const registerOfficer = async (req, res) => {
         accountInfo:accountInform._id,  
         officerId:officer1.officerId,
     })
+    accountInform.user=newOfficer._id
     await userAddress.save()
     await personalInfor.save()
     await accountInform.save() 
@@ -378,10 +370,10 @@ const userLogin = async (userCreds, role, res) => {
     //     console.log(res)
     // })
     // console.log(officerIds.accountInfo)
-    const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
-    const u=users.filter((user)=>{
-        return user.accountInfo.username===username
-    })
+    // const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
+    // const u=users.filter((user)=>{
+    //     return user.accountInfo.username===username
+    // })
     // const offId=u[0]._id
     // res.status(200).json(u)
     if (isMatch) {
@@ -403,6 +395,7 @@ const userLogin = async (userCreds, role, res) => {
         return res.status(200).json({
             ...result,
             succes: true,
+            user:user.user
             // offId
         })
 

@@ -39,22 +39,14 @@ const [data,setData] =useState({})
     fetchTenders()
   },[])
   // let dataa = props.data;
-  let tenders = tenderss;
+  let tenders = tenderss.filter((t)=>{
+    return t.creator===localStorage.getItem('whoId')
+  });
 
   // console.log("my NEw KINGDOM", dataa);
   let i;
 
   const rows = [];
-  // for (i = 0; i < tenderss.length; i++) {
-  //   rows[i] = createData(
-  //     i,
-  //     // dataa[i].title,
-  //     // dataa[i].bidOpenOn,
-  //     // dataa[i].closingDate,
-  //     // dataa[i].bidOpenOn,
-  //     "Active"
-  //   );
-  // }
   console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
     return (

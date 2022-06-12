@@ -85,7 +85,7 @@ const Login = () => {
           setLogged(true)
 alert(response.data.token);
 localStorage.setItem('token', response.data.token);
-localStorage.setItem('whoId', response.data.offId);
+localStorage.setItem('whoId', response.data.user);
 localStorage.setItem('role',response.data.role)
 setRole(response.data.role)
           // navigate('/officer')
