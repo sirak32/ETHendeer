@@ -200,8 +200,14 @@ const rejectPending=async(req,res)=>{
     res.status(200).json("Request Rejected")
 }
 const getPendingSuppliers=async(req,res)=>{
-    const pend=await pendingsupplier.find().populate('accountInfo')
-    res.status(200).json(pend)
+    try {
+        
+        const pend=await pendingsupplier.find().populate('accountInfo')
+        res.status(200).json(pend)
+    } catch (error) {
+        res.status(404).json({message:error.message})
+
+    }
 }
 const getOnePending=async(req,res)=>{
     const id=req.params.id

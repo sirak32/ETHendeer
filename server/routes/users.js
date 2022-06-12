@@ -103,10 +103,15 @@ router.patch('/update-admin', passport.authenticate("jwt-bearer", {
 }), checkRole(['admin']),updateAccount)
 
 router.get('/fromme/:id',async (req,res)=>{
-  const id=req.params.id
-    console.log(id)
-   const dataBeforeDeletion=await officer.findOneAndDelete(id)
-   res.status(200).json(dataBeforeDeletion)
+  try {
+    
+    const id=req.params.id
+      console.log(id)
+     const dataBeforeDeletion=await officer.findByIdAndRemove(id)
+     res.status(200).json(dataBeforeDeletion)
+  } catch (error) {
+    res.status(404).json({message:error.message})
+  }
   // res.json({message:id})
 })
 // DELETING THE SUPPLIER AND OFFICER ACCOUNTS
