@@ -36,14 +36,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         // console.log('Im being belcash baldereba',tenders)
   }, []);
   const OptmTender = [];
-  let i;
-  for (i = 0; i < tenders.length; i++) {
-    OptmTender[i] = { 
-      title: tenders[i].title, 
-      tenderNo: tenders[i].number,
-      bidOpenOn:tenders[i].bidOpenOn,
-      closingDate:tenders[i].closingDate };
-  }
+
   // const [{}]=tenders.map((tender)=>)
     console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
@@ -68,7 +61,12 @@ closedNo++
               <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
               <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
               <Dash title="Closed" color={'bg-pink-500'} number={closedNo} />
-            </Wrapper>           
+            
+            {/* <Dash title="Suppliers" color={'bg-green-500'} number={suppliers.length} />
+              <Dash title="Tenders" color={'bg-yellow-500'} number={tenders.length} />
+              <Dash title="Active" color={'bg-pink-500'} number={tenders.length-closedNo} />
+              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
+</Wrapper>           
             <BasicTabs data={{OptmTender,suppliers,tenders}} />
           </div>
           <div className="row__two"></div>

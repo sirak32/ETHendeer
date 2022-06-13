@@ -17,8 +17,10 @@ const Table = ({tenderss,fetchTenders}) => {
   const [visibleTop, setVisibleTop] = useState(false);
   const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
+const [cloz,setCloz]=useState(true)
   useEffect(()=>{
     fetchTenders()
+    // setCloz(true)
   },[])
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
@@ -55,8 +57,10 @@ console.log("now ",now," op ",op,op<now)
     if(op>now)
     return <div className="bg-green-500 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium "  > Active</div>;
     else
-    return <div className="bg-yellow-600 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium"> Closed</div>;
-
+    {
+      setCloz(true)
+      return <div className="bg-yellow-600 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium"> Closed</div>;
+}
   };
   const editProduct = () => {};
   const confirmDeleteProduct = () => {};
@@ -72,7 +76,7 @@ console.log("now ",now," op ",op,op<now)
             setVisibleTop(true)
           }}
         />
-        <Button
+        {cloz&&<Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
           onClick={() => {
@@ -81,7 +85,8 @@ console.log("now ",now," op ",op,op<now)
             console.log('setting the data',editData)
             setEdit(true)
             editProduct(rowData)}}
-        />
+        /> }
+        
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
@@ -125,13 +130,8 @@ console.log("now ",now," op ",op,op<now)
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
-        {/* <Column
-        
-          selectionMode="multiple"
-          headerStyle={{ width: "3em" }}
-        ></Column> */}
         {console.log("tenders are",tenders)}
-        <Column editor={(options) => textEditor(options)} style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
+        <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
