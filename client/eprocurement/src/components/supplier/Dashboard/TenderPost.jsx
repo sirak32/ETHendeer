@@ -208,6 +208,11 @@ const [selected,setSelected]=useState({})
                   setVis(false)
                   toastBR .current.show({severity:'success', summary: 'You Applied Successfully', detail:'Tender Application', life: 8000});
                   })
+                  .catch(()=>{
+                    alert("You Can't Apply agian")
+                    setVis(false)
+
+                  })
                   })
                 })
               }}

@@ -20,8 +20,8 @@ export default function Sidebar(props) {
   const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
-  const menus=['Dashboard','Tenders','Profile',,'Help & Support']
-  const links=['/','#','/supplier-profile','#','#'] 
+  const menus=['Dashboard','My Tenders','Profile',,'Help & Support']
+  const links=['/','/supplier-tenders','/supplier-profile','#','#'] 
 
   html.addEventListener("click", () => setNavbarState(false));
 

@@ -10,7 +10,8 @@ import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
 import { InputText } from "primereact/inputtext";
-const Table = ({tenderss,fetchTenders}) => {
+import { fetchApplied } from "../../../actions/appliedAction";
+const Table = ({tenderss,applieds,fetchTenders,fetchApplieds}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
   const [editData, setEditData]=useState({})
@@ -23,7 +24,13 @@ const [data,setData] =useState({})
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
   });
-  console.log('tenders are',tenderss)
+//   let appliedss = applieds[32].tender 
+  let appT=[]
+  applieds.map((ap)=>{
+      if(ap.applier===localStorage.getItem('whoId'))
+      appT.push(ap.tender)
+    })
+    console.log('This is Mr',appT) 
 
   const deleteButton = (rowData) => {
     return (
@@ -39,9 +46,9 @@ const [data,setData] =useState({})
       <Button
         icon="pi pi-pencil"
         className="p-button-rounded"
-        aria-label="Cancel" 
+        aria-label="Cancel"
       />
-    ); 
+    );
   };
   const statusItemTemplate = (option) => {
     return (
@@ -56,7 +63,6 @@ console.log("now ",now," op ",op,op<now)
     return <div className="bg-green-500 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium "  > Active</div>;
     else
     return <div className="bg-yellow-600 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium"> Closed</div>;
-
   };
   const editProduct = () => {};
   const confirmDeleteProduct = () => {};
@@ -72,32 +78,8 @@ console.log("now ",now," op ",op,op<now)
             setVisibleTop(true)
           }}
         />
-        <Button
-          icon="pi pi-pencil"
-          className="p-button-rounded p-button-success mr-2"
-          onClick={() => {
-
-            setEditData(rowData)
-            console.log('setting the data',editData)
-            setEdit(true)
-            editProduct(rowData)}}
-        />
-        <Button
-          icon="pi pi-trash"
-          className="p-button-rounded p-button-warning"
-          onClick={async() => {
-            // alert(rowData._id)
-            await axios.delete(`http://localhost:5001/tenders/${rowData._id}`)
-            .then((e)=>{
-              fetchTenders()
-              if(restart)
-              setRestart(false)
-              else
-              setRestart(true)
-
-            })
-          }}
-        />
+        
+    
       </>
     );
   };
@@ -109,13 +91,13 @@ console.log("now ",now," op ",op,op<now)
     <>
       <DataTable
         breakpoint="960px"
-        editMode="cell"
+        // editMode=''
         header="Tenders List"
-        value={tenders}
+        value={appT}
         responsiveLayout="stack"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
-        dataKey={tenders._id}
+        dataKey={tenderss._id}
         paginator
         rowHover
         selection={selectedCustomers}
@@ -220,12 +202,17 @@ console.log("now ",now," op ",op,op<now)
 const mapStateToProps = (state) => {
   return {
     tenderss: state.tenders.tenders,
+    applieds: state.applied.applied,
+
+
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchTenders: () => dispatch(fetchTender()),
+    fetchApplieds: () => dispatch(fetchApplied()),
+
   };
 };
 
