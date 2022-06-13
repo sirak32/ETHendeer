@@ -43,9 +43,9 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
         <div className="grid">
           <div className="row__one">
           <Wrapper>
-            <Dash title="Suppliers" number={suppliers.length}/>
-            <Dash title="Officers" number={officers.length}/>
-            <Dash title="Pending " number={pendings.length}/>
+            <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
+            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
+            <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
             </Wrapper>
             <AdminTab data={{suppliers,officers,pendings}}/>
           </div>
