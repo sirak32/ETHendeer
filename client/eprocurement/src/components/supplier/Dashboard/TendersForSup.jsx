@@ -92,17 +92,18 @@ console.log("now ",now," op ",op,op<now)
       <DataTable
         breakpoint="960px"
         // editMode=''
-        header="Tenders List"
+        // header="Applied Tenders List"
+        header={<center><h2 className="text-teal-400">Applied Tenders List</h2></center>}
         value={appT}
         responsiveLayout="stack"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
-        dataKey={tenderss._id}
+        dataKey={appT._id}
         paginator
         rowHover
         selection={selectedCustomers}
         onSelectionChange={(e) => setSelectedCustomers(e.value)}
-        emptyMessage="Data Not Found"
+        emptyMessage={<center><h4>No Applied Tender Found</h4></center>}
         className="datatable-responsive"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
@@ -113,7 +114,7 @@ console.log("now ",now," op ",op,op<now)
           headerStyle={{ width: "3em" }}
         ></Column> */}
         {console.log("tenders are",tenders)}
-        <Column editor={(options) => textEditor(options)} style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
+        <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
         <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
