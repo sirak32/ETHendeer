@@ -10,7 +10,8 @@ import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
 import { InputText } from "primereact/inputtext";
-const Table = ({tenderss,fetchTenders}) => {
+import { fetchApplied } from "../../../actions/appliedAction";
+const Table = ({tenderss,applieds,fetchApplieds,fetchTenders}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
   const [editData, setEditData]=useState({})
@@ -20,8 +21,9 @@ const [data,setData] =useState({})
 const [cloz,setCloz]=useState(true)
   useEffect(()=>{
     fetchTenders()
-    // setCloz(true)
+    fetchApplieds()
   },[])
+  console.log(applieds,'applieds')
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
   });
@@ -199,19 +201,26 @@ console.log("now ",now," op ",op,op<now)
           {<span>Are you sure you want to delete the selected products?</span>}
         </div>
       </Dialog>
-      <Sidebar className=" text-500 border-cyan-500 surface-overlay border-3 border-round-md font-bold m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+      <Sidebar className=" text-500 border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+                    <div className="border-round-3xl border-double h-18rem text-white " style={{backgroundColor:'#8940d6'}}>
                      <center><h1 className="text-white">{data.title}</h1> <h2><pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h2> <hr></hr></center>
-                       
+                    </div>
                     <h1>{data.description}</h1>
                     <h1>{data.title}</h1> 
-                    <h1>ጨርታዉ የተከፈተበት _ <i className="text-300 text-white">{new Date(data.publishedDate).toDateString()}</i></h1>
-                    <h1>ጨረታዉ የሚዘጋው <i className="text-white">{new Date(data.closingDate).toDateString()}</i></h1>
-                    <h1>ሰነድ የሚከፈተው <i className="text-white">{new Date(data.bidOpenOn).toDateString()}</i></h1>
+                    <h1>ጨርታዉ የተከፈተበት _ <i className="">{new Date(data.publishedDate).toDateString()}</i></h1>
+                    <h1>ጨረታዉ የሚዘጋው <i className="">{new Date(data.closingDate).toDateString()}</i></h1>
+                    <h1>ሰነድ የሚከፈተው <i className="">{new Date(data.bidOpenOn).toDateString()}</i></h1>
                     <hr></hr>
-                    <h1><i className="">የጨረታ መስፈርቶች</i>  <p className="text-white"> {data.termsAndConditions}</p></h1> 
+                    <h1><i className="">የጨረታ መስፈርቶች</i>  <p className=""> {data.termsAndConditions}</p></h1> 
                     {data.applicants!==null && <h2> <hr></hr>
+                    {/* {new Date(data.bidOpenOn).toISOString()} */}
           {/* {data.applicants} */}
         </h2>}
+        {applieds.map((ap)=>{
+          if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
+          if(ap.tender._id===data._id)
+          return (<h1>{ap.applier} {ap.tender._id}</h1>)
+        })}
                 </Sidebar>
     </>
   ):<ProgressBar/>;
@@ -220,12 +229,14 @@ console.log("now ",now," op ",op,op<now)
 const mapStateToProps = (state) => {
   return {
     tenderss: state.tenders.tenders,
+    applieds: state.applied.applied,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchTenders: () => dispatch(fetchTender()),
+    fetchApplieds: () => dispatch(fetchApplied()),
   };
 };
 

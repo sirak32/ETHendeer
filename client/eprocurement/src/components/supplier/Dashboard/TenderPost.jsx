@@ -166,6 +166,8 @@ const [selected,setSelected]=useState({})
            {/* <p>Remaining Days</p> */}
             <Button
               onClick={() => {
+                window.open(`http://localhost:5001/image/${selected.document}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
+
                 saveAs(
                   `http://localhost:5001/image/${selected.document}`,
                   `Tender Bid ${selected.document}.pdf`

@@ -190,7 +190,7 @@ console.log("now ",now," op ",op,op<now)
                     <h1>{data.title}</h1> 
                     <h1>ጨርታዉ የተከፈተበት _ <i className="">{new Date(data.publishedDate).toDateString()}</i></h1>
                     <h1>ጨረታዉ የሚዘጋው <i className="">{new Date(data.closingDate).toDateString()}</i></h1>
-                    <h1>ሰነድ የሚከፈተው <i className="text-900">{new Date(data.bidOpenOn).toDateString()}</i></h1>
+                    <h1>ሰነድ የሚከፈተው <i className="">{new Date(data.bidOpenOn).toDateString()}</i></h1>
                     <hr></hr>
                     <h1><i className="">የጨረታ መስፈርቶች</i>  <p className=""> {data.termsAndConditions}</p></h1> 
                     {data.applicants!==null && <h2> <hr></hr>
