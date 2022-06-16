@@ -188,7 +188,77 @@ const getApplyStat=async (req,res)=>{
     try {
         
         const applyStat=await apply.find({})
-        res.status(200).json(applyStat)
+        let logMonthly={
+            Sep:0,
+            Oct:0,
+            Nov:0,
+            Dec:0,
+            Jan:0,
+            Feb:0,
+            Mar:0,
+            Apr:0,
+            May:0,
+            Jun:0,
+            Jul:0,
+            Aug:0,
+        }
+        let Mon
+        applyStat.map((s)=>{
+            Mon=new Date(s.date).getMonth()
+            switch (Mon) {
+              case 0:
+                    console.log('inside switch')
+                logMonthly = { ...logMonthly, Jan: ++logMonthly.Jan };
+                break;
+              case 1:
+                logMonthly = { ...logMonthly, Feb: ++logMonthly.Feb };
+
+                break;
+              case 2:
+                logMonthly = { ...logMonthly, Mar: ++logMonthly.Mar };
+
+                break;
+              case 3:
+                logMonthly = { ...logMonthly, Apr: ++logMonthly.Apr };
+
+                break;
+              case 4:
+                logMonthly = { ...logMonthly, May: ++logMonthly.May };
+
+                break;
+              case 5:
+                logMonthly = { ...logMonthly, Jun: ++logMonthly.Jun };
+
+                break;
+              case 6:
+                logMonthly = { ...logMonthly, Jul: ++logMonthly.Jul };
+
+                break;
+              case 7:
+                logMonthly = { ...logMonthly, Aug: ++logMonthly.Aug };
+
+                break;
+              case 8:
+                logMonthly = { ...logMonthly, Sep: ++logMonthly.Sep };
+
+                break;
+              case 9:
+                logMonthly = { ...logMonthly, Oct: ++logMonthly.Oct };
+
+                break;
+              case 10:
+                logMonthly = { ...logMonthly, Nov: ++logMonthly.Nov };
+
+                break;
+              case 11:
+                logMonthly = { ...logMonthly, Dec: ++logMonthly.Dec };
+                break;
+
+              default:
+                break;
+            }
+        })
+        res.status(200).json(logMonthly)
     } catch (error) {
         res.status(404).json(error)
     }

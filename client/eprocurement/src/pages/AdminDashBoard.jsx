@@ -13,25 +13,115 @@ import AdminTab from '../components/supplier/Dashboard/AdminTab'
 import { FilePicker } from 'evergreen-ui'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import { fetchOfficer } from "../actions/officerAction.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
  import { useNavigate } from "react-router";
 import { fetchPending } from "../actions/pendingAction.js";
 import Side from '../components/supplier/Dashboard/AdmSide'
+import { Chart } from 'primereact/chart';
+import axios from "axios";
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings}) => {
   const menus=['Dashboard','Officers','Suppliers','Feadbacks']
   console.log("from admin panel officers",suppliers,officers)
   const navigate=useNavigate()
-  useEffect(()=>{
+  
+  let logMonthly={
+    Sep:0,
+    Oct:0,
+    Nov:0,
+    Dec:0, 
+    Jan:0,  
+    Feb:0,
+    Mar:0,
+    Apr:0,
+    May:0,
+    Jun:0,
+    Jul:0,
+    Aug:0, 
+  }
+  const [month,setMonth]=useState(logMonthly)
+  const [tog,setTog]=useState(false)
+  const [basicData,setBasicData] = useState({
+    // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+    // datasets: [
+    //     { 
+    //         label: 'Number Of Login',
+    //         backgroundColor: '#42A5F5',
+    //         data: [month.Jan, month.Feb, month.Mar, month.Apr, month.May, month.Jun, month.Jul, month.Aug,month.Sep, month.Oct, month.Nov, month.Dec]
+    //     },
+        
+    // ]
+  });
+  useEffect(async()=>{
     const role=localStorage.getItem('role')
 
         if(role!=='admin')
         navigate('/')
         fetchPendings()
     fetchSuppliers()
+    // fetchOfficers()
+    const fetch=async()=>{
+      const data=await axios.get('http://localhost:5001/login-stat')
+      setMonth(data.data)
+      setBasicData({
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        datasets: [ 
+          {
+              label: 'Number Of Login',
+              backgroundColor: '#42A5F5', 
+              data: [month.Jan, month.Feb, month.Mar, month.Apr, month.May, month.Jun, month.Jul, month.Aug,month.Sep, month.Oct, month.Nov, month.Dec]
+          },
+          
+      ]
+      })
+    }
+    
+    fetch()
+    if(tog)
+    setTog(false)
+    else
+    setTog(true)
     fetchOfficers()
+// .then((data)=>{
+//   setMonth(data.data)
+  
+//   // alert(data.data[0].date)
+// })
 
   },[])
+  console.log('Login Stat',month)
+  let basicOptions = {
+    maintainAspectRatio: false,
+    aspectRatio: .8,
+    plugins: {
+        legend: {
+            labels: {
+                color: '#495057'
+            }
+        }
+    },
+    scales: {
+        x: {
+            ticks: {
+                color: '#495057'
+            },
+            grid: {
+                color: '#ebedef'
+            }
+        },
+        y: {
+            ticks: {
+                color: '#495057'
+            },
+            grid: {
+                color: '#ebedef'
+            }
+        }
+    }
+};
+
+console.log('Tester Test',month.Jun)
+
   console.log('pendings are ',pendings)
   return (
     <Div>
@@ -42,6 +132,14 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
         <NavBar />
         <div className="grid">
           <div className="row__one">
+          <div className="card">
+                <h5>Login Statistics {month.Jun}</h5>
+                <Chart type="line" data={basicData} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
+            </div>
+            {/* <div className="card">
+                <h5>Vertical</h5>
+                <Chart type="doughnut" data={basicData} options={basicOptions} />
+            </div> */}
           <Wrapper>
             <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
             <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
