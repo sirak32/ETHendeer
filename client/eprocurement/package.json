@@ -2,7 +2,8 @@
   "name": "eprocurement",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:5001",
+  "proxy":"http://localhost:3001",
+  
   "dependencies": {
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",

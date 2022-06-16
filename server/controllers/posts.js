@@ -2,6 +2,7 @@ import tender from "../models/tender.js";
 import appliedtenders from "../models/appliedTenders.js";
 
 import mongoose from 'mongoose'
+import { apply } from "../models/stat.js";
 const getPosts = async (req, res) => {
     try {
         const postTenders = await tender.find()
@@ -54,9 +55,12 @@ const createAppliedTender=async (req,res)=>{
         tend.appllicants=[...applica,t.applier]
         tend.save()
         const newApplied=new appliedtenders(body)
+        const apl=new apply({})
         try {
            await newApplied.save()
+           await apl.save()
             res.status(201).json(tend)
+
         } catch (error) {
             res.json(error)
         }
@@ -179,6 +183,17 @@ const deletePost = async (req, res) => {
         message: "Tender Post deleted successfully."
     });
 }
+///// Statistics Data Manipulation
+const getApplyStat=async (req,res)=>{
+    try {
+        
+        const applyStat=await apply.find({})
+        res.status(200).json(applyStat)
+    } catch (error) {
+        res.status(404).json(error)
+    }
+    
+}
 
 
 
@@ -189,5 +204,6 @@ export {
     updatePost,
     deletePost,
     createAppliedTender,
-    getAppliedTenders
+    getAppliedTenders,
+    getApplyStat
 }

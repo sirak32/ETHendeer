@@ -45,6 +45,7 @@ let creator;
       description: "",
       number: "",
       type: "",
+      bidFee:null,
       creator: creator,
       closingDate: "null",
       bidOpenOn: "null",
@@ -168,6 +169,26 @@ let creator;
                 />{" "}
                 <label htmlFor="description" className="p-success">
                   Tender Description*
+                </label>
+              </span>
+            </Grid>
+            <Grid item xs={6}>
+              <span className="p-float-label">
+                <InputText
+                  required
+                  type='number'
+                  min={1}
+                  onChange={formik.handleChange}
+                  name="bidFee"
+                  className="mt-5 w-7 h-5rem"
+                  id="bidFee"
+                  color="success"
+                  value={formik.values.bidFee}
+                  label="Bid Fee"
+                  sx={{ m: 1, width: "25ch" }}
+                />{" "}
+                <label htmlFor="bidFee" className="p-success">
+                  Bid Fee*
                 </label>
               </span>
             </Grid>

@@ -23,9 +23,11 @@ import { Toast } from "primereact/toast";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { IoAddCircleOutline } from "react-icons/io5";
-import axios from "axios";
+import axios from "axios"
+import {useNavigate} from 'react-router-dom'
 
 const MediaCard = ({ tenders, fetchTenders }) => {
+  const navigate =useNavigate()
   const toastBR  = useRef(null);
   const [techDoc, setTechDoc] = useState(null);
   const [busiDoc,setBusiDoc]= useState(null)
@@ -38,6 +40,7 @@ const [selected,setSelected]=useState({})
     
     <span>
       <Button
+        // disabled
         label="Apply"
         icon="pi pi-check"
         onClick={() => {
@@ -47,12 +50,22 @@ const [selected,setSelected]=useState({})
         }}
       />
       <Button
-        label="See Detail"
-        icon="pi pi-chevron-circle-down"
-        className="p-button-secondary ml-2"
-        onClick={() => {
+        label="Buy Bid"
+        icon="pi pi-angle-right"
+        className="p-button-secondary ml-2 "
+        onClick={ () => {
           // setSelected(t)
-          setVis2(true);
+           axios.post("http://localhost:3001/Home/CheckoutExpress", {
+            ItemId: t.number,
+            ItemName: `Bid Form-${t.number}`,
+            UnitPrice: t.bidFee,
+          }).then((mess)=>{
+            // window.open(mess.data.message)
+            // window.location(mess.data.message)
+            // navigate(mess.data.message)
+            window.location.replace(mess.data.message);
+          });
+          // setVis2(true);
         }}
       />
     </span>
@@ -70,6 +83,7 @@ const [selected,setSelected]=useState({})
 
   return tenders.length !== 0 ? (
     <>
+    
       <Grid container spacing={5}>
         {tenders.map((t) => (
           new Date(t.closingDate).toISOString()>new Date().toISOString()?
@@ -106,40 +120,7 @@ const [selected,setSelected]=useState({})
       >
         <div className="bg-orange-400 m-0 w-12 h-5rem"></div>
         <div className="formgrid grid">
-          {/* <div className="col">
-            <p class="text-4xl w-10 font-semibold">
-              Tender Title : - {selected.title}
-            </p>
-            <p class="text-4xl w-10 font-semibold">
-              Tender Description :- {selected.description}
-            </p>
-            <p class="text-4xl w-10 font-semibold">
-              Published =&gt; {new Date(selected.publishedDate).toDateString()}
-            </p>
-            <p class="text-4xl w-10 font-semibold">
-              Closing Date =&gt;{" "}
-              {new Date(selected.closingDate).toDateString().replace(/ /g, "-")}
-            </p>
-            <p class="text-4xl w-10 font-semibold">
-              Bid Opening =&gt; {new Date(selected.bidOpenOn).toDateString()}
-            </p>
-            <p class="text-4xl w-10 font-semibold">Attached Documents</p>
-            <Button
-              onClick={() => {
-                saveAs(
-                  `http://localhost:5001/image/${selected.document}`,
-                  `Tender Bid ${selected.document}.pdf`
-                );
-              }}
-              className="w-full  p-0 h-6rem flex justify-content-center bg-yellow-400"
-              aria-label="Amazon"
-            >
-              <i className="pi pi-download px-2 bg-yellow-400"></i>
-              <span className="px-3 align-self-center flex bg-yellow-400">
-                Download Documents
-              </span>
-            </Button>
-          </div> */}
+          
           <Card
             // title="Tender Information/"
             
@@ -219,7 +200,7 @@ const [selected,setSelected]=useState({})
                 })
               }}
             >
-              <div className="mt-7">
+              {/* <div className="mt-7">
                 <span className="p-float-label">
                   <Password
                     className="mt-3  "
@@ -247,7 +228,7 @@ const [selected,setSelected]=useState({})
                   <InputText id="remark" name="remark" />
                   <label htmlFor="remark">Remark</label>
                 </span>
-              </div>
+              </div> */}
               <div className=" mt-7">
                 <Button className="p-button-rounded p-button-info ">
                   <input

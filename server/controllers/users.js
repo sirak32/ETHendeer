@@ -12,6 +12,7 @@ import {
 } from "../models/account.js";
 import passport from "passport";
 import jwt from 'jsonwebtoken'
+import { login,register } from "../models/stat.js";
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
@@ -174,6 +175,8 @@ const registerPendingSupplier = async (req, res) => {
     await personalInfor.save()
     await accountInform.save()
     await newSupplier.save()
+    const rg=new register({})
+    await rg.save()
     return res.status(201).json({
         message: "Account Created"
     })
@@ -377,6 +380,8 @@ const userLogin = async (userCreds, role, res) => {
     // const offId=u[0]._id
     // res.status(200).json(u)
     if (isMatch) {
+        const lo=new login({})
+        await lo.save()
         let token = jwt.sign({
             user_id: user._id,
             role: user.role,
@@ -434,7 +439,26 @@ const deleteTender=async(req,res)=>{
 
 }
 // res.status(200).json(updatedUser)
-
+const getLoginStat=async (req,res)=>{
+    try {
+        
+        const loginStat=await login.find({})
+        res.status(200).json(loginStat)
+    } catch (error) {
+        res.status(404).json(error)
+    }
+    
+}
+const getRegisterStat=async (req,res)=>{
+    try {
+        
+        const registerStat=await register.find({})
+        res.status(200).json(registerStat)
+    } catch (error) {
+        res.status(404).json(error)
+    }
+    
+}
 export {
     checkRole,
     userAuth,
@@ -455,5 +479,7 @@ export {
     getPendingSuppliers,
     getOnePending,
     acceptSupplier,
-    rejectPending
+    rejectPending,
+    getLoginStat,
+    getRegisterStat
 }

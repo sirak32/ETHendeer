@@ -20,11 +20,15 @@ import {
   getPendingSuppliers,
   getOnePending,
   acceptSupplier,
-  rejectPending
+  rejectPending,
+  getLoginStat,
+  getRegisterStat
 } from "../controllers/users.js";
 import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
 import {officer} from '../models/user.js'
+import {login,register} from '../models/stat.js'
+import { getApplyStat } from "../controllers/posts.js";
 const router = express.Router();
 
 /** *
@@ -152,4 +156,12 @@ const data=req.body
 await supplier.findByIdAndUpdate(id,data)
 res.json("succes")
 })
+
+///////  Statistics Data Manipulation
+router.get('/login-stat',getLoginStat)
+router.get('/register-stat',getRegisterStat)
+router.get('/apply-stat',getApplyStat)
+
+
+
 export default router;

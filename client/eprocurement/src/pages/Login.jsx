@@ -83,7 +83,7 @@ const Login = () => {
 })
         if(response.data.succes){
           setLogged(true)
-alert(response.data.token);
+// alert(response.data.token);
 localStorage.setItem('token', response.data.token);
 localStorage.setItem('whoId', response.data.user);
 localStorage.setItem('role',response.data.role)

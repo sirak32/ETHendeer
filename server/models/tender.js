@@ -4,6 +4,7 @@ const postSchema = mongoose.Schema({
     description: String,
     number: String,
     type: String,
+    bidFee:mongoose.Schema.Types.Number,
     creator: String,
     publishedDate:Date,
     closingDate: Date,
