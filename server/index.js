@@ -147,6 +147,10 @@ app.get("/image/:filename", (req, res) => {
 });
 app.use("/tenders", route);
 app.use("/", userRoute);
+app.get("/complete",(req,res)=>{
+  console.log(req.query.Status,req.query.MerchantOrderId)
+  res.status(200).send('<h1>Successfull Payment<script>;window.location.replace("http://localhost:3000")</script></h1>')
+})
 // app.use('/applied')
 
 // let buff = new Buffer.from(data, 'base64');

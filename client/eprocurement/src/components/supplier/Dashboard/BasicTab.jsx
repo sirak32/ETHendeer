@@ -25,15 +25,13 @@ export default function BasicTabs(props) {
 
     <TabView   activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel  header="ALL TENDERS">
-        Content I
+
         <Table data={props.data.tenders}/>
     </TabPanel>
     <TabPanel header="ADD TENDERS">
-        Content II
         <AddTenderForm/>
     </TabPanel>
     <TabPanel header="SUPPLIERS LIST">
-        Content III
         <SuppliersTable data={props.data.suppliers}/>
     </TabPanel>
 </TabView>

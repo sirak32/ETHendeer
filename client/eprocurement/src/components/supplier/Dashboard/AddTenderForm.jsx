@@ -115,6 +115,9 @@ let creator;
   console.log("testing the states without dispatching", tenders.tenders);
   return (
     <form onSubmit={formik.handleSubmit}>
+       <fieldset>
+       <legend>Post New Tender</legend>
+       
       <Container>
         <Div className="card">
           <Grid container spacing={5}>
@@ -328,7 +331,7 @@ let creator;
         ></Box>
 
         <Toast ref={toast} position="bottom-center" />
-      </Container>
+      </Container></fieldset>
     </form>
   );
 };

@@ -26,18 +26,18 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
   const navigate=useNavigate()
   
   let logMonthly={
-    Sep:0,
-    Oct:0,
-    Nov:0,
-    Dec:0, 
-    Jan:0,  
-    Feb:0,
-    Mar:0,
-    Apr:0,
-    May:0,
-    Jun:0,
-    Jul:0,
-    Aug:0, 
+    Sep:89,
+    Oct:35,
+    Nov:76,
+    Dec:100, 
+    Jan:64,  
+    Feb:89,
+    Mar:78,
+    Apr:50,
+    May:85,
+    Jun:100,
+    Jul:105,
+    Aug:101, 
   }
   const [month,setMonth]=useState(logMonthly)
   const [tog,setTog]=useState(false)
@@ -123,14 +123,14 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
 console.log('Tester Test',month.Jun)
 
   console.log('pendings are ',pendings)
-  return (
+  return ( 
     <Div>
       {/* <SideBar  menu={menus} /> */}
       <Side active={0}  menu={menus} />
 
       <Section>
         <NavBar />
-        <div className="grid">
+        <div className="grid"> 
           <div className="row__one">
           <div className="card">
                 <h5>Login Statistics {month.Jun}</h5>

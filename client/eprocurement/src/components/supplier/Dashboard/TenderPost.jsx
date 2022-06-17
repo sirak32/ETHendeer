@@ -35,11 +35,11 @@ const MediaCard = ({ tenders, fetchTenders }) => {
 
 const [selected,setSelected]=useState({})
 
-  const header = <img alt="Card" src={img} />;
+  const header = <img alt="Card" src={img} height={'23rem'}/>;
   const footer = (t)=>(
     
     <span>
-      <Button
+      <Button  
         // disabled
         label="Apply"
         icon="pi pi-check"
@@ -56,14 +56,21 @@ const [selected,setSelected]=useState({})
         onClick={ () => {
           // setSelected(t)
            axios.post("http://localhost:3001/Home/CheckoutExpress", {
-            ItemId: t.number,
+            ItemId: `${t._id},${localStorage.getItem('whoId')}`,
             ItemName: `Bid Form-${t.number}`,
             UnitPrice: t.bidFee,
           }).then((mess)=>{
+            // var myWindow = window.open("", "_self");
+            // myWindow.document.write("<p>I replaced the current window.</p>");
+
             // window.open(mess.data.message)
             // window.location(mess.data.message)
             // navigate(mess.data.message)
+            
+            // window.location.replace(mess.data.message,'_blank');
+            // window.open(mess.data.message);
             window.location.replace(mess.data.message);
+
           });
           // setVis2(true);
         }}
@@ -200,35 +207,6 @@ const [selected,setSelected]=useState({})
                 })
               }}
             >
-              {/* <div className="mt-7">
-                <span className="p-float-label">
-                  <Password
-                    className="mt-3  "
-                    id="supPassword"
-                    name="supPassword"
-                    toggleMask
-                  />
-                  <label htmlFor="supPassword">Password</label>
-                </span>
-              </div>
-              <div className="mt-7 ">
-                <span className="p-float-label">
-                  <Password
-                    // className="mt-3"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    toggleMask
-                  />
-                  <label htmlFor="confirmPassword">Confirm Password</label>
-                </span>
-              </div>
-              <div className="mt-7 ">
-                <span className="p-float-label p-input-icon-right">
-                  <i className="pi pi-info-circle" />
-                  <InputText id="remark" name="remark" />
-                  <label htmlFor="remark">Remark</label>
-                </span>
-              </div> */}
               <div className=" mt-7">
                 <Button className="p-button-rounded p-button-info ">
                   <input
@@ -256,20 +234,6 @@ const [selected,setSelected]=useState({})
                 className="p-button-warning p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"
                 aria-label="Amazon"
               >
-                {/* <i className="pi pi-right px-2"></i> */}
-                {/* <span
-            className="px-3 align-self-center flex m-4"
-            onClick={() => {
-              toast.current.show({
-                severity: "success",
-                summary: "Success Message",
-                detail: "Message Content",
-                life: 3000,
-              });
-            }}
-          >
-            Apply
-          </span> */}
                 Apply
               </Button>
             </form>
