@@ -29,30 +29,44 @@ import {useNavigate} from 'react-router-dom'
 const MediaCard = ({ tenders, fetchTenders }) => {
   const navigate =useNavigate()
   const toastBR  = useRef(null);
+  const [disable,setDisable]=useState(true)
   const [techDoc, setTechDoc] = useState(null);
   const [busiDoc,setBusiDoc]= useState(null)
-  
-
+  let checkPay=(t)=>{
+    let dis=true
+    t.payers.map((su)=>{
+      if(su==localStorage.getItem('whoId')){
+        dis=false
+      }
+      // return false
+    })
+    return dis
+    // return true
+  }
+  const labels=(t)=>{
+    let paid=checkPay(t)
+    return paid?'Buy Bid':'Paid'
+  }
+const checkPayu=()=>false
 const [selected,setSelected]=useState({})
 
   const header = <img alt="Card" src={img} height={'23rem'}/>;
   const footer = (t)=>(
-    
     <span>
       <Button  
-        // disabled
+        disabled={checkPay(t)}
         label="Apply"
-        icon="pi pi-check"
+        icon={!checkPay(t)?"pi pi-arrow-circle-down":"pi pi-arrow-circle-right"}
         onClick={() => {
           setSelected(t)
           setVis(true);
-         
         }}
       />
       <Button
-        label="Buy Bid"
+
+        label={labels(t)}
         icon="pi pi-angle-right"
-        className="p-button-secondary ml-2 "
+        className={!checkPay(t)? "p-button-success ml-2 bg-red-500":"p-button-secondary ml-2 bg-red-500"}
         onClick={ () => {
           // setSelected(t)
            axios.post("http://localhost:3001/Home/CheckoutExpress", {
@@ -90,7 +104,6 @@ const [selected,setSelected]=useState({})
 
   return tenders.length !== 0 ? (
     <>
-    
       <Grid container spacing={5}>
         {tenders.map((t) => (
           new Date(t.closingDate).toISOString()>new Date().toISOString()?
@@ -110,7 +123,6 @@ const [selected,setSelected]=useState({})
                 {t.description}
               </p>
             </Card>
-
             <Toast ref={toastBR } />
           </Grid>:''
         ))}

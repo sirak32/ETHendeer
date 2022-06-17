@@ -13,6 +13,7 @@ import Grid from "gridfs-stream";
 import path from "path";
 import crypto from "crypto";
 import methodOverride from "method-override";
+import tender from "./models/tender.js";
 
 // const fs=require('fs')
 const app = express();
@@ -147,8 +148,15 @@ app.get("/image/:filename", (req, res) => {
 });
 app.use("/tenders", route);
 app.use("/", userRoute);
-app.get("/complete",(req,res)=>{
-  console.log(req.query.Status,req.query.MerchantOrderId)
+app.get("/complete",async(req,res)=>{
+  const tenderId=req.query.MerchantOrderId.split(',')[0]
+  const supplierId=req.query.MerchantOrderId.split(',')[1]
+  const tend=await tender.findById(tenderId)
+  // const pyrs=tend.payers         tend.applicants=[...tend.applicants,mongoose.Types.ObjectId(body.applier) ]
+
+  tend.payers=[...tend.payers,mongoose.Types.ObjectId(supplierId)]
+  await tend.save()
+  console.log(req.query.Status,'tender',tend)
   res.status(200).send('<h1>Successfull Payment<script>;window.location.replace("http://localhost:3000")</script></h1>')
 })
 // app.use('/applied')
