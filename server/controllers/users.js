@@ -293,6 +293,20 @@ const displayAll = async (req, res) => {
     res.status(200).json(users)
 }
 const getAllOfficers=async (req, res) => {
+  /*
+_id
+firstName
+middleNam
+lastName
+email
+phoneNumber
+username
+password
+email
+role
+user
+officerId
+  */
     // const users = await officer.find().populate('personalInfo').populate('accountInfo')
     const users = await officer.find().populate({
         path:'personalInfo',
@@ -302,6 +316,7 @@ const getAllOfficers=async (req, res) => {
         }
     }).populate('accountInfo')
 // .populate('accountInfo')
+console.log(users)
     res.status(200).json(users)
 }
 

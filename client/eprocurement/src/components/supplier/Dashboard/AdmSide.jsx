@@ -17,12 +17,12 @@ import { Table } from "@mui/material";
 import { useNavigate } from "react-router";
 export default function Sidebar(props) {
   const navigate=useNavigate()
-  const [currentLink, setCurrentLink] = useState(0);
+  const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
   const menus=['Dashboard','Officers','Suppliers']
-  const llinks=['#','#','#','#','#']
+  const llinks=['/','/admin-officer','/admin-supplier','#']
   useEffect(() => {
     const sr = scrollreveal({ 
       origin: "left",
@@ -36,7 +36,7 @@ export default function Sidebar(props) {
           .brand,
           .links>ul>li:nth-of-type(1),
       .links>ul>li:nth-of-type(2),
-      .links>ul>li:nth-of-type(3),
+      .links>ul>li:nth-of-type(3), 
       .links>ul>li:nth-of-type(4),
       .links>ul>li:nth-of-type(5),
       .links>ul>li:nth-of-type(6),

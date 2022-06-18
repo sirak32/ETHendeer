@@ -211,10 +211,14 @@ console.log("now ",now," op ",op,op<now)
           // console.log('APPLIER XXXX',ap.applier,suppliers)
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
          { 
-          const sup=suppliers.filter((su)=>{
+          console.log("app",ap)
+          var sup
+          if(ap.applier!==null)
+          {
+             sup=suppliers.filter((su)=>{
             return (su._id===ap.applier._id)
 
-          })
+          })}
           console.log("BELCASH",sup)
           if(ap.tender._id===data._id)
          {

@@ -18,6 +18,9 @@ import SupplierTenders from './pages/SupplierTenders'
 import OfficerProfile from './pages/OfficerProfile'
 // import InputAdornments from "./components/supplier/Dashboard/AddTenderForm.jsx";
 import SupplierProfile from './pages/SupplierProfile'
+import AdminOfficers from './pages/AdminOfficers'
+import AdminSuppliers from './pages/AdminSuppliers'
+
 const App = () => {
   return (
     // <AdminDashboard />
@@ -37,6 +40,8 @@ const App = () => {
 
 
         <Route exact path="/officer-profile" element={<OfficerProfile />}></Route>
+        <Route exact path="/admin-officer" element={<AdminOfficers />}></Route>
+        <Route exact path="/admin-supplier" element={<AdminSuppliers />}></Route>
 
         <Route exact path="/add-officer" element={<AddOfficer />}></Route>
         <Route exact path="/officers-list" element={<OfficersList />}></Route>

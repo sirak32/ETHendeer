@@ -8,6 +8,7 @@ import { Sidebar } from 'primereact/sidebar';
 import { connect } from "react-redux";
 import { fetchOfficer } from "../../../actions/officerAction";
 import axios from "axios";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const Table = ({officers,fetchOfficers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
@@ -16,25 +17,61 @@ const Table = ({officers,fetchOfficers}) => {
   const [deleteOff,setDeleteOff]=useState(false)
   const [deleteId,setDeleteId]=useState(0)
 const [data,setData] =useState({})
+const [off,setOffi]=useState({
+  _id:'',
+firstName:'',
+middleName:'',
+lastName:'',
+email:'',
+phoneNumber:'',
+username:'',
+password:'',
+email:'',
+role:'',
+user:'',
+officerId:'',
+})
+// let supDat
 useEffect(()=>{
 fetchOfficers()
-// console.log('consola',officers)
+if(officers.length>0){
+  {
+    setOffi({
+      _id:officers[0]._id,
+      firstName:officers[0]._id,
+      middleName:officers[0]._id,
+      lastName:officers[0]._id,
+      email:officers[0]._id,
+      phoneNumber:officers[0]._id,
+      username:officers[0]._id,
+      password:officers[0]._id,
+      email:officers[0]._id,
+      role:officers[0]._id,
+      user:officers[0]._id,
+      officerId:officers[0]._id, 
+    })
+  }
+}
 },[])
-
-
-
-  // const editProduct = () => {};
-  // const confirmDeleteProduct = () => {};
+let selected={}
+if(officers.length>0)
+console.log('OFFICERS',off) 
   const actionBodyTemplate = (rowData) => {
-    return (
+    return officers.length>0?(
       <>
         <Button
           icon="pi pi-caret-down"
           className="p-button-rounded mr-2"
           onClick={() => {
-            console.log('Supplier List',rowData)
+            console.log('Officers',rowData)
             setData(rowData)
-            setVisibleTop(true)
+             selected=officers.filter((ofi)=>{
+              console.log('OFFi',ofi._id)
+              console.log('ROW',rowData._id)
+
+              return (ofi._id==rowData._id)
+            })
+            setVisibleTop(true)  
           }}
         />
         <Button
@@ -43,19 +80,13 @@ fetchOfficers()
           onClick={() => {
             setDeleteId(rowData._id)
             setDeleteOff(true)
-            console.log('consola',rowData._id)
-              // axios.get(`http://localhost:5001/fromme/${rowData._id}`)
-              // .then((res)=>{
-              //   fetchOfficers()
-              //   setDeleteProductsDialog(true);
-              // })
+            // console.log('consola',rowData._id)
           }}
         />
       </>
-    );
+    ):<ProgressSpinner/> ;
   };
-  const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
-  return (
+  return officers.length>0? (
     <>
       <DataTable
         breakpoint="960px"
@@ -102,16 +133,14 @@ fetchOfficers()
             {/* <FormikFormDemo/> */}
 
         </Dialog>
-
       <Dialog  visible={visibleTop} dismissableMask style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <h3>Top Sidebar Supplier</h3>
+                    <center> <h3>Supplier</h3></center>
                     <h1>{data._id}</h1>
-                    {/* <h1>{data.personalInfo.firstName}</h1> */}
-                    <h1>Tender Number</h1>
+                    <h1>{data.officerId}</h1>
+                    <h1>{Object.keys(selected).length>0?selected._id:'No Data'}</h1>
+                    {console.log('selected',selected)}
                     <h1>Tender `Description`</h1>
                 </Dialog> 
-                
-                
                 <Dialog
         visible={deleteOff}
         style={{ width: "450px" }}
@@ -157,9 +186,9 @@ fetchOfficers()
           />
           {<span>Are you sure you want to delete the selected Officer?</span>}
         </div>
-                </Dialog>
+       </Dialog>
     </>
-  );
+  ):<ProgressSpinner/> ;
 };
 const mapStateToProps = (state) => {
   return {

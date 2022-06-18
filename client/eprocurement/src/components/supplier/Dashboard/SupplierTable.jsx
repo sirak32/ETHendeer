@@ -42,7 +42,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
             console.log('consola',rowData._id)
             setDeleteId(rowData._id)
             setDeleteOff(true)
-            
           }}
           />
       </>
@@ -88,8 +87,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
       <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
         {/* <FormikFormDemo selected={suppli} /> */}
         <h1>Hello</h1>
-        {/* {console.log('suppli',suppli)} */}
-      {/* <h1>  {suppli.personalInfo.firstName}</h1> */}
       </Dialog>
       <Dialog
         visible={deleteOff}
