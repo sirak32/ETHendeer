@@ -11,7 +11,9 @@ import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
 import { InputText } from "primereact/inputtext";
 import { fetchApplied } from "../../../actions/appliedAction";
-const Table = ({tenderss,applieds,fetchApplieds,fetchTenders}) => {
+import { fetchSuppliers } from "../../../actions/supplierAction";
+import {saveAs} from 'file-saver'
+const Table = ({tenderss,applieds,suppliers,fetchApplieds,fetchTenders,fetchSuppliers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
   const [editData, setEditData]=useState({})
@@ -196,10 +198,69 @@ console.log("now ",now," op ",op,op<now)
                     {/* {new Date(data.bidOpenOn).toISOString()} */}
           {/* {data.applicants} */}
         </h2>}
-        {applieds.map((ap)=>{
+      <center> <h1>Suppliers Who Applied For This Tender</h1></center><hr/>
+        {applieds.map((ap)=>{   
+          // const sup=suppliers.filter((su)=>{
+          //   return (su._id===ap.applier._id)
+
+          // })
+          // suppliers.map((su)=>{
+          //   if(su._id===ap.applier._id)
+
+          // })
+          console.log('APPLIER XXXX',ap.applier,suppliers)
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
+         { 
+          const sup=suppliers.filter((su)=>{
+            return (su._id===ap.applier._id)
+
+          })
+          console.log("BELCASH",sup)
           if(ap.tender._id===data._id)
-          return (<h1>{ap.applier._id } {ap.tender._id}</h1>)
+         {
+
+           return (
+            <> 
+            <center>
+              <h1 className="text-indigo-600">
+            {/* {ap.applier._id } 
+            {ap.tender._id}  */}
+            {sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName} 
+             {/* {ap.businessDoc}
+              {ap.technicalDoc}   */}
+               <Button
+                icon="pi pi-download"
+                 className="ml-4 p-button-rounded p-button-success" 
+                 aria-label="User"
+                 label="Business Bid"
+                 onClick={(()=>{
+                  window.open(`http://localhost:5001/image/${ap.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
+
+                  // window.open(`http://localhost:5001/image/${ap.businessDoc}` "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800")
+                    saveAs(`http://localhost:5001/image/${ap.businessDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}.pdf`)
+                 })}
+                 />
+                 <Button
+                icon="pi pi-download"
+                 className="ml-4 p-button-rounded p-button-info" 
+                 aria-label="User"
+                 label="Tecnical Bid"
+                 onClick={(()=>{
+                  window.open(`http://localhost:5001/image/${ap.technicalDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
+
+                  // window.open(`http://localhost:5001/image/${ap.businessDoc}` "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800")
+                    saveAs(`http://localhost:5001/image/${ap.technicalDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`)
+                 })}
+                 />
+
+ </h1>
+            </center>
+            
+            </>
+          
+           )
+          
+          }}
         })}
                 </Sidebar>
     </>
@@ -210,6 +271,7 @@ const mapStateToProps = (state) => {
   return {
     tenderss: state.tenders.tenders,
     applieds: state.applied.applied,
+    suppliers:state.suppliers.suppliers,
   };
 };
 
@@ -217,6 +279,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchTenders: () => dispatch(fetchTender()),
     fetchApplieds: () => dispatch(fetchApplied()),
+    fetchSuppliers:()=>dispatch(fetchSuppliers()),
+
   };
 };
 

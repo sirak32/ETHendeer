@@ -50,6 +50,9 @@ const Table = ({suppliers,fetchSuppliers}) => {
       </>
     );
   };
+  useEffect(()=>{
+    fetchSuppliers()
+  },[])
   return suppliers.length>0? (
     <>
     <DataTable

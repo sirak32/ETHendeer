@@ -25,6 +25,7 @@ import { Password } from "primereact/password";
 import { IoAddCircleOutline } from "react-icons/io5";
 import axios from "axios"
 import {useNavigate} from 'react-router-dom'
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const MediaCard = ({ tenders, fetchTenders }) => {
   const navigate =useNavigate()
@@ -268,6 +269,7 @@ const [selected,setSelected]=useState({})
     </>
   ) : (
     <>
+    <ProgressSpinner/>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>

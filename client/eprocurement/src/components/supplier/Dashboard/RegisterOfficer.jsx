@@ -13,8 +13,10 @@ import "./FormDemo.css";
 import { Grid } from "@mui/material";
 import { FileUploadDemo } from "./FileUploadDemo";
 import axios from "axios";
+import { connect } from "react-redux";
+import { fetchPending } from "../../../actions/pendingAction";
 
-export const FormikFormDemo = () => {
+ const FormikFormDemo = ({pendings, fetchPendings}) => {
   const count = [
     { name: "Addis Ababa,", code: "AF" },
     { name: "Gonder", code: "AX" },
@@ -266,7 +268,7 @@ export const FormikFormDemo = () => {
 
   useEffect(() => {
     setCountries(count);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -286,8 +288,6 @@ export const FormikFormDemo = () => {
       email: "",
       password: "",
       ownershipType:"",
-      // date: null,
-      // country: null,
       accept: false,
     },
     validate: (data) => {
@@ -366,7 +366,8 @@ export const FormikFormDemo = () => {
 
         setFormData(data);
         setShowMessage(true);
-        // formik.resetForm();
+        fetchPendings()
+        formik.resetForm();
       })
 
     },
@@ -879,3 +880,15 @@ export const FormikFormDemo = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    pendings:state.pendings.pendings,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPendings:()=>dispatch(fetchPending()),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(FormikFormDemo)

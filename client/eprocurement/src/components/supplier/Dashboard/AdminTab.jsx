@@ -10,7 +10,7 @@ import Table from "./Table";
 import AddOfficer from "./AddOfficer";
 import RegisterSupplier from "./RegisterSupplier";
 import OfficersList from "./OfficersList";
-import { FormikFormDemo } from "./RegisterOfficer";
+import FormikFormDemo  from "./RegisterOfficer";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import SupplierTable from "./SupplierTable";
