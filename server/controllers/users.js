@@ -12,7 +12,7 @@ import {
 } from "../models/account.js";
 import passport from "passport";
 import jwt from 'jsonwebtoken'
-import { login,register } from "../models/stat.js";
+import { apply, login,register } from "../models/stat.js";
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
@@ -443,7 +443,37 @@ const getLoginStat=async (req,res)=>{
     try {
         
         const loginStat=await login.find({})
+        const registerStat=await register.find({})
+        const applyStat=await apply.find({})
         let logMonthly={
+            Sep:0,
+            Oct:0,
+            Nov:0,
+            Dec:0,
+            Jan:0,
+            Feb:0,
+            Mar:0,
+            Apr:0,
+            May:0,
+            Jun:0,
+            Jul:0,
+            Aug:0,
+        }
+        let regMonthly={
+            Sep:0,
+            Oct:0,
+            Nov:0,
+            Dec:0,
+            Jan:0,
+            Feb:0,
+            Mar:0,
+            Apr:0,
+            May:0,
+            Jun:0,
+            Jul:0,
+            Aug:0,
+        }
+        let aplMonthly={
             Sep:0,
             Oct:0,
             Nov:0,
@@ -513,13 +543,125 @@ const getLoginStat=async (req,res)=>{
                 break;
             }
         })
-        res.status(200).json(logMonthly)
+        registerStat.map((s)=>{
+            Mon=new Date(s.date).getMonth()
+            switch (Mon) {
+              case 0:
+                    console.log('inside switch')
+                    regMonthly = { ...regMonthly, Jan: ++regMonthly.Jan };
+                break;
+              case 1:
+                regMonthly = { ...regMonthly, Feb: ++regMonthly.Feb };
+
+                break;
+              case 2:
+                regMonthly = { ...regMonthly, Mar: ++regMonthly.Mar };
+
+                break;
+              case 3:
+                regMonthly = { ...regMonthly, Apr: ++regMonthly.Apr };
+
+                break;
+              case 4:
+                regMonthly = { ...regMonthly, May: ++regMonthly.May };
+
+                break;
+              case 5:
+                regMonthly = { ...regMonthly, Jun: ++regMonthly.Jun };
+
+                break;
+              case 6:
+                regMonthly = { ...regMonthly, Jul: ++regMonthly.Jul };
+
+                break;
+              case 7:
+                regMonthly = { ...regMonthly, Aug: ++regMonthly.Aug };
+
+                break;
+              case 8:
+                regMonthly = { ...regMonthly, Sep: ++regMonthly.Sep };
+
+                break;
+              case 9:
+                regMonthly = { ...regMonthly, Oct: ++regMonthly.Oct };
+
+                break;
+              case 10:
+                regMonthly = { ...regMonthly, Nov: ++regMonthly.Nov };
+
+                break;
+              case 11:
+                regMonthly = { ...regMonthly, Dec: ++regMonthly.Dec };
+                break;
+
+              default:
+                break;
+            }
+        })
+        applyStat.map((s)=>{
+            Mon=new Date(s.date).getMonth()
+            switch (Mon) {
+              case 0:
+                    console.log('inside switch')
+                    aplMonthly = { ...aplMonthly, Jan: ++aplMonthly.Jan };
+                break;
+              case 1:
+                aplMonthly = { ...aplMonthly, Feb: ++aplMonthly.Feb };
+
+                break;
+              case 2:
+                aplMonthly = { ...aplMonthly, Mar: ++aplMonthly.Mar };
+
+                break;
+              case 3:
+                aplMonthly = { ...aplMonthly, Apr: ++aplMonthly.Apr };
+
+                break;
+              case 4:
+                aplMonthly = { ...aplMonthly, May: ++aplMonthly.May };
+
+                break;
+              case 5:
+                aplMonthly = { ...aplMonthly, Jun: ++aplMonthly.Jun };
+
+                break;
+              case 6:
+                aplMonthly = { ...aplMonthly, Jul: ++aplMonthly.Jul };
+
+                break;
+              case 7:
+                aplMonthly = { ...aplMonthly, Aug: ++aplMonthly.Aug };
+
+                break;
+              case 8:
+                aplMonthly = { ...aplMonthly, Sep: ++aplMonthly.Sep };
+
+                break;
+              case 9:
+                aplMonthly = { ...aplMonthly, Oct: ++aplMonthly.Oct };
+
+                break;
+              case 10:
+                aplMonthly = { ...aplMonthly, Nov: ++aplMonthly.Nov };
+
+                break;
+              case 11:
+                aplMonthly = { ...aplMonthly, Dec: ++aplMonthly.Dec };
+                break;
+
+              default:
+                break;
+            }
+        })
+        res.status(200).json({login:logMonthly,
+                            register:regMonthly,
+                        apply:aplMonthly}) 
     } catch (error) {
         res.status(404).json(error)
     }
     
 }
-const getRegisterStat=async (req,res)=>{
+const getRegisterStat=async (req,res)=>{ 
     try {
         
         const registerStat=await register.find({})

@@ -20,76 +20,74 @@ import { fetchPending } from "../actions/pendingAction.js";
 import Side from '../components/supplier/Dashboard/AdmSide'
 import { Chart } from 'primereact/chart';
 import axios from "axios";
-const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings}) => {
+import { fetchLoginStat } from "../actions/loginStatAction.js";
+import { ProgressBar } from "primereact/progressbar";
+
+import { ProgressSpinner } from 'primereact/progressspinner';
+ 
+const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings,stats,fetchLoginStats}) => {
   const menus=['Dashboard','Officers','Suppliers','Feadbacks']
-  console.log("from admin panel officers",suppliers,officers)
+  // console.log("from admin panel officers",suppliers,officers)
   const navigate=useNavigate()
-  
+
   let logMonthly={
-    Sep:89,
-    Oct:35,
-    Nov:76,
-    Dec:100, 
-    Jan:64,  
-    Feb:89,
-    Mar:78,
-    Apr:50,
-    May:85,
-    Jun:100,
-    Jul:105,
-    Aug:101, 
+    Sep:0,
+    Oct:0,
+    Nov:0,
+    Dec:0,  
+    Jan:0,  
+    Feb:0,
+    Mar:0,
+    Apr:0, 
+    May:0, 
+    Jun:0,
+    Jul:0,
+    Aug:0,  
   }
   const [month,setMonth]=useState(logMonthly)
   const [tog,setTog]=useState(false)
+  let statis
   const [basicData,setBasicData] = useState({
-    // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
-    // datasets: [
-    //     { 
-    //         label: 'Number Of Login',
-    //         backgroundColor: '#42A5F5',
-    //         data: [month.Jan, month.Feb, month.Mar, month.Apr, month.May, month.Jun, month.Jul, month.Aug,month.Sep, month.Oct, month.Nov, month.Dec]
-    //     },
-        
-    // ]
   });
   useEffect(async()=>{
     const role=localStorage.getItem('role')
 
         if(role!=='admin')
         navigate('/')
+        fetchLoginStats()
         fetchPendings()
     fetchSuppliers()
-    // fetchOfficers()
-    const fetch=async()=>{
-      const data=await axios.get('http://localhost:5001/login-stat')
-      setMonth(data.data)
-      setBasicData({
+if(Object.keys(stats).length!==0)
+      { statis={
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
         datasets: [ 
           {
               label: 'Number Of Login',
               backgroundColor: '#42A5F5', 
-              data: [month.Jan, month.Feb, month.Mar, month.Apr, month.May, month.Jun, month.Jul, month.Aug,month.Sep, month.Oct, month.Nov, month.Dec]
+              data: [stats.login.Jan, stats.login.Feb, stats.login.Mar, stats.login.Apr, stats.login.May, stats.login.Jun, stats.login.Jul, stats.login.Aug,stats.login.Sep, stats.login.Oct, stats.login.Nov, stats.login.Dec]
           },
           
       ]
-      })
-    }
-    
-    fetch()
-    if(tog)
-    setTog(false)
-    else
-    setTog(true)
+      }}
+      else{
+        statis={
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+          datasets: [ 
+            {
+                label: 'Number Of Login',
+                backgroundColor: '#42A5F5', 
+                data: [0,0,0,0,0,0,0,0,0,0,0,0]
+            },
+            
+        ]
+        }
+      }
+
     fetchOfficers()
-// .then((data)=>{
-//   setMonth(data.data)
-  
-//   // alert(data.data[0].date)
-// })
+    fetchLoginStats()
+
 
   },[])
-  console.log('Login Stat',month)
   let basicOptions = {
     maintainAspectRatio: false,
     aspectRatio: .8,
@@ -120,10 +118,11 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
     }
 };
 
-console.log('Tester Test',month.Jun)
-
-  console.log('pendings are ',pendings)
-  return ( 
+console.log('Tester Test',stats)
+if (Object.keys(stats).length===0)
+console.log('FROM INSA')
+  // console.log('pendings are ',pendings)
+  return (Object.keys(stats).length!==0)? ( 
     <Div>
       {/* <SideBar  menu={menus} /> */}
       <Side active={0}  menu={menus} />
@@ -133,8 +132,32 @@ console.log('Tester Test',month.Jun)
         <div className="grid"> 
           <div className="row__one">
           <div className="card">
-                <h5>Login Statistics {month.Jun}</h5>
-                <Chart type="line" data={basicData} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
+                <h5 className="text-teal-500 text-3xl">Login Statistics </h5>
+                <Chart type="line" data={{
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        datasets: [ 
+          {
+              label: 'Number Of Login',
+              backgroundColor: '#42A5F5', 
+              data: [stats.login.Jan, stats.login.Feb, stats.login.Mar, stats.login.Apr, stats.login.May, stats.login.Jun, stats.login.Jul, stats.login.Aug,stats.login.Sep, stats.login.Oct, stats.login.Nov, stats.login.Dec]
+          },
+          
+      ]
+      }} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
+            </div>
+            <div className="card">
+                <h5>Register Statistics </h5>
+                <Chart type="line" data={{
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        datasets: [ 
+          {
+              label: 'Number Of Login',
+              backgroundColor: '#42A5F5', 
+              data: [stats.register.Jan, stats.register.Feb, stats.register.Mar, stats.register.Apr, stats.register.May, stats.register.Jun, stats.register.Jul, stats.register.Aug,stats.register.Sep, stats.register.Oct, stats.register.Nov, stats.register.Dec]
+          },
+          
+      ]
+      }} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
             </div>
             {/* <div className="card">
                 <h5>Vertical</h5>
@@ -152,7 +175,7 @@ console.log('Tester Test',month.Jun)
       </Section>
     </Div>
 
-  );
+  ):<> <center> <ProgressSpinner/></center> </>;
 };
 
 
@@ -160,7 +183,9 @@ const mapStateToProps = (state) => {
   return {
     suppliers:state.suppliers.suppliers,
     officers:state.officers.officers,
-    pendings:state.pendings.pendings
+    pendings:state.pendings.pendings,
+    stats:state.stat.stat
+
   };
 };
 
@@ -168,7 +193,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSuppliers:()=>dispatch(fetchSuppliers()),
     fetchOfficers:()=>dispatch(fetchOfficer()),
-    fetchPendings:()=>dispatch(fetchPending())
+    fetchPendings:()=>dispatch(fetchPending()),
+    fetchLoginStats:()=>dispatch(fetchLoginStat())
   };
 };
 
