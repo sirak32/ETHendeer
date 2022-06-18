@@ -26,35 +26,14 @@ const [data,setData] =useState({})
   });
 //   let appliedss = applieds[32].tender 
   let appT=[]
-  applieds.map((ap)=>{
-      if(ap.applier===localStorage.getItem('whoId'))
+  applieds.map((ap)=>{ 
+      if(ap.applier._id===localStorage.getItem('whoId'))
       appT.push(ap.tender)
     })
     console.log('This is Mr',appT) 
 
-  const deleteButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-trash"
-        className="p-button-rounded p-button-danger"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
+
+
   const statusBodyTemplate = (rowData) => {
     const op=rowData.bidOpenOn
     const now=new Date().toISOString()
@@ -70,16 +49,13 @@ console.log("now ",now," op ",op,op<now)
     return (
       <>
         <Button
-          icon="pi pi-caret-down
-"
+          icon="pi pi-caret-down"
           className="p-button-rounded mr-2"
           onClick={() => {
             setData(rowData)
             setVisibleTop(true)
           }}
         />
-        
-    
       </>
     );
   };

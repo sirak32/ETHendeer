@@ -19,6 +19,7 @@ const Table = ({tenderss,applieds,fetchApplieds,fetchTenders}) => {
   const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
 const [cloz,setCloz]=useState(true)
+const[deleteId,setDeleteId]=useState(0)
   useEffect(()=>{
     fetchTenders()
     fetchApplieds()
@@ -28,30 +29,7 @@ const [cloz,setCloz]=useState(true)
     return t.creator===localStorage.getItem('whoId')
   });
   console.log('tenders are',tenderss)
-
-  const deleteButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-trash"
-        className="p-button-rounded p-button-danger"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel" 
-      />
-    ); 
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
+ 
   const statusBodyTemplate = (rowData) => {
     const op=rowData.bidOpenOn
     const now=new Date().toISOString()
@@ -94,15 +72,8 @@ console.log("now ",now," op ",op,op<now)
           className="p-button-rounded p-button-warning"
           onClick={async() => {
             // alert(rowData._id)
-            await axios.delete(`http://localhost:5001/tenders/${rowData._id}`)
-            .then((e)=>{
-              fetchTenders()
-              if(restart)
-              setRestart(false)
-              else
-              setRestart(true)
-
-            })
+            setDeleteId(rowData._id)
+            setDeleteProductsDialog(true)
           }}
         />
       </>
@@ -167,7 +138,7 @@ console.log("now ",now," op ",op,op<now)
       <Dialog
         visible={deleteProductsDialog}
         style={{ width: "450px" }}
-        header="Confirm"
+        header="Confirm Delete"
         modal
         footer={
           <>
@@ -182,8 +153,17 @@ console.log("now ",now," op ",op,op<now)
             <Button
               label="Yes"
               icon="pi pi-check"
-              className="p-button-text"
-              onClick={(() => {
+              className="p-button-text text-yellow-50 bg-pink-500 "
+              onClick={(async() => {
+                await axios.delete(`http://localhost:5001/tenders/${deleteId}`)
+            .then((e)=>{
+              fetchTenders()
+              if(restart)
+              setRestart(false)
+              else
+              setRestart(true)
+
+            })
                 setDeleteProductsDialog(false);
               })}
             />
@@ -219,7 +199,7 @@ console.log("now ",now," op ",op,op<now)
         {applieds.map((ap)=>{
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
           if(ap.tender._id===data._id)
-          return (<h1>{ap.applier} {ap.tender._id}</h1>)
+          return (<h1>{ap.applier._id } {ap.tender._id}</h1>)
         })}
                 </Sidebar>
     </>

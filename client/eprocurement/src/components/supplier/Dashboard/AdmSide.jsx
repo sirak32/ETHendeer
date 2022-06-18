@@ -21,10 +21,10 @@ export default function Sidebar(props) {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
-  const menus=['Dashboard','Officers','Suppliers','Feadbacks']
+  const menus=['Dashboard','Officers','Suppliers']
   const llinks=['#','#','#','#','#']
   useEffect(() => {
-    const sr = scrollreveal({
+    const sr = scrollreveal({ 
       origin: "left",
       distance: "80px",
       duration: 1000,

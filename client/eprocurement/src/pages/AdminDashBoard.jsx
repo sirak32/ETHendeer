@@ -22,11 +22,11 @@ import { Chart } from 'primereact/chart';
 import axios from "axios";
 import { fetchLoginStat } from "../actions/loginStatAction.js";
 import { ProgressBar } from "primereact/progressbar";
-
+import Grid from '@mui/material/Grid'
 import { ProgressSpinner } from 'primereact/progressspinner';
  
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings,stats,fetchLoginStats}) => {
-  const menus=['Dashboard','Officers','Suppliers','Feadbacks']
+  const menus=['Dashboard','Officers','Suppliers',]
   // console.log("from admin panel officers",suppliers,officers)
   const navigate=useNavigate()
 
@@ -84,7 +84,7 @@ if(Object.keys(stats).length!==0)
       }
 
     fetchOfficers()
-    fetchLoginStats()
+    // fetchLoginStats()
 
 
   },[])
@@ -131,38 +131,44 @@ console.log('FROM INSA')
         <NavBar />
         <div className="grid"> 
           <div className="row__one">
-          <div className="card">
-                <h5 className="text-teal-500 text-3xl">Login Statistics </h5>
-                <Chart type="line" data={{
+            <Grid>
+              <Grid item xs={6}>
+<div className="card">
+               <center> <h5 className="text-teal-500 text-lg">Login Statistics </h5></center>
+                <Chart type="bar" data={{
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
         datasets: [ 
           {
-              label: 'Number Of Login',
+              label: 'Login',
               backgroundColor: '#42A5F5', 
               data: [stats.login.Jan, stats.login.Feb, stats.login.Mar, stats.login.Apr, stats.login.May, stats.login.Jun, stats.login.Jul, stats.login.Aug,stats.login.Sep, stats.login.Oct, stats.login.Nov, stats.login.Dec]
           },
           
       ]
-      }} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
+      }} options={basicOptions}  
+      // style={{ position: 'relative', width: '60%' }} 
+      />
             </div>
-            <div className="card">
-                <h5>Register Statistics </h5>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="card">
+                <center> <h5 className="text-teal-500 text-lg">Registration Statistics </h5></center>
                 <Chart type="line" data={{
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
         datasets: [ 
           {
-              label: 'Number Of Login',
-              backgroundColor: '#42A5F5', 
+              label: 'Registration',
+              backgroundColor: '#85F', 
               data: [stats.register.Jan, stats.register.Feb, stats.register.Mar, stats.register.Apr, stats.register.May, stats.register.Jun, stats.register.Jul, stats.register.Aug,stats.register.Sep, stats.register.Oct, stats.register.Nov, stats.register.Dec]
           },
           
       ]
-      }} options={basicOptions}  style={{ position: 'relative', width: '60%' }} />
+      }} options={basicOptions} 
+      //  style={{ position: 'relative', width: '60%' }} 
+       />
             </div>
-            {/* <div className="card">
-                <h5>Vertical</h5>
-                <Chart type="doughnut" data={basicData} options={basicOptions} />
-            </div> */}
+                </Grid>
+            </Grid>
           <Wrapper>
             <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
             <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>

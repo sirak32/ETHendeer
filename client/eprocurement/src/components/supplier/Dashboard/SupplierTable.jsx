@@ -9,77 +9,31 @@ import { FormikFormDemo } from "./EditSupplier";
 import { Dialog } from "primereact/dialog";
 import { fetchSuppliers } from "../../../actions/supplierAction";
 import axios from "axios";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 const Table = ({suppliers,fetchSuppliers}) => {
   const [edit,setEdit]=useState(false)
   const [selectedCustomers, setSelectedCustomers] = useState(null);
-  const [suppli,setSuppli]=useState({})
+  // const [suppli,setSuppli]=useState({})
+  const [data,setData] =useState({})
 
-  const deleteButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-trash"
-        className="p-button-rounded p-button-danger"
-        aria-label="Cancel"
-      />
-    );
-  };
-  
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel"
-        onClick={(()=>{
-          setEdit(true)
-        })}
-      />
-    );
-  };
-  const detailButton = (rowData) => {
-    //
-    //
-    return (
-      <Button
-        icon="pi-chevron-circle-down"
-        className="p-button-rounded"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
-  const statusBodyTemplate = (rowData) => {
-    return <Button label={`${rowData.status}`} className="p-button-success" />;
-    // return <span  className={`status-active`}>{rowData.status}</span>;
-  };
-  const editProduct = () => {};
   const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
-    console.log("row datas",rowData)
     return (
       <>
         <Button
           icon="pi pi-caret-down
-"
+          "
           className="p-button-rounded mr-2"
           onClick={() => {
-            
-            confirmDeleteProduct(rowData)
+            console.log("row datas",rowData)
+            setData(rowData)
+            setEdit(true)
+            // console.log('Supli',suppli)
+
           
           }}
           />
-        {/* <Button
-          icon="pi pi-pencil"
-          className="p-button-rounded p-button-success mr-2"
-          onClick={() => {setEdit(true)
-          setSuppli(rowData)
-          }}
-          /> */}
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
@@ -88,16 +42,15 @@ const Table = ({suppliers,fetchSuppliers}) => {
             axios.get(`http://localhost:5001/supli/${rowData._id}`)
             .then((res)=>{
              fetchSuppliers()
-              // setDeleteProductsDialog(true);
             })
-            // alert("box")
+
             confirmDeleteProduct(rowData)
           }}
           />
       </>
     );
   };
-  return (
+  return suppliers.length>0? (
     <>
     <DataTable
       breakpoint="960px"
@@ -123,17 +76,20 @@ const Table = ({suppliers,fetchSuppliers}) => {
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
       <Column
-        body={actionBodyTemplate}
+        body={actionBodyTemplate()}
         exportable={false}
         style={{ minWidth: "8rem" }}
       ></Column>
     </DataTable>
 
       <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-        <FormikFormDemo selected={suppli} />
+        {/* <FormikFormDemo selected={suppli} /> */}
+        <h1>Hello</h1>
+        {/* {console.log('suppli',suppli)} */}
+      {/* <h1>  {suppli.personalInfo.firstName}</h1> */}
       </Dialog>
       </>
-  );
+  ):<ProgressSpinner/>;
 };
 const mapStateToProps = (state) => {
   return {

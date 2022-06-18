@@ -25,7 +25,7 @@ const getPosts = async (req, res) => {
 }
 const getAppliedTenders=async (req,res) =>{
     try {
-        const applied=await appliedtenders.find().populate('tender')
+        const applied=await appliedtenders.find().populate('tender').populate('applier')
         res.status(200).json(applied)
     } catch (error) {
         res.status(404).json({message:error})

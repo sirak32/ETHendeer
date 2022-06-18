@@ -18,73 +18,16 @@ useEffect(()=>{
 fetchOfficers()
 console.log('consola',officers)
 },[])
-  // function createData(
-  //   tenderNO,
-  //   tenderId,
-  //   tenderTitle,
-  //   openingDate,
-  //   closingDate,
-  //   status
-  // ) {
-  //   return {
-  //     tenderNO,
-  //     firstName:tenderId,
-  //     tenderTitle,
-  //     openingDate,
-  //     closingDate,
-  //     status, };
-  // }
-  // let dataa 
-  // console.log("my NEw KINGDOM", dataa);
-  let i;
 
-  const rows = [];
-  // for (i = 0; i < dataa.length; i++) {
-  //   rows[i] = createData(
-  //     i,
-  //     dataa[i].officerId,
-  //     dataa[i].personalInfo.firstName,
-  //     `${dataa[i].personalInfo.phoneNumber.countryCode}${dataa[i].personalInfo.phoneNumber.regionalCode}${dataa[i].personalInfo.phoneNumber.number}`,
-  //     dataa[i].personalInfo.email,
-  //     "4"
-  //   );
-  // }
-  // console.log("Succesffull", rows);
-  const deleteButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-trash"
-        className="p-button-rounded p-button-danger"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
-  const statusBodyTemplate = (rowData) => {
-    return <Button label={`${rowData.status}`} className="p-button-success" />;
-    // return <span  className={`status-active`}>{rowData.status}</span>;
-  };
-  const editProduct = () => {};
-  const confirmDeleteProduct = () => {};
+
+
+  // const editProduct = () => {};
+  // const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
     return (
       <>
         <Button
-          icon="pi pi-caret-down
-"
+          icon="pi pi-caret-down"
           className="p-button-rounded mr-2"
           onClick={() => {
             console.log('Supplier List',rowData)
@@ -92,13 +35,6 @@ console.log('consola',officers)
             setVisibleTop(true)
           }}
         />
-        {/* <Button
-          icon="pi pi-pencil"
-          className="p-button-rounded p-button-success mr-2"
-          onClick={() => {
-            setEdit(true)
-            editProduct(rowData)}}
-        /> */}
         <Button
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
@@ -114,7 +50,6 @@ console.log('consola',officers)
       </>
     );
   };
-  // console.log("rows are", rows);
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return (
     <>
@@ -200,14 +135,14 @@ console.log('consola',officers)
           {<span>Are you sure you want to delete the selected products?</span>}
         </div>
       </Dialog>
-      <Sidebar  visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+      <Dialog  visible={visibleTop}  style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
                     <h3>Top Sidebar Supplier</h3>
                     <h1>{data._id}</h1>
-                    <h1>Tender Description</h1>
+                    {/* <h1>{data.personalInfo.firstName}</h1> */}
                     <h1>Tender Number</h1>
                     <h1>Tender `Description`</h1>
 
-                </Sidebar>
+                </Dialog> 
     </>
   );
 };
