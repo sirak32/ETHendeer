@@ -18,7 +18,7 @@ const Table = ({officers,fetchOfficers}) => {
 const [data,setData] =useState({})
 useEffect(()=>{
 fetchOfficers()
-console.log('consola',officers)
+// console.log('consola',officers)
 },[])
 
 
@@ -147,7 +147,7 @@ console.log('consola',officers)
           </>
         }
         onHide={() => {
-          setDeleteProductsDialog(false);
+          setDeleteOff(false);
         }}
       >
         <div className="confirmation-content">

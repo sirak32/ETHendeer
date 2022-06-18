@@ -14,10 +14,11 @@ import { ProgressSpinner } from "primereact/progressspinner";
 const Table = ({suppliers,fetchSuppliers}) => {
   const [edit,setEdit]=useState(false)
   const [selectedCustomers, setSelectedCustomers] = useState(null);
+  const [deleteOff,setDeleteOff]=useState(false)
+  const [deleteId,setDeleteId]=useState(0)
   // const [suppli,setSuppli]=useState({})
   const [data,setData] =useState({})
 
-  const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
     return (
       <>
@@ -29,7 +30,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
             console.log("row datas",rowData)
             setData(rowData)
             setEdit(true)
-            // console.log('Supli',suppli)
+            console.log('Supli',suppliers)
 
           
           }}
@@ -39,12 +40,9 @@ const Table = ({suppliers,fetchSuppliers}) => {
           className="p-button-rounded p-button-warning"
           onClick={() => {
             console.log('consola',rowData._id)
-            axios.get(`http://localhost:5001/supli/${rowData._id}`)
-            .then((res)=>{
-             fetchSuppliers()
-            })
-
-            confirmDeleteProduct(rowData)
+            setDeleteId(rowData._id)
+            setDeleteOff(true)
+            
           }}
           />
       </>
@@ -54,7 +52,9 @@ const Table = ({suppliers,fetchSuppliers}) => {
     fetchSuppliers()
   },[])
   return suppliers.length>0? (
+    
     <>
+    {}
     <DataTable
       breakpoint="960px"
       editMode="cell"
@@ -79,7 +79,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
       <Column
-        body={actionBodyTemplate()}
+        body={actionBodyTemplate}
         exportable={false}
         style={{ minWidth: "8rem" }}
       ></Column>
@@ -91,6 +91,52 @@ const Table = ({suppliers,fetchSuppliers}) => {
         {/* {console.log('suppli',suppli)} */}
       {/* <h1>  {suppli.personalInfo.firstName}</h1> */}
       </Dialog>
+      <Dialog
+        visible={deleteOff}
+        style={{ width: "450px" }}
+        header="Confirm Delete"
+        modal
+        dismissableMask
+        footer={
+          <>
+            <Button
+              label="No"
+              icon="pi pi-times"
+              className="p-button-text"
+              onClick={(async() => {
+
+                setDeleteOff(false);
+              }
+              )}
+            />
+            <Button
+              label="Yes"
+              icon="pi pi-check"
+              className="p-button-text text-yellow-50 bg-pink-500 "
+              
+              onClick={( () => {
+                // console.log("INside Button Function")
+                axios.get(`http://localhost:5001/supli/${deleteId}`)
+                .then((res)=>{
+                 fetchSuppliers()
+                 setDeleteOff(false);
+                })
+              })}
+              />
+          </>
+        }
+        onHide={() => {
+          setDeleteOff(false);
+        }}
+      >
+        <div className="confirmation-content">
+          <i
+            className="pi pi-exclamation-triangle mr-3"
+            style={{ fontSize: "2rem" }}
+          />
+          {<span>Are you sure you want to delete the selected Supplier?</span>}
+        </div>
+                </Dialog>
       </>
   ):<ProgressSpinner/>;
 };

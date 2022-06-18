@@ -52,7 +52,7 @@ function a11yProps(index) {
 
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
-  console.log("props value", props.data);
+  // console.log("props value", props.data);
   const [vis, setVis] = React.useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);

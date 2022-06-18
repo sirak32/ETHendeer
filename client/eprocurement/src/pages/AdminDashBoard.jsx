@@ -118,9 +118,9 @@ if(Object.keys(stats).length!==0)
     }
 };
 
-console.log('Tester Test',stats)
-if (Object.keys(stats).length===0)
-console.log('FROM INSA')
+// console.log('Tester Test',stats)
+// if (Object.keys(stats).length===0)
+// console.log('FROM INSA')
   // console.log('pendings are ',pendings)
   return (Object.keys(stats).length!==0)? ( 
     <Div>
