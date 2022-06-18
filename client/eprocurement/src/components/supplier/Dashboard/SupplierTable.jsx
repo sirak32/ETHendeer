@@ -39,6 +39,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
           onClick={() => {
+            console.log('suppliers',suppliers)
             console.log('consola',rowData._id)
             setDeleteId(rowData._id)
             setDeleteOff(true)
@@ -74,7 +75,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
     >
       <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
-      <Column field="personalInfo.phoneNumber.number" sortable header="Phone Number"></Column>
+      <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
       <Column

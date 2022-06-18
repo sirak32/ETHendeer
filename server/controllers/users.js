@@ -195,12 +195,10 @@ const rejectPending=async(req,res)=>{
 }
 const getPendingSuppliers=async(req,res)=>{
     try {
-        
         const pend=await pendingsupplier.find().populate('accountInfo')
         res.status(200).json(pend)
     } catch (error) {
         res.status(404).json({message:error.message})
-
     }
 }
 const getOnePending=async(req,res)=>{
@@ -240,7 +238,7 @@ const registerOfficer = async (req, res) => {
     middleNam: officer1.middleName,
     lastName: officer1.lastName,
     email: officer1.email,
-    phoneNumber:'+251919298457',
+    phoneNumber:officer1.phoneNumber,
     address:userAddress._id,
 
     })
