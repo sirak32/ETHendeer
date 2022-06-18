@@ -62,7 +62,7 @@ closedNo++
       <Section>
         <NavBar />
         <div className="grid">
-          <div className="row__one">
+          <div className="row__one"> 
             <Wrapper>
               <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
               <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />

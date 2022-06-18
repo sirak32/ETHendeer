@@ -212,7 +212,7 @@ console.log("now ",now," op ",op,op<now)
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
          { 
           console.log("app",ap)
-          var sup
+          var sup=[]
           if(ap.applier!==null)
           {
              sup=suppliers.filter((su)=>{
@@ -223,13 +223,15 @@ console.log("now ",now," op ",op,op<now)
           if(ap.tender._id===data._id)
          {
 
-           return ap.length>0?(
+           return sup.length>0?(
             <> 
             <center>
               <h1 className="text-indigo-600">
             {/* {ap.applier._id } 
             {ap.tender._id}  */}
-            {sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName} 
+            {
+            sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName
+            } 
              {/* {ap.businessDoc}
               {ap.technicalDoc}   */}
                <Button
@@ -262,7 +264,7 @@ console.log("now ",now," op ",op,op<now)
             
             </>
           
-           ):'' 
+           ):''
           
           }}
         })}
