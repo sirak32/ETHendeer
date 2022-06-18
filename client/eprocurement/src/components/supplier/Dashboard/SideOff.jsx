@@ -22,7 +22,7 @@ export default function Sidebar(props) {
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
   const menus = ["Dashboard", "Suppliers","Account Setting", "Tender Manual"];
-  const links=['/','/login','/officer-profile','/officer-manual']
+  const links=['/','/officer-supplier','/officer-profile','/officer-manual']
 
   useEffect(() => {
     const sr = scrollreveal({

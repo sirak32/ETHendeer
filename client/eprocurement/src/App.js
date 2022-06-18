@@ -20,6 +20,7 @@ import OfficerProfile from './pages/OfficerProfile'
 import SupplierProfile from './pages/SupplierProfile'
 import AdminOfficers from './pages/AdminOfficers'
 import AdminSuppliers from './pages/AdminSuppliers'
+import OfficerSuppliers from './pages/OfficerSuppliers'
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const App = () => {
 
 
         <Route exact path="/officer-profile" element={<OfficerProfile />}></Route>
+        <Route exact path="/officer-supplier" element={<OfficerSuppliers />}></Route>
+
         <Route exact path="/admin-officer" element={<AdminOfficers />}></Route>
         <Route exact path="/admin-supplier" element={<AdminSuppliers />}></Route>
 

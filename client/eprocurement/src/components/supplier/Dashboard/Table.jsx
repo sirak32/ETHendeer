@@ -223,7 +223,7 @@ console.log("now ",now," op ",op,op<now)
           if(ap.tender._id===data._id)
          {
 
-           return (
+           return ap.length>0?(
             <> 
             <center>
               <h1 className="text-indigo-600">
@@ -262,7 +262,7 @@ console.log("now ",now," op ",op,op<now)
             
             </>
           
-           )
+           ):'' 
           
           }}
         })}

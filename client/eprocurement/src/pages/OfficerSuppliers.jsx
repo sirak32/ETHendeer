@@ -20,12 +20,9 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
  
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-  // const [tendeN,setTenderN]=useState(null)
   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
-    // dispatch({type:'SET_LOADING'})
-    // dispatch({type:'SET_TENDER',
-    //   payload:'data'})
+
         const tokens=localStorage.getItem('token')
         const role=localStorage.getItem('role')
 
@@ -33,7 +30,6 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         navigate('/')
         fetchTenders();
         fetchSuppliers()
-        // console.log('Im being belcash baldereba',tenders)
   }, []);
   const OptmTender = [];
   let i;
@@ -58,7 +54,7 @@ closedNo++
   return tenders ? (
     <Div>
       {/* <SideBar menu={menus} /> */}
-      <Side active={2} menu={menus}/>
+      <Side active={1} menu={menus}/>
       <Section>
         <NavBar />
         <div className="grid">
