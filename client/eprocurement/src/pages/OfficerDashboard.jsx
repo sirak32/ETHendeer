@@ -61,12 +61,7 @@ closedNo++
               <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
               <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
               <Dash title="Closed" color={'bg-pink-500'} number={closedNo} />
-            
-            {/* <Dash title="Suppliers" color={'bg-green-500'} number={suppliers.length} />
-              <Dash title="Tenders" color={'bg-yellow-500'} number={tenders.length} />
-              <Dash title="Active" color={'bg-pink-500'} number={tenders.length-closedNo} />
-              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
-</Wrapper>           
+            </Wrapper>           
             <BasicTabs data={{OptmTender,suppliers,tenders}} />
           </div>
           <div className="row__two"></div>

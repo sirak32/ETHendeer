@@ -64,10 +64,10 @@ closedNo++
         <div className="grid">
           <div className="row__one">
             <Wrapper>
-              <Dash title="Suppliers" number={suppliers.length} />
-              <Dash title="Tenders" number={tenders.length} />
-              <Dash title="Active" number={tenders.length-closedNo} />
-              <Dash title="Closed" number={closedNo} />
+              <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
+              <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
+              <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
+              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} />
             </Wrapper>           
             {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
           </div>

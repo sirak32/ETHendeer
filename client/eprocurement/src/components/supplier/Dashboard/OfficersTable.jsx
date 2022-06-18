@@ -13,6 +13,8 @@ const Table = ({officers,fetchOfficers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
   const [visibleTop, setVisibleTop] = useState(false);
+  const [deleteOff,setDeleteOff]=useState(false)
+  const [deleteId,setDeleteId]=useState(0)
 const [data,setData] =useState({})
 useEffect(()=>{
 fetchOfficers()
@@ -39,12 +41,14 @@ console.log('consola',officers)
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
           onClick={() => {
+            setDeleteId(rowData._id)
+            setDeleteOff(true)
             console.log('consola',rowData._id)
-              axios.get(`http://localhost:5001/fromme/${rowData._id}`)
-              .then((res)=>{
-                fetchOfficers()
-                setDeleteProductsDialog(true);
-              })
+              // axios.get(`http://localhost:5001/fromme/${rowData._id}`)
+              // .then((res)=>{
+              //   fetchOfficers()
+              //   setDeleteProductsDialog(true);
+              // })
           }}
         />
       </>
@@ -98,10 +102,20 @@ console.log('consola',officers)
             {/* <FormikFormDemo/> */}
 
         </Dialog>
-      <Dialog
-        visible={deleteProductsDialog}
+
+      <Dialog  visible={visibleTop} dismissableMask style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+                    <h3>Top Sidebar Supplier</h3>
+                    <h1>{data._id}</h1>
+                    {/* <h1>{data.personalInfo.firstName}</h1> */}
+                    <h1>Tender Number</h1>
+                    <h1>Tender `Description`</h1>
+                </Dialog> 
+                
+                
+                <Dialog
+        visible={deleteOff}
         style={{ width: "450px" }}
-        header="Confirm"
+        header="Confirm Delete"
         modal
         footer={
           <>
@@ -109,16 +123,25 @@ console.log('consola',officers)
               label="No"
               icon="pi pi-times"
               className="p-button-text"
-              onClick={() => {
-                setDeleteProductsDialog(false);
-              }}
+              onClick={(async() => {
+
+                setDeleteOff(false);
+              }
+              )}
             />
             <Button
               label="Yes"
               icon="pi pi-check"
-              className="p-button-text"
-              onClick={(() => {
-                setDeleteProductsDialog(false);
+              className="p-button-text text-yellow-50 bg-pink-500 "
+              
+              onClick={( () => {
+                console.log("INside Button Function")
+                axios.get(`http://localhost:5001/fromme/${deleteId}`)
+              .then((res)=>{
+                setDeleteOff(false);
+                fetchOfficers()
+              })
+                setDeleteOff(false);
               })}
             />
           </>
@@ -132,17 +155,9 @@ console.log('consola',officers)
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {<span>Are you sure you want to delete the selected products?</span>}
+          {<span>Are you sure you want to delete the selected Officer?</span>}
         </div>
-      </Dialog>
-      <Dialog  visible={visibleTop}  style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <h3>Top Sidebar Supplier</h3>
-                    <h1>{data._id}</h1>
-                    {/* <h1>{data.personalInfo.firstName}</h1> */}
-                    <h1>Tender Number</h1>
-                    <h1>Tender `Description`</h1>
-
-                </Dialog> 
+                </Dialog>
     </>
   );
 };

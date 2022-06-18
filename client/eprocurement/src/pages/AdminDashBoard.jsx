@@ -135,7 +135,7 @@ console.log('FROM INSA')
               <Grid item xs={6}>
 <div className="card">
                <center> <h5 className="text-teal-500 text-lg">Login Statistics </h5></center>
-                <Chart type="bar" data={{
+                <Chart type="line" data={{
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
         datasets: [ 
           {
@@ -146,14 +146,14 @@ console.log('FROM INSA')
           
       ]
       }} options={basicOptions}  
-      // style={{ position: 'relative', width: '60%' }} 
+      style={{ position: 'relative', width: '60%' }} 
       />
             </div>
               </Grid>
               <Grid item xs={6}>
                 <div className="card">
                 <center> <h5 className="text-teal-500 text-lg">Registration Statistics </h5></center>
-                <Chart type="line" data={{
+                <Chart type="bar" data={{
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
         datasets: [ 
           {
@@ -164,7 +164,7 @@ console.log('FROM INSA')
           
       ]
       }} options={basicOptions} 
-      //  style={{ position: 'relative', width: '60%' }} 
+       style={{ position: 'relative', width: '60%' }} 
        />
             </div>
                 </Grid>

@@ -180,7 +180,7 @@ console.log("now ",now," op ",op,op<now)
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {<span>Are you sure you want to delete the selected products?</span>}
+          {<span>Are you sure you want to delete the selected Tender?</span>}
         </div>
       </Dialog>
       <Sidebar className=" text-500 border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
@@ -208,7 +208,7 @@ console.log("now ",now," op ",op,op<now)
           //   if(su._id===ap.applier._id)
 
           // })
-          console.log('APPLIER XXXX',ap.applier,suppliers)
+          // console.log('APPLIER XXXX',ap.applier,suppliers)
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
          { 
           const sup=suppliers.filter((su)=>{

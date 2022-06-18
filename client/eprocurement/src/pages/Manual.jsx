@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { Button } from 'primereact/button';
 import { Container } from '@mui/material';
+import { Link } from 'react-router-dom';
 // import './AccordionDemo.css';
 
 export const AccordionDemo = () => {
@@ -68,6 +69,11 @@ export const AccordionDemo = () => {
 
             </div>
         </div>
+      <center>
+            <Link to={'/'} style={{textDecoration:'none'}}> 
+        <Button label="Back to Home" className="p-button-success mt-4" />
+            </Link>
+        </center>
         </Container>
     )
 }
