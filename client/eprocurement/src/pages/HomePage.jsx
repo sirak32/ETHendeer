@@ -1,3 +1,4 @@
+import Page from '../landing/index'
 import styled from "styled-components";
 import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
 import NavBar from "../components/supplier/Dashboard/NavBar";
@@ -17,7 +18,6 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import MenubarDemo from "../components/supplier/Dashboard/MenubarDemo.jsx";
 import { Image } from 'primereact/image';
-// import Containers from '../landing/Container'
 
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
   const menus=['Dashboard','Officers','Suppliers','Logout']
@@ -34,29 +34,51 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers}) => {
     //     <MainContent/>
     // </Container>
     /*<Div>
-      <Sidebar/>
-      <Dashboard/>
+    <Sidebar/>
+    <Dashboard/>
     </Di>*/
     // <Sidebar/>
-    // <Div>
-        // {/* <MenubarDemo/> */}
-        // {/* <Image src="https://sld.gs/wp-content/uploads/2018/04/react-background.jpg" alt="Image" width="100%"  /> */}
-      // <Section>
-      //   <div className="grid">
-      //     <div className="row__one">
-      //            </div>
-      //     <div className="row__two"></div>
-      //   </div>
-      // </Section>
-      
-      // <Containers/>
-    // </Div>
+    <Div>
+        <Page/>
+        <MenubarDemo/>
+        <Image src="https://sld.gs/wp-content/uploads/2018/04/react-background.jpg" alt="Image" width="100%"  />
+      {/* <SideBar  menu={menus} /> */}
+      <Section>
+        {/* <NavBar /> */}
+        <div className="grid">
+          <div className="row__one">
+          {/* <Wrapper>
+            <Dash title="Suppliers" number={suppliers.length}/>
+            <Dash title="Officers" number={officers.length}/> */}
+            {/* <Dash title="Active" number="200"/>
+            <Dash title="Closed" number="45"/> */}
+            {/* <Dash  title="Closed"/>
+            <Dash  title="Closed"/> */}
+            {/* </Wrapper> */}
+            {/* <Table /> */}
+            {/* <BasicTabs/> */}
+            {/* <MediaCard/> */}
+{/*  */}
+            {/* <MediaCard/> */}
+            {/* <MediaCard/> */}
+            {/* <MediaCard/> */}
+            {/* <AdminTab data={{suppliers}}/> */}
+            {/* <FilePicker multiple width={250} onChange={(files) => console.log(files)} placeholder="Select the file here!" /> */}
+
+            {/* <AddOfficer/> */}
+            {/* <OfficersList/>
+            <RegisterSupplier/> */}
+
+          </div>
+          <div className="row__two"></div>
+        </div>
+      </Section>
+    </Div>
     // <div>hi</div>
     //  <> <SideBar/>
     //   <NavBar/>
     //   <Table/>
     // </>
-    <h1>Home Page</h1>
   );
 };
 

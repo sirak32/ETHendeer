@@ -367,8 +367,6 @@ const userLogin = async (userCreds, role, res) => {
             message: "Username not found",
             succes: false
         })
-
-
     }
     // if (user.role !== role) {
     //     return res.status(403).json({
@@ -754,6 +752,22 @@ const getRegisterStat=async (req,res)=>{
     }
     
 }
+const resetPassword=async(req,res)=>{
+  const id = req.params.id
+  try {
+    var pass="ETH"
+    const p=await bcrypt.hash(pass,12)
+    console.log('info inside',p)
+    const account1=await account.findByIdAndUpdate(id,{password:p})
+    // account1.password=p
+    // await account1.save() 
+    res.status(200).json({message:account1})
+  } catch (error) {
+    res.status(200).json({error})
+
+  }
+}
+
 export {
     checkRole,
     userAuth,
@@ -776,5 +790,6 @@ export {
     acceptSupplier,
     rejectPending,
     getLoginStat,
-    getRegisterStat
+    getRegisterStat,
+    resetPassword
 }

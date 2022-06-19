@@ -70,7 +70,7 @@ export const AccordionDemo = () => {
             </div>
         </div>
       <center>
-            <Link to={'/'} style={{textDecoration:'none'}}> 
+            <Link to={'/officer'} style={{textDecoration:'none'}}> 
         <Button label="Back to Home" className="p-button-success mt-4" />
             </Link>
         </center>

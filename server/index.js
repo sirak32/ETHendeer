@@ -14,7 +14,8 @@ import path from "path";
 import crypto from "crypto";
 import methodOverride from "method-override";
 import tender from "./models/tender.js";
-
+import nodemailer from 'nodemailer'
+// import nodemailer from 'no'
 // const fs=require('fs')
 const app = express();
 app.use(cors());
@@ -157,10 +158,34 @@ app.get("/complete",async(req,res)=>{
   tend.payers=[...tend.payers,mongoose.Types.ObjectId(supplierId)]
   await tend.save()
   console.log(req.query.Status,'tender',tend)
-  res.status(200).send('<h1>Successfull Payment<script>;window.location.replace("http://localhost:3000")</script></h1>')
+  res.status(200).send('<h1>Successfull Payment<script>;window.location.replace("http://localhost:3000/supplier")</script></h1>')
 })
+
 // app.use('/applied')
 
 // let buff = new Buffer.from(data, 'base64');
 // // fs.writeFileSync('print.pdf', buff);
 // console.log('Base64 image data converted to file: stack-abuse-logo-out.png');
+
+
+//// EMAIL
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'tiliksewmulugeta552@gmail.com',
+//     pass: 'TILIKSEWMULUGETA552'
+//   }
+// });
+// var mailOptions = {
+//   from: 'tiliksewmulugeta552@gmail.com',
+//   to: 'sirak21tesfaye@gmail.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log('error is',error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });

@@ -27,8 +27,8 @@ const App = () => {
     // <AdminDashboard />
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
+        {/* <Route exact path="/" element={<Login />}></Route> */}
+        <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/officer-manual" element={<AccordionDemo />}></Route>
 
         <Route exact path="/apply" element={<Apply />}></Route>
