@@ -13,6 +13,7 @@ const store=createStore( rootReducer,compose(applyMiddleware(thunk)))
 ReactDom.render(
   <Provider store={store}>  
   <App />  
+  {/* <Home/> */}
 </Provider>,  
 document.getElementById('root')
 );

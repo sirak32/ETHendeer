@@ -12,7 +12,7 @@ import AddOfficer from "./pages/AddOfficer.jsx";
 import TenderDetail from "./pages/TenderDetail";
 import Login from "./pages/Login";
 import Apply from "./pages/ApplyingTender";
-import Home from "./pages/Home.jsx";
+import Home from './landing/App'
 import { AccordionDemo } from "./pages/Manual.jsx";
 import SupplierTenders from './pages/SupplierTenders'
 import OfficerProfile from './pages/OfficerProfile'
