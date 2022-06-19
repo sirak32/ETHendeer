@@ -27,7 +27,7 @@ export default function Sidebar(props) {
     const sr = scrollreveal({ 
       origin: "left",
       distance: "80px",
-      duration: 1000,
+      duration: 300,
       reset: false,
     });
 
@@ -44,7 +44,7 @@ export default function Sidebar(props) {
       `,
       {
         opacity: 0,
-        interval: 300,
+        interval: 50,
       }
     );
   }, []);

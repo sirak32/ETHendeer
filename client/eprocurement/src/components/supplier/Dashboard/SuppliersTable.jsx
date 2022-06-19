@@ -76,7 +76,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
     <DataTable
       breakpoint="960px"
       editMode="cell"
-      header="Pending Supplier Registration List"
+      header={<center>Supplier List</center>}
       value={suppliers}
       responsiveLayout="scroll"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

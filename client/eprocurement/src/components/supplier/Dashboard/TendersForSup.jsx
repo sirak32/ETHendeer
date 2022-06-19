@@ -26,9 +26,11 @@ const [data,setData] =useState({})
   });
 //   let appliedss = applieds[32].tender 
   let appT=[]
+  console.log(applieds)
   applieds.map((ap)=>{ 
-      if(ap.applier._id===localStorage.getItem('whoId'))
-      appT.push(ap.tender)
+      // console.log(ap)
+      // if(ap.applier._id===localStorage.getItem('whoId'))
+      // appT.push(ap.tender)
     })
     console.log('This is Mr',appT) 
 

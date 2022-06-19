@@ -29,6 +29,8 @@ import styled from "styled-components";
 import { useRef } from "react";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
+import { Fieldset } from 'primereact/fieldset';
+
 const InputAdornments = ({ tenders, fetchTenders }) => {
   const toast = useRef(null);
   const showSuccess = () => {
@@ -58,8 +60,6 @@ let creator;
       dat.append("doc", selectedFile);
       const bidOpenOn= new Date(data.bidOpenOn).toUTCString()
       const closingDate=new Date(data.closingDate).toUTCString()
-      // console.log("the expected",dat);
-      // console.log("spreading ",{...data,creator:"tilikse",bidOpenOn,closingDate,publishedDate})
 
       // console.log("data",publishedDate)
 //       let dateStr = "Fri Apr 20 2020 00:00:00 GMT+0530 (India Standard Time)"
@@ -73,7 +73,6 @@ let creator;
         const c=localStorage.getItem('whoId')
           await axios.post("http://localhost:5001/tenders/", {...data,creator:c,bidOpenOn,closingDate,publishedDate,document:file})
           .then(() => {
-            // setNo('changed')
             showSuccess()
             // formik.resetForm()
           });
@@ -114,10 +113,9 @@ let creator;
   };
   console.log("testing the states without dispatching", tenders.tenders);
   return (
+ <Fieldset legend="Post New Tender" toggleable >
     <form onSubmit={formik.handleSubmit}>
-       <fieldset>
-       <legend>Post New Tender</legend>
-       
+
       <Container>
         <Div className="card">
           <Grid container spacing={5}>
@@ -331,36 +329,16 @@ let creator;
         ></Box>
 
         <Toast ref={toast} position="bottom-center" />
-      </Container></fieldset>
+      </Container>
     </form>
+      </Fieldset>
   );
 };
 const handleForm = (e) => {
   e.preventDefault();
   console.log(e.target[5].value);
-  //   axios.post('http://localhost:5001/tenders',{
-  //     title: e.target[0].value,
-  //     description: e.target[2].value,
-  //     number: e.target[1].value,
-  //     type: e.target[3].value,
-  //     catagory: e.target[4].value,
-  //     lotNo: e.target[5].value,
-  //     minPrice:e.target[6].value,
-  //     publishedDate:e.target[11].value ,
-  //     closingDate: e.target[12].value,
-  //     bidOpenOn: e.target[13].value,
-  //     participationFee: e.target[9].value,
-  //     bidSecurityAmount: e.target[7].value,
-  //     termsAndConditions: e.target[8].value,
-
-  //   })
 };
-// const handleFormChange =(e)=>{
-// setFormValue({
-//   ...formDatas,
 
-// })
-// }
 const Div =styled.div`
 
 min-width:450px;

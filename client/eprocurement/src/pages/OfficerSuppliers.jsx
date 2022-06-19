@@ -14,6 +14,8 @@ import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import Side from '../components/supplier/Dashboard/SideOff'
+import SuppliersTable from '../components/supplier/Dashboard/SuppliersTable'
+
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
@@ -61,11 +63,12 @@ closedNo++
           <div className="row__one">
             <Wrapper>
               <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
-              <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
-              <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
-              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} />
+              {/* <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} /> */}
+              {/* <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
+              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
             </Wrapper>           
             {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
+            <SuppliersTable data={suppliers}/>
           </div>
           <div className="row__two"></div>
         </div>
@@ -153,6 +156,6 @@ const Wrapper = styled.div`
   padding: 2rem 0;
   gap: 3rem;
   border-radius: 2rem;
-  justify-content: space-evenly;
+  // justify-content: space-evenly;
 `;
 export default connect(mapStateToProps, mapDispatchToProps)(App);
