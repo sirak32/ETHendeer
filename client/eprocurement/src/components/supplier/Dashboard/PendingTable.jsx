@@ -166,7 +166,7 @@ fetchPendings()
       editMode="cell"
       header="Pending Supplier Registration List"
       value={pendings}
-      responsiveLayout="scroll"
+      responsiveLayout="cell"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
       rowsPerPageOptions={[5, 10, 15, 25, 50]}
       dataKey={pendings._id}
@@ -174,7 +174,7 @@ fetchPendings()
       rowHover
       selection={selectedCustomers}
       onSelectionChange={(e) => setSelectedCustomers(e.value)}
-      emptyMessage="Data Not Found"
+      emptyMessage={<center><h4> No Pending Suppliers</h4></center>}
       className="datatable-responsive"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}

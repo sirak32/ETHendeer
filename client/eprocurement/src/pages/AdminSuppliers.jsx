@@ -24,7 +24,10 @@ import { fetchLoginStat } from "../actions/loginStatAction.js";
 import { ProgressBar } from "primereact/progressbar";
 import Grid from '@mui/material/Grid'
 import { ProgressSpinner } from 'primereact/progressspinner';
- 
+import SupplierTable from "../components/supplier/Dashboard/SupplierTable";
+import PendingTable from "../components/supplier/Dashboard/PendingTable";
+import { Fieldset } from 'primereact/fieldset';
+
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings,stats,fetchLoginStats}) => {
   const menus=['Dashboard','Officers','Suppliers',]
   // console.log("from admin panel officers",suppliers,officers)
@@ -131,10 +134,18 @@ if(Object.keys(stats).length!==0)
             
           <Wrapper>
             <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
-            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
+            {/* <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/> */}
             <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
             </Wrapper>
-            <AdminTab data={{suppliers,officers,pendings}}/>
+            {/* <AdminTab data={{suppliers,officers,pendings}}/> */}
+            <Fieldset legend="Registered Suppliers"  toggleable >
+            <SupplierTable data={suppliers} />
+            </Fieldset>
+            <hr/>
+            <hr/>
+            <Fieldset legend="Pending Registration" toggleable collapsed>
+            <PendingTable data={pendings} />
+            </Fieldset>
           </div>
           <div className="row__two"></div>
         </div>
@@ -214,7 +225,7 @@ display:flex;
 padding:2rem 0;
 gap:3rem;
 border-radius:2rem;
-justify-content:space-around;
+justify-content:space-between;
 `;
 
 

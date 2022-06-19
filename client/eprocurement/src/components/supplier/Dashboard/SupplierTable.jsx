@@ -60,7 +60,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       editMode="cell"
       header="Pending Supplier Registration List"
       value={suppliers}
-      responsiveLayout="scroll"
+      responsiveLayout="cell"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
       rowsPerPageOptions={[5, 10, 15, 25, 50]}
       dataKey={suppliers._id}
@@ -68,7 +68,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       rowHover
       selection={selectedCustomers}
       onSelectionChange={(e) => setSelectedCustomers(e.value)}
-      emptyMessage="Data Not Found"
+      emptyMessage="Suppliers Not Found"
       className="datatable-responsive"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}

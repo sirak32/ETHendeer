@@ -29,7 +29,7 @@ const App = () => {
         <NavBar  />
         <div className="grid">
           <div className="row__one">
-            <MediaCard/>
+            {/* <MediaCard/> */}
             <ScrollTop/>
           </div>
           <div className="row__two"></div>

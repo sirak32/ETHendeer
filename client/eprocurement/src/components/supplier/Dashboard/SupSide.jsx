@@ -20,8 +20,8 @@ export default function Sidebar(props) {
   const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
-  const menus=['Dashboard','My Tenders','Profile',,'Help & Support']
-  const links=['/','/supplier-tenders','/supplier-profile','/supplier-support','#'] 
+  const menus=['Dashboard','My Tenders','Profile','Help & Support']
+  const links=['/','/supplier-tenders','/supplier-profile','/supplier-support'] 
 
   html.addEventListener("click", () => setNavbarState(false));
 
@@ -29,7 +29,7 @@ export default function Sidebar(props) {
     const sr = scrollreveal({
       origin: "left",
       distance: "80px",
-      duration: 1000,
+      duration: 300,
       reset: false,
     });
 
@@ -46,7 +46,7 @@ export default function Sidebar(props) {
       `,
       {
         opacity: 0,
-        interval: 300,
+        interval: 50,
       }
     );
   }, []);

@@ -66,7 +66,11 @@ const Table = ({suppliers,fetchSuppliers}) => {
           icon="pi pi-caret-down
 "
           className="p-button-rounded mr-2"
-          onClick={() => confirmDeleteProduct(rowData)}
+          onClick={() => {
+              setEdit(true)
+              confirmDeleteProduct(rowData)
+          }
+          }
           />
       </>
     );
@@ -86,20 +90,17 @@ const Table = ({suppliers,fetchSuppliers}) => {
       rowHover
       selection={selectedCustomers}
       onSelectionChange={(e) => setSelectedCustomers(e.value)}
-      emptyMessage="Data Not Found"
+      emptyMessage={<h4> Suppliers Not Found</h4>}
       className="datatable-responsive"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
+      {/* <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column> */}
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
-      <Column field="personalInfo.phoneNumber.number" sortable header="Phone Number"></Column>
+      <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
-      {/* <Column field='status' sortable header='status'></Column> */}
-      {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
+      {/* <Column field='status' sortable rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
       <Column
         body={actionBodyTemplate}
         exportable={false}
@@ -107,8 +108,8 @@ const Table = ({suppliers,fetchSuppliers}) => {
       ></Column>
     </DataTable>
 
-      <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-        <FormikFormDemo selected={suppli} />
+      <Dialog visible={edit} dismissableMask style={{ width: '85rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
+      <h1>Supplier Info</h1>
       </Dialog>
       </>
   );
