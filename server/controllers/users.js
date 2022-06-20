@@ -774,14 +774,14 @@ const changeAccount=async(req,res)=>{
   const id = req.params.id
   let data=req.body
   try {
-    const ac=await account.findById(id)
+    const ac=await account.findOne({username:id})
     const pw=ac.password
     const newpw=data.newPassword
     const un=data.username
     const p=await bcrypt.hash(newpw,12)
     const isOk=await bcrypt.compare(data.oldPassword,pw)
     if(isOk){
-      const account1=await account.findByIdAndUpdate(id,{password:p,username:un})
+      const account1=await account.findOneAndUpdate({username:id},{password:p,username:un})
       res.status(200).json({success:true})
       console.log('Match')
     }
