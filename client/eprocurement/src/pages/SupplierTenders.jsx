@@ -31,7 +31,7 @@ const App = ({applieds,fetchApplieds}) => {
       {/* <SideBar menu={menus} /> */}
       <Side active={1} menu={menus} />
       <Section>
-        <NavBar  />
+        {/* <NavBar  /> */}
         <div className="grid">
           <div className="row__one">
             {/* <MediaCard/> */}

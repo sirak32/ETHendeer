@@ -23,10 +23,8 @@ const App = () => {
 
   return (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={3} menu={menus} />
       <Section>
-        <NavBar  />
         <div className="grid">
           <div className="row__one">
             {/* <MediaCard/> */}

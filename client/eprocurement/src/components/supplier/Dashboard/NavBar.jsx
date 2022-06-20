@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
+import { Avatar } from "evergreen-ui";
 export default function Navbar() {
   return (
     <Nav>
       <div className="title">
         
-        <h1>
+        <h4>
          <span>ETHender DASHBOARD</span>
-        </h1>
+        </h4>
       </div>
       <div className="search">
-        <BiSearch />
-        <input type="text" placeholder="Search" />
+      {/* <i class="pi pi-circle-on"></i> */}
+        {/* <input type="text" placeholder="Search" /> */}
       </div>
     </Nav>
   );
@@ -33,7 +34,7 @@ const Nav = styled.nav`
     }
   }
   .search {
-    background-color: #212121;
+    // background-color: #212121;
     display: flex;
     align-items: center;
     gap: 1rem;

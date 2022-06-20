@@ -91,57 +91,14 @@ const getFormErrorMessage = (name) => {
 };
   return suppliers ? (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={2} menu={menus}/>
       <Section>
-        <NavBar />
         <div className="grid">
           <div className="row__one">
-            {/* <Wrapper>
-              <Dash title="Suppliers" number={suppliers.length} />
-              <Dash title="Tenders" number={tenders.length} />
-              <Dash title="Active" number={tenders.length-closedNo} /> 
-              <Dash title="Closed" number={closedNo} />
-            </Wrapper>            */}
-            {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
-            {/* <div className="flex align-items-center justify-content-center top-50 font-bold text-white border-round m-2" >
-             
-             <div>
-
-             
-              <div className="field w-7 m-6">
-                            <span className="p-float-label p-input-icon-right">
-                                <i className="pi pi-envelope" />
-                                <InputText id="username" name="username" value={formik.values.username} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('username') })} />
-                                <label htmlFor="username" className={classNames({ 'p-error': isFormFieldValid('username') })}>Username</label>
-                            </span>
-                            {getFormErrorMessage('username')}
-                        </div>
-                        <div className="field m-6 min-w-full"> 
-                            <span className="p-float-label min-w-full">
-                                <Password id="password" name="password" value={formik.values.password} onChange={formik.handleChange} toggleMask
-                                    className={classNames({ 'p-invalid': isFormFieldValid('password') })}   />
-                                <label htmlFor="password" className={classNames({ 'p-error': isFormFieldValid('password') })}>Password</label>
-                            </span>
-                            {getFormErrorMessage('password')}
-                        </div>
-                        <div className="field m-6">
-                            <span className="p-float-label">
-                                <Password id="password2" name="password2" value={formik.values.password2} onChange={formik.handleChange} toggleMask
-                                    className={classNames({ 'p-invalid': isFormFieldValid('password2') })}   />
-                                <label htmlFor="password2" className={classNames({ 'p-error': isFormFieldValid('password2') })}>Confirm Password</label>
-                            </span>
-                            {getFormErrorMessage('password2')}
-                        </div></div>
-            </div> */}
-            <Cont maxWidth={'xs'}>
-            <h1>Officer Profile Setting</h1>
-            {/* <form> */}
+            <Cont maxWidth={'xs'} className='mt-8'>
             <Form onSubmit={(e)=>{
               e.preventDefault()
               if(data.confirmPassword.localeCompare(data.newPassword)===0){
-                // alert("Password  Match")
-
                 axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
                 .then((res)=>{
                   alert('Password Changed Successfully',res.data)

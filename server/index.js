@@ -14,9 +14,16 @@ import path from "path";
 import crypto from "crypto";
 import methodOverride from "method-override";
 import tender from "./models/tender.js";
-import nodemailer from 'nodemailer'
-// import nodemailer from 'no'
-// const fs=require('fs')
+import dotenv from 'dotenv';
+import mg from 'mailgun-js';
+dotenv.config();
+
+
+const mailgun = () =>
+  mg({
+    apiKey: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMIAN,
+  });
 const app = express();
 app.use(cors());
 app.use(methodOverride("_method"));
@@ -169,23 +176,26 @@ app.get("/complete",async(req,res)=>{
 
 
 //// EMAIL
-// var transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'tiliksewmulugeta552@gmail.com',
-//     pass: 'TILIKSEWMULUGETA552'
-//   }
-// });
-// var mailOptions = {
-//   from: 'tiliksewmulugeta552@gmail.com',
-//   to: 'sirak21tesfaye@gmail.com',
-//   subject: 'Sending Email using Node.js',
-//   text: 'That was easy!'
-// };
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log('error is',error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
+app.post('/api/email', (req, res) => {
+  const { email, subject, message } = req.body;
+  mailgun()
+    .messages()
+    .send(
+      {
+        from: 'Sirak Tesfaye <sirak21tesfaye@gmail.com>',
+        to: `${email}`,
+        subject: `${subject}`,
+        html: `<h1>${message}</h1>
+        <img src="" alt="Italian Trulli">`,
+      },
+      (error, body) => {
+        if (error) {
+          console.log(error);
+          res.status(500).send({ message: 'Error in sending email' });
+        } else {
+          console.log(body);
+          res.send({ message: 'Email sent successfully' });
+        }
+      }
+    );
+});

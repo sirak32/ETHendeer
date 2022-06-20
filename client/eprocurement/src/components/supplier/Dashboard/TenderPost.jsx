@@ -164,14 +164,14 @@ const [selected,setSelected]=useState({})
                <br /> {selected.description}
             </p>
             <p className="text-2xl w-10 flex align-items-center justify-content-end mt-8">
-              Published <pre>  </pre><i className="pi pi-calendar-minus"> </i>  <pre>  </pre>{new Date(selected.publishedDate).toDateString()}
+              Published <i className="pi pi-calendar-minus ml-5 mr-5"> </i>{new Date(selected.publishedDate).toDateString()}
             </p>
             <p className="text-2xl w-10 flex align-items-center justify-content-end">
-              Closing Date<pre>  </pre><i className="pi pi-calendar-minus"> </i> <pre>  </pre>
+              Closing Date<i className="pi pi-calendar-minus ml-5 mr-5"> </i>
               {new Date(selected.closingDate).toDateString().replace(/ /g, "-")}
             </p>
             <p className="text-2xl w-10 flex align-items-center justify-content-end">
-              Bid Opening <pre>  </pre><i className="pi pi-calendar-minus"> </i><pre>  </pre> {new Date(selected.bidOpenOn).toDateString()}
+              Bid Opening <i className="pi pi-calendar-minus ml-5 mr-5"> </i>{new Date(selected.bidOpenOn).toDateString()}
             </p>
             <p className="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p>
            {/* <p>Remaining Days</p> */}
@@ -187,9 +187,7 @@ const [selected,setSelected]=useState({})
               className="w-full  p-0 h-6rem flex justify-content-center p-button-rounded p-button-info"
             >
               <i className="pi pi-download px-2 "></i>
-              {/* <span className="px-3 align-self-center flex"> */}
               Download Documents
-              {/* </span> */}
             </Button>
           </Card>
         </div>
@@ -253,7 +251,7 @@ const [selected,setSelected]=useState({})
               </div>
               <Button
                 type="submit"
-                className="p-button-warning p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"
+                className="p-button-success p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"
                 aria-label="Amazon"
               >
                 Apply

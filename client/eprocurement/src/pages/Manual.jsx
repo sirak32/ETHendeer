@@ -33,7 +33,7 @@ export const AccordionDemo = () => {
 
         <div className="accordion-demo ">
             <div className="card">
-                <h2 className='align-self-center'>Manual for Officer</h2>
+                <center> <h3 className='align-self-center'>Manual for Officer</h3></center>
                 <Accordion activeIndex={0}>
                     <AccordionTab header="How To Make A Tender ">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
