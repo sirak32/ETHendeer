@@ -61,9 +61,6 @@ let creator;
       const bidOpenOn= new Date(data.bidOpenOn).toUTCString()
       const closingDate=new Date(data.closingDate).toUTCString()
 
-      // console.log("data",publishedDate)
-//       let dateStr = "Fri Apr 20 2020 00:00:00 GMT+0530 (India Standard Time)"
-// console.log(new Date(dateStr).toUTCString())
       await axios.post(
         "http://localhost:5001/upload",
         dat
@@ -86,9 +83,7 @@ let creator;
   const [no, setNo] = React.useState("");
   const [type, setType] = React.useState("");
   const [selectedFile, setSelectedFile] = React.useState(null);
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
-  };
+
   const [values, setValues] = React.useState({
     amount: "",
     password: "",
@@ -106,10 +101,6 @@ let creator;
       ...values,
       showPassword: !values.showPassword,
     });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
   console.log("testing the states without dispatching", tenders.tenders);
   return (

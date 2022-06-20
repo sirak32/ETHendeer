@@ -132,11 +132,11 @@ const registerPendingSupplier = async (req, res) => {
     }
 
     const emailNotTaken = await validatePendingEmail(userBody.email)
-    if (!emailNotTaken) {
-        return res.status(401).json({
-            message: "Email is taken"
-        })
-    }
+    // if (!emailNotTaken) {
+    //     return res.status(401).json({
+    //         message: "Email is taken"
+    //     })
+    // }
 
     const password = await bcrypt.hash(userBody.password, 12)
     const userAddress = new address({
@@ -168,9 +168,8 @@ const registerPendingSupplier = async (req, res) => {
         handlerRole:"manager",
         ownershipType:"PartnerShip",
         tinNumber:userBody.tinNumber,
-        Attacheddocument:userBody.Attacheddocument||'ATTACHED',
+        Attacheddocument:userBody.Attacheddocument,
     })
-
     await userAddress.save()
     await personalInfor.save()
     await accountInform.save()
@@ -326,7 +325,7 @@ const validateUsername = async username => {
     return userName ? false : true
 }
 const validatePendingEmail = async email => {
-    const Email = await pendingsupplier.findOne({
+    const Email = await account.findOne({
         email
     })
     console.log('email-',Email)
@@ -334,10 +333,10 @@ const validatePendingEmail = async email => {
 }
 
 const validatePendingUsername = async username => {
-    const userName = await pendingsupplier.findOne({
+    const userName = await account.findOne({
         username
     })
-    console.log(userName)
+    console.log('Found',userName)
     return userName ? false : true
 }
 const validateEmail = async email => {

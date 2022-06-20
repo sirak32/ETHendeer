@@ -162,7 +162,7 @@ fetchPendings()
 const downloadlink=(t)=>{
   return <Button icon="pi pi-download" className="p-button-rounded p-button-success" aria-label="Search"  label="See Document"
   onClick={()=>{
-    window.open(`http://localhost:5001/image/56aee552c69070b269e4dbcc585e25fd.pdf`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=1000,height=400");
+    window.open(`http://localhost:5001/image/${t.Attacheddocument}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=1000,height=400");
   }}
   />
 }

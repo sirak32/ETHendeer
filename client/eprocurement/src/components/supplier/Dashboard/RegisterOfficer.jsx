@@ -15,6 +15,7 @@ import { FileUploadDemo } from "./FileUploadDemo";
 import axios from "axios";
 import { connect } from "react-redux";
 import { fetchPending } from "../../../actions/pendingAction";
+import { IoAddCircleOutline } from "react-icons/io5";
 
  const FormikFormDemo = ({pendings, fetchPendings}) => {
   const count = [
@@ -265,7 +266,7 @@ import { fetchPending } from "../../../actions/pendingAction";
   const [countries, setCountries] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
-
+const [selectedFile,setSelectedFile]=useState()
   useEffect(() => {
     setCountries(count);
   }, []);
@@ -359,15 +360,24 @@ import { fetchPending } from "../../../actions/pendingAction";
 
       return errors;
     },
-    onSubmit: (data) => {
+    onSubmit: async(data) => {
+      const dat = new FormData();
+      dat.append("doc", selectedFile);
       console.log(data)
-      axios.post('http://localhost:5001/pending-supplier',data)
-      .then((e)=>{
-
-        setFormData(data);
-        setShowMessage(true);
-        fetchPendings()
-        formik.resetForm();
+       axios.post(
+        "http://localhost:5001/upload",
+        dat
+      ).then((res)=>{
+        console.log('upload success')
+        const file=res.data
+        axios.post('http://localhost:5001/pending-supplier',{...data,Attacheddocument:file})
+        .then((e)=>{
+  
+          setFormData(data);
+          setShowMessage(true);
+          fetchPendings()
+          formik.resetForm();
+        })
       })
 
     },
@@ -423,11 +433,10 @@ import { fetchPending } from "../../../actions/pendingAction";
             className="pi pi-check-circle"
             style={{ fontSize: "5rem", color: "var(--green-500)" }}
           ></i>
-          <h5>Registration Successful!</h5>
+          <h5>Registration Request Successful Sent!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{'formData.name'}</b> ; it'll
-            be valid next 30 days without activation. Please check{" "}
-            <b>{formData.email}</b> for activation instructions.
+            Your account is in Pendinging registered state, We'll Let u Know when We Finish Document Review Process
+           
           </p>
         </div>
       </Dialog>
@@ -810,7 +819,24 @@ import { fetchPending } from "../../../actions/pendingAction";
                   {getFormErrorMessage("password")}
                 </div>
               </Grid>
-
+                        <Grid item xs={6}>
+                           {/* <input type='file'/> */}
+                           <Grid item xs={6}>
+              <div className="App ">
+                <Button variant="contained" component="label" color="primary">
+                  <IoAddCircleOutline /> Upload Your Legal Documents
+                  <input
+                    onInput={(e) => setSelectedFile(e.target.files[0])}
+                    accept=".pdf"
+                    type="file"
+                    name="doc"
+                    required
+                    hidden
+                  />
+                </Button>
+              </div>
+            </Grid>
+                        </Grid>
 
               <Grid item xs={6}>
                 <div className="field-checkbox">
@@ -854,11 +880,9 @@ import { fetchPending } from "../../../actions/pendingAction";
                   }}
                 />
               </Grid>
+             
               {/* <FileUploadDemo/> */}
             </Grid>
-
-            {/* THis is Break Point */}
-            {/* This is  */}
           </form>
         </div>
       </div>
