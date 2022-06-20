@@ -24,7 +24,8 @@ import {
   getLoginStat,
   getRegisterStat,
   resetPassword,
-  changeAccount
+  changeAccount,
+  getEmails
 } from "../controllers/users.js";
 import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
@@ -74,6 +75,7 @@ router.get('/get-pending-suppliers',getPendingSuppliers)
 router.get('/get-pending-supplier/:id',getOnePending)
 router.patch('/reset-password/:id',resetPassword)
 router.patch('/change-account/:id',changeAccount)
+router.get('/get-emails',getEmails)
 router.get(
   "/officer-dashboard",
   passport.authenticate("jwt-bearer", {

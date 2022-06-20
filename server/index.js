@@ -66,7 +66,6 @@ db.once("open", () => {
   gfs.collection("uploads");
 });
 
-////engines
 
 const storage = new GridFsStorage({
   url: CONNECTIONI_URL,
@@ -88,12 +87,7 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 app.post("/upload", upload.single("doc"), (req, res) => {
-//   res.redirect("/");
   res.json(req.file.filename)
-  console.log("here from upload");
-  //  res.json({file:req.file}).redirect('/')
-//   res.json({"name":req.file.filename})
-  console.log("here after upload");
 });
 // @route GET /
 // @desc Loads form
@@ -160,21 +154,11 @@ app.get("/complete",async(req,res)=>{
   const tenderId=req.query.MerchantOrderId.split(',')[0]
   const supplierId=req.query.MerchantOrderId.split(',')[1]
   const tend=await tender.findById(tenderId)
-  // const pyrs=tend.payers         tend.applicants=[...tend.applicants,mongoose.Types.ObjectId(body.applier) ]
-
   tend.payers=[...tend.payers,mongoose.Types.ObjectId(supplierId)]
   await tend.save()
   console.log(req.query.Status,'tender',tend)
   res.status(200).send('<h1>Successfull Payment<script>;window.location.replace("http://localhost:3000/supplier")</script></h1>')
 })
-
-// app.use('/applied')
-
-// let buff = new Buffer.from(data, 'base64');
-// // fs.writeFileSync('print.pdf', buff);
-// console.log('Base64 image data converted to file: stack-abuse-logo-out.png');
-
-
 //// EMAIL
 app.post('/api/email', (req, res) => {
   const { email, subject, message } = req.body;
@@ -199,3 +183,4 @@ app.post('/api/email', (req, res) => {
       }
     );
 });
+

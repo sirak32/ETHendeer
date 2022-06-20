@@ -804,7 +804,14 @@ const changeAccount=async(req,res)=>{
 
   // }
 }
-
+const getEmails=async(req,res)=>{
+  const em=await account.find({role:'supplier'})
+  let emails=[]
+  em.map((e)=>{
+    emails.push(e.email)
+  })
+  res.json(emails)
+}
 export {
     checkRole,
     userAuth,
@@ -829,5 +836,6 @@ export {
     getLoginStat,
     getRegisterStat,
     resetPassword,
-    changeAccount
+    changeAccount,
+    getEmails
 }

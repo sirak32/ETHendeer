@@ -69,9 +69,24 @@ let creator;
         const file=res.data
         const c=localStorage.getItem('whoId')
           await axios.post("http://localhost:5001/tenders/", {...data,creator:c,bidOpenOn,closingDate,publishedDate,document:file})
-          .then(() => {
+          .then(async() => {
             showSuccess()
-            // formik.resetForm()
+            await axios.get(`http://localhost:5001/get-emails`)
+            .then((res)=>{
+              const emails=res.data;
+              emails.map(async(em)=>{
+                await axios.post(`http://localhost:5001/api/email`,{email:em,subject:"New Tender Available",message:"New Tender is available. Please Visit Your Dashboard!"})
+                .then(()=>{
+                  alert('email sent to all suppliers')
+                }).catch((e)=>{
+                  alert(e)
+
+                })
+              })
+            }).catch(e=>{
+              alert(e)
+            })
+            formik.resetForm()
           });
         console.log(res.data)
       }).then(()=>fetchTenders());
