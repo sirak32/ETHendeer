@@ -73,11 +73,12 @@ export default function BasicTabs(props) {
           onChange={handleChange}
           aria-label="basic tabs example"
           centered
+          className="text-3xl"
         >
-          <Tab label="OFFICERS LIST" {...a11yProps(0)} />
-          <Tab label="SUPPLIER LIST" {...a11yProps(1)} />
-          <Tab label="PENDING SUPPLIER REGISTRATION" {...a11yProps(2)} />
-          <Tab label="ADD OFFICER" {...a11yProps(3)} />
+          <Tab className="text-2xl" label="OFFICERS LIST" {...a11yProps(0)} />
+          <Tab className="text-2xl" label="SUPPLIER LIST" {...a11yProps(1)} />
+          <Tab className="text-2xl" label="PENDING SUPPLIER REGISTRATION" {...a11yProps(2)} />
+          <Tab className="text-2xl" label="ADD OFFICER" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

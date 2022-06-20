@@ -28,9 +28,9 @@ const [data,setData] =useState({})
   let appT=[]
   console.log(applieds)
   applieds.map((ap)=>{ 
-      // console.log(ap)
-      // if(ap.applier._id===localStorage.getItem('whoId'))
-      // appT.push(ap.tender)
+      console.log(ap)
+      if(ap.applier===localStorage.getItem('whoId'))
+      appT.push(ap.tender)
     })
     console.log('This is Mr',appT) 
 
@@ -82,7 +82,7 @@ console.log("now ",now," op ",op,op<now)
         selection={selectedCustomers}
         onSelectionChange={(e) => setSelectedCustomers(e.value)}
         emptyMessage={<center><h4>No Applied Tender Found</h4></center>}
-        className="datatable-responsive"
+        className="datatable-responsive text-2xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >

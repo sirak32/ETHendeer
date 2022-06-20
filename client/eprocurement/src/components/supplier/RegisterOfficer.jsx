@@ -400,9 +400,9 @@ import axios from 'axios'
           ></i>
           <h5>Registration Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{formData.firstName}</b> ; it'll
-            be valid next 30 days without activation. Please check{" "}
-            <b>{formData.email}</b> for activation instructions.
+            Your account is registered under Pending <b>{formData.firstName}</b> ; it'll
+            Accepted if you qualify for the review Process.
+ for activation instructions.
           </p>
         </div>
       </Dialog>
@@ -433,7 +433,7 @@ import axios from 'axios'
                     <label
                       htmlFor="officerId"
                       className={classNames({
-                        "p-error": isFormFieldValid("officerId"),
+                        "p-error ": isFormFieldValid("officerId"),
                       })}
                     >
                       Officer Id

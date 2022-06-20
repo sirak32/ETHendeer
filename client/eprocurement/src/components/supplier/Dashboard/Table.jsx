@@ -101,7 +101,7 @@ console.log("now ",now," op ",op,op<now)
         selection={selectedCustomers}
         onSelectionChange={(e) => setSelectedCustomers(e.value)}
         emptyMessage="Data Not Found"
-        className="datatable-responsive"
+        className="datatable-responsive text-2xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
@@ -183,8 +183,8 @@ console.log("now ",now," op ",op,op<now)
           {<span>Are you sure you want to delete the selected Tender?</span>}
         </div>
       </Dialog>
-      <Sidebar className=" text-500 border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <div className="border-round-3xl border-double h-18rem text-white " style={{backgroundColor:'#8940d6'}}>
+      <Sidebar className="  border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
+                    <div className="border-round-xl border-double h-18rem text-white " style={{backgroundColor:'#8940d6'}}>
                      <center><h1 className="text-white">{data.title}</h1> <h2><pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h2> <hr></hr></center>
                     </div>
                     <h1>{data.description}</h1>
@@ -195,20 +195,10 @@ console.log("now ",now," op ",op,op<now)
                     <hr></hr>
                     <h1><i className="">የጨረታ መስፈርቶች</i>  <p className=""> {data.termsAndConditions}</p></h1> 
                     {data.applicants!==null && <h2> <hr></hr>
-                    {/* {new Date(data.bidOpenOn).toISOString()} */}
-          {/* {data.applicants} */}
+
         </h2>}
       <center> <h1>Suppliers Who Applied For This Tender</h1></center><hr/>
         {applieds.map((ap)=>{   
-          // const sup=suppliers.filter((su)=>{
-          //   return (su._id===ap.applier._id)
-
-          // })
-          // suppliers.map((su)=>{
-          //   if(su._id===ap.applier._id)
-
-          // })
-          // console.log('APPLIER XXXX',ap.applier,suppliers)
           if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
          { 
           console.log("app",ap)
@@ -216,24 +206,22 @@ console.log("now ",now," op ",op,op<now)
           if(ap.applier!==null)
           {
              sup=suppliers.filter((su)=>{
-            return (su._id===ap.applier._id)
-
+            return (su._id===ap.applier)
           })}
           console.log("BELCASH",sup)
           if(ap.tender._id===data._id)
          {
-
            return sup.length>0?(
             <> 
             <center>
-              <h1 className="text-indigo-600">
+              <p className="text-indigo-300 border-1 surface-border p-5 border-round-xs">
             {/* {ap.applier._id } 
             {ap.tender._id}  */}
-            {
+           <h3 className="text-2xl bg-yellow-50">{
             sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName
             } 
-             {/* {ap.businessDoc}
-              {ap.technicalDoc}   */}
+            </h3> 
+
                <Button
                 icon="pi pi-download"
                  className="ml-4 p-button-rounded p-button-success" 
@@ -259,11 +247,10 @@ console.log("now ",now," op ",op,op<now)
                  })}
                  />
 
- </h1>
+ </p>
             </center>
             
             </>
-          
            ):''
           
           }}

@@ -59,12 +59,12 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
     <Div>
       <Side active={2} menu={menus}/>
       <Section>
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="grid">
           <div className="row__one"> 
             <Wrapper>
-            <Cont maxWidth={'xs'}>
-            <h1>Officer Profile Setting</h1>
+            <Cont maxWidth={'xs'} className='mt-7'>
+            {/* <h1>Officer Profile Setting</h1> */}
             <Form onSubmit={(e)=>{
               e.preventDefault()
               if(data.confirmPassword.localeCompare(data.newPassword)===0){
