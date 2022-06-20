@@ -166,7 +166,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // fetchTenders: () => dispatch(fetchTender()),
     fetchPendings:()=>dispatch(fetchPending())
 
   };
