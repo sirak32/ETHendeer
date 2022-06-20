@@ -16,30 +16,11 @@ const Table = ({pendings,fetchPendings}) => {
   function createData(id,no, name, email, phone, tinNO) {
     return {id, no, name, email, phone, tinNO };
   }
-  // let supList = props.data;
-  // console.log("myPendings", supList);
   let i;
 useEffect(()=>{
 fetchPendings()
 },[])
   const rows = [];
-  // const [suppli,setSuppli]=useState({})
-  // for (i = 0; i < supList.length; i++) {
-  //   console.log(supList[i])
-  //   rows[i] = createData(
-  //     supList[i]._id,
-  //     // supList[i].accountInfo._id,
-  //     // supList[i].personalInfo._id,
-  //     // supList[i].personalInfo.address._id,
-
-
-  //     i,
-  //     `${supList[i].personalInfo.firstName} ${supList[i].personalInfo.middleNam} ${supList[i].personalInfo.lastName}`,
-  //     supList[i].personalInfo.email,
-  //     `${supList[i].personalInfo.phoneNumber.countryCode}${supList[i].personalInfo.phoneNumber.regionalCode}${supList[i].personalInfo.phoneNumber.number}`,
-  //     supList[i].tinNumber
-  //   );
-  // }
   console.log("Succesffull", rows);
   const deleteButton = (rowData) => {
     return (
@@ -64,8 +45,6 @@ fetchPendings()
     );
   };
   const detailButton = (rowData) => {
-    //
-    //
     return (
       <Button
         icon="pi-chevron-circle-down"
@@ -79,10 +58,7 @@ fetchPendings()
       <span className={`customer-badge status-negotiation`}>{option}</span>
     );
   };
-  const statusBodyTemplate = (rowData) => {
-    return <Button label={`${rowData.status}`} className="p-button-success" />;
-    // return <span  className={`status-active`}>{rowData.status}</span>;
-  };
+
   const editProduct = () => {};
   const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
@@ -98,13 +74,6 @@ fetchPendings()
              fetchPendings()
             }}
           />
-        {/* <Button
-          icon="pi pi-pencil"
-          className="p-button-rounded p-button-success mr-2"
-          onClick={() => {setEdit(true)
-          setSuppli(rowData)
-          }}
-          /> */}
         <Button
           icon="pi pi-check "
           className="p-button-rounded  p-button-success mr-2"
@@ -143,22 +112,6 @@ fetchPendings()
   console.log("rows are", rows);
   const suppData=[]
   let j
-  // console.log("supList",supList)
-  // for(j=0;j<supList.length;j++)
-//  suppData[j]= {
-//     firstName: supList[j].personalInfo.firstName,
-//       middleName:supList[j].personalInfo.middleName,
-//       lastName: supList[j].personalInfo.lastName,
-//       phone: supList[j].personalInfo.firstName,
-//       city: supList[j].personalInfo.firstName,
-//       subcity: supList[j].personalInfo.firstName,
-//       wereda: supList[j].personalInfo.firstName,
-//       kebele: supList[j].personalInfo.firstName,
-//       businessType: supList[j].personalInfo.firstName,
-//       tinNumber: supList[ j].tinNumber,
-//       username: supList[j].personalInfo.firstName,
-      
-//   }
 const downloadlink=(t)=>{
   return <Button icon="pi pi-download" className="p-button-rounded p-button-success" aria-label="Search"  label="See Document"
   onClick={()=>{
