@@ -412,6 +412,7 @@ import axios from 'axios'
           <h5 className="text-center">Register Supplier</h5>
           <form onSubmit={formik.handleSubmit} className="p-fluid">
             <Grid
+            className="text-3xl"
               sx={{ background: "white", padding: "0 12rem" }}
               container
               spacing={2}

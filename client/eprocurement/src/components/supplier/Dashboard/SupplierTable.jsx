@@ -69,7 +69,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       selection={selectedCustomers}
       onSelectionChange={(e) => setSelectedCustomers(e.value)}
       emptyMessage="Suppliers Not Found"
-      className="datatable-responsive"
+      className="datatable-responsive text-3xl"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >

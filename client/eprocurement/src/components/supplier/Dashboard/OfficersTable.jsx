@@ -60,7 +60,8 @@ console.log('OFFICERS',off)
     return officers.length>0?(
       <>
         <Button
-          icon="pi pi-caret-down"
+          icon="pi pi-refresh"
+          label="Reset Password"
           className="p-button-rounded mr-2"
           onClick={() => {
             console.log('Officers',rowData)
@@ -80,7 +81,6 @@ console.log('OFFICERS',off)
           onClick={() => {
             setDeleteId(rowData._id)
             setDeleteOff(true)
-            // console.log('consola',rowData._id)
           }}
         />
       </>
@@ -102,7 +102,7 @@ console.log('OFFICERS',off)
         selection={selectedCustomers}
         onSelectionChange={(e) => setSelectedCustomers(e.value)}
         emptyMessage="Data Not Found"
-        className="datatable-responsive"
+        className="datatable-responsive text-3xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
@@ -129,7 +129,6 @@ console.log('OFFICERS',off)
         onHide={() => {
           setEdit(false);
         }}>
-            {/* <FormikFormDemo/> */}
 
         </Dialog>
       <Dialog  visible={visibleTop} dismissableMask style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>

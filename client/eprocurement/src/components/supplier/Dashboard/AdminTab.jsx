@@ -59,6 +59,7 @@ export default function BasicTabs(props) {
 
   return (
     <Box
+    className="text-3xl"
       sx={{
         width: "100%",
         backgroundColor: "white",
@@ -97,13 +98,6 @@ export default function BasicTabs(props) {
         >
           <FormikFormDemo />
         </Dialog>
-        {/* <Button
-          onClick={() => {
-            setVis(true);
-          }}
-        >
-          ADD SUPPLIER
-        </Button> */}
         <PendingTable data={props.data.pendings} />
       </TabPanel>
       <TabPanel value={value} index={3}>

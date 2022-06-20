@@ -63,18 +63,11 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         <div className="grid">
           <div className="row__one"> 
             <Wrapper>
-              {/* <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
-              <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
-              <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
-              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
             <Cont maxWidth={'xs'}>
             <h1>Officer Profile Setting</h1>
-            {/* <form> */}
             <Form onSubmit={(e)=>{
               e.preventDefault()
               if(data.confirmPassword.localeCompare(data.newPassword)===0){
-                // alert("Password  Match")
-
                 axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
                 .then((res)=>{
                   alert('Password Changed Successfully',res.data)

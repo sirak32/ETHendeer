@@ -127,6 +127,11 @@ if(Object.keys(stats).length!==0)
         <NavBar />
         <div className="grid"> 
           <div className="row__one">
+            <Wrapper className="mt-6">
+            <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
+            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
+            <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
+            </Wrapper>
             <Grid>
               <Grid item xs={6}>
 <div className="card">
@@ -165,11 +170,7 @@ if(Object.keys(stats).length!==0)
             </div>
                 </Grid>
             </Grid>
-          <Wrapper>
-            <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
-            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
-            <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
-            </Wrapper>
+          
             <AdminTab data={{suppliers,officers,pendings}}/>
           </div>
           <div className="row__two"></div>

@@ -182,7 +182,7 @@ const downloadlink=(t)=>{
       selection={selectedCustomers}
       onSelectionChange={(e) => setSelectedCustomers(e.value)}
       emptyMessage={<center><h4> No Pending Suppliers</h4></center>}
-      className="datatable-responsive"
+      className="datatable-responsive text-3xl"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
