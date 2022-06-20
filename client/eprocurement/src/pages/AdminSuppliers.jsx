@@ -134,15 +134,12 @@ if(Object.keys(stats).length!==0)
             
           <Wrapper>
             <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
-            {/* <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/> */}
             <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
             </Wrapper>
-            {/* <AdminTab data={{suppliers,officers,pendings}}/> */}
             <Fieldset legend="Registered Suppliers"  toggleable >
             <SupplierTable data={suppliers} />
             </Fieldset>
-            <hr/>
-            <hr/>
+
             <Fieldset legend="Pending Registration" toggleable collapsed>
             <PendingTable data={pendings} />
             </Fieldset>

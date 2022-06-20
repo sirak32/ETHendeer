@@ -765,7 +765,7 @@ const resetPassword=async(req,res)=>{
     // await account1.save() 
     res.status(200).json({message:account1})
   } catch (error) {
-    res.status(200).json({error})
+    res.status(404).json({error})
 
   }
 }

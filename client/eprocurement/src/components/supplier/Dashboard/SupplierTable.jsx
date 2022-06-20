@@ -17,22 +17,29 @@ const Table = ({suppliers,fetchSuppliers}) => {
   const [deleteOff,setDeleteOff]=useState(false)
   const [deleteId,setDeleteId]=useState(0)
   // const [suppli,setSuppli]=useState({})
+  const [accId,setAccId]=useState(0)
   const [data,setData] =useState({})
 
   const actionBodyTemplate = (rowData) => {
     return (
       <>
         <Button
-          icon="pi pi-caret-down
-          "
+          icon="pi pi-refresh"
+          label="Reset Password"
           className="p-button-rounded mr-2"
           onClick={() => {
             console.log("row datas",rowData)
-            setData(rowData)
-            setEdit(true)
-            console.log('Supli',suppliers)
+            setAccId(rowData.accountInfo._id)
+            axios.patch(`http://localhost:5001/reset-password/${accId}`)
+            .then((res)=>{
+              alert('Password Reseted')
+            }).catch((e)=>{
+              alert(e)
 
-          
+            })
+            // setData(rowData)
+            // setEdit(true)
+            // console.log('Supli',suppliers)          
           }}
           />
         <Button
@@ -73,7 +80,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      {/* <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column> */}
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
@@ -86,8 +92,8 @@ const Table = ({suppliers,fetchSuppliers}) => {
     </DataTable>
 
       <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-        {/* <FormikFormDemo selected={suppli} /> */}
-        <h1>Hello</h1>
+        <h1>{accId}</h1>
+
       </Dialog>
       <Dialog
         visible={deleteOff}

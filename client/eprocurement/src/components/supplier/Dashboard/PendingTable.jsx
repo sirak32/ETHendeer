@@ -65,15 +65,15 @@ fetchPendings()
     console.log("row datas",rowData)
     return (
       <>
-        <Button
-          icon="pi pi-caret-down
-"
+        {/* <Button
+          icon="pi pi-refresh"
+          label="Reset Password"
           className="p-button-rounded p-button-info mr-2"
           onClick={() =>{
              confirmDeleteProduct(rowData)
              fetchPendings()
             }}
-          />
+          /> */}
         <Button
           icon="pi pi-check "
           className="p-button-rounded  p-button-success mr-2"
