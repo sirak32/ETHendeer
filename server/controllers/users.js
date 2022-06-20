@@ -773,19 +773,37 @@ const resetPassword=async(req,res)=>{
 const changeAccount=async(req,res)=>{
   const id = req.params.id
   let data=req.body
-  console.log(data)
-  
   try {
-    var pass=data.password
-    const p=await bcrypt.hash(pass,12)
-    data={...data,password:p}
-    console.log('info inside',p)
-    const account1=await account.findByIdAndUpdate(id,data)
-    res.status(200).json({message:account1})
+    const ac=await account.findById(id)
+    const pw=ac.password
+    const newpw=data.newPassword
+    const un=data.username
+    const p=await bcrypt.hash(newpw,12)
+    const isOk=await bcrypt.compare(data.oldPassword,pw)
+    if(isOk){
+      const account1=await account.findByIdAndUpdate(id,{password:p,username:un})
+      res.status(200).json({success:true})
+      console.log('Match')
+    }
+    else{
+  
+      res.status(404).json({success:false})
+      console.log('not match')
+    }
   } catch (error) {
     res.status(200).json({error})
-
   }
+  // try {
+  //   var pass=data.password
+  //   const p=await bcrypt.hash(pass,12)
+  //   data={...data,password:p}
+  //   console.log('info inside',p)
+  //   const account1=await account.findByIdAndUpdate(id,data)
+  //   res.status(200).json({message:account1})
+  // } catch (error) {
+  //   res.status(200).json({error})
+
+  // }
 }
 
 export {
