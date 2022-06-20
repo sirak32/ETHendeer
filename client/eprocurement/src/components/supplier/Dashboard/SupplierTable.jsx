@@ -73,7 +73,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column>
+      {/* <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column> */}
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>

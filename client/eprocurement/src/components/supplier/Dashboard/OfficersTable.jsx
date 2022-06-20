@@ -106,14 +106,13 @@ console.log('OFFICERS',off)
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
-        <Column
-          selectionMode="multiple"
-          headerStyle={{ width: "3em" }}
-        ></Column>
+
         <Column field="officerId" sortable filter header="Officer Id"></Column>
         <Column field="personalInfo.firstName" sortable  header="Officer Name"></Column>
+        <Column field="personalInfo.lastName" sortable  header="Lastname"></Column>
         <Column field="personalInfo.phoneNumber" sortable  header="Phone Number"></Column>
         <Column field="personalInfo.email" sortable  header="Email"></Column>
+
         <Column
           body={actionBodyTemplate}
           exportable={false}

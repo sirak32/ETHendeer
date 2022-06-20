@@ -168,7 +168,7 @@ const registerPendingSupplier = async (req, res) => {
         handlerRole:"manager",
         ownershipType:"PartnerShip",
         tinNumber:userBody.tinNumber,
-        Attacheddocument:userBody.Attacheddocument,
+        Attacheddocument:userBody.Attacheddocument||'ATTACHED',
     })
 
     await userAddress.save()

@@ -52,7 +52,6 @@ function a11yProps(index) {
 
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
-  // console.log("props value", props.data);
   const [vis, setVis] = React.useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -98,13 +97,13 @@ export default function BasicTabs(props) {
         >
           <FormikFormDemo />
         </Dialog>
-        <Button
+        {/* <Button
           onClick={() => {
             setVis(true);
           }}
         >
           ADD SUPPLIER
-        </Button>
+        </Button> */}
         <PendingTable data={props.data.pendings} />
       </TabPanel>
       <TabPanel value={value} index={3}>
