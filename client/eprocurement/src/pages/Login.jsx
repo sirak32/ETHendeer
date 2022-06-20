@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom'
 import vid from '../videos/production .mp4'
 import { MdGeneratingTokens } from 'react-icons/md';
 import FileBase from 'react-file-base64'
+import ParticlesBg from 'particles-bg';
 // import axios from 'axios' 
 // import base64 from 'base64topdf'
 const Login = () => {
@@ -42,7 +43,7 @@ const Login = () => {
 
   const form=document.getElementById("np")
   // const formData=new FormData(form)
-  const [logged,setLogged]=React.useState(false)
+  const [logged,setLogged]=React.useState(true)
     const [role,setRole]=React.useState('')
     const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
@@ -83,44 +84,32 @@ const Login = () => {
 })
         if(response.data.succes){
           setLogged(true)
-// alert(response.data.token);
 localStorage.setItem('token', response.data.token);
 localStorage.setItem('whoId', response.data.user);
 localStorage.setItem('role',response.data.role)
 setRole(response.data.role)
-          // navigate('/officer')
         }
         else {
           setLogged(false)
-
         }
-        // window.location='http://localhost:3000/officer'
       })
-      .catch((e)=>console.log(e.response.status))
-    //  
-        //   alert(`username - ${values.username} \npassword -  ${values.password}`)
-        //   console.log(values.username)
+      .catch((e)=>{
+        alert('Connection Error : Please Ckeck your Connection')
+        console.log(e.response.status)
+      })
+
       }
 
       const doc=""
 
-      // let decoded=base64.base64Decode(doc,'pdfname')
   return (
       <>
     <form onSubmit={handleSubmit}>
-{/* <video  loop autoPlay>
-        <source
-        src={vid}
-        type="video/mp4"
-        />
-      Your browser does not support the video tag. */}
-          {/* </video> */}
           {(role==='officer')&& navigate('/officer')}
           {(role==='admin')&& navigate('/admin')}
           {(role==='supplier')&& navigate('/supplier')}
-
-
-      <Container>
+          <ParticlesBg type='circle' bg={true} color={'#c9b42c'} />
+              <Container >
     <Wrapper>
         <TextField 
                 sx={{ m: 1, width: "15vw" }}
@@ -129,14 +118,12 @@ setRole(response.data.role)
                 name="userName"
                 color="success"
                 label="Enter User Name"
-                // id="outlined-start-adornment"
                 />{" "}
           <FormControl sx={{ m: 1, width: "15vw" }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
             <OutlinedInput
-              //   id="outlined-adornment-password"
               type={values.showPassword ? "text" : "password"}
               value={values.password}
               onChange={handleChange("password")}
@@ -155,45 +142,29 @@ setRole(response.data.role)
               label="Password"
               />
           </FormControl>
-              {!logged&& <Alert severity="error">Incorrect Credetials: Fill it Correctly</Alert>}
+              {!logged&& <Alert severity="error">Incorrect Username or Password</Alert>}
           <Button type='submit' sx={{width:'15vw'}} color='primary' variant='contained' size='large'> Login</Button>
+          <Button href='/' type='button' sx={{width:'15vw'}} color='success' variant='contained' size='large'> Back to Home</Button>
+
     </Wrapper>
               </Container>
-              {/* <a download='document.pdf' href={decoded}>Download the file</a> */}
                         </form>
-                        <form
-                        //  name='up' method='POST'
-                        //   encType='multipart/form-data' 
-                        //   action='http://localhost:5001/upload' 
-                        // id='np'
+
+
+
+
+                        {/* <form
                         onSubmit={((e)=>{
                           e.preventDefault()
                           const data = new FormData()
                           data.append("doc", selectedFile);
                           console.log("the cuty i=of ",data)
                           axios.post('http://localhost:5001/upload',data,
-                          // {
-                          //   headers: {
-                          //     accept: "application/json",
-                          //     "Accept-Language": "en-US,en;q=0.8",
-                          //     "Content-Type": `multipart/form-data`,
-                          //   },
-                          // }
+
                           )
                         })}
                         >  
-                          {/* <input accept='.pdf' onInput={e => setSelectedFile(e.target.files[0])}  type={"file"} name="doc" 
-                          
-                          /> */}
-                          {/* <input  */}
-                          {/* // onInput={e => setSelectedFile(e.target.files[0])}  */}
-                          {/* type="submit" value="Submit" /> */}
-                            {/* <img src={pdf}/> */}
-                            {/* {pdf} */}
-                        </form>
-                        {/* <img src={`image/c9088f58b148054769bf681597875bf2.png`} alt=""/> */}
-                        {/* <a target="_blank" download="Tender.pdf" href="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf">DOWNLOAD FILE</a>
-                        <iframe src="http://localhost:5001/image/15df0d7b83ea38974665e3e70d2540fa.pdf" frameBorder="100%"  width={"50%"} height="250rem"></iframe> */}
+                        </form> */}
                         </>
   )
 }

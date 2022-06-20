@@ -1,5 +1,14 @@
+import { Dialog } from "primereact/dialog";
+import { useState } from "react";
+import FormikFormDemo  from "../../components/supplier/Dashboard/RegisterOfficer";
+
+
 export const Navigation = (props) => {
+  const [vis,setVis]=useState(false)
   return (
+    <>
+    
+   
     <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
       <div className='container'>
         <div className='navbar-header'>
@@ -41,19 +50,35 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
-              <a href='#portfolio' className='page-scroll'>
+              <a href='#portfolio' className='page-scroll' onClick={(()=>{
+                setVis(true)
+              })}>
                 REGISTER AS SUPPLIER
               </a>
             </li>
-            {/* <li>
-              <a href='#testimonials' className='page-scroll'>
-                Testimonials
+            <li>
+              <a href='/login' className='page-scroll'>
+                LOGIN
               </a>
-            </li> */}
+            </li>
             
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> 
+    
+    <Dialog
+          visible={vis}
+          dismissableMask
+          className="p-fluid"
+          style={{ width: "80rem" }}
+          header="REGISTER SUPPLIER"
+          onHide={() => {
+            setVis(false);
+          }}
+        >
+          <FormikFormDemo />
+        </Dialog>
+    </>
   )
 }

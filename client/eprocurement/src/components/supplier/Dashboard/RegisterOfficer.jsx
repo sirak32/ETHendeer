@@ -810,22 +810,7 @@ import { fetchPending } from "../../../actions/pendingAction";
                   {getFormErrorMessage("password")}
                 </div>
               </Grid>
-              {/* <Grid item xs={6}>
-                <div className="field">
-                  <span className="p-float-label">
-                    <Calendar
-                      id="date"
-                      name="date"
-                      value={formik.values.date}
-                      onChange={formik.handleChange}
-                      dateFormat="dd/mm/yy"
-                      mask="99/99/9999"
-                      showIcon
-                    />
-                    <label htmlFor="date">Date</label>
-                  </span>
-                </div>
-              </Grid> */}
+
 
               <Grid item xs={6}>
                 <div className="field-checkbox">
@@ -856,7 +841,7 @@ import { fetchPending } from "../../../actions/pendingAction";
               </Grid> */}
 
               <Grid item xs={6}>
-                <Button type="submit" label="Submit" className="mt-2" />
+                <Button type="submit" label="Done" className="mt-2" />
               </Grid>
               <Grid item xs={6}>
                 <Button

@@ -31,6 +31,7 @@ const App = () => {
       {/* <Gallery /> */}
       {/* <Testimonials data={landingPageData.Testimonials} /> */}
       <Footer />
+      
     </div>
   )
 }
