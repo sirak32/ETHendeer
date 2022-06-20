@@ -87,6 +87,7 @@ const Login = () => {
 localStorage.setItem('token', response.data.token);
 localStorage.setItem('whoId', response.data.user);
 localStorage.setItem('role',response.data.role)
+localStorage.setItem('user',response.data.username)
 setRole(response.data.role)
         }
         else {

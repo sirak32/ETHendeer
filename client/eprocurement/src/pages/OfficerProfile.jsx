@@ -19,10 +19,18 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
 
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
+  const usern=localStorage.getItem('user')
+  const [data,setData]=useState({
+    username:usern,
+    oldPassword:'',
+    newPassword:'',
+    confirmPassword:''
+  })
  
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
@@ -64,14 +72,32 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
             {/* <form> */}
             <Form onSubmit={(e)=>{
               e.preventDefault()
-              alert('password has changed')
+              if(data.confirmPassword.localeCompare(data.newPassword)===0){
+                // alert("Password  Match")
+
+                axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
+                .then((res)=>{
+                  alert('Password Changed Successfully',res.data)
+                })
+                .catch((e)=>{
+                  alert('Incorrect Password',e)
+                })
+              }
+              else
+              {
+                alert("Password don't Match")
+              }
             }}>
-      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+      <Form.Group as={Row} className="mb-3" controlId="username">
         <Form.Label column sm="2">
           Username
         </Form.Label>
         <Col sm="10">
-          <Form.Control size="lg" required    />
+          <Form.Control
+          defaultValue={usern}
+          onChange={(e)=>{
+            setData({...data,username:e.target.value})
+          }} size="lg" required    />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" controlId="oldPassword">
@@ -79,7 +105,14 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
           Old Password
         </Form.Label>
         <Col sm="10">
-          <Form.Control size="lg" required type="password" placeholder="old Password" />
+          <Form.Control 
+          size="lg"
+           required
+            type="password"
+            onChange={(e)=>{
+              setData({...data,oldPassword:e.target.value})
+            }}
+             placeholder="old Password" />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" required controlId="newPassword">
@@ -87,7 +120,13 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
           New Password
         </Form.Label>
         <Col sm="10">
-          <Form.Control size="lg"  type="password" placeholder="new Password" />
+          <Form.Control 
+          onChange={(e)=>{
+            setData({...data,newPassword:e.target.value})
+          }}
+          size="lg"  
+          type="password" 
+          placeholder="new Password" />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" required controlId="confirmPassword">
@@ -95,7 +134,14 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
           Confirm Password
         </Form.Label>
         <Col sm="10">
-          <Form.Control size="lg" required  type="password" placeholder="confirm Password" />
+          <Form.Control
+          onChange={((e)=>{
+            // console.log(e.target.value)
+            setData({...data,confirmPassword:e.target.value})
+          })}
+           size="lg"
+            required
+             type="password" placeholder="confirm Password" />
         </Col>
       </Form.Group>
       <Form.Group as={Row} className="mb-3" controlId="">
