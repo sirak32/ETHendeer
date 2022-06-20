@@ -92,7 +92,17 @@ const [selected,setSelected]=useState({})
       />
     </span>
   );
-  const seen=(pubDate)=>(<i class="pi pi-calendar-plus  p-2 text-xl text-black-500  font-medium ">{`  ${pubDate}`}</i>)
+  const seen=(pubDate,cloDate)=>{
+    const now=new Date().getTime()
+    const cd=new Date(cloDate).getTime()
+    const remaining=cd-now
+    var days = Math.ceil(remaining / (1000 * 3600 * 24));
+    return <> 
+  <i class="pi pi-calendar-plus  p-2 text-2xl text-black-500  font-medium ">{`  ${pubDate}`}</i>
+  <i class="pi pi-angle-double-down  p-2 text-2xl text-pink-500  font-medium ">{`  ${days} Days to Close`}</i>
+
+  </>
+  }
   const [vis, setVis] = useState(false);
   const [vis2, setVis2] = useState(false);
   console.log("tenders are from supplier", tenders);
@@ -108,12 +118,12 @@ const [selected,setSelected]=useState({})
       <Grid container spacing={5}>
         {tenders.map((t) => (
           new Date(t.closingDate).toISOString()>new Date().toISOString()?
-          <Grid item xs={3}>
-            <Card
-              className="m-0 scalein animation-duration-250 max-h-1rem"
-              title={t.title}
-              subTitle={seen(new Date(t.publishedDate).toDateString())}
-              style={{ width: "25em" }}
+          <Grid item xs={2}>
+            <Card 
+              className="mt-7 scalein animation-duration-250 max-h-1rem"
+              title={`${t.title.substr(0,100)}...`}
+              subTitle={seen(new Date(t.publishedDate).toDateString(),new Date(t.closingDate).toDateString())}
+              style={{ width: "25rem", }}
               footer={footer(t)}
               header={header}
             >
@@ -121,7 +131,7 @@ const [selected,setSelected]=useState({})
                 className="m-0 "
                 style={{ lineHeight: "1.5", height: "10rem" }}
               >
-                {t.description}
+                {t.description.substr(0,85)}...
               </p>
             </Card>
             <Toast ref={toastBR } />
@@ -130,7 +140,7 @@ const [selected,setSelected]=useState({})
       </Grid>
       <Dialog
         modal
-        draggable={false}
+        draggable={false} 
         dismissableMask
         style={{ width: "90rem", height: "300rem", left: "8%" }}
         visible={vis}
@@ -194,7 +204,6 @@ const [selected,setSelected]=useState({})
                 const data2=new FormData()
                 data1.append('doc',busiDoc)
                 data2.append('doc',techDoc)
-// return;
                 await axios.post( "http://localhost:5001/upload",data1)
                 .then(async(res)=>{
                   const busi=res.data
@@ -269,14 +278,17 @@ const [selected,setSelected]=useState({})
     </>
   ) : (
     <>
+    <center>
+
     <ProgressSpinner/>
+    </center>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      {/* <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
+      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar> */}
       ;
     </>
   );

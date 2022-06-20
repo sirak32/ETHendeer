@@ -15,7 +15,6 @@ const App = () => {
 
   useEffect(()=>{
     const role=localStorage.getItem('role')
-
     if(role!=='supplier')
     navigate('/')
   },[])
@@ -23,7 +22,6 @@ const App = () => {
 
   return (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={0} menu={menus} />
       <Section>
         <NavBar  />

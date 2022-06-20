@@ -15,17 +15,11 @@ import { TabView, TabPanel } from 'primereact/tabview';
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
   console.log('BELCASH',props.data.tenders)
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const [activeIndex, setActiveIndex] = React.useState(0);
-
   return (
 
     <TabView   activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
     <TabPanel  header="ALL TENDERS">
-
         <Table data={props.data.tenders}/>
     </TabPanel>
     <TabPanel header="ADD TENDERS">

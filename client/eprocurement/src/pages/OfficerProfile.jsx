@@ -14,26 +14,25 @@ import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import Side from '../components/supplier/Dashboard/SideOff'
+import Cont from '@mui/material/Container'
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
  
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-  // const [tendeN,setTenderN]=useState(null)
   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
-    // dispatch({type:'SET_LOADING'})
-    // dispatch({type:'SET_TENDER',
-    //   payload:'data'})
-        const tokens=localStorage.getItem('token')
         const role=localStorage.getItem('role')
-
         if(role!=='officer')
         navigate('/')
         fetchTenders();
         fetchSuppliers()
-        // console.log('Im being belcash baldereba',tenders)
   }, []);
   const OptmTender = [];
   let i;
@@ -42,22 +41,14 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       title: tenders[i].title, 
       tenderNo: tenders[i].number,
       bidOpenOn:tenders[i].bidOpenOn,
-      closingDate:tenders[i].closingDate };
+      closingDate:tenders[i].closingDate 
+    };
   }
-  // const [{}]=tenders.map((tender)=>)
-    console.log("tender from belcash", tenders,'supplier from redux',suppliers);
+  console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   let closedNo=0
-  const closed=tenders.map((t)=>{
-    let cd=new Date(t.closingDate).toISOString()
-    let td=new Date().toISOString()
-if(cd<=td)
-closedNo++
-
-  })
   return tenders ? (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={2} menu={menus}/>
       <Section>
         <NavBar />
@@ -68,9 +59,61 @@ closedNo++
               <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
               <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
               <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
+            <Cont maxWidth={'xs'}>
             <h1>Officer Profile Setting</h1>
+            {/* <form> */}
+            <Form onSubmit={(e)=>{
+              e.preventDefault()
+              alert('password has changed')
+            }}>
+      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+        <Form.Label column sm="2">
+          Username
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required    />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+        <Form.Label column sm="2">
+          Old Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required type="password" placeholder="old Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="newPassword">
+        <Form.Label column sm="2">
+          New Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg"  type="password" placeholder="new Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="confirmPassword">
+        <Form.Label column sm="2">
+          Confirm Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required  type="password" placeholder="confirm Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="">
+        <Form.Label column sm="2">
+          
+        </Form.Label>
+        <Col sm="10">
+        <Button type='submit' variant="success">Done</Button>{' '}
+        <Button type='reset' variant="warning">Reset</Button>{' '}
+
+        </Col>
+      </Form.Group>
+
+    </Form>
+
+            {/* </form> */}
+            </Cont>
             </Wrapper>           
-            {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
           </div>
           <div className="row__two"></div>
         </div>

@@ -20,37 +20,20 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
  
   const tender = useSelector((state) => state.loading);
   const dispatch = useDispatch();
-  // const [tendeN,setTenderN]=useState(null)
   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
-    // dispatch({type:'SET_LOADING'})
-    // dispatch({type:'SET_TENDER',
-    //   payload:'data'})
-        const tokens=localStorage.getItem('token')
+
         const role=localStorage.getItem('role')
 
         if(role!=='officer')
         navigate('/')
         fetchTenders();
         fetchSuppliers()
-        // console.log('Im being belcash baldereba',tenders)
   }, []);
   const OptmTender = [];
-
-  // const [{}]=tenders.map((tender)=>)
-    console.log("tender from belcash", tenders,'supplier from redux',suppliers);
-  const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   let closedNo=0
-  const closed=tenders.map((t)=>{
-    let cd=new Date(t.closingDate).toISOString()
-    let td=new Date().toISOString()
-if(cd<=td)
-closedNo++
-
-  })
   return tenders ? (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={0} menu={menus}/>
       <Section>
         <NavBar />

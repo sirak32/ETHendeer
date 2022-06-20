@@ -20,8 +20,11 @@ import { InputText } from "primereact/inputtext";
 import { useFormik } from "formik";
 import { Password } from "primereact/password";
 import { classNames } from "primereact/utils";
-import Containe from '@mui/material/Container'
-
+import Cont from '@mui/material/Container'
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
@@ -48,13 +51,6 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       //  localStorage.setItem('un',uname) 
        console.log("myInfo",myInfo) 
       }, []);
-// if(my)
-  const textEditor = (options) => {
-    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-}
-const onRowEditComplete1=()=>{
-
-}
 const formik = useFormik({
   initialValues: {
       username: '',
@@ -78,9 +74,6 @@ const formik = useFormik({
       return errors;
   },
   onSubmit: (data) => {
-      // setFormData(data);
-      // setShowMessage(true);
-
       formik.resetForm();
   }
 });
@@ -103,7 +96,7 @@ const getFormErrorMessage = (name) => {
               <Dash title="Closed" number={closedNo} />
             </Wrapper>            */}
             {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
-            <div className="flex align-items-center justify-content-center top-50 font-bold text-white border-round m-2" >
+            {/* <div className="flex align-items-center justify-content-center top-50 font-bold text-white border-round m-2" >
              
              <div>
 
@@ -132,8 +125,61 @@ const getFormErrorMessage = (name) => {
                             </span>
                             {getFormErrorMessage('password2')}
                         </div></div>
-            </div>
-            
+            </div> */}
+            <Cont maxWidth={'xs'}>
+            <h1>Officer Profile Setting</h1>
+            {/* <form> */}
+            <Form onSubmit={(e)=>{
+              e.preventDefault()
+              alert('password has changed')
+            }}>
+      <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+        <Form.Label column sm="2">
+          Username
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required    />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+        <Form.Label column sm="2">
+          Old Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required type="password" placeholder="old Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="newPassword">
+        <Form.Label column sm="2">
+          New Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg"  type="password" placeholder="new Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="confirmPassword">
+        <Form.Label column sm="2">
+          Confirm Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control size="lg" required type="password" placeholder="confirm Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="">
+        <Form.Label column sm="2">
+          
+        </Form.Label>
+        <Col sm="10">
+        <Button type='submit' variant="success">Done</Button>{' '}
+        <Button type='reset' variant="warning">Reset</Button>{' '}
+
+        </Col>
+      </Form.Group>
+
+    </Form>
+
+            {/* </form> */}
+            </Cont>
           </div>
           <div className="row__two"></div>
         </div>

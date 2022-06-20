@@ -186,18 +186,12 @@ const downloadlink=(t)=>{
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      {/* <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column> */}
       <Column field="organizationName" filter sortable header="Supplier Trade Name" ></Column>
       <Column field="personalInfo.firstName" filter sortable header="Representative Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="accountInfo.email" sortable header="Email"></Column>
       <Column body={downloadlink} field="Attacheddocument" sortable header="Attached Document"></Column>
-
       <Column field="tinNumber" sortable header="Tin"></Column>
-      {/* <Column field='status' sortable header='status'></Column> */}
-      {/* <Column field="status" header="Status" sortable style={{ minWidth: '10rem' }} body={statusBodyTemplate} filter  /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }}  style={{ minWidth: '10rem' }}bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={editButton} /> */}
-      {/* <Column  headerStyle={{ width: '4rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
       <Column
         body={actionBodyTemplate}
         exportable={false}
@@ -206,14 +200,12 @@ const downloadlink=(t)=>{
     </DataTable>
 
       <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-        {/* <FormikFormDemo selected={suppli} /> */}
       </Dialog>
       </>
   );
 };
 const mapStateToProps = (state) => {
   return {
-    // tenders: state.tenders,
     pendings:state.pendings.pendings
 
   };

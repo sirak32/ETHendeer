@@ -39,8 +39,6 @@ const App = () => {
         <Route exact path="/supplier-profile" element={<SupplierProfile />}></Route>
         <Route exact path="/supplier-tenders" element={<SupplierTenders />}></Route>
         <Route exact path="/supplier-support" element={<SupplierSupport />}></Route>
-
-
         <Route exact path="/officer-profile" element={<OfficerProfile />}></Route>
         <Route exact path="/officer-supplier" element={<OfficerSuppliers />}></Route>
 
