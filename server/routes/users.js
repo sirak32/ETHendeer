@@ -23,7 +23,8 @@ import {
   rejectPending,
   getLoginStat,
   getRegisterStat,
-  resetPassword
+  resetPassword,
+  changeAccount
 } from "../controllers/users.js";
 import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
@@ -71,8 +72,8 @@ router.post('/accept-pending-supplier',acceptSupplier)
 router.delete('/reject-pending-supplier/:id',rejectPending)
 router.get('/get-pending-suppliers',getPendingSuppliers)
 router.get('/get-pending-supplier/:id',getOnePending)
-router.get('/reset-password/:id',resetPassword)
-
+router.patch('/reset-password/:id',resetPassword)
+router.patch('/change-account/:id',changeAccount)
 router.get(
   "/officer-dashboard",
   passport.authenticate("jwt-bearer", {

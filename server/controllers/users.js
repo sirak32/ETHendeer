@@ -375,7 +375,7 @@ const userLogin = async (userCreds, role, res) => {
     //     })
 
     // }
-    console.log(user.password)
+    console.log("From Belcash",user.password,password)
     let isMatch = await bcrypt.compare(password,user.password) 
     // const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
         
@@ -754,13 +754,33 @@ const getRegisterStat=async (req,res)=>{
 }
 const resetPassword=async(req,res)=>{
   const id = req.params.id
+  let data=req.body
+  console.log(data)
   try {
-    var pass="ETH"
+    var pass="ETHENDER"
     const p=await bcrypt.hash(pass,12)
-    console.log('info inside',p)
+    // data={...data,password:p}
+    // console.log('info inside',p)
     const account1=await account.findByIdAndUpdate(id,{password:p})
     // account1.password=p
     // await account1.save() 
+    res.status(200).json({message:account1})
+  } catch (error) {
+    res.status(200).json({error})
+
+  }
+}
+const changeAccount=async(req,res)=>{
+  const id = req.params.id
+  let data=req.body
+  console.log(data)
+  
+  try {
+    var pass=data.password
+    const p=await bcrypt.hash(pass,12)
+    data={...data,password:p}
+    console.log('info inside',p)
+    const account1=await account.findByIdAndUpdate(id,data)
     res.status(200).json({message:account1})
   } catch (error) {
     res.status(200).json({error})
@@ -791,5 +811,6 @@ export {
     rejectPending,
     getLoginStat,
     getRegisterStat,
-    resetPassword
+    resetPassword,
+    changeAccount
 }
