@@ -23,11 +23,20 @@ import { fetchLoginStat } from "../actions/loginStatAction.js";
 import { ProgressBar } from "primereact/progressbar";
 import Grid from '@mui/material/Grid'
 import { ProgressSpinner } from 'primereact/progressspinner';
-import OfficersTable from "../components/supplier/Dashboard/OfficersTable";
-import { Fieldset } from 'primereact/fieldset';
+import Cont from '@mui/material/Container'
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings,stats,fetchLoginStats}) => {
   const menus=['Dashboard','Officers','Suppliers',]
+  const [data,setData]=useState({
+    username:'tilik',
+    oldPassword:'',
+    newPassword:'',
+    confirmPassword:''
+  })
   const navigate=useNavigate()
   let logMonthly={
     Sep:0,
@@ -117,30 +126,102 @@ if(Object.keys(stats).length!==0)
     }
 };
 
-// console.log('Tester Test',stats)
-// if (Object.keys(stats).length===0)
-// console.log('FROM INSA')
-  // console.log('pendings are ',pendings)
   return (Object.keys(stats).length!==0)? ( 
     <Div>
-      {/* <SideBar  menu={menus} /> */}
-      <Side active={1}  menu={menus} />
+      <Side active={3}  menu={menus} />
 
       <Section>
         <div className="grid"> 
           <div className="row__one">
-            
-          <Wrapper>
-            {/* <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/> */}
-            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
-            {/* <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/> */}
-            </Wrapper>
-            {/* <AdminTab data={{suppliers,officers,pendings}}/> */}
-            <Fieldset legend="Officers List" toggleable>
+          <Cont maxWidth={'xs'} className='mt-7'>
+            <Form onSubmit={(e)=>{
+              e.preventDefault()
+              if(data.confirmPassword.localeCompare(data.newPassword)===0){
+                axios.patch(`http://localhost:5001/change-account/tilik`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
+                .then((res)=>{
+                  navigate('/admin')
+                })
+                .catch((e)=>{
+                  alert('Incorrect Password',e)
+                })
+              }
+              else
+              {
+                alert("Password don't Match")
+              }
+            }}>
+      <Form.Group as={Row} className="mb-3" controlId="username">
+        <Form.Label column sm="2">
+          Username
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+        //   defaultValue={usern}
+          onChange={(e)=>{
+            setData({...data,username:e.target.value})
+          }} size="lg" required    />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+        <Form.Label column sm="2">
+          Old Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control 
+          min={8}
+          size="lg"
+           required
+            type="password"
+            onChange={(e)=>{
+              setData({...data,oldPassword:e.target.value})
+            }}
+             placeholder="old Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="newPassword">
+        <Form.Label column sm="2">
+          New Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control 
+          min={8}
+          onChange={(e)=>{
+            setData({...data,newPassword:e.target.value})
+          }}
+          size="lg"  
+          type="password" 
+          placeholder="new Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" required controlId="confirmPassword" >
+        <Form.Label column sm="2" >
+          Confirm Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+          min={8}
+          onChange={((e)=>{
+            // console.log(e.target.value)
+            setData({...data,confirmPassword:e.target.value})
+          })}
+           size="lg"
+            required
+             type="password" placeholder="confirm Password" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="">
+        <Form.Label column sm="2">
+          
+        </Form.Label>
+        <Col sm="10">
+        <Button type='submit' variant="success">Done</Button>{' '}
+        <Button type='reset' variant="warning">Reset</Button>{' '}
 
-            <OfficersTable data={officers} />
-            </Fieldset>
-          </div>
+        </Col>
+      </Form.Group>
+
+    </Form>
+            </Cont>          </div>
           <div className="row__two"></div>
         </div>
       </Section>

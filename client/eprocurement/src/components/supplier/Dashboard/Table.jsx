@@ -94,7 +94,6 @@ console.log("now ",now," op ",op,op<now)
       }}
     />
     {cloz&&<Button
-    disabled
       icon="pi pi-pencil"
       className="p-button-rounded p-button-success mr-2"
       onClick={() => {
@@ -106,6 +105,7 @@ console.log("now ",now," op ",op,op<now)
     /> }
     
     <Button
+    disabled
       icon="pi pi-trash"
       className="p-button-rounded p-button-warning"
       onClick={async() => {

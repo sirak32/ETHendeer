@@ -4,8 +4,6 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import {connect} from 'react-redux'
-import { fetchTender } from "../../../actions/tenderAction";
-import { FormikFormDemo } from "./EditSupplier";
 import { Dialog } from "primereact/dialog";
 import { fetchSuppliers } from "../../../actions/supplierAction";
 import axios from "axios";
@@ -16,7 +14,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [deleteOff,setDeleteOff]=useState(false)
   const [deleteId,setDeleteId]=useState(0)
-  // const [suppli,setSuppli]=useState({})
   const [accId,setAccId]=useState(0)
   const [data,setData] =useState({})
 
@@ -35,9 +32,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
               alert('Password Reseted')
             }).catch((e)=>{
               alert(e)
-
             })
-          
           }}
           />
         <Button

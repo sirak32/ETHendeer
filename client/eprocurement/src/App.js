@@ -22,6 +22,8 @@ import AdminOfficers from './pages/AdminOfficers'
 import AdminSuppliers from './pages/AdminSuppliers'
 import OfficerSuppliers from './pages/OfficerSuppliers'
 import SupplierSupport from './pages/SupplierSupport'
+import AdminProfile from './pages/AdminProfile'
+
 const App = () => {
   return (
     // <AdminDashboard />
@@ -37,6 +39,7 @@ const App = () => {
         {/* <Route exact path="/supplier-profile" element={<TenderDetail />}></Route> */}
         
         <Route exact path="/supplier-profile" element={<SupplierProfile />}></Route>
+        <Route exact path="/admin-profile" element={<AdminProfile />}></Route>
         <Route exact path="/supplier-tenders" element={<SupplierTenders />}></Route>
         <Route exact path="/supplier-support" element={<SupplierSupport />}></Route>
         <Route exact path="/officer-profile" element={<OfficerProfile />}></Route>

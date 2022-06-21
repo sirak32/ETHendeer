@@ -47,8 +47,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
     Jul:0,
     Aug:0,  
   }
-  const [month,setMonth]=useState(logMonthly)
-  const [tog,setTog]=useState(false)
+
   let statis
   const [basicData,setBasicData] = useState({
   });
@@ -85,11 +84,7 @@ if(Object.keys(stats).length!==0)
         ]
         }
       }
-
     fetchOfficers()
-    // fetchLoginStats()
-
-
   },[])
   let basicOptions = {
     maintainAspectRatio: false,
@@ -124,14 +119,10 @@ if(Object.keys(stats).length!==0)
 
   return (Object.keys(stats).length!==0)? ( 
     <Div>
-      {/* <SideBar  menu={menus} /> */}
       <Side active={2}  menu={menus} />
-
       <Section>
-        <NavBar />
         <div className="grid"> 
-          <div className="row__one">
-            
+          <div className="row__one">            
           <Wrapper>
             <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
             <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
