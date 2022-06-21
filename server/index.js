@@ -161,6 +161,11 @@ app.get("/complete",async(req,res)=>{
 })
 //// EMAIL
 app.post('/api/email', (req, res) => {
+  try {
+    
+  } catch (error) {
+    
+  }
   const { email, subject, message } = req.body;
   mailgun()
     .messages()

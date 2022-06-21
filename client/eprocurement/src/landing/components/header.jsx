@@ -16,7 +16,7 @@ export const Header = (props) => {
                 </h1>
                 <p>{props.data ?'you can sign up as a supplier @ home and apply everywhere you are using our electronic procurement system' : 'Loading'}</p>
                 <a
-                  href='#features'
+                  href='/login'
                   className='btn btn-custom btn-lg page-scroll'
                 >
                   Get Started

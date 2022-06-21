@@ -24,7 +24,7 @@ export const Navigation = (props) => {
             <span className='icon-bar'></span>{' '}
             <span className='icon-bar'></span>{' '}
           </button>
-          <a className='navbar-brand page-scroll' href='#page-top'>
+          <a className='navbar-brand page-scroll' href=''>
             ETHENDER
           </a>{' '}
         </div>
@@ -50,7 +50,7 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
-              <a href='#portfolio' className='page-scroll' onClick={(()=>{
+              <a href='#' className='page-scroll' onClick={(()=>{
                 setVis(true)
               })}>
                 REGISTER AS SUPPLIER
