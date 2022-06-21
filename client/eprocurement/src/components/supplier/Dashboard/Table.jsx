@@ -9,10 +9,10 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
-import { InputText } from "primereact/inputtext";
 import { fetchApplied } from "../../../actions/appliedAction";
 import { fetchSuppliers } from "../../../actions/supplierAction";
 import {saveAs} from 'file-saver'
+import { useRef } from "react";
 const Table = ({tenderss,applieds,suppliers,fetchApplieds,fetchTenders,fetchSuppliers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
@@ -22,6 +22,11 @@ const Table = ({tenderss,applieds,suppliers,fetchApplieds,fetchTenders,fetchSupp
 const [data,setData] =useState({})
 const [cloz,setCloz]=useState(true)
 const[deleteId,setDeleteId]=useState(0)
+const dt = useRef(null);
+const exporting = () => {
+  dt.exportCSV();
+}
+
   useEffect(()=>{
     fetchTenders()
     fetchApplieds()
@@ -29,11 +34,9 @@ const[deleteId,setDeleteId]=useState(0)
   console.log(applieds,'applieds')
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
-  });
-  console.log('tenders are',tenderss)
- 
+  }); 
   const statusBodyTemplate = (rowData) => {
-    const op=rowData.bidOpenOn
+    const op=rowData.closingDate
     const now=new Date().toISOString()
 console.log("now ",now," op ",op,op<now)
     if(op>now)
@@ -45,7 +48,6 @@ console.log("now ",now," op ",op,op<now)
 }
   };
   const editProduct = () => {};
-  const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
     return (
       <>
@@ -73,7 +75,6 @@ console.log("now ",now," op ",op,op<now)
           icon="pi pi-trash"
           className="p-button-rounded p-button-warning"
           onClick={async() => {
-            // alert(rowData._id)
             setDeleteId(rowData._id)
             setDeleteProductsDialog(true)
           }}
@@ -81,16 +82,15 @@ console.log("now ",now," op ",op,op<now)
       </>
     );
   };
-  const textEditor = (options) => {
-    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-}
+  const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
+
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return tenderss!==null?(
     <>
-      <DataTable
+      <DataTable 
         breakpoint="960px"
         editMode="cell"
-        header="Tenders List"
+        header={header}
         value={tenders}
         responsiveLayout="stack"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -104,8 +104,8 @@ console.log("now ",now," op ",op,op<now)
         className="datatable-responsive text-2xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
+        ref={dt}
       >
-        {console.log("tenders are",tenders)}
         <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>
@@ -199,7 +199,7 @@ console.log("now ",now," op ",op,op<now)
         </h2>}
       <center> <h1>Suppliers Who Applied For This Tender</h1></center><hr/>
         {applieds.map((ap)=>{   
-          if(new Date().toISOString()>=new Date().toISOString(data.bidOpenOn))
+          if(new Date().toISOString()<new Date().toISOString(data.bidOpenOn))
          { 
           console.log("app",ap)
           var sup=[]
@@ -215,8 +215,6 @@ console.log("now ",now," op ",op,op<now)
             <> 
             <center>
               <p className="text-indigo-300 border-1 surface-border p-5 border-round-xs">
-            {/* {ap.applier._id } 
-            {ap.tender._id}  */}
            <h3 className="text-2xl bg-yellow-50">{
             sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName
             } 
@@ -229,8 +227,6 @@ console.log("now ",now," op ",op,op<now)
                  label="Business Bid"
                  onClick={(()=>{
                   window.open(`http://localhost:5001/image/${ap.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
-
-                  // window.open(`http://localhost:5001/image/${ap.businessDoc}` "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800")
                     saveAs(`http://localhost:5001/image/${ap.businessDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}.pdf`)
                  })}
                  />
@@ -241,8 +237,6 @@ console.log("now ",now," op ",op,op<now)
                  label="Tecnical Bid"
                  onClick={(()=>{
                   window.open(`http://localhost:5001/image/${ap.technicalDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
-
-                  // window.open(`http://localhost:5001/image/${ap.businessDoc}` "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800")
                     saveAs(`http://localhost:5001/image/${ap.technicalDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`)
                  })}
                  />

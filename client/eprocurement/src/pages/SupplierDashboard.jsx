@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
 import NavBar from "../components/supplier/Dashboard/NavBar";
-import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
-import Table from "../components/supplier/Dashboard/Table";
-import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
 import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
-import { Stack } from "@mui/material";
 import { ScrollTop } from 'primereact/scrolltop';
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -60,7 +55,6 @@ const Section = styled.section`
     margin-top: 2rem;
     .row__one {
       display: grid;
-      /* grid-template-columns: repeat(2, 1fr); */
       height: 50%;
       gap: 1rem;
     }

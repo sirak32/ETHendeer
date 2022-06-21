@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
 import NavBar from "../components/supplier/Dashboard/NavBar";
-import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
-import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
-import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
-import Modal from "../components/supplier/Dashboard/Modal";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { useEffect,useState } from "react";
 import Dash from "../components/supplier/Dashboard/Dash";
@@ -18,8 +14,6 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
  
-  const tender = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
 

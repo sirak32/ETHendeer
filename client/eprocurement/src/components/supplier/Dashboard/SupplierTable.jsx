@@ -37,9 +37,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
               alert(e)
 
             })
-            // setData(rowData)
-            // setEdit(true)
-            // console.log('Supli',suppliers)          
+          
           }}
           />
         <Button
@@ -81,7 +79,9 @@ const Table = ({suppliers,fetchSuppliers}) => {
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
+      
+      <Column field="organizationName" filter sortable header="Organization" ></Column>
+      <Column field="personalInfo.firstName"  sortable header="Representative Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>

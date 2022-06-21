@@ -29,34 +29,8 @@ const tender=props.data
 const selected=props.selected
   const formik = useFormik({
     initialValues:tender,
-    // validate: (data) => {
-    //   let errors = {};
-    //   if (!data.title) {
-    //     errors.title = " Name is required.";
-    //   }
-    //   if (!data.number) {
-    //     errors.number = "Middle Name is required.";
-    //   }
-    //   if (!data.description) {
-    //     errors.description = "Last Name is required.";
-    //   }
-
-    //   if (!data.type) {
-    //     errors.type = "First Name is required.";
-    //   } 
-    //   if (!data.termsAndConditions) {
-    //     errors.termsAndConditions = "Subcity Name is required.";
-    //   }
-    //   if (!data.accept) {
-    //     errors.accept = "You need to agree to the terms and conditions.";
-    //   }
-
-    //   return errors;
-    // },
     onSubmit: async(data) => {
       console.log("here checking",data.title)
-      // setFormData(data);
-      // setShowMessage(true);
       await axios.patch(`http://localhost:5001/tenders/${tender._id}`,data)
       .then(()=>{
         console.log('updated succefullly')
@@ -64,12 +38,7 @@ const selected=props.selected
       formik.resetForm();
     },
   });
-// const handleSubmit=async()=>{
-//   await axios.patch(`http://localhost:5001/tenders/${tender._id}`,data)
-//   .then(()=>{
-//     console.log('updated succefullly')
-//   })
-// }
+
   const isFormFieldValid = (name) =>
     !!(formik.touched[name] && formik.errors[name]);
   const getFormErrorMessage = (name) => {
@@ -121,11 +90,9 @@ const selected=props.selected
             className="pi pi-check-circle"
             style={{ fontSize: "5rem", color: "var(--green-500)" }}
           ></i>
-          <h5>Registration Successful!</h5>
+          <h5> Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{formData.name}</b> ; it'll
-            be valid next 30 days without activation. Please check{" "}
-            <b>{formData.email}</b> for activation instructions.
+          Successful!
           </p>
         </div>
       </Dialog>
@@ -264,7 +231,7 @@ const selected=props.selected
                   {getFormErrorMessage("termsAndConditions")}
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
               <span className="p-float-label">
                 <Calendar
                   className="mt-5 h-5rem w-7"
@@ -280,6 +247,26 @@ const selected=props.selected
                   showIcon
                 />
                 <label htmlFor="bidOpenOn"> Opening Date</label>
+              </span>
+            </Grid> */}
+             <Grid item xs={6}>
+              <span className="p-float-label">
+                <InputText
+                  required
+                  type='number'
+                  min={1}
+                  onChange={formik.handleChange}
+                  name="bidFee"
+                  className="mt-5 w-7 h-5rem"
+                  id="bidFee"
+                  color="success"
+                  value={formik.values.bidFee}
+                  label="Bid Fee"
+                  sx={{ m: 1, width: "25ch" }}
+                />{" "}
+                <label htmlFor="bidFee" className="p-success">
+                  Bid Fee*
+                </label>
               </span>
             </Grid>
             <Grid item xs={6}>

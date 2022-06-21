@@ -14,7 +14,6 @@ import { TabView, TabPanel } from 'primereact/tabview';
 
 export default function BasicTabs(props) {
   const [value, setValue] = React.useState(0);
-  console.log('BELCASH',props.data.tenders)
   const [activeIndex, setActiveIndex] = React.useState(0);
   return (
 

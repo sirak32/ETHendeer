@@ -3,8 +3,6 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { FormikFormDemo } from "./EditTender";
-import { Sidebar } from 'primereact/sidebar';
 import { connect } from "react-redux";
 import { fetchOfficer } from "../../../actions/officerAction";
 import axios from "axios";
@@ -17,6 +15,7 @@ const Table = ({officers,fetchOfficers}) => {
   const [deleteOff,setDeleteOff]=useState(false)
   const [deleteId,setDeleteId]=useState(0)
 const [data,setData] =useState({})
+const [accId,setAccId]=useState(0)
 const [off,setOffi]=useState({
   _id:'',
 firstName:'',
@@ -31,7 +30,6 @@ role:'',
 user:'',
 officerId:'',
 })
-// let supDat
 useEffect(()=>{
 fetchOfficers()
 if(officers.length>0){
@@ -64,15 +62,15 @@ console.log('OFFICERS',off)
           label="Reset Password"
           className="p-button-rounded mr-2"
           onClick={() => {
-            console.log('Officers',rowData)
-            setData(rowData)
-             selected=officers.filter((ofi)=>{
-              console.log('OFFi',ofi._id)
-              console.log('ROW',rowData._id)
+            console.log("row datas",rowData)
+            setAccId(rowData.accountInfo._id)
+            axios.patch(`http://localhost:5001/reset-password/${accId}`)
+            .then((res)=>{
+              alert('Password Reseted')
+            }).catch((e)=>{
+              alert(e)
 
-              return (ofi._id==rowData._id)
             })
-            setVisibleTop(true)  
           }}
         />
         <Button
