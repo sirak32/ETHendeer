@@ -17,6 +17,7 @@ import SupplierTable from "./SupplierTable";
 import OfficersTable from "./OfficersTable";
 import PendingTable from "./PendingTable";
 import RegisterOfficer from '../RegisterOfficer'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

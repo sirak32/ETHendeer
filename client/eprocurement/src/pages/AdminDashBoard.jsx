@@ -24,7 +24,7 @@ import { fetchLoginStat } from "../actions/loginStatAction.js";
 import { ProgressBar } from "primereact/progressbar";
 import Grid from '@mui/material/Grid'
 import { ProgressSpinner } from 'primereact/progressspinner';
- 
+import Chartt from 'react-apexcharts'
 const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPendings,stats,fetchLoginStats}) => {
   const menus=['Dashboard','Officers','Suppliers',]
   // console.log("from admin panel officers",suppliers,officers)
@@ -126,6 +126,90 @@ if(Object.keys(stats).length!==0)
         <NavBar />
         <div className="grid">
           <div className="row__one">
+          
+          <center>
+             <Chartt options={{chart: {
+          id: 'apexchart-example'
+        },
+        xaxis: {
+          categories: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ]
+        }}} series={
+          [
+            {
+          name: 'Login',
+          data: [
+            stats.login.Jan,
+            stats.login.Feb,
+            stats.login.Mar,
+            // stats.login.Apr,
+            40,
+            // stats.login.May,
+            60,
+            stats.login.Jun,
+            stats.login.Jul,
+            stats.login.Aug,
+            stats.login.Sep,
+            stats.login.Oct,
+            stats.login.Nov,
+            stats.login.Dec, 
+          ]
+        },
+        {
+          name: 'Registered Suppliers',
+          data: [
+            stats.register.Jan,
+            stats.register.Feb,
+            stats.register.Mar,
+            stats.register.Apr,
+            // 40,
+            stats.register.May,
+            // 60,
+            stats.register.Jun,
+            stats.register.Jul,
+            stats.register.Aug,
+            stats.register.Sep,
+            stats.register.Oct,
+            stats.register.Nov,
+            stats.register.Dec, 
+          ]
+        },
+        {
+          name: 'Participation',
+          data: [
+            stats.apply.Jan,
+            stats.apply.Feb,
+            stats.apply.Mar,
+            // stats.apply.Apr,
+            80,
+            // stats.apply.May,
+            10,
+            stats.apply.Jun,
+            stats.apply.Jul,
+            stats.apply.Aug,
+            stats.apply.Sep,
+            stats.apply.Oct,
+            stats.apply.Nov,
+            stats.apply.Dec, 
+          ]
+        }
+      ]
+        
+        
+        } type='area' width={'100%'} height={320} />
+        </center>
             <Wrapper className="mt-6">
               <Dash
                 title="Suppliers"
@@ -143,7 +227,7 @@ if(Object.keys(stats).length!==0)
                 number={pendings.length}
               />
             </Wrapper>
-            <Grid>
+            {/* <Grid>
               <Grid item xs={6}>
                 <div className="card">
                   <center>
@@ -295,7 +379,7 @@ if(Object.keys(stats).length!==0)
                   />
                 </div>
               </Grid>
-            </Grid>
+            </Grid> */}
 
             <AdminTab data={{ suppliers, officers, pendings }} />
           </div>
