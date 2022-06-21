@@ -34,29 +34,31 @@ export const AccordionDemo = () => {
         <div className="accordion-demo ">
             <div className="card">
                 <center> <h3 className='align-self-center'>Manual for Officer</h3></center>
+                <center> <h6 className='align-self-center'>How to post a tender?</h6></center>
+
                 <Accordion activeIndex={0}>
-                <AccordionTab header={<p className='text-2xl'>What is Needed From The Suppliers</p>}>
-                        <p className='text-2xl'>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                <AccordionTab header={<p className='text-2xl'>Step 1</p>}>
+                        <p className='text-2xl'>
+1. First open your Dashboard.
+</p>
                     </AccordionTab>
-                    <AccordionTab header={<p className='text-2xl'>What is Needed From The Suppliers</p>}>
-                        <p className='text-2xl'>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    <AccordionTab header={<p className='text-2xl'>Step 2</p>}>
+                        <p className='text-2xl'>2. Click on add tender tab.</p>
                     </AccordionTab>
-                    <AccordionTab header={<p className='text-2xl'>What is Needed From The Suppliers</p>}>
-                        <p className='text-2xl'>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    <AccordionTab header={<p className='text-2xl'>Step 3</p>}>
+                        <p className='text-2xl'>3. Fill tender information on the form with valid data.</p>
                     </AccordionTab>
-                    <AccordionTab header={<p className='text-2xl'>What is Needed From The Suppliers</p>}>
-                        <p className='text-2xl'>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                            cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                    <AccordionTab header={<p className='text-2xl'>Step 4</p>}>
+                        <p className='text-2xl'>4. Attach bid document on attachment button.</p>
+                    </AccordionTab>
+                    <AccordionTab header={<p className='text-2xl'>Step 4</p>}>
+                        <p className='text-2xl'>5. Click on "Submit" button. </p>
+                    </AccordionTab>
+                    <AccordionTab header={<p className='text-2xl'>Step 4</p>}>
+                        <p className='text-2xl'>6. Check it on my tenders tab.</p>
                     </AccordionTab>
                 </Accordion>
-
+                
             </div>
         </div>
       <center>

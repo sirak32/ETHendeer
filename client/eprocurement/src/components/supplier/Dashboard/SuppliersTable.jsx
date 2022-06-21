@@ -4,18 +4,19 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import {connect} from 'react-redux'
-import { fetchTender } from "../../../actions/tenderAction";
-import { FormikFormDemo } from "./EditSupplier";
-import { Dialog } from "primereact/dialog";
 import { fetchSuppliers } from "../../../actions/supplierAction";
+import { useRef } from "react";
 
 const Table = ({suppliers,fetchSuppliers}) => {
   const [edit,setEdit]=useState(false)
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [suppli,setSuppli]=useState({})
+  const dt = useRef(null);
+  const exporting = () => {
+    dt.current.exportCSV();
+  }
+  const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
 
-  console.log(suppliers)
-  const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
 
     return (
@@ -35,7 +36,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
     <DataTable
       breakpoint="960px"
       editMode="cell"
-      header={<center>Supplier List</center>}
+      header={<center>{header} Supplier List</center>}
       value={suppliers}
       responsiveLayout="scroll"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -49,6 +50,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       className="datatable-responsive text-2xl"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
+      ref={dt}
     >
       <Column field="organizationName" filter sortable header="Organization Name" ></Column>
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>

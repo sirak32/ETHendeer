@@ -9,6 +9,7 @@ import { FormikFormDemo } from "./EditSupplier";
 import { Dialog } from "primereact/dialog";
 import axios from "axios";
 import { fetchPending } from "../../../actions/pendingAction";
+import { useRef } from "react";
 
 const Table = ({pendings,fetchPendings}) => {
   const [edit,setEdit]=useState(false)
@@ -90,12 +91,18 @@ const downloadlink=(t)=>{
   }}
   />
 }
+const dt = useRef(null);
+const exporting = () => {
+  dt.current.exportCSV();
+}
+const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
+
   return (
     <>
     <DataTable
       breakpoint="960px"
       editMode="cell"
-      header="Pending Supplier Registration List"
+      header={<center>{header} Pending Supplier Registration List</center>}
       value={pendings}
       responsiveLayout="cell"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -109,6 +116,7 @@ const downloadlink=(t)=>{
       className="datatable-responsive text-3xl"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
+      ref={dt}
     >
       <Column field="organizationName" filter sortable header="Supplier Trade Name" ></Column>
       <Column field="personalInfo.firstName" filter sortable header="Representative Name" ></Column>

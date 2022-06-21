@@ -8,6 +8,7 @@ import { Dialog } from "primereact/dialog";
 import { fetchSuppliers } from "../../../actions/supplierAction";
 import axios from "axios";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef } from "react";
 
 const Table = ({suppliers,fetchSuppliers}) => {
   const [edit,setEdit]=useState(false)
@@ -15,7 +16,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
   const [deleteOff,setDeleteOff]=useState(false)
   const [deleteId,setDeleteId]=useState(0)
   const [accId,setAccId]=useState(0)
-  const [data,setData] =useState({})
 
   const actionBodyTemplate = (rowData) => {
     return (
@@ -50,8 +50,13 @@ const Table = ({suppliers,fetchSuppliers}) => {
   };
   useEffect(()=>{
     fetchSuppliers()
-    console.log("Last Loger",suppliers)
   },[])
+  const dt = useRef(null);
+  const exporting = () => {
+    dt.current.exportCSV();
+  }
+  const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
+
   return suppliers.length>0? (
     
     <>
@@ -59,7 +64,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
     <DataTable
       breakpoint="960px"
       editMode="cell"
-      header= {<center> Suppliers List</center>}
+      header= {<center>{ header} Suppliers List</center>}
       value={suppliers}
       responsiveLayout="cell"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -73,8 +78,8 @@ const Table = ({suppliers,fetchSuppliers}) => {
       className="datatable-responsive text-3xl"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
+      ref={dt}
     >
-      
       <Column field="organizationName" filter sortable header="Organization" ></Column>
       <Column field="personalInfo.firstName"  sortable header="Representative Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
@@ -86,10 +91,8 @@ const Table = ({suppliers,fetchSuppliers}) => {
         style={{ minWidth: "8rem" }}
       ></Column>
     </DataTable>
-
       <Dialog visible={edit} dismissableMask style={{ width: '80rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
         <h1>{accId}</h1>
-
       </Dialog>
       <Dialog
         visible={deleteOff}
@@ -136,7 +139,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
           />
           {<span>Are you sure you want to delete the selected Supplier?</span>}
         </div>
-                </Dialog>
+      </Dialog>
       </>
   ):<ProgressSpinner/>;
 };

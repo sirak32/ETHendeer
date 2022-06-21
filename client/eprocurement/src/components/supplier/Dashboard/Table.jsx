@@ -24,7 +24,8 @@ const [cloz,setCloz]=useState(true)
 const[deleteId,setDeleteId]=useState(0)
 const dt = useRef(null);
 const exporting = () => {
-  dt.exportCSV();
+  console.log('Export')
+  dt.current.exportCSV();
 }
 
   useEffect(()=>{
@@ -53,7 +54,6 @@ console.log("now ",now," op ",op,op<now)
     const cd=new Date(rowData.publishedDate).getTime()
     const remaining=now-cd
     var days = Math.ceil(remaining / (1000 * 3600 * 24));
-    console.log('SSS',days)
     return days<=1?(
       <>
         <Button
@@ -94,6 +94,7 @@ console.log("now ",now," op ",op,op<now)
       }}
     />
     {cloz&&<Button
+    disabled
       icon="pi pi-pencil"
       className="p-button-rounded p-button-success mr-2"
       onClick={() => {

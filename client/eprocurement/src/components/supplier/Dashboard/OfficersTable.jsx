@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { fetchOfficer } from "../../../actions/officerAction";
 import axios from "axios";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { useRef } from "react";
 
 const Table = ({officers,fetchOfficers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
@@ -84,12 +85,19 @@ console.log('OFFICERS',off)
       </>
     ):<ProgressSpinner/> ;
   };
+  const dt = useRef(null);
+
+  const exporting = () => {
+    dt.current.exportCSV();
+  }
+  const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
+
   return officers.length>0? (
     <>
       <DataTable
         breakpoint="960px"
         editMode="cell"
-        header="Tenders List"
+        header={<center> {header}Tenders List</center>}
         value={officers}
         responsiveLayout="scroll"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -103,6 +111,7 @@ console.log('OFFICERS',off)
         className="datatable-responsive text-3xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
+        ref={dt}
       >
 
         <Column field="officerId" sortable filter header="Officer Id"></Column>
