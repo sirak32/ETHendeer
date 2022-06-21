@@ -109,7 +109,7 @@ setRole(response.data.role)
           {(role==='officer')&& navigate('/officer')}
           {(role==='admin')&& navigate('/admin')}
           {(role==='supplier')&& navigate('/supplier')}
-          <ParticlesBg type='circle' bg={true} color={'#c9b42c'} />
+          {/* <ParticlesBg type='circle' bg={true} color={'#c9b42c'} /> */}
               <Container >
     <Wrapper>
         <TextField 

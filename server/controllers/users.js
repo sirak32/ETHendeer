@@ -111,7 +111,7 @@ const acceptSupplier = async (req, res) => {
         handlerRole:"manager",
         ownershipType:userBody.ownershipType,
         tinNumber:userBody.tinNumber,
-        Attacheddocument:"filename.pdf",
+        Attacheddocument:userBody.Attacheddocument,
     })
     accountInform.user=newSupplier._id
     await accountInform.save()
@@ -151,7 +151,7 @@ const registerPendingSupplier = async (req, res) => {
     middleNam: userBody.middleName,
     lastName: userBody.lastName,
     email: userBody.email,
-    phoneNumber: userBody.phoneNumber,
+    phoneNumber: userBody.phone,
     address:userAddress._id,
     })
     const accountInform=new pendingAccount({

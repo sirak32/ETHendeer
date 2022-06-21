@@ -88,17 +88,6 @@ export default function BasicTabs(props) {
         <SupplierTable data={props.data.suppliers} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Dialog
-          visible={vis}
-          className="p-fluid"
-          style={{ width: "80rem" }}
-          header="REGISTER SUPPLIER"
-          onHide={() => {
-            setVis(false);
-          }}
-        >
-          <FormikFormDemo />
-        </Dialog>
         <PendingTable data={props.data.pendings} />
       </TabPanel>
       <TabPanel value={value} index={3}>

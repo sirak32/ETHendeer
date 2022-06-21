@@ -57,6 +57,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
   };
   useEffect(()=>{
     fetchSuppliers()
+    console.log("Last Loger",suppliers)
   },[])
   return suppliers.length>0? (
     
@@ -65,7 +66,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
     <DataTable
       breakpoint="960px"
       editMode="cell"
-      header="Pending Supplier Registration List"
+      header= {<center> Suppliers List</center>}
       value={suppliers}
       responsiveLayout="cell"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

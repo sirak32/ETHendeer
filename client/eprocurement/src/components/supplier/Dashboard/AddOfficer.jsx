@@ -21,9 +21,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 export default function InputAdornments() {
   const [type, setType] = React.useState("");
 
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
-  };
+ 
   const [values, setValues] = React.useState({
     amount: "",
     password: "",
@@ -32,20 +30,6 @@ export default function InputAdornments() {
     showPassword: false,
   });
   const [formValues, setFormValue] = React.useState(formDatas);
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <form

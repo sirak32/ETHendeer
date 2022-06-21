@@ -32,34 +32,7 @@ fetchPendings()
     );
   };
   
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel"
-        onClick={(()=>{
-          setEdit(true)
-        })}
-      />
-    );
-  };
-  const detailButton = (rowData) => {
-    return (
-      <Button
-        icon="pi-chevron-circle-down"
-        className="p-button-rounded"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
 
-  const editProduct = () => {};
   const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
     console.log("row datas",rowData)
@@ -84,6 +57,7 @@ fetchPendings()
               const data=res.data
               axios.post(`http://localhost:5001/accept-pending-supplier`,data)
               .then((re)=>{
+                
                 fetchPendings()
                 // alert(re.data)
               })

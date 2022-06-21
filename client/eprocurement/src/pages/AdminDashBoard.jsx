@@ -118,67 +118,200 @@ if(Object.keys(stats).length!==0)
     }
 };
 
-  return (Object.keys(stats).length!==0)? ( 
+  return Object.keys(stats).length !== 0 ? (
     <Div>
-      {/* <SideBar  menu={menus} /> */}
-      <Side active={0}  menu={menus} />
+      <Side active={0} menu={menus} />
 
       <Section>
         <NavBar />
-        <div className="grid"> 
+        <div className="grid">
           <div className="row__one">
             <Wrapper className="mt-6">
-            <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length}/>
-            <Dash title="Officers" color={'bg-indigo-400'} number={officers.length}/>
-            <Dash title="Pending " color={'bg-orange-500'} number={pendings.length}/>
+              <Dash
+                title="Suppliers"
+                color={"bg-cyan-500"}
+                number={suppliers.length}
+              />
+              <Dash
+                title="Officers"
+                color={"bg-indigo-400"}
+                number={officers.length}
+              />
+              <Dash
+                title="Pending "
+                color={"bg-orange-500"}
+                number={pendings.length}
+              />
             </Wrapper>
             <Grid>
               <Grid item xs={6}>
-<div className="card">
-               <center> <h5 className="text-teal-500 text-lg">Login Statistics </h5></center>
-                <Chart type="line" data={{
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
-        datasets: [ 
-          {
-              label: 'Login',
-              backgroundColor: '#42A5F5', 
-              data: [stats.login.Jan, stats.login.Feb, stats.login.Mar, stats.login.Apr, stats.login.May, stats.login.Jun, stats.login.Jul, stats.login.Aug,stats.login.Sep, stats.login.Oct, stats.login.Nov, stats.login.Dec]
-          },
-          
-      ]
-      }} options={basicOptions}  
-      style={{ position: 'relative', width: '60%' }} 
-      />
-            </div>
+                <div className="card">
+                  <center>
+                    {" "}
+                    <h5 className="text-teal-500 text-lg">Login Statistics </h5>
+                  </center>
+                  <Chart
+                    type="line"
+                    data={{
+                      labels: [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                      ],
+                      datasets: [
+                        {
+                          label: "Login",
+                          backgroundColor: "#42A5F5",
+                          data: [
+                            stats.login.Jan,
+                            stats.login.Feb,
+                            stats.login.Mar,
+                            stats.login.Apr,
+                            stats.login.May,
+                            stats.login.Jun,
+                            stats.login.Jul,
+                            stats.login.Aug,
+                            stats.login.Sep,
+                            stats.login.Oct,
+                            stats.login.Nov,
+                            stats.login.Dec,
+                          ],
+                        },
+                      ],
+                    }}
+                    options={basicOptions}
+                    style={{ position: "relative", width: "100%" }}
+                  />
+                </div>
               </Grid>
               <Grid item xs={6}>
                 <div className="card">
-                <center> <h5 className="text-teal-500 text-lg">Registration Statistics </h5></center>
-                <Chart type="bar" data={{
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
-        datasets: [ 
-          {
-              label: 'Registration',
-              backgroundColor: '#85F', 
-              data: [stats.register.Jan, stats.register.Feb, stats.register.Mar, stats.register.Apr, stats.register.May, stats.register.Jun, stats.register.Jul, stats.register.Aug,stats.register.Sep, stats.register.Oct, stats.register.Nov, stats.register.Dec]
-          },
-          
-      ]
-      }} options={basicOptions} 
-       style={{ position: 'relative', width: '60%' }} 
-       />
-            </div>
-                </Grid>
+                  <center>
+                    {" "}
+                    <h5 className="text-teal-500 text-lg">
+                      Registration Statistics{" "}
+                    </h5>
+                  </center>
+                  <Chart
+                    type="bar"
+                    data={{
+                      labels: [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                      ],
+                      datasets: [
+                        {
+                          label: "Registration",
+                          backgroundColor: "#85F",
+                          data: [
+                            stats.register.Jan,
+                            stats.register.Feb,
+                            stats.register.Mar,
+                            stats.register.Apr,
+                            stats.register.May,
+                            stats.register.Jun,
+                            stats.register.Jul,
+                            stats.register.Aug,
+                            stats.register.Sep,
+                            stats.register.Oct,
+                            stats.register.Nov,
+                            stats.register.Dec,
+                          ],
+                        },
+                      ],
+                    }}
+                    options={basicOptions}
+                    style={{ position: "relative", width: "100%" }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="card">
+                  <center>
+                    {" "}
+                    <h5 className="text-teal-500 text-lg">
+                      Applying Statistics{" "}
+                    </h5>
+                  </center>
+                  <Chart
+                    type="bar"
+                    data={{
+                      labels: [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                      ],
+                      datasets: [
+                        {
+                          label: "Applied",
+                          backgroundColor: "#3F4",
+                          data: [
+                            stats.apply.Jan,
+                            stats.apply.Feb,
+                            stats.apply.Mar,
+                            stats.apply.Apr,
+                            stats.apply.May,
+                            stats.apply.Jun,
+                            stats.apply.Jul,
+                            stats.apply.Aug,
+                            stats.apply.Sep,
+                            stats.apply.Oct,
+                            stats.apply.Nov,
+                            stats.apply.Dec,
+                          ],
+                        },
+                      ],
+                    }}
+                    options={basicOptions}
+                    style={{ position: "relative", width: "100%" }}
+                  />
+                </div>
+              </Grid>
             </Grid>
-          
-            <AdminTab data={{suppliers,officers,pendings}}/>
+
+            <AdminTab data={{ suppliers, officers, pendings }} />
           </div>
           <div className="row__two"></div>
         </div>
       </Section>
     </Div>
-
-  ):<> <center> <ProgressSpinner/></center> </>;
+  ) : (
+    <>
+      {" "}
+      <center>
+        {" "}
+        <ProgressSpinner />
+      </center>{" "}
+    </>
+  );
 };
 
 
