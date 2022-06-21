@@ -82,14 +82,6 @@ export default function Sidebar(props) {
                 onClick={() => {
                   setCurrentLink(i)
                   navigate(links[i])
-                // if(currentLink==3){
-                //   localStorage.removeItem('token')
-                //   localStorage.removeItem('role')
-                //   localStorage.removeItem('whoId')
-
-                //   navigate('/')
-                //   // window.location='localhost:3000/'
-                // }
                 }}
               >
                 <a >
@@ -107,10 +99,8 @@ export default function Sidebar(props) {
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
-
-            navigate('/')
-            // window.location='localhost:3000/'
-          
+            localStorage.removeItem('user')
+            navigate('/officer')          
         })}>
           <a href="/login">
             <FiLogOut />

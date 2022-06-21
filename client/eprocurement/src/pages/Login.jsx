@@ -5,30 +5,15 @@ import React from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
-import vid from '../videos/production .mp4'
-import { MdGeneratingTokens } from 'react-icons/md';
-import FileBase from 'react-file-base64'
-import ParticlesBg from 'particles-bg';
-// import axios from 'axios' 
-// import base64 from 'base64topdf'
 const Login = () => {
-  const [selectedFile, setSelectedFile] = React.useState(null);
-
-  const [pdf,setPdf]=React.useState('')
   const navigate=useNavigate()
   React.useEffect(()=>{
-    // axios.get('http://localhost:5001/files/8bbe0c2edba7923eef0d954284aed972.png')
-    // .then((response)=>{
-    //   setPdf(response.data)
-    //   console.log(response)
-    // })
     const tokens=localStorage.getItem('token')
     const r=localStorage.getItem('role')
 
     if(tokens!==null){
       setLogged(true)
       console.log('tokens ',tokens) 
-      // navigate('/officer')
 
     }
     if(r==='officer')
@@ -41,19 +26,13 @@ const Login = () => {
     
   },[])
 
-  const form=document.getElementById("np")
-  // const formData=new FormData(form)
   const [logged,setLogged]=React.useState(true)
     const [role,setRole]=React.useState('')
-    const [type, setType] = React.useState("");
     const [values, setValues] = React.useState({
       username: "",
       password: "",
       showPassword: false, 
     });
-    const handleTypeChange = (event) => {
-      setType(event.target.value);
-    };
     const handleClickShowPassword = () => {
       setValues({
         ...values,
@@ -76,11 +55,8 @@ const Login = () => {
       password: values.password
       })
       .then(function (response) {
-        // <Navigate to='/officer'/>
-        // alert(response.data.succes);
         axios.get('http://localhost:5001/tenders')
 .then((result)=>{
-  setPdf(result)
 })
         if(response.data.succes){
           setLogged(true)
@@ -100,9 +76,6 @@ setRole(response.data.role)
       })
 
       }
-
-      const doc=""
-
   return (
       <>
     <form onSubmit={handleSubmit}>
@@ -110,8 +83,8 @@ setRole(response.data.role)
           {(role==='admin')&& navigate('/admin')}
           {(role==='supplier')&& navigate('/supplier')}
           {/* <ParticlesBg type='circle' bg={true} color={'#c9b42c'} /> */}
-              <Container >
-    <Wrapper>
+              <Container style={{marginTop:'13rem'}}>
+    <Wrapper style={{marginTop:'8rem'}}>
         <TextField 
                 sx={{ m: 1, width: "15vw" }}
                 onChange={handleChange("username")}
@@ -146,26 +119,9 @@ setRole(response.data.role)
               {!logged&& <Alert severity="error">Incorrect Username or Password</Alert>}
           <Button type='submit' sx={{width:'15vw'}} color='primary' variant='contained' size='large'> Login</Button>
           <Button href='/' type='button' sx={{width:'15vw'}} color='success' variant='contained' size='large'> Back to Home</Button>
-
-    </Wrapper>
+          </Wrapper>
               </Container>
                         </form>
-
-
-
-
-                        {/* <form
-                        onSubmit={((e)=>{
-                          e.preventDefault()
-                          const data = new FormData()
-                          data.append("doc", selectedFile);
-                          console.log("the cuty i=of ",data)
-                          axios.post('http://localhost:5001/upload',data,
-
-                          )
-                        })}
-                        >  
-                        </form> */}
                         </>
   )
 }
@@ -185,6 +141,7 @@ display: flex;
   text-transform: uppercase;
   letter-spacing: 0.4rem;
   padding-top:10rem;
+  margin-top:15rem
 `;
 
 const loginApi=(e)=>{

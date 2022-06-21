@@ -31,10 +31,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
     newPassword:'',
     confirmPassword:''
   })
- 
-  const tender = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
-  const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
+   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
         const role=localStorage.getItem('role')
         if(role!=='officer')
@@ -59,18 +56,16 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
     <Div>
       <Side active={2} menu={menus}/>
       <Section>
-        {/* <NavBar /> */}
         <div className="grid">
           <div className="row__one"> 
             <Wrapper>
             <Cont maxWidth={'xs'} className='mt-7'>
-            {/* <h1>Officer Profile Setting</h1> */}
             <Form onSubmit={(e)=>{
               e.preventDefault()
               if(data.confirmPassword.localeCompare(data.newPassword)===0){
                 axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
                 .then((res)=>{
-                  alert('Password Changed Successfully',res.data)
+                  navigate('/officer')
                 })
                 .catch((e)=>{
                   alert('Incorrect Password',e)
@@ -99,6 +94,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         </Form.Label>
         <Col sm="10">
           <Form.Control 
+          min={8}
           size="lg"
            required
             type="password"
@@ -114,6 +110,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         </Form.Label>
         <Col sm="10">
           <Form.Control 
+          min={8}
           onChange={(e)=>{
             setData({...data,newPassword:e.target.value})
           }}
@@ -122,12 +119,13 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
           placeholder="new Password" />
         </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mb-3" required controlId="confirmPassword">
-        <Form.Label column sm="2">
+      <Form.Group as={Row} className="mb-3" required controlId="confirmPassword" >
+        <Form.Label column sm="2" >
           Confirm Password
         </Form.Label>
         <Col sm="10">
           <Form.Control
+          min={8}
           onChange={((e)=>{
             // console.log(e.target.value)
             setData({...data,confirmPassword:e.target.value})
@@ -149,8 +147,6 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       </Form.Group>
 
     </Form>
-
-            {/* </form> */}
             </Cont>
             </Wrapper>           
           </div>

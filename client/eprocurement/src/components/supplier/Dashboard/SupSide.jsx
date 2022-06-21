@@ -12,15 +12,13 @@ import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
 import { IoNavigateCircle } from 'react-icons/io5';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
-import Login from './Login'
-import { Table } from "@mui/material";
 import { useNavigate } from "react-router";
 export default function Sidebar(props) {
   const navigate=useNavigate()
   const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
-  const menus=['Dashboard','My Tenders','Profile','Help & Support']
+  const menus=['Dashboard','My Tenders','Account Setting','Help & Support']
   const links=['/supplier','/supplier-tenders','/supplier-profile','/supplier-support'] 
 
   html.addEventListener("click", () => setNavbarState(false));
@@ -83,14 +81,6 @@ export default function Sidebar(props) {
                 onClick={() => {
                   setCurrentLink(i)
                   navigate(links[i])
-                // if(currentLink==3){
-                //   localStorage.removeItem('token')
-                //   localStorage.removeItem('role')
-                //   localStorage.removeItem('whoId')
-
-                //   navigate('/')
-                //   // window.location='localhost:3000/'
-                // }
                 }}
               >
                 <a >
@@ -107,10 +97,7 @@ export default function Sidebar(props) {
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
-
-            navigate('/')
-            // window.location='localhost:3000/'
-          
+            navigate('/login')          
         })}>
           <a href="/login">
             <FiLogOut />

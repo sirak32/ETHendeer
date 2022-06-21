@@ -57,9 +57,8 @@ fetchPendings()
               const data=res.data
               axios.post(`http://localhost:5001/accept-pending-supplier`,data)
               .then((re)=>{
-                
+                axios.post(`http://localhost:5001/api/email`,{email:'tiliksewmulugeta552@gmail.com',subject:'Registration Accepted!',message:'Your Request To be Registered As A Supplier In ETHENDER System Is Accepted! Now You can Log In And Get All The Services'})
                 fetchPendings()
-                // alert(re.data)
               })
             })
             console.log(rowData.id)
@@ -68,11 +67,9 @@ fetchPendings()
           />
 
 <Button
-          icon="pi pi-times
-"
+          icon="pi pi-times"
           className="p-button-rounded p-button-warning mr-2"
           onClick={() => {
-            // console.log(rowData._id)
             axios.delete(`http://localhost:5001/reject-pending-supplier/${rowData._id}`)
             .then(()=>{
               fetchPendings()

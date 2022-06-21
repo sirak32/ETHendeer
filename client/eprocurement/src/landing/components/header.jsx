@@ -4,7 +4,7 @@ export const Header = (props) => {
   return (
     <header id='header'>
       <div className='intro'>
-        <ParticlesBg type='circle' bg={{zIndex: 0, position:"absolute", top:0}} />
+        <ParticlesBg type='lines' bg={{zIndex: 0, position:"absolute", top:0}} />
         <div className='overlay'>
           <div className='container'>
           

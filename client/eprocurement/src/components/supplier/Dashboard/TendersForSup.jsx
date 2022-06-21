@@ -9,7 +9,6 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
-import { InputText } from "primereact/inputtext";
 import { fetchApplied } from "../../../actions/appliedAction";
 const Table = ({tenderss,applieds,fetchTenders,fetchApplieds}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
@@ -24,29 +23,21 @@ const [data,setData] =useState({})
   let tenders = tenderss.filter((t)=>{
     return t.creator===localStorage.getItem('whoId')
   });
-//   let appliedss = applieds[32].tender 
   let appT=[]
-  console.log(applieds)
   applieds.map((ap)=>{ 
-      console.log(ap)
       if(ap.applier===localStorage.getItem('whoId'))
       appT.push(ap.tender)
     })
-    console.log('This is Mr',appT) 
-
-
 
   const statusBodyTemplate = (rowData) => {
-    const op=rowData.bidOpenOn
+    const op=rowData.closingDate
     const now=new Date().toISOString()
-console.log("now ",now," op ",op,op<now)
     if(op>now)
     return <div className="bg-green-500 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium "  > Active</div>;
     else
     return <div className="bg-yellow-600 flex align-items-center justify-content-center m-5 h-2rem text-white font-medium"> Closed</div>;
   };
-  const editProduct = () => {};
-  const confirmDeleteProduct = () => {};
+
   const actionBodyTemplate = (rowData) => {
     return (
       <>
@@ -61,16 +52,12 @@ console.log("now ",now," op ",op,op<now)
       </>
     );
   };
-  const textEditor = (options) => {
-    return <InputText type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-}
+
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return tenderss!==null?(
     <>
       <DataTable
         breakpoint="960px"
-        // editMode=''
-        // header="Applied Tenders List"
         header={<center><h3 className="text-teal-400">Applied Tenders List</h3></center>}
         value={appT}
         responsiveLayout="stack"
@@ -82,15 +69,10 @@ console.log("now ",now," op ",op,op<now)
         selection={selectedCustomers}
         onSelectionChange={(e) => setSelectedCustomers(e.value)}
         emptyMessage={<center><h4>No Applied Tender Found</h4></center>}
-        className="datatable-responsive text-2xl"
+        className="datatable-responsive text-3xl"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tenders"
         rows={10}
       >
-        {/* <Column
-        
-          selectionMode="multiple"
-          headerStyle={{ width: "3em" }}
-        ></Column> */}
         {console.log("tenders are",tenders)}
         <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
@@ -169,9 +151,9 @@ console.log("now ",now," op ",op,op<now)
                     <h1>ጨርታዉ የተከፈተበት _ <i className="">{new Date(data.publishedDate).toDateString()}</i></h1>
                     <h1>ጨረታዉ የሚዘጋው <i className="">{new Date(data.closingDate).toDateString()}</i></h1>
                     <h1>ሰነድ የሚከፈተው <i className="">{new Date(data.bidOpenOn).toDateString()}</i></h1>
-                    <h1><i className="">የጨረታ መስፈርቶች</i>  <p className=""> {data.termsAndConditions}</p></h1> 
+                    <h1><i className="">የጨረታ መስፈርቶች =&gt;</i>   {data.termsAndConditions}</h1> 
                     {data.applicants!==null && <h2> 
-        </h2>}
+                  </h2>}
                 </Sidebar>
     </>
   ):<ProgressBar/>;

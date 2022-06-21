@@ -92,11 +92,11 @@ const acceptSupplier = async (req, res) => {
         })
     }
     const emailNotTaken = await validateEmail(userBody.accountInfo.email)
-    if (!emailNotTaken) {
-        return res.status(401).json({
-            message: "Email is taken"
-        })
-    }
+    // if (!emailNotTaken) {
+    //     return res.status(401).json({
+    //         message: "Email is taken"
+    //     })
+    // }
     const accountInform=new account({
         username: userBody.accountInfo.username,
     password:userBody.accountInfo.password,

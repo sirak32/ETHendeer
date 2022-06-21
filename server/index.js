@@ -133,10 +133,7 @@ app.get("/image/:filename", (req, res) => {
         err: "No file exists",
       });
     }
-
-    // Check if image
     if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
-      // Read output to browser
     } 
     
     else {
@@ -161,11 +158,7 @@ app.get("/complete",async(req,res)=>{
 })
 //// EMAIL
 app.post('/api/email', (req, res) => {
-  try {
-    
-  } catch (error) {
-    
-  }
+
   const { email, subject, message } = req.body;
   mailgun()
     .messages()
@@ -182,7 +175,6 @@ app.post('/api/email', (req, res) => {
           console.log(error);
           res.status(500).send({ message: 'Error in sending email' });
         } else {
-          console.log(body);
           res.send({ message: 'Email sent successfully' });
         }
       }

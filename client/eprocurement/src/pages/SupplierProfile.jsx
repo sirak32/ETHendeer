@@ -1,24 +1,14 @@
 import styled from "styled-components";
 import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
 import NavBar from "../components/supplier/Dashboard/NavBar";
-import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
-import Table from "../components/supplier/Dashboard/Table";
-import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
-import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
-import Modal from "../components/supplier/Dashboard/Modal";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { connect } from "react-redux";
 import { useEffect,useState } from "react";
-import Dash from "../components/supplier/Dashboard/Dash";
 import { fetchTender } from "../actions/tenderAction";
 import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import Side from '../components/supplier/Dashboard/SupSide'
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { InputText } from "primereact/inputtext";
 import { useFormik } from "formik";
-import { Password } from "primereact/password";
 import { classNames } from "primereact/utils";
 import Cont from '@mui/material/Container'
 import Col from 'react-bootstrap/Col';
@@ -29,12 +19,8 @@ import axios from "axios";
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
- 
-  const tender = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
-  const menus=['Dashboard','Tenders','Profile','Help & Support']
+   const menus=['Dashboard','Tenders','Profile','Help & Support']
   let myInfo
-  let uname
   const usern=localStorage.getItem('user')
   const [data,setData]=useState({
     username:usern,
@@ -47,17 +33,13 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         const tokens=localStorage.getItem('token')
         const role=localStorage.getItem('role')
         if(role!=='supplier')
-        navigate('/')
+        navigate('/login')
         fetchTenders();
         fetchSuppliers()
         myInfo=suppliers.filter((supplier)=>{
-
           return supplier._id=localStorage.getItem('whoId')
         }
        )
-      //  uname=myInfo[1].accountInfo.username
-      //  localStorage.setItem('un',uname) 
-       console.log("myInfo",myInfo) 
       }, []);
 const formik = useFormik({
   initialValues: {
@@ -145,6 +127,7 @@ const getFormErrorMessage = (name) => {
         </Form.Label>
         <Col sm="10">
           <Form.Control 
+          min={8}
           onChange={(e)=>{
             setData({...data,newPassword:e.target.value})
           }}

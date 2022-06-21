@@ -16,16 +16,19 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
  
   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
-
         const role=localStorage.getItem('role')
-
         if(role!=='officer')
         navigate('/')
         fetchTenders();
         fetchSuppliers()
   }, []);
   const OptmTender = [];
-  let closedNo=0
+  let closedNo = 0;
+  const closed = tenders.map((t) => {
+    let cd = new Date(t.closingDate).toISOString();
+    let td = new Date().toISOString();
+    if (cd <= td) closedNo++;
+  });
   return tenders ? (
     <Div>
       <Side active={0} menu={menus}/>
