@@ -187,7 +187,7 @@ if(Object.keys(stats).length!==0)
           ]
         },
         {
-          name: 'Participation',
+          name: 'Bid Participation',
           data: [
             stats.apply.Jan,
             stats.apply.Feb,
