@@ -42,7 +42,6 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
       bidOpenOn:tenders[i].bidOpenOn,
       closingDate:tenders[i].closingDate };
   }
-  // const [{}]=tenders.map((tender)=>)
     console.log("tender from belcash", tenders,'supplier from redux',suppliers);
   const t = tenders.map((tender) => <h1>{tender.title}</h1>);
   let closedNo=0
@@ -55,19 +54,13 @@ closedNo++
   })
   return tenders ? (
     <Div>
-      {/* <SideBar menu={menus} /> */}
       <Side active={1} menu={menus}/>
       <Section>
-        {/* <NavBar /> */}
         <div className="grid">
           <div className="row__one">
             <Wrapper>
               <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
-              {/* <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} /> */}
-              {/* <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
-              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} /> */}
             </Wrapper>           
-            {/* <BasicTabs data={{OptmTender,suppliers,tenders}} /> */}
             <SuppliersTable data={suppliers}/>
           </div>
           <div className="row__two"></div>

@@ -14,61 +14,16 @@ const Table = ({suppliers,fetchSuppliers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [suppli,setSuppli]=useState({})
 
-  const deleteButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-trash"
-        className="p-button-rounded p-button-danger"
-        aria-label="Cancel"
-      />
-    );
-  };
-  
-  const editButton = (rowData) => {
-    return (
-      <Button
-        icon="pi pi-pencil"
-        className="p-button-rounded"
-        aria-label="Cancel"
-        onClick={(()=>{
-          setEdit(true)
-        })}
-      />
-    );
-  };
-  const detailButton = (rowData) => {
-    //
-    //
-    return (
-      <Button
-        icon="pi-chevron-circle-down"
-        className="p-button-rounded"
-        aria-label="Cancel"
-      />
-    );
-  };
-  const statusItemTemplate = (option) => {
-    return (
-      <span className={`customer-badge status-negotiation`}>{option}</span>
-    );
-  };
-  const statusBodyTemplate = (rowData) => {
-    return <Button label={`${rowData.status}`} className="p-button-success" />;
-    // return <span  className={`status-active`}>{rowData.status}</span>;
-  };
-  const editProduct = () => {};
+  console.log(suppliers)
   const confirmDeleteProduct = () => {};
   const actionBodyTemplate = (rowData) => {
 
     return (
       <>
         <Button
-          icon="pi pi-caret-down
-"
-          className="p-button-rounded mr-2"
+          label="active"
+          className="p-button-rounded mr-2 bg-green-500 w-9"
           onClick={() => {
-              setEdit(true)
-              confirmDeleteProduct(rowData)
           }
           }
           />
@@ -95,22 +50,18 @@ const Table = ({suppliers,fetchSuppliers}) => {
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Suppliers"
       rows={10}
     >
-      {/* <Column selectionMode="multiple" headerStyle={{ width: "3em" }}></Column> */}
+      <Column field="organizationName" filter sortable header="Organization Name" ></Column>
       <Column field="personalInfo.firstName" filter sortable header="Supplier Name" ></Column>
+      <Column field="personalInfo.lastName" filter sortable header="Last Name" ></Column>
       <Column field="personalInfo.phoneNumber" sortable header="Phone Number"></Column>
       <Column field="personalInfo.email" sortable header="Email"></Column>
       <Column field="tinNumber" sortable header="Tin"></Column>
-      {/* <Column field='status' sortable rem', textAlign: 'center' }} style={{ minWidth: '10rem' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={deleteButton} /> */}
       <Column
         body={actionBodyTemplate}
         exportable={false}
         style={{ minWidth: "8rem" }}
       ></Column>
     </DataTable>
-
-      <Dialog visible={edit} dismissableMask style={{ width: '85rem' }} draggable={false}  onHide={(()=>{setEdit(false)})}>
-      <h1>Supplier Info</h1>
-      </Dialog>
       </>
   );
 };
