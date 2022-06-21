@@ -49,11 +49,15 @@ console.log("now ",now," op ",op,op<now)
   };
   const editProduct = () => {};
   const actionBodyTemplate = (rowData) => {
-    return (
+    const now=new Date().getTime()
+    const cd=new Date(rowData.publishedDate).getTime()
+    const remaining=now-cd
+    var days = Math.ceil(remaining / (1000 * 3600 * 24));
+    console.log('SSS',days)
+    return days<=1?(
       <>
         <Button
-          icon="pi pi-caret-down
-"
+          icon="pi pi-caret-down"
           className="p-button-rounded mr-2"
           onClick={() => {
             setData(rowData)
@@ -80,10 +84,38 @@ console.log("now ",now," op ",op,op<now)
           }}
         />
       </>
-    );
+    ): <>
+    <Button
+      icon="pi pi-caret-down"
+      className="p-button-rounded mr-2"
+      onClick={() => {
+        setData(rowData)
+        setVisibleTop(true)
+      }}
+    />
+    {cloz&&<Button
+    disabled
+      icon="pi pi-pencil"
+      className="p-button-rounded p-button-success mr-2"
+      onClick={() => {
+
+        setEditData(rowData)
+        console.log('setting the data',editData)
+        setEdit(true)
+        editProduct(rowData)}}
+    /> }
+    
+    <Button
+      icon="pi pi-trash"
+      className="p-button-rounded p-button-warning"
+      onClick={async() => {
+        setDeleteId(rowData._id)
+        setDeleteProductsDialog(true)
+      }}
+    />
+  </>;
   };
   const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
-
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
   return tenderss!==null?(
     <>
@@ -240,10 +272,8 @@ console.log("now ",now," op ",op,op<now)
                     saveAs(`http://localhost:5001/image/${ap.technicalDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`)
                  })}
                  />
-
- </p>
+              </p>
             </center>
-            
             </>
            ):''
           

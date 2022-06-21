@@ -151,13 +151,10 @@ const [selected,setSelected]=useState({})
         <div className="bg-orange-400 m-0 w-12 h-5rem"></div>
         <div className="formgrid grid">
           
-          <Card
-            // title="Tender Information/"
-            
+          <Card          
             style={{ width: "25rem", marginBottom: "2rem" }}
             className="col m-6 p-6 "
           >
-            {/* <p class="text-3xl w-10 font-bold">{selected.title}</p> */}
             <center className="text-3xl w-10 font-bold">{selected.title}</center>
 
             <p className="text-2xl w-10 ">

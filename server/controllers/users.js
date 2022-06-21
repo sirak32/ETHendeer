@@ -181,7 +181,6 @@ const registerPendingSupplier = async (req, res) => {
     })
 }
 
-
 /////
 const getPending=async(req,res)=>{
     const pend=await pendingsupplier.find().populate('accountInfo').populate('personalInfo')
@@ -206,10 +205,8 @@ const getOnePending=async(req,res)=>{
     try {
         
         const sup=await pendingsupplier.findById(id).populate('accountInfo')
-        // const post = await tender.findById(id);
         console.log(sup)
         res.status(200).json(sup)
-        // res.status(200).json(post);
     } catch (error) {
         res.status(404).json({
             message: error.message
@@ -217,14 +214,7 @@ const getOnePending=async(req,res)=>{
     }
 
 }
-
-
-
-
-
-// Officer Registration
-
-const registerOfficer = async (req, res) => {
+    const registerOfficer = async (req, res) => {
     const officer1=req.body
     const userAddress = new address({
         city: officer1.city.name,
@@ -263,22 +253,15 @@ const registerOfficer = async (req, res) => {
         success: true
     });
 }
-
-
 //Admin Login
 const loginAdmin = (req, res) => {
-
 }
-
 // Officer Login
 const loginOfficer = (req, res) => {
 
 }
-
-
 //Supplier Login
 const loginSupplier = (req, res) => {
-
 }
 const displayDashboard = (req, res) => {
     res.status(200).json({
@@ -290,21 +273,6 @@ const displayAll = async (req, res) => {
     res.status(200).json(users)
 }
 const getAllOfficers=async (req, res) => {
-  /*
-_id
-firstName
-middleNam
-lastName
-email
-phoneNumber
-username
-password
-email
-role
-user
-officerId
-  */
-    // const users = await officer.find().populate('personalInfo').populate('accountInfo')
     const users = await officer.find().populate({
         path:'personalInfo',
         populate:{
@@ -312,7 +280,6 @@ officerId
             model:'Address'
         }
     }).populate('accountInfo')
-// .populate('accountInfo')
 console.log(users)
     res.status(200).json(users)
 }
@@ -367,28 +334,8 @@ const userLogin = async (userCreds, role, res) => {
             succes: false
         })
     }
-    // if (user.role !== role) {
-    //     return res.status(403).json({
-    //         message: "Make sure to login to the right endpoint",
-    //         succes: false
-    //     })
-
-    // }
     console.log("From Belcash",user.password,password)
     let isMatch = await bcrypt.compare(password,user.password) 
-    // const officerIds=await officer.findOne().populate('accountInfo').exec((ere,res)=>{
-        
-        
-    //     // res.filter()
-    //     console.log(res)
-    // })
-    // console.log(officerIds.accountInfo)
-    // const users = await officer.find({officerId:'ETS3'}).populate('accountInfo').populate('personalInfo')
-    // const u=users.filter((user)=>{
-    //     return user.accountInfo.username===username
-    // })
-    // const offId=u[0]._id
-    // res.status(200).json(u)
     if (isMatch) {
         const lo=new login({})
         await lo.save()
@@ -411,7 +358,6 @@ const userLogin = async (userCreds, role, res) => {
             ...result,
             succes: true,
             user:user.user
-            // offId
         })
 
     } else {
@@ -431,8 +377,6 @@ const userAuth = () => {
 }
 
 const updateAccount=async (req,res)=>{
-
-   // update handling
    const filter=req.params.id
    const data=req.body
   const updatedUser=await user.findOneAndUpdate(filter,data,{
@@ -448,7 +392,6 @@ const deleteAccount=async(req,res)=>{
 const deleteTender=async(req,res)=>{
 
 }
-// res.status(200).json(updatedUser)
 const getLoginStat=async (req,res)=>{
     try {
         

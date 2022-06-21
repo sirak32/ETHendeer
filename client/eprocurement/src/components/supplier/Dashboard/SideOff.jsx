@@ -100,7 +100,7 @@ export default function Sidebar(props) {
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
             localStorage.removeItem('user')
-            navigate('/officer')          
+            navigate('/login')          
         })}>
           <a href="/login">
             <FiLogOut />

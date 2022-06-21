@@ -51,8 +51,6 @@ export default function Sidebar(props) {
 
   return (
     <>
-    
-
       <Section>
         <div className="top">
           <div className="brand">
@@ -81,14 +79,6 @@ export default function Sidebar(props) {
                 onClick={() => {
                   setCurrentLink(i)
                   navigate(llinks[i])
-                // if(currentLink==3){
-                //   localStorage.removeItem('token')
-                //   localStorage.removeItem('role')
-                //   localStorage.removeItem('whoId')
-
-                //   navigate('/')
-                //   // window.location='localhost:3000/'
-                // }
                 }}
               >
                 <a >
@@ -106,9 +96,7 @@ export default function Sidebar(props) {
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
 
-            navigate('/')
-            // window.location='localhost:3000/'
-          
+            navigate('/login')          
         })}>
           <a href="/login">
             <FiLogOut />
