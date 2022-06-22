@@ -29,15 +29,11 @@ const App = () => {
     // <AdminDashboard />
     <Router>
       <Routes>
-        {/* <Route exact path="/" element={<Login />}></Route> */}
         <Route exact path="/" element={<Home />}></Route>
         <Route exact path="/officer-manual" element={<AccordionDemo />}></Route>
 
         <Route exact path="/apply" element={<Apply />}></Route>
-        <Route exact path="/register" element={<Login />}></Route>
-
-        {/* <Route exact path="/supplier-profile" element={<TenderDetail />}></Route> */}
-        
+        <Route exact path="/register" element={<Login />}></Route>        
         <Route exact path="/supplier-profile" element={<SupplierProfile />}></Route>
         <Route exact path="/admin-profile" element={<AdminProfile />}></Route>
         <Route exact path="/supplier-tenders" element={<SupplierTenders />}></Route>

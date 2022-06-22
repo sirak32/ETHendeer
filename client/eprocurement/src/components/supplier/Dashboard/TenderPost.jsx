@@ -69,25 +69,14 @@ const [selected,setSelected]=useState({})
         icon="pi pi-angle-right"
         className={!checkPay(t)? "p-button-success ml-2 bg-red-500":"p-button-secondary ml-2 bg-red-500"}
         onClick={ () => {
-          // setSelected(t)
            axios.post("http://localhost:3001/Home/CheckoutExpress", {
             ItemId: `${t._id},${localStorage.getItem('whoId')}`,
             ItemName: `Bid Form-${t.number}`,
             UnitPrice: t.bidFee,
           }).then((mess)=>{
-            // var myWindow = window.open("", "_self");
-            // myWindow.document.write("<p>I replaced the current window.</p>");
-
-            // window.open(mess.data.message)
-            // window.location(mess.data.message)
-            // navigate(mess.data.message)
-            
-            // window.location.replace(mess.data.message,'_blank');
-            // window.open(mess.data.message);
             window.location.replace(mess.data.message);
 
           });
-          // setVis2(true);
         }}
       />
     </span>
@@ -111,8 +100,6 @@ const [selected,setSelected]=useState({})
     fetchTenders();
   }, []);
   
-  console.log('filtered',ten) 
-
   return tenders.length !== 0 ? (
     <>
       <Grid container spacing={5}>
@@ -170,12 +157,10 @@ const [selected,setSelected]=useState({})
             <p className="text-2xl w-10 flex align-items-center justify-content-end">
               Bid Opening <i className="pi pi-calendar-minus ml-5 mr-5"> </i>{new Date(selected.bidOpenOn).toDateString()}
             </p>
-            <p className="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p>
-           {/* <p>Remaining Days</p> */}
+            <center> <p className="text-2xl w-10 flex align-items-center justify-content-start">Download Attached Documents Below</p></center>
             <Button
               onClick={() => {
                 window.open(`http://localhost:5001/image/${selected.document}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
-
                 saveAs(
                   `http://localhost:5001/image/${selected.document}`,
                   `Tender Bid ${selected.document}.pdf`
@@ -188,7 +173,6 @@ const [selected,setSelected]=useState({})
             </Button>
           </Card>
         </div>
-        
           <Card className="m-0   flex align-items-center justify-content-center">
             <form
               className="m-5"
@@ -205,7 +189,6 @@ const [selected,setSelected]=useState({})
                   await axios.post( "http://localhost:5001/upload",data2)
                   .then(async(res2)=>{
                     const tech=res2.data
-
                     await axios.post('http://localhost:5001/tenders/applied-tenders',{
                       tender:selected._id,
                       applier:localStorage.getItem('whoId'),
@@ -222,10 +205,12 @@ const [selected,setSelected]=useState({})
                   })
                   })
                 })
-              }}
+              }
+            }
             >
+              
               <div className=" mt-7">
-                <Button className="p-button-rounded p-button-info ">
+               <span > Technical Document</span> <Button className="p-button-rounded p-button-info ">
                   <input
                     onInput={(e) => setTechDoc(e.target.files[0])}
                     accept=".pdf"
@@ -236,7 +221,7 @@ const [selected,setSelected]=useState({})
                 </Button>
               </div>
               <div className=" mt-4 w-full h-5rem">
-                <Button className="p-button-rounded p-button-info">
+              <span > Business Document</span> <Button className="p-button-rounded p-button-info">
                   <input
                     onInput={(e) => setBusiDoc(e.target.files[0])}
                     accept=".pdf"
@@ -278,12 +263,6 @@ const [selected,setSelected]=useState({})
     <ProgressSpinner/>
     </center>
       <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      {/* <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar>
-      <ProgressBar mode="indeterminate" style={{ height: "6px" }}></ProgressBar> */}
       ;
     </>
   );

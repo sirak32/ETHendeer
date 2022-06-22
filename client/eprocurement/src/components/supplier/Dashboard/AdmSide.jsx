@@ -53,7 +53,9 @@ export default function Sidebar(props) {
     <>
       <Section>
         <div className="top">
-          <div className="brand">
+          <div className="brand" style={{cursor:'pointer'}} onClick={()=>{
+            navigate('/')
+          }}>
             <IoNavigateCircle />
             <span>ETH-ender</span>
           </div>
@@ -95,8 +97,7 @@ export default function Sidebar(props) {
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
-
-            navigate('/login')          
+            // navigate('/login')          
         })}>
           <a href="/login">
             <FiLogOut />

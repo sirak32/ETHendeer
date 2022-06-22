@@ -25,7 +25,7 @@ const App = ({suppliers,fetchSuppliers,officers,fetchOfficers,pendings,fetchPend
         fetchLoginStats()
         fetchPendings()
         fetchSuppliers()
-    fetchOfficers()
+        fetchOfficers()
   },[])
 
   return Object.keys(stats).length !== 0 ? (

@@ -141,7 +141,7 @@ display: flex;
   text-transform: uppercase;
   letter-spacing: 0.4rem;
   padding-top:10rem;
-  margin-top:15rem
+
 `;
 
 const loginApi=(e)=>{

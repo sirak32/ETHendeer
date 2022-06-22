@@ -18,7 +18,7 @@ export default function Sidebar(props) {
   const [currentLink, setCurrentLink] = useState(props.active);
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
-  const menus=['Dashboard','My Tenders','Account Setting','Help & Support']
+  const menus=['Home','My Tenders','Account Setting','Help & Support']
   const links=['/supplier','/supplier-tenders','/supplier-profile','/supplier-support'] 
 
   html.addEventListener("click", () => setNavbarState(false));
@@ -55,7 +55,9 @@ export default function Sidebar(props) {
 
       <Section>
         <div className="top">
-          <div className="brand">
+          <div className="brand" style={{cursor:'pointer'}} onClick={()=>{
+            navigate('/')
+          }}>
             <IoNavigateCircle />
             <span>ETH-ender</span>
           </div>
@@ -97,7 +99,7 @@ export default function Sidebar(props) {
             localStorage.removeItem('token')
             localStorage.removeItem('role')
             localStorage.removeItem('whoId')
-            navigate('/login')          
+            // navigate('/login')          
         })}>
           <a href="/login">
             <FiLogOut />
