@@ -1,12 +1,5 @@
 import * as React from "react";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { MdArrowDropDown } from "react-icons/md";
-import { Container, Grid, Stack } from "@mui/material";
-import Modal from "./Modal";
-import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -20,18 +13,13 @@ import img from "../../../assets/images.jfif";
 import { saveAs } from "file-saver";
 import { useRef } from "react";
 import { Toast } from "primereact/toast";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import { IoAddCircleOutline } from "react-icons/io5";
 import axios from "axios"
 import {useNavigate} from 'react-router-dom'
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Tag } from 'primereact/tag';
 
 const MediaCard = ({ tenders, fetchTenders }) => {
-  const navigate =useNavigate()
   const toastBR  = useRef(null);
-  const [disable,setDisable]=useState(true)
   const [techDoc, setTechDoc] = useState(null);
   const [busiDoc,setBusiDoc]= useState(null)
   let checkPay=(t)=>{
@@ -40,10 +28,8 @@ const MediaCard = ({ tenders, fetchTenders }) => {
       if(su==localStorage.getItem('whoId')){
         dis=false
       }
-      // return false
     })
     return dis
-    // return true
   }
   const labels=(t)=>{
     let paid=checkPay(t)
@@ -119,6 +105,7 @@ const [selected,setSelected]=useState({})
                 style={{ lineHeight: "1.5", height: "10rem" }}
               >
                 {t.description.substr(0,85)}...
+                
               </p>
             </Card>
             <Toast ref={toastBR } />
