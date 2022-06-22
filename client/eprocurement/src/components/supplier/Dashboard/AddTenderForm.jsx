@@ -249,11 +249,9 @@ let creator;
                   showTime={true}
 							   	showSeconds={true}
                   minDate={new Date()}
-                  // maxDate={new Date("2020-02-02")}
                   value={formik.values.bidOpenOn}
                   onChange={formik.handleChange}
                   dateFormat="dd/mm/yy"
-                  // mask="99/99/9999"
                   showIcon
                 />
                 <label htmlFor="bidOpenOn"> Opening Date</label>
@@ -283,7 +281,6 @@ let creator;
             <Grid item xs={6}>
               <div className="App mt-5 w-7 h-5rem">
                 <Button variant="contained" component="label" color="primary">
-                  {" "}
                   <IoAddCircleOutline /> Upload Bid Document
                   <input
                     onInput={(e) => setSelectedFile(e.target.files[0])}

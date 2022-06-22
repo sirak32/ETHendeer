@@ -26,6 +26,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import axios from "axios"
 import {useNavigate} from 'react-router-dom'
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Tag } from 'primereact/tag';
 
 const MediaCard = ({ tenders, fetchTenders }) => {
   const navigate =useNavigate()
@@ -48,7 +49,6 @@ const MediaCard = ({ tenders, fetchTenders }) => {
     let paid=checkPay(t)
     return paid?'Buy Bid':'Paid'
   }
-const checkPayu=()=>false
 const [selected,setSelected]=useState({})
 
   const header = <img alt="Card" src={img} height={'23rem'}/>;
@@ -174,6 +174,7 @@ const [selected,setSelected]=useState({})
           </Card>
         </div>
           <Card className="m-0   flex align-items-center justify-content-center">
+          <Tag className="mr-2" icon="pi pi-info-circle" severity="info" value="Info"></Tag><h3>Attach Technical document ( bank CPO, tax clearance ) by making them as one pdf & Attach bid price list with pdf format on the Second attachment button.</h3>
             <form
               className="m-5"
               onSubmit={async(e) => {
@@ -208,9 +209,11 @@ const [selected,setSelected]=useState({})
               }
             }
             >
+              <center>
+
               
               <div className=" mt-7">
-               <span > Technical Document</span> <Button className="p-button-rounded p-button-info ">
+               <span className="text-lg font-bold mr-4"> Technical Document</span> <Button className="p-button-rounded p-button-info ">
                   <input
                     onInput={(e) => setTechDoc(e.target.files[0])}
                     accept=".pdf"
@@ -221,7 +224,7 @@ const [selected,setSelected]=useState({})
                 </Button>
               </div>
               <div className=" mt-4 w-full h-5rem">
-              <span > Business Document</span> <Button className="p-button-rounded p-button-info">
+              <span className="text-lg font-bold mr-5"> Business Document</span> <Button className="p-button-rounded p-button-info">
                   <input
                     onInput={(e) => setBusiDoc(e.target.files[0])}
                     accept=".pdf"
@@ -238,6 +241,7 @@ const [selected,setSelected]=useState({})
               >
                 Apply
               </Button>
+              </center>
             </form>
           </Card>
         
