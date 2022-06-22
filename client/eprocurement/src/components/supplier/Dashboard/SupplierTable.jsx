@@ -97,7 +97,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
       <Dialog
         visible={deleteOff}
         style={{ width: "450px" }}
-        header="Confirm Delete"
+        header={"Confirm Delete"}
         modal
         dismissableMask
         footer={
@@ -118,7 +118,6 @@ const Table = ({suppliers,fetchSuppliers}) => {
               className="p-button-text text-yellow-50 bg-pink-500 "
               
               onClick={( () => {
-                // console.log("INside Button Function")
                 axios.get(`http://localhost:5001/supli/${deleteId}`)
                 .then((res)=>{
                  fetchSuppliers()
@@ -137,7 +136,7 @@ const Table = ({suppliers,fetchSuppliers}) => {
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {<span>Are you sure you want to delete the selected Supplier?</span>}
+          {<span className="text-3xl">Are you sure you want to delete the selected Supplier?</span>}
         </div>
       </Dialog>
       </>

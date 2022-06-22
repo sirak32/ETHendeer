@@ -53,8 +53,6 @@ if(officers.length>0){
 }
 },[])
 let selected={}
-if(officers.length>0)
-console.log('OFFICERS',off) 
   const actionBodyTemplate = (rowData) => {
     return officers.length>0?(
       <>
@@ -100,7 +98,7 @@ console.log('OFFICERS',off)
         header={<center> {header}Tenders List</center>}
         value={officers}
         responsiveLayout="scroll"
-        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+        paginatorTemplate={"FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"}
         rowsPerPageOptions={[5, 10, 15, 25, 50]}
         dataKey={officers._id}
         paginator
@@ -189,7 +187,7 @@ console.log('OFFICERS',off)
             className="pi pi-exclamation-triangle mr-3"
             style={{ fontSize: "2rem" }}
           />
-          {<span>Are you sure you want to delete the selected Officer?</span>}
+          {<span className="text-3xl">Are you sure you want to delete the selected Officer?</span>}
         </div>
        </Dialog>
     </>

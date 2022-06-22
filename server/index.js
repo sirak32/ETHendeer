@@ -17,8 +17,6 @@ import tender from "./models/tender.js";
 import dotenv from 'dotenv';
 import mg from 'mailgun-js';
 dotenv.config();
-
-
 const mailgun = () =>
   mg({
     apiKey: process.env.MAILGUN_API_KEY,
@@ -92,7 +90,6 @@ app.post("/upload", upload.single("doc"), (req, res) => {
 // @route GET /
 // @desc Loads form
 app.get("/files", (req, res) => {
-    
   gfs.files.find().toArray((err, files) => {
     // Check if files
     if (!files || files.length === 0) {
