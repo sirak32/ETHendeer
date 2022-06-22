@@ -246,6 +246,8 @@ let creator;
                   max="2020-02-02"
                   min="2020-01-02"
                   id="bidOpenOn"
+                  showTime={true}
+							   	showSeconds={true}
                   minDate={new Date()}
                   // maxDate={new Date("2020-02-02")}
                   value={formik.values.bidOpenOn}
@@ -265,6 +267,8 @@ let creator;
                   className="mt-5 h-5rem w-7"
                   // max="2020-02-02"
                   // min="2020-01-02"
+                  showTime={true}
+						  		showSeconds={true}
                   minDate={new Date()}
                   id="closingDate"
                   value={formik.values.closingDate}
