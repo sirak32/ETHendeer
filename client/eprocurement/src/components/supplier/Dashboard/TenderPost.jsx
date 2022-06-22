@@ -168,8 +168,8 @@ const [selected,setSelected]=useState({})
               }}
               className="w-full  p-0 h-6rem flex justify-content-center p-button-rounded p-button-info"
             >
-              <i className="pi pi-download px-2 "></i>
-              Download Documents
+              <i className="pi pi-download px-5 text-xl"></i>
+              <h3 className="text-yellow-50">  Download Documents</h3>
             </Button>
           </Card>
         </div>
@@ -239,7 +239,7 @@ const [selected,setSelected]=useState({})
                 className="p-button-success p-button-rounded p-button-contained w-full  p-0 h-6rem flex justify-content-center"
                 aria-label="Amazon"
               >
-                Apply
+             <h3 className="text-yellow-50">Apply</h3>   
               </Button>
               </center>
             </form>
