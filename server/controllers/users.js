@@ -13,6 +13,7 @@ import {
 import passport from "passport";
 import jwt from 'jsonwebtoken'
 import { apply, login,register } from "../models/stat.js";
+import tender from "../models/tender.js";
 
 const registerSupplier = async (req, res) => {
     const userBody = req.body
@@ -755,6 +756,39 @@ const getEmails=async(req,res)=>{
   })
   res.json(emails)
 }
+
+
+const updateAttending=async(req,res)=>{
+  const password=req.body.password
+  const tenderId=req.body.tenderId
+  const user=req.body.user
+  const us=await account.findOne({username:user})
+  const isMatch=await bcrypt.compare(password,us.password)
+if(isMatch){
+
+  const tend=await tender.findById(tenderId)
+  const t=++tend.attendedOfficer
+  const tendy=await tender.findByIdAndUpdate(tenderId,{attendedOfficer:t})
+  res.status(200).json({success:true})
+}
+else{
+  res.status(401).json({success:false})
+
+}
+}
+const getAttNum=async(req,res)=>{
+  try {
+      const id=req.params.id
+  const tend=await tender.findById(id)
+  const no=tend.attendedOfficer
+  res.status(200).json({number:no})
+  } catch (error) {
+    res.status(401).json({success:false})
+
+  }
+
+}
+
 export {
     checkRole,
     userAuth,
@@ -780,5 +814,7 @@ export {
     getRegisterStat,
     resetPassword,
     changeAccount,
-    getEmails
+    getEmails,
+    updateAttending,
+    getAttNum
 }

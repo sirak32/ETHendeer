@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import SideBar from "../components/supplier/Dashboard/SideBar.jsx";
 import NavBar from "../components/supplier/Dashboard/NavBar";
+import Tenderlist from "../components/supplier/Dashboard/TenderList.jsx";
+import Table from "../components/supplier/Dashboard/Table";
 import BasicTabs from "../components/supplier/Dashboard/BasicTab.jsx";
+import MediaCard from "../components/supplier/Dashboard/TenderPost.jsx";
+import Modal from "../components/supplier/Dashboard/Modal";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { useEffect,useState } from "react";
 import Dash from "../components/supplier/Dashboard/Dash";
@@ -10,11 +14,22 @@ import ProgressBar from '../components/supplier/Dashboard/ProgressBar'
 import { useNavigate } from 'react-router-dom'
 import { fetchSuppliers } from "../actions/supplierAction.js";
 import Side from '../components/supplier/Dashboard/SideOff'
+import Cont from '@mui/material/Container'
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import axios from "axios";
+
 const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   const navigate=useNavigate()
   const [logged,setLogged]=useState(false)
- 
-  const menus = ["Dashboard", "Tender", "Suppliers","", "Tender Manual"];
+  const usern=localStorage.getItem('user')
+  const [data,setData]=useState({
+    tenderId:'',
+    password:''
+  })
+   const menus = ["Dashboard", "Tender", "Suppliers", "Tender Manual"];
   useEffect(() => {
         const role=localStorage.getItem('role')
         if(role!=='officer')
@@ -23,26 +38,76 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
         fetchSuppliers()
   }, []);
   const OptmTender = [];
-  let closedNo = 0;
-  const closed = tenders.map((t) => {
-    let cd = new Date(t.closingDate).toISOString();
-    let td = new Date().toISOString();
-    if (cd <= td) closedNo++;
-  });
+  let i;
+  for (i = 0; i < tenders.length; i++) {
+    OptmTender[i] = { 
+      title: tenders[i].title, 
+      tenderNo: tenders[i].number,
+      bidOpenOn:tenders[i].bidOpenOn,
+      closingDate:tenders[i].closingDate 
+    };
+  }
+  console.log("tender from belcash", tenders,'supplier from redux',suppliers);
+  const t = tenders.map((tender) => <h1>{tender.title}</h1>);
+  let closedNo=0
   return tenders ? (
     <Div>
-      <Side active={0} menu={menus}/>
+      <Side active={2} menu={menus}/>
       <Section>
-        <NavBar />
         <div className="grid">
-          <div className="row__one">
+          <div className="row__one"> 
             <Wrapper>
-              <Dash title="Suppliers" color={'bg-cyan-500'} number={suppliers.length} />
-              <Dash title="Tenders" color={'bg-purple-500'} number={tenders.length} />
-              <Dash title="Active" color={'bg-green-500'} number={tenders.length-closedNo} />
-              <Dash title="Closed" color={'bg-pink-500'} number={closedNo} />
+            <Cont maxWidth={'xs'} className='' style={{marginTop:'20rem'}}>
+            <Form onSubmit={(e)=>{
+              e.preventDefault()
+             console.log(data)
+             axios.patch(`http://localhost:5001/attend-officer`,{tenderId:data.tenderId,user:localStorage.getItem('user'),password:data.password})
+             .then((res)=>{
+                console.log(res.data)
+             })
+            }}>
+                <Form.Group as={Row} className="mb-3" controlId="tenderId">
+        <Form.Label column sm="2">
+          Tender Id
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+        //   defaultValue={usern}
+          onChange={(e)=>{
+            setData({...data,tenderId:e.target.value})
+          }} size="lg" required    />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="password">
+        <Form.Label column sm="2">
+          Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control 
+          min={8}
+          size="lg"
+           required
+            type="password"
+            onChange={(e)=>{
+              setData({...data,password:e.target.value})
+            }}
+             placeholder="Password" />
+        </Col>
+      </Form.Group>
+
+
+      <Form.Group as={Row} className="mb-3" controlId="">
+        <Form.Label column sm="2">
+          
+        </Form.Label>
+        <Col sm="10">
+        <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
+        </Col>
+      </Form.Group>
+
+    </Form>
+            </Cont>
             </Wrapper>           
-            <BasicTabs data={{OptmTender,suppliers,tenders}} />
           </div>
           <div className="row__two"></div>
         </div>

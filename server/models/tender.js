@@ -11,6 +11,7 @@ const postSchema = mongoose.Schema({
     bidOpenOn: Date,
     termsAndConditions: String,
     document:String,
+    attendedOfficer:mongoose.Schema.Types.Number, 
     payers:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Supplier'

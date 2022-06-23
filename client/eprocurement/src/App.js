@@ -23,6 +23,7 @@ import AdminSuppliers from './pages/AdminSuppliers'
 import OfficerSuppliers from './pages/OfficerSuppliers'
 import SupplierSupport from './pages/SupplierSupport'
 import AdminProfile from './pages/AdminProfile'
+import OfficerAttend from './pages/OfficerAttend'
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const App = () => {
         <Route exact path="/supplier-support" element={<SupplierSupport />}></Route>
         <Route exact path="/officer-profile" element={<OfficerProfile />}></Route>
         <Route exact path="/officer-supplier" element={<OfficerSuppliers />}></Route>
+        <Route exact path="/officer-attend" element={<OfficerAttend />}></Route>
+
 
         <Route exact path="/admin-officer" element={<AdminOfficers />}></Route>
         <Route exact path="/admin-supplier" element={<AdminSuppliers />}></Route>

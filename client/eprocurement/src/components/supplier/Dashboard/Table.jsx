@@ -13,6 +13,9 @@ import { fetchApplied } from "../../../actions/appliedAction";
 import { fetchSuppliers } from "../../../actions/supplierAction";
 import {saveAs} from 'file-saver'
 import { useRef } from "react";
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 const Table = ({tenderss,applieds,suppliers,fetchApplieds,fetchTenders,fetchSuppliers}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
@@ -21,8 +24,12 @@ const Table = ({tenderss,applieds,suppliers,fetchApplieds,fetchTenders,fetchSupp
   const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
 const [cloz,setCloz]=useState(true)
+const [password,setPassword]=useState(null)
 const[deleteId,setDeleteId]=useState(0)
+const [tid,setTid]=useState(null)
+const [v,setV]=useState(false)
 const dt = useRef(null);
+const [no,setNo]=useState(0)
 const exporting = () => {
   console.log('Export')
   dt.current.exportCSV();
@@ -83,6 +90,25 @@ console.log("now ",now," op ",op,op<now)
             setDeleteProductsDialog(true)
           }}
         />
+        <Button
+          icon="pi pi-caret-right"
+          className="p-button-rounded p-button-secondary ml-2"
+          onClick={async() => {
+            // setDeleteId(rowData._id)
+            // setDeleteProductsDialog(true)\
+            setTid(rowData._id)
+            // axios.get(`http://localhost:5001/attends/${tid}`)
+            // .then((res)=>{
+            //     setNo(res.data.number)
+            // }).then(()=>{
+
+            //   setV(true)
+            // })
+            setNo(rowData.attendedOfficer)
+            setV(true)
+          }}
+        />
+        
       </>
     ): <>
     <Button
@@ -114,6 +140,24 @@ console.log("now ",now," op ",op,op<now)
         setDeleteProductsDialog(true)
       }}
     />
+    <Button
+          icon="pi pi-caret-right"
+          className="p-button-rounded p-button-secondary ml-2"
+          onClick={async() => {
+            // setDeleteId(rowData._id)
+            // setDeleteProductsDialog(true)\
+            setTid(rowData.attends)
+            // axios.get(`http://localhost:5001/attends/${tid}`)
+            // .then((res)=>{
+            //     setNo(res.data.number)
+                
+            // }).then(()=>{
+            //   setV(true)
+            // })
+            setNo(rowData.attendedOfficer)
+            setV(true)
+          }}
+        />
   </>;
   };
   const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
@@ -281,6 +325,38 @@ console.log("now ",now," op ",op,op<now)
           }}
         })}
                 </Sidebar>
+
+                <Dialog visible={v} dismissableMask style={{width:'50rem'}} onHide={()=>{
+                  setV(false)
+                }}>
+                  <h1>Hello {tid} {no} </h1>
+         <Form.Group as={Row} className="mb-3" controlId="">
+         <Form.Label column sm="2">
+         </Form.Label>
+         <Col sm="10">
+         <Button className="w-7" variant="success" onClick={()=>{
+          if(no>0){
+            console.log(applieds)
+           const r= applieds.filter((ap)=>{
+              return ap.tender._id===tid
+            })
+            // if(r!==null){
+            //   window.location.replace(`http://localhost:5001/image/${r[0].businessDoc}`)
+            // }
+            r.map((p)=>{
+              window.open(`http://localhost:5001/image/${p.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+
+            })
+            console.log(r)
+            alert(no)
+          }
+          else{
+            alert("Not Eligible")
+          }
+         }}>Get Documents</Button>{' '}
+         </Col>
+      </Form.Group>
+                </Dialog>
     </>
   ):<ProgressBar/>;
 };
@@ -303,3 +379,103 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Table);
+
+
+
+// <Form onSubmit={(e)=>{
+//   e.preventDefault()
+//   if(data.confirmPassword.localeCompare(data.newPassword)===0){
+//     axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
+//     .then((res)=>{  
+//       navigate('/officer')
+//     })
+//     .catch((e)=>{
+//       alert('Incorrect Password',e)
+//     })
+//   }
+//   else
+//   {
+//     alert("Password don't Match")
+//   }
+// }}>
+
+// <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+// <Form.Label column sm="2">
+// Password
+// </Form.Label>
+// <Col sm="10">
+// <Form.Control 
+// min={8}
+// size="lg"
+// required
+// type="password"
+// onChange={(e)=>{
+//   setData({...data,oldPassword:e.target.value})
+// }}
+//  placeholder="Password" />
+// </Col>
+// </Form.Group>
+
+
+// <Form.Group as={Row} className="mb-3" controlId="">
+// <Form.Label column sm="2">
+
+// </Form.Label>
+// <Col sm="10">
+// <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
+// </Col>
+// </Form.Group>
+
+// </Form>
+
+
+
+
+
+
+  //  <Form onSubmit={(e)=>{
+  //             e.preventDefault()
+  //             // if(data.confirmPassword.localeCompare(data.newPassword)===0){
+  //             //   axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
+  //             //   .then((res)=>{  
+  //             //     // navigate('/officer')
+  //             //   })
+  //             //   .catch((e)=>{
+  //             //     alert('Incorrect Password',e)
+  //             //   })
+  //             // }
+  //             // else
+  //             // {
+  //             //   alert("Password don't Match")
+  //             // }
+  //             // axios.patch(`http://localhost:5001/attend-officer`,{password,tenderId,user:localStorage.getItem('user')})
+  //           }}>
+
+  //     <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+  //       <Form.Label column sm="2">
+  //         Password
+  //       </Form.Label>
+  //       <Col sm="10">
+  //         <Form.Control 
+  //         min={8}
+  //         size="lg"
+  //          required
+  //           type="password"
+  //           onChange={(e)=>{
+  //             setPassword(e.target.value)
+  //           }}
+  //            placeholder="Password" />
+  //       </Col>
+  //     </Form.Group>
+
+
+  //     <Form.Group as={Row} className="mb-3" controlId="">
+  //       <Form.Label column sm="2">
+          
+  //       </Form.Label>
+  //       <Col sm="10">
+  //       <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
+  //       </Col>
+  //     </Form.Group>
+
+  //   </Form>

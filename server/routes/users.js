@@ -25,7 +25,9 @@ import {
   getRegisterStat,
   resetPassword,
   changeAccount,
-  getEmails
+  getEmails,
+  updateAttending,
+  getAttNum
 } from "../controllers/users.js";
 import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
@@ -167,6 +169,8 @@ router.get('/login-stat',getLoginStat)
 router.get('/register-stat',getRegisterStat)
 router.get('/apply-stat',getApplyStat)
 
-
+router.patch('/attend-officer',updateAttending)
+// getAttNum
+router.get('/attends/:id',getAttNum)
 
 export default router;

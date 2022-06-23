@@ -75,9 +75,9 @@ let creator;
             .then((res)=>{
               const emails=res.data;
               emails.map(async(em)=>{
-                await axios.post(`http://localhost:5001/api/email`,{email:em,subject:"New Tender Available",message:"New Tender is available. Please Visit Your Dashboard!"})
+                await axios.post(`http://localhost:5001/api/email`,{email:em,subject:"New Tender Available",message:`${data.title}. Please Visit Your Dashboard!`})
                 .then(()=>{
-                  alert('email sent to all suppliers')
+                  // alert('email sent to all suppliers')
                 }).catch((e)=>{
                   alert(e)
 
@@ -95,8 +95,6 @@ let creator;
       console.log("sent tenders", data);
     },
   });
-  const [no, setNo] = React.useState("");
-  const [type, setType] = React.useState("");
   const [selectedFile, setSelectedFile] = React.useState(null);
 
   const [values, setValues] = React.useState({
@@ -107,17 +105,6 @@ let creator;
     showPassword: false,
   });
   const [formValues, setFormValue] = React.useState(formDatas);
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-  console.log("testing the states without dispatching", tenders.tenders);
   return (
  <Fieldset legend="Post New Tender" toggleable >
     <form onSubmit={formik.handleSubmit}>

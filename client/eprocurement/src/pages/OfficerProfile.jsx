@@ -54,7 +54,7 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
   let closedNo=0
   return tenders ? (
     <Div>
-      <Side active={2} menu={menus}/>
+      <Side active={3} menu={menus}/>
       <Section>
         <div className="grid">
           <div className="row__one"> 
