@@ -231,7 +231,7 @@ const selected=props.selected
                   {getFormErrorMessage("termsAndConditions")}
                 </div>
               </Grid>
-              {/* <Grid item xs={6}>
+              <Grid item xs={6}>
               <span className="p-float-label">
                 <Calendar
                   className="mt-5 h-5rem w-7"
@@ -248,7 +248,7 @@ const selected=props.selected
                 />
                 <label htmlFor="bidOpenOn"> Opening Date</label>
               </span>
-            </Grid> */}
+            </Grid>
              <Grid item xs={6}>
               <span className="p-float-label">
                 <InputText

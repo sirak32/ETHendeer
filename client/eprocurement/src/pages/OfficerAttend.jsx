@@ -63,6 +63,8 @@ const App = ({ tenders, fetchTenders,fetchSuppliers,suppliers }) => {
              console.log(data)
              axios.patch(`http://localhost:5001/attend-officer`,{tenderId:data.tenderId,user:localStorage.getItem('user'),password:data.password})
              .then((res)=>{
+                fetchTenders()
+                navigate('/officer')
                 console.log(res.data)
              })
             }}>

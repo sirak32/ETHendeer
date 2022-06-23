@@ -10,6 +10,9 @@ import { connect } from "react-redux";
 import { fetchTender } from "../../../actions/tenderAction";
 import { ProgressBar } from "primereact/progressbar";
 import { fetchApplied } from "../../../actions/appliedAction";
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 const Table = ({tenderss,applieds,fetchTenders,fetchApplieds}) => {
   const [selectedCustomers, setSelectedCustomers] = useState(null);
   const [edit,setEdit]=useState(false)
@@ -17,6 +20,9 @@ const Table = ({tenderss,applieds,fetchTenders,fetchApplieds}) => {
   const [visibleTop, setVisibleTop] = useState(false);
   const [restart,setRestart]=useState(false)
 const [data,setData] =useState({})
+const [v,setV]=useState(false)
+const [password,setPassword]=useState(null)
+
   useEffect(()=>{
     fetchTenders()
   },[])
@@ -47,6 +53,15 @@ const [data,setData] =useState({})
           onClick={() => {
             setData(rowData)
             setVisibleTop(true)
+          }}
+        />
+        <Button
+          label="Attend Opening"
+          icon="pi pi-caret-right"
+          className="p-button-rounded p-button-secondary mr-2"
+          onClick={() => {
+            setData(rowData)
+            setV(true)
           }}
         />
       </>
@@ -141,6 +156,69 @@ const [data,setData] =useState({})
           />
           {<span>Are you sure you want to delete the selected products?</span>}
         </div>
+      </Dialog>
+      <Dialog
+        visible={v}
+        style={{ width: "450px" }}
+        header="Confirm"
+        modal
+        onHide={() => {
+          setV(false); 
+        }}
+      > 
+   <Form onSubmit={(e)=>{
+              e.preventDefault()
+              console.log(data._id)
+              // if(data.confirmPassword.localeCompare(data.newPassword)===0){
+              //   axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
+              //   .then((res)=>{  
+              //     // navigate('/officer')
+              //   })
+              //   .catch((e)=>{
+              //     alert('Incorrect Password',e)
+              //   })
+              // }
+              // else
+              // {
+              //   alert("Password don't Match")
+              // }
+              // axios.patch(`http://localhost:5001/attend-officer`,{password,tenderId,user:localStorage.getItem('user')})
+
+
+              axios.patch(`http://localhost:5001/attend-supplier/`,{password:password,tenderId:data._id,user:localStorage.getItem('user')})
+              .then((res)=>{
+                console.log(res.data)
+              })
+            }}>
+
+      <Form.Group as={Row} className="mb-3" controlId="oldPassword">
+        <Form.Label column sm="2">
+          Password
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control 
+          min={8}
+          size="lg"
+           required
+            type="password"
+            onChange={(e)=>{
+              setPassword(e.target.value)
+            }}
+             placeholder="Password" />
+        </Col>
+      </Form.Group>
+
+
+      <Form.Group as={Row} className="mb-3" controlId="">
+        <Form.Label column sm="2">
+          
+        </Form.Label>
+        <Col sm="10">
+        <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
+        </Col>
+      </Form.Group>
+
+    </Form>
       </Dialog>
       <Sidebar className="  border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
                     <div className="border-round-3xl border-double h-18rem text-white " style={{backgroundColor:'#8940d6'}}>

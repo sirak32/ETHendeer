@@ -27,7 +27,9 @@ import {
   changeAccount,
   getEmails,
   updateAttending,
-  getAttNum
+  getAttNum,
+  getAttNumSup,
+  updateAttendingSup
 } from "../controllers/users.js";
 import { account } from "../models/account.js";
 import { supplier } from "../models/user.js";
@@ -170,7 +172,9 @@ router.get('/register-stat',getRegisterStat)
 router.get('/apply-stat',getApplyStat)
 
 router.patch('/attend-officer',updateAttending)
+router.patch('/attend-supplier',updateAttendingSup)
 // getAttNum
 router.get('/attends/:id',getAttNum)
+router.get('/sup-attends/:id',getAttNumSup)
 
 export default router;

@@ -183,6 +183,8 @@ console.log("now ",now," op ",op,op<now)
         rows={10}
         ref={dt}
       >
+                <Column style={{ width: '20%' }} field="_id"  sortable filter header="Id"></Column>
+
         <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
         <Column field="publishedDate" sortable  header="Published Date"></Column>
         <Column field="closingDate" sortable  header="Closing Date"></Column>

@@ -776,11 +776,42 @@ else{
 
 }
 }
+const updateAttendingSup=async(req,res)=>{
+  const password=req.body.password
+  const tenderId=req.body.tenderId
+  const user=req.body.user 
+  const us=await account.findOne({username:user})
+  const isMatch=await bcrypt.compare(password,us.password)
+if(isMatch){
+
+  const tend=await tender.findById(tenderId)
+  const t=++tend.attendedSupplier
+  const tendy=await tender.findByIdAndUpdate(tenderId,{attendedSupplier:t})
+  res.status(200).json({success:true})
+}
+else{
+  res.status(401).json({success:false})
+
+}
+}
 const getAttNum=async(req,res)=>{
   try {
       const id=req.params.id
   const tend=await tender.findById(id)
   const no=tend.attendedOfficer
+  res.status(200).json({number:no})
+  } catch (error) {
+    res.status(401).json({success:false})
+
+  }
+
+}
+
+const getAttNumSup=async(req,res)=>{
+  try {
+      const id=req.params.id
+  const tend=await tender.findById(id)
+  const no=tend.attendedSupplier
   res.status(200).json({number:no})
   } catch (error) {
     res.status(401).json({success:false})
@@ -816,5 +847,7 @@ export {
     changeAccount,
     getEmails,
     updateAttending,
-    getAttNum
+    getAttNum,
+    updateAttendingSup,
+    getAttNumSup
 }
