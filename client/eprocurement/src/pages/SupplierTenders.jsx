@@ -6,6 +6,7 @@ import Side from '../components/supplier/Dashboard/SupSide'
 import { connect } from "react-redux";
 import TenderTable from '../components/supplier/Dashboard/TendersForSup'
 import { fetchApplied } from "../actions/appliedAction.js";
+
 const App = ({applieds,fetchApplieds}) => {
 
   const navigate=useNavigate()
