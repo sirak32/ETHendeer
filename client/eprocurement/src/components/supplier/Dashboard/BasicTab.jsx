@@ -40,14 +40,14 @@ export default function BasicTabs(props) {
     </TabPanel>
     <TabPanel header="NOTIFY WINNER">
         {/* <SuppliersTable data={props.data.suppliers}/> */}
-        <Form onSubmit={(e)=>{
+        <Form id='f1' onSubmit={(e)=>{
               e.preventDefault()
               if(data.tenderId.trim().length===24){
 
                  axios.post(`http://localhost:5001/api/email`,{email:data.email,subject:"Notifying Tender Winner",message:`You Win A Tender You Applied In Referenced By ${data.tenderId}. Please Come In Person and Proceed!`})
                   .then(()=>{
                     alert('email sent to all suppliers')
-                    navigate('/officer')
+                    document.getElementById("f1").reset();
                   }).catch((e)=>{
                     alert(e)
   
