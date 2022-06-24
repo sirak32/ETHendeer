@@ -30,6 +30,8 @@ const [tid,setTid]=useState(null)
 const [v,setV]=useState(false)
 const dt = useRef(null);
 const [no,setNo]=useState(0)
+const [no2,setNo2]=useState(0)
+
 const exporting = () => {
   console.log('Export')
   dt.current.exportCSV();
@@ -96,6 +98,7 @@ console.log("now ",now," op ",op,op<now)
           onClick={async() => {
             // setDeleteId(rowData._id)
             // setDeleteProductsDialog(true)\
+            setNo2(rowData.attendSupplier)
             setTid(rowData._id)
             // axios.get(`http://localhost:5001/attends/${tid}`)
             // .then((res)=>{
@@ -104,6 +107,7 @@ console.log("now ",now," op ",op,op<now)
 
             //   setV(true)
             // })
+            console.log(rowData.attendedSupplier) 
             setNo(rowData.attendedOfficer)
             setV(true)
           }}
@@ -146,6 +150,7 @@ console.log("now ",now," op ",op,op<now)
           onClick={async() => {
             // setDeleteId(rowData._id)
             // setDeleteProductsDialog(true)\
+            setNo2(rowData.attendSupplier)
             setTid(rowData.attends)
             // axios.get(`http://localhost:5001/attends/${tid}`)
             // .then((res)=>{
@@ -154,6 +159,7 @@ console.log("now ",now," op ",op,op<now)
             // }).then(()=>{
             //   setV(true)
             // })
+            console.log(rowData.attendedSupplier)
             setNo(rowData.attendedOfficer)
             setV(true)
           }}
@@ -331,20 +337,18 @@ console.log("now ",now," op ",op,op<now)
                 <Dialog visible={v} dismissableMask style={{width:'50rem'}} onHide={()=>{
                   setV(false)
                 }}>
-                  <h1>Hello {tid} {no} </h1>
+                  <h1>Hello {tid} {no} {no2} </h1>
          <Form.Group as={Row} className="mb-3" controlId="">
          <Form.Label column sm="2">
          </Form.Label>
          <Col sm="10">
          <Button className="w-7" variant="success" onClick={()=>{
-          if(no>0){
+          alert(no2)
+          if(no>0 && no2>0){
             console.log(applieds)
            const r= applieds.filter((ap)=>{
               return ap.tender._id===tid
             })
-            // if(r!==null){
-            //   window.location.replace(`http://localhost:5001/image/${r[0].businessDoc}`)
-            // }
             r.map((p)=>{
               window.open(`http://localhost:5001/image/${p.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
 

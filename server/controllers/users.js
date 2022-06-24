@@ -765,9 +765,16 @@ const updateAttending=async(req,res)=>{
   const us=await account.findOne({username:user})
   const isMatch=await bcrypt.compare(password,us.password)
 if(isMatch){
-
+  let t
   const tend=await tender.findById(tenderId)
-  const t=++tend.attendedOfficer
+  if(tend.attoff.includes(user)){
+    t=tend.attendedOfficer
+  }
+  else{
+    t=++tend.attendedOfficer
+    const tendi=await tender.findByIdAndUpdate(tenderId,{attoff:[...tend.attoff,user]})
+  }
+  // const t=++tend.attendedOfficer
   const tendy=await tender.findByIdAndUpdate(tenderId,{attendedOfficer:t})
   res.status(200).json({success:true})
 }
@@ -783,9 +790,15 @@ const updateAttendingSup=async(req,res)=>{
   const us=await account.findOne({username:user})
   const isMatch=await bcrypt.compare(password,us.password)
 if(isMatch){
-
+  var t
   const tend=await tender.findById(tenderId)
-  const t=++tend.attendedSupplier
+  if(tend.attsup.includes(user)){
+    t=tend.attendedSupplier
+  }
+  else{
+    t=++tend.attendedSupplier
+    const tendi=await tender.findByIdAndUpdate(tenderId,{attsup:[...tend.attsup,user]})
+  }
   const tendy=await tender.findByIdAndUpdate(tenderId,{attendedSupplier:t})
   res.status(200).json({success:true})
 }

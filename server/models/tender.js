@@ -13,6 +13,8 @@ const postSchema = mongoose.Schema({
     document:String,
     attendedOfficer:mongoose.Schema.Types.Number, 
     attendedSupplier:mongoose.Schema.Types.Number, 
+    attoff:[String],
+    attsup:[String],
     payers:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Supplier'

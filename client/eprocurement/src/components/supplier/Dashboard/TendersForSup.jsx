@@ -188,7 +188,13 @@ const [password,setPassword]=useState(null)
               axios.patch(`http://localhost:5001/attend-supplier/`,{password:password,tenderId:data._id,user:localStorage.getItem('user')})
               .then((res)=>{
                 console.log(res.data)
+                setV(false)
               })
+              .catch((erroe)=>{
+                alert('Error')
+                setV(false)
+              })
+          
             }}>
 
       <Form.Group as={Row} className="mb-3" controlId="oldPassword">
