@@ -337,9 +337,10 @@ console.log("now ",now," op ",op,op<now)
         <hr />
         {applieds.map((ap) => {
           if (
-            new Date().toISOString() < new Date().toISOString(data.bidOpenOn)
+            new Date().toISOString() >=new Date().toISOString(data.bidOpenOn)
           ) {
-            console.log("app", ap);
+            console.log("app", ap.tender.applicants);
+            // tenders.filter((t)=>{})
             var sup = [];
             if (ap.applier !== null) {
               sup = suppliers.filter((su) => {
@@ -348,7 +349,7 @@ console.log("now ",now," op ",op,op<now)
             }
             console.log("BELCASH", sup);
             if (ap.tender._id === data._id) {
-              return sup.length > 0 ? (
+              return  (
                 <>
                   <center>
                     <p className="text-indigo-300 border-1 surface-border p-5 border-round-xs">
@@ -357,7 +358,7 @@ console.log("now ",now," op ",op,op<now)
                         {sup[0].personalInfo.lastName}
                       </h3>
 
-                      <Button
+                      {/* <Button
                         icon="pi pi-download"
                         className="ml-4 p-button-rounded p-button-success"
                         aria-label="User"
@@ -390,16 +391,15 @@ console.log("now ",now," op ",op,op<now)
                             `BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`
                           );
                         }}
-                      />
+                      /> */}
                     </p>
                   </center>
                 </>
-              ) : (
-                ""
-              );
+              ) ;
             }
           }
         })}
+        
       </Sidebar>
 
       <Dialog
@@ -483,101 +483,3 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps,mapDispatchToProps)(Table);
 
 
-
-// <Form onSubmit={(e)=>{
-//   e.preventDefault()
-//   if(data.confirmPassword.localeCompare(data.newPassword)===0){
-//     axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
-//     .then((res)=>{  
-//       navigate('/officer')
-//     })
-//     .catch((e)=>{
-//       alert('Incorrect Password',e)
-//     })
-//   }
-//   else
-//   {
-//     alert("Password don't Match")
-//   }
-// }}>
-
-// <Form.Group as={Row} className="mb-3" controlId="oldPassword">
-// <Form.Label column sm="2">
-// Password
-// </Form.Label>
-// <Col sm="10">
-// <Form.Control 
-// min={8}
-// size="lg"
-// required
-// type="password"
-// onChange={(e)=>{
-//   setData({...data,oldPassword:e.target.value})
-// }}
-//  placeholder="Password" />
-// </Col>
-// </Form.Group>
-
-
-// <Form.Group as={Row} className="mb-3" controlId="">
-// <Form.Label column sm="2">
-
-// </Form.Label>
-// <Col sm="10">
-// <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
-// </Col>
-// </Form.Group>
-
-// </Form>
-
-
-
-
-
-
-  //  <Form onSubmit={(e)=>{
-  //             e.preventDefault()
-  //             // if(data.confirmPassword.localeCompare(data.newPassword)===0){
-  //             //   axios.patch(`http://localhost:5001/change-account/${usern}`,{newPassword:data.newPassword,oldPassword:data.oldPassword,username:data.username})
-  //             //   .then((res)=>{  
-  //             //     // navigate('/officer')
-  //             //   })
-  //             //   .catch((e)=>{
-  //             //     alert('Incorrect Password',e)
-  //             //   })
-  //             // }
-  //             // else
-  //             // {
-  //             //   alert("Password don't Match")
-  //             // }
-  //             // axios.patch(`http://localhost:5001/attend-officer`,{password,tenderId,user:localStorage.getItem('user')})
-  //           }}>
-
-  //     <Form.Group as={Row} className="mb-3" controlId="oldPassword">
-  //       <Form.Label column sm="2">
-  //         Password
-  //       </Form.Label>
-  //       <Col sm="10">
-  //         <Form.Control 
-  //         min={8}
-  //         size="lg"
-  //          required
-  //           type="password"
-  //           onChange={(e)=>{
-  //             setPassword(e.target.value)
-  //           }}
-  //            placeholder="Password" />
-  //       </Col>
-  //     </Form.Group>
-
-
-  //     <Form.Group as={Row} className="mb-3" controlId="">
-  //       <Form.Label column sm="2">
-          
-  //       </Form.Label>
-  //       <Col sm="10">
-  //       <Button className="w-7" type='submit' variant="success">Done</Button>{' '}
-  //       </Col>
-  //     </Form.Group>
-
-  //   </Form>
