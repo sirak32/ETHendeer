@@ -11,8 +11,14 @@ const postSchema = mongoose.Schema({
     bidOpenOn: Date,
     termsAndConditions: String,
     document:String,
-    attendedOfficer:mongoose.Schema.Types.Number, 
-    attendedSupplier:mongoose.Schema.Types.Number, 
+    attendedOfficer:{
+        type:mongoose.Schema.Types.Number, 
+        default:0
+    },
+    attendedSupplier:{
+       type: mongoose.Schema.Types.Number, 
+        default:0
+    },
     attoff:[String],
     attsup:[String],
     payers:[{

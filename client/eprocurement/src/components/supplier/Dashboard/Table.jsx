@@ -31,6 +31,7 @@ const [v,setV]=useState(false)
 const dt = useRef(null);
 const [no,setNo]=useState(0)
 const [no2,setNo2]=useState(0)
+const [ns,setNs]=useState(0)
 
 const exporting = () => {
   console.log('Export')
@@ -99,6 +100,7 @@ console.log("now ",now," op ",op,op<now)
             // setDeleteId(rowData._id)
             // setDeleteProductsDialog(true)\
             setNo2(rowData.attendSupplier)
+            setNs(rowData.attendedSupplier)
             setTid(rowData._id)
             // axios.get(`http://localhost:5001/attends/${tid}`)
             // .then((res)=>{
@@ -107,7 +109,7 @@ console.log("now ",now," op ",op,op<now)
 
             //   setV(true)
             // })
-            console.log(rowData.attendedSupplier) 
+            console.log("Attended Supplier",rowData.attendedSupplier) 
             setNo(rowData.attendedOfficer)
             setV(true)
           }}
@@ -150,6 +152,7 @@ console.log("now ",now," op ",op,op<now)
           onClick={async() => {
             // setDeleteId(rowData._id)
             // setDeleteProductsDialog(true)\
+            setNs(rowData.attendedSupplier)
             setNo2(rowData.attendSupplier)
             setTid(rowData.attends)
             // axios.get(`http://localhost:5001/attends/${tid}`)
@@ -159,6 +162,7 @@ console.log("now ",now," op ",op,op<now)
             // }).then(()=>{
             //   setV(true)
             // })
+            console.log("Attended Supplier 1",rowData.attendedSupplier) 
             console.log(rowData.attendedSupplier)
             setNo(rowData.attendedOfficer)
             setV(true)
@@ -168,9 +172,9 @@ console.log("now ",now," op ",op,op<now)
   };
   const header = <div style={{textAlign:'left'}}><Button type="button" icon="pi pi-external-link" iconPos="left" label="Export CSV" onClick={exporting}></Button></div>;
   const [deleteProductsDialog, setDeleteProductsDialog] = React.useState(false);
-  return tenderss!==null?(
+  return tenderss !== null ? (
     <>
-      <DataTable 
+      <DataTable
         breakpoint="960px"
         editMode="cell"
         header={header}
@@ -189,19 +193,30 @@ console.log("now ",now," op ",op,op<now)
         rows={10}
         ref={dt}
       >
-                <Column style={{ width: '20%' }} field="_id"  sortable filter header="Id"></Column>
+        <Column
+          style={{ width: "20%" }}
+          field="_id"
+          sortable
+          filter
+          header="Id"
+        ></Column>
 
-        <Column style={{ width: '20%' }} field="title"  sortable filter header="Tender Name"></Column>
-        <Column field="publishedDate" sortable  header="Published Date"></Column>
-        <Column field="closingDate" sortable  header="Closing Date"></Column>
-        <Column field="bidOpenOn" sortable  header="Bid Opening Date"></Column>
+        <Column
+          style={{ width: "20%" }}
+          field="title"
+          sortable
+          filter
+          header="Tender Name"
+        ></Column>
+        <Column field="publishedDate" sortable header="Published Date"></Column>
+        <Column field="closingDate" sortable header="Closing Date"></Column>
+        <Column field="bidOpenOn" sortable header="Bid Opening Date"></Column>
         <Column
           field={"title"}
           header="Status"
           sortable
           style={{ minWidth: "10rem" }}
           body={statusBodyTemplate}
-          
         />
         <Column
           body={actionBodyTemplate}
@@ -216,12 +231,12 @@ console.log("now ",now," op ",op,op<now)
         modal
         dismissableMask
         onHide={() => {
-          fetchTenders()
+          fetchTenders();
           setEdit(false);
-        }}>
-            <FormikFormDemo data={editData} />
-
-        </Dialog>
+        }}
+      >
+        <FormikFormDemo data={editData} />
+      </Dialog>
       <Dialog
         visible={deleteProductsDialog}
         style={{ width: "450px" }}
@@ -241,18 +256,16 @@ console.log("now ",now," op ",op,op<now)
               label="Yes"
               icon="pi pi-check"
               className="p-button-text text-yellow-50 bg-pink-500 "
-              onClick={(async() => {
-                await axios.delete(`http://localhost:5001/tenders/${deleteId}`)
-            .then((e)=>{
-              fetchTenders()
-              if(restart)
-              setRestart(false)
-              else
-              setRestart(true)
-
-            })
+              onClick={async () => {
+                await axios
+                  .delete(`http://localhost:5001/tenders/${deleteId}`)
+                  .then((e) => {
+                    fetchTenders();
+                    if (restart) setRestart(false);
+                    else setRestart(true);
+                  });
                 setDeleteProductsDialog(false);
-              })}
+              }}
             />
           </>
         }
@@ -268,103 +281,186 @@ console.log("now ",now," op ",op,op<now)
           {<span>Are you sure you want to delete the selected Tender?</span>}
         </div>
       </Dialog>
-      <Sidebar className="  border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center" visible={visibleTop} position="top" style={{width:"70%",height:"85%",left:"8%"}} onHide={() => setVisibleTop(false)}>
-                    <div className="border-round-xl border-double h-18rem text-white " style={{backgroundColor:'#8940d6'}}>
-                     <center><h1 className="text-white">{data.title}</h1> <h2><pre> የጨረታ ቁጥር {data.number}<br/>{data.type}</pre></h2> <hr></hr></center>
-                    </div>
-                    <h1>{data.description}</h1>
-                    <h1>{data.title}</h1> 
-                    <h1>ጨርታዉ የተከፈተበት _ <i className="">{new Date(data.publishedDate).toDateString()}</i></h1>
-                    <h1>ጨረታዉ የሚዘጋው <i className="">{new Date(data.closingDate).toDateString()}</i></h1>
-                    <h1>ሰነድ የሚከፈተው <i className="">{new Date(data.bidOpenOn).toDateString()}</i></h1>
-                    <hr></hr>
-                    <h1><i className="">የጨረታ መስፈርቶች</i>  <p className=""> {data.termsAndConditions}</p></h1> 
-                    {data.applicants!==null && <h2> <hr></hr>
+      <Sidebar
+        className="  border-cyan-500 border-3 border-round-md m-2 flex align-items-center justify-content-center"
+        visible={visibleTop}
+        position="top"
+        style={{ width: "70%", height: "85%", left: "8%" }}
+        onHide={() => setVisibleTop(false)}
+      >
+        <div
+          className="border-round-xl border-double h-18rem text-white "
+          style={{ backgroundColor: "#8940d6" }}
+        >
+          <center>
+            <h1 className="text-white">{data.title}</h1>{" "}
+            <h2>
+              <pre>
+                {" "}
+                የጨረታ ቁጥር {data.number}
+                <br />
+                {data.type}
+              </pre>
+            </h2>{" "}
+            <hr></hr>
+          </center>
+        </div>
+        <h1>{data.description}</h1>
+        <h1>{data.title}</h1>
+        <h1>
+          ጨርታዉ የተከፈተበት _{" "}
+          <i className="">{new Date(data.publishedDate).toDateString()}</i>
+        </h1>
+        <h1>
+          ጨረታዉ የሚዘጋው{" "}
+          <i className="">{new Date(data.closingDate).toDateString()}</i>
+        </h1>
+        <h1>
+          ሰነድ የሚከፈተው{" "}
+          <i className="">{new Date(data.bidOpenOn).toDateString()}</i>
+        </h1>
+        <hr></hr>
+        <h1>
+          <i className="">የጨረታ መስፈርቶች</i>{" "}
+          <p className=""> {data.termsAndConditions}</p>
+        </h1>
+        {data.applicants !== null && (
+          <h2>
+            {" "}
+            <hr></hr>
+          </h2>
+        )}
+        <center>
+          {" "}
+          <h1>Suppliers Who Applied For This Tender</h1>
+        </center>
+        <hr />
+        {applieds.map((ap) => {
+          if (
+            new Date().toISOString() < new Date().toISOString(data.bidOpenOn)
+          ) {
+            console.log("app", ap);
+            var sup = [];
+            if (ap.applier !== null) {
+              sup = suppliers.filter((su) => {
+                return su._id === ap.applier;
+              });
+            }
+            console.log("BELCASH", sup);
+            if (ap.tender._id === data._id) {
+              return sup.length > 0 ? (
+                <>
+                  <center>
+                    <p className="text-indigo-300 border-1 surface-border p-5 border-round-xs">
+                      <h3 className="text-2xl bg-yellow-50">
+                        {sup[0].personalInfo.firstName}{" "}
+                        {sup[0].personalInfo.lastName}
+                      </h3>
 
-        </h2>}
-      <center> <h1>Suppliers Who Applied For This Tender</h1></center><hr/>
-        {applieds.map((ap)=>{   
-          if(new Date().toISOString()<new Date().toISOString(data.bidOpenOn))
-         { 
-          console.log("app",ap)
-          var sup=[]
-          if(ap.applier!==null)
-          {
-             sup=suppliers.filter((su)=>{
-            return (su._id===ap.applier)
-          })}
-          console.log("BELCASH",sup)
-          if(ap.tender._id===data._id)
-         {
-           return sup.length>0?(
-            <> 
-            <center>
-              <p className="text-indigo-300 border-1 surface-border p-5 border-round-xs">
-           <h3 className="text-2xl bg-yellow-50">{
-            sup[0].personalInfo.firstName} {sup[0].personalInfo.lastName
-            } 
-            </h3> 
-
-               <Button
-                icon="pi pi-download"
-                 className="ml-4 p-button-rounded p-button-success" 
-                 aria-label="User"
-                 label="Business Bid"
-                 onClick={(()=>{
-                  window.open(`http://localhost:5001/image/${ap.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
-                    saveAs(`http://localhost:5001/image/${ap.businessDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}.pdf`)
-                 })}
-                 />
-                 <Button
-                icon="pi pi-download"
-                 className="ml-4 p-button-rounded p-button-info" 
-                 aria-label="User"
-                 label="Tecnical Bid"
-                 onClick={(()=>{
-                  window.open(`http://localhost:5001/image/${ap.technicalDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800");
-                    saveAs(`http://localhost:5001/image/${ap.technicalDoc}`,`BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`)
-                 })}
-                 />
-              </p>
-            </center>
-            </>
-           ):''
-          
-          }}
+                      <Button
+                        icon="pi pi-download"
+                        className="ml-4 p-button-rounded p-button-success"
+                        aria-label="User"
+                        label="Business Bid"
+                        onClick={() => {
+                          window.open(
+                            `http://localhost:5001/image/${ap.businessDoc}`,
+                            "_blank",
+                            "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800"
+                          );
+                          saveAs(
+                            `http://localhost:5001/image/${ap.businessDoc}`,
+                            `BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}.pdf`
+                          );
+                        }}
+                      />
+                      <Button
+                        icon="pi pi-download"
+                        className="ml-4 p-button-rounded p-button-info"
+                        aria-label="User"
+                        label="Tecnical Bid"
+                        onClick={() => {
+                          window.open(
+                            `http://localhost:5001/image/${ap.technicalDoc}`,
+                            "_blank",
+                            "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=400,width=1350,height=800"
+                          );
+                          saveAs(
+                            `http://localhost:5001/image/${ap.technicalDoc}`,
+                            `BusinesDOc ${sup[0].personalInfo.firstName} ${sup[0].personalInfo.lastName}`
+                          );
+                        }}
+                      />
+                    </p>
+                  </center>
+                </>
+              ) : (
+                ""
+              );
+            }
+          }
         })}
-                </Sidebar>
+      </Sidebar>
 
-                <Dialog visible={v} dismissableMask style={{width:'50rem'}} onHide={()=>{
-                  setV(false)
-                }}>
-                  <h1>Hello {tid} {no} {no2} </h1>
-         <Form.Group as={Row} className="mb-3" controlId="">
-         <Form.Label column sm="2">
-         </Form.Label>
-         <Col sm="10">
-         <Button className="w-7" variant="success" onClick={()=>{
-          alert(no2)
-          if(no>0 && no2>0){
-            console.log(applieds)
-           const r= applieds.filter((ap)=>{
-              return ap.tender._id===tid
-            })
-            r.map((p)=>{
-              window.open(`http://localhost:5001/image/${p.businessDoc}`, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
-
-            })
-            console.log(r)
-            alert(no)
-          }
-          else{
-            alert("Not Eligible")
-          }
-         }}>Get Documents</Button>{' '}
-         </Col>
-      </Form.Group>
-                </Dialog>
+      <Dialog
+        visible={v}
+        dismissableMask
+        style={{ width: "50rem" }}
+        onHide={() => {
+          setV(false);
+        }}
+      >
+        <h4>
+          Hello - {no} Attending Officers and  {ns} Attending Supplier
+        </h4>
+        <Form.Group as={Row} className="mb-3" controlId="">
+          <Form.Label column sm="2"></Form.Label>
+          <Col sm="10">
+            <Button
+              className="w-7"
+              variant="success"
+              disabled={(no > 0 && ns > 0)?false:true}
+              onClick={() => {
+                // alert(ns);
+                if (no > 0 && ns > 0) {
+                  console.log(applieds);
+                  const r = applieds.filter((ap) => {
+                    return ap.tender._id === tid;
+                  });
+                  // console.log(r)
+                  r.map((p,k) => {
+                    //  saveAs()
+                    saveAs(
+                      `http://localhost:5001/image/${p.businessDoc}`,
+                      `Belcash/BusinesDoc ${p.applier}.pdf`
+                    );
+                    saveAs(
+                      `http://localhost:5001/image/${p.technicalDoc}`,
+                      `Belcash/TechnicalDoc ${p.applier}.pdf`
+                    );
+                      console.log(k,p.businessDoc)
+                    // window.open(
+                    //   `http://localhost:5001/image/${p.businessDoc}`,
+                    //   "_blank",
+                    //   "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400"
+                    // );
+                  });
+                  
+                  // alert(no);
+                } else {
+                  alert("Not Eligible");
+                }
+              }}
+            >
+              Get Documents
+            </Button>{" "}
+          </Col>
+        </Form.Group>
+      </Dialog>
     </>
-  ):<ProgressBar/>;
+  ) : (
+    <ProgressBar />
+  );
 };
 
 const mapStateToProps = (state) => {
