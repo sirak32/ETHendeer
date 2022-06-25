@@ -411,7 +411,7 @@ console.log("now ",now," op ",op,op<now)
         }}
       >
         <h4>
-          Hello - {no} Attending Officers and  {ns} Attending Supplier
+           {no} Attending Officers and  {ns} Attending Supplier
         </h4>
         <Form.Group as={Row} className="mb-3" controlId="">
           <Form.Label column sm="2"></Form.Label>
@@ -422,7 +422,7 @@ console.log("now ",now," op ",op,op<now)
               disabled={(no > 0 && ns > 0)?false:true}
               onClick={() => {
                 // alert(ns);
-                if (no > 0 && ns > 0) {
+                if (no > 2 && ns > 0) {
                   console.log(applieds);
                   const r = applieds.filter((ap) => {
                     return ap.tender._id === tid;

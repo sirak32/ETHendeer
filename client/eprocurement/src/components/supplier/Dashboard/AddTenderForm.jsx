@@ -33,6 +33,7 @@ import { Fieldset } from 'primereact/fieldset';
 
 const InputAdornments = ({ tenders, fetchTenders }) => {
   const toast = useRef(null);
+  const tomorrow = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
   const showSuccess = () => {
     toast.current.show({severity:'success', summary: 'Tender Added Successfully', detail:'Tender Added Successfully Descriptions Here', life: 10000});
 }
@@ -235,7 +236,7 @@ let creator;
                   id="bidOpenOn"
                   showTime={true}
 							   	showSeconds={true}
-                  minDate={new Date()}
+                  minDate={tomorrow}
                   value={formik.values.bidOpenOn}
                   onChange={formik.handleChange}
                   dateFormat="dd/mm/yy"
@@ -254,7 +255,7 @@ let creator;
                   // min="2020-01-02"
                   showTime={true}
 						  		showSeconds={true}
-                  minDate={new Date()}
+                  minDate={tomorrow}
                   id="closingDate"
                   value={formik.values.closingDate}
                   onChange={formik.handleChange}
